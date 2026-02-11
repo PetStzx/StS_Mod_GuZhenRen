@@ -3,10 +3,8 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -33,6 +31,8 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
         this.amount = amount;
 
+        // 构造函数只负责计算数值加成
+        // 拦截和转化逻辑现已完全移交给 ZhiZhangPower 和 NianTouShouZuPower
         int bonus = getBonus();
         if (bonus > 0) {
             this.amount += bonus;
@@ -46,12 +46,10 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         if (owner == null) return 0;
         if (owner.hasPower(QingPower.POWER_ID)) {
             int qingAmt = owner.getPower(QingPower.POWER_ID).amount;
-            // 每3层+1
             bonus += qingAmt / 3;
         }
         if (owner.hasPower(ZhiDaoDaoHenPower.POWER_ID)) {
             int daoHenAmt = owner.getPower(ZhiDaoDaoHenPower.POWER_ID).amount;
-            // 每3层+1
             bonus += daoHenAmt / 3;
         }
         return bonus;
@@ -60,17 +58,11 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
     @Override
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
+
+        // 只需要处理正常的叠加逻辑
+        // 如果被拦截，stackPower 根本不会被触发
         int bonus = getBonus();
         int totalGain = stackAmount + bonus;
-
-        if (owner.hasPower(ZhiZhangPower.POWER_ID)) {
-            this.flash();
-            int tempHp = totalGain * 2;
-            if (tempHp > 0) {
-                this.addToTop(new AddTemporaryHPAction(owner, owner, tempHp));
-            }
-            return;
-        }
 
         this.amount += totalGain;
         checkThreshold();
@@ -79,16 +71,7 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
     @Override
     public void onInitialApplication() {
-        if (owner.hasPower(ZhiZhangPower.POWER_ID)) {
-            this.flash();
-            int tempHp = this.amount * 2;
-            if (tempHp > 0) {
-                this.addToTop(new AddTemporaryHPAction(owner, owner, tempHp));
-            }
-            this.addToTop(new RemoveSpecificPowerAction(owner, owner, this));
-            return;
-        }
-
+        // 同理，如果被拦截，此方法不会触发
         checkThreshold();
         updateDescription();
     }
@@ -116,10 +99,13 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         return new NianPower(owner, amount);
     }
 
+    // 给金刚念等卡牌使用的预测方法
     public static boolean isConverted(AbstractCreature owner) {
         if (owner == null) return false;
         if (owner.hasPower(WanWuDaTongBianPower.POWER_ID)) return true;
         if (owner.hasPower(ZhiZhangPower.POWER_ID)) return true;
+        // 如果念头受阻，对于伤害卡牌来说，也等同于没有获得念，所以视为被拦截
+        if (owner.hasPower(NianTouShouZuPower.POWER_ID)) return true;
         return false;
     }
 }

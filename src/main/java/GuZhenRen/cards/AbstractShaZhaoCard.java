@@ -2,8 +2,9 @@ package GuZhenRen.cards;
 
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.patches.GuZhenRenTags;
-import com.megacrit.cardcrawl.cards.AbstractCard; // 确保导入
-import java.util.ArrayList; // 确保导入
+import com.badlogic.gdx.graphics.g2d.SpriteBatch; // 【新增】
+import com.megacrit.cardcrawl.cards.AbstractCard;
+import java.util.ArrayList;
 
 public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
 
@@ -12,12 +13,35 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
         super(id, name, img, cost, rawDescription,
                 type,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 虽然是金卡，但因为 canSpawn 返回 false，所以不会掉落
+                CardRarity.SPECIAL, // 【修改】逻辑上设为特殊，防止掉落
                 target);
 
         this.tags.add(GuZhenRenTags.SHA_ZHAO);
         this.baseRank = 0;
         this.rank = 0;
+    }
+
+    // =========================================================================
+    //  【核心新增】渲染欺诈：所有杀招在显示时都伪装成金卡
+    // =========================================================================
+    @Override
+    public void render(SpriteBatch sb) {
+        // 1. 保存真实稀有度
+        CardRarity originalRarity = this.rarity;
+        // 2. 伪装
+        this.rarity = CardRarity.RARE;
+        // 3. 绘制
+        super.render(sb);
+        // 4. 还原
+        this.rarity = originalRarity;
+    }
+
+    @Override
+    public void renderInLibrary(SpriteBatch sb) {
+        CardRarity originalRarity = this.rarity;
+        this.rarity = CardRarity.RARE;
+        super.renderInLibrary(sb);
+        this.rarity = originalRarity;
     }
 
     @Override
@@ -29,18 +53,12 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
     public void upgrade() {
     }
 
-    // =========================================================================
-    //  【核心修复】禁止自然掉落
-    // =========================================================================
+    // 双重保险
     @Override
     public boolean canSpawn(ArrayList<AbstractCard> rewardCards) {
-        // 返回 false，表示这张牌绝对不会出现在战斗奖励、商店或随机生成的卡池中
         return false;
     }
 
-    // =========================================================================
-    //  描述构建逻辑
-    // =========================================================================
     @Override
     protected String constructRawDescription() {
         if (this.myBaseDescription == null) {
@@ -49,15 +67,11 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
 
         StringBuilder sb = new StringBuilder();
 
-        // 1. 添加流派
         if (guPathString != null && !guPathString.isEmpty()) {
             sb.append(guPathString).append(" 。 ");
         }
 
-        // 2. 添加杀招标签
         sb.append("guzhenren:杀招 。");
-
-        // 3. 添加正文
         sb.append(" NL ").append(this.myBaseDescription);
 
         return sb.toString();

@@ -181,5 +181,9 @@
   "GuZhenRen:ZhuiMingHuo": {
     "NAME": "追命火",
     "DESCRIPTION": "给予 !M! 层 guzhenren:追命火 。 NL 消耗 。"
+  },
+  "GuZhenRen:LeShanLeShuiGu": {
+    "NAME": "乐山乐水蛊",
+    "DESCRIPTION": "获得 !M! 层 guzhenren:意 。 NL 本场战斗，你无法再获得 guzhenren:念 。消耗 。"
   }
 }

@@ -142,5 +142,11 @@
       "回合开始时，给予 #b",
       " 层 #y焚烧 。 NL 若场上存在 #y追命火 ，任意意图为攻击的敌人在行动结束后，将获得 #b1 层 #y追命火 。"
     ]
+  },
+  "GuZhenRen:NianTouShouZuPower": {
+    "NAME": "念头受阻",
+    "DESCRIPTIONS": [
+      "你无法再获得 #y念 。"
+    ]
   }
 }
