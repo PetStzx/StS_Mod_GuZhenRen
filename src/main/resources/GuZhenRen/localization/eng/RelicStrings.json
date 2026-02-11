@@ -1,0 +1,9 @@
+{
+  "GuZhenRen:KongQiao": {
+    "NAME": "空窍",
+    "FLAVOR": "修行的基础",
+    "DESCRIPTIONS": [
+      "战斗结束时，回复 #b99 点生命。"
+    ]
+  }
+}

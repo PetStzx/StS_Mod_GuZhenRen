@@ -1,0 +1,185 @@
+{
+  "GuZhenRen:YueGuangGu": {
+    "NAME": "月光蛊",
+    "DESCRIPTION": "造成 !D! 点伤害。",
+    "FLAVOR": "古月一族的特产蛊虫。"
+  },
+  "GuZhenRen:YuPiGu": {
+    "NAME": "玉皮蛊",
+    "DESCRIPTION": "获得 !B! 点 格挡 。"
+  },
+  "GuZhenRen:XiaoGuangGu": {
+    "NAME": "小光蛊",
+    "DESCRIPTION": "使下 !M! 张 guzhenren:光道 蛊虫伤害翻倍。 NL 给予 1 层 虚弱 。"
+  },
+  "GuZhenRen:JuChiJinWu": {
+    "NAME": "锯齿金蜈",
+    "DESCRIPTION": "造成 !D! 点伤害 !M! 次。 NL 每次打出这张牌，本场战斗中造成的伤害次数减少 1 。",
+    "EXTENDED_DESCRIPTION": ["电齿杀人蜈"]
+  },
+  "GuZhenRen:TouXiGu": {
+    "NAME": "偷袭蛊",
+    "DESCRIPTION": "造成 !D! 点无视 格挡 的伤害。 NL 给予 1 层 易伤 。"
+  },
+  "GuZhenRen:ZiLiGengShengGu": {
+    "NAME": "自力更生蛊",
+    "DESCRIPTION": "恢复 !M! 点生命。 NL 恢复量受 力量 影响。 NL 消耗 。"
+  },
+  "GuZhenRen:JiuYeShengJiCao": {
+    "NAME": "九叶生机草",
+    "DESCRIPTION": "获得一份 生机叶 。 NL 消耗 。"
+  },
+  "GuZhenRen:ChiLi": {
+    "NAME": "吃力",
+    "DESCRIPTION": "造成 !D! 点伤害 。 NL 斩杀 时，永久获得 1 点 力量 。 消耗 。"
+  },
+  "GuZhenRen:GongBeiGu": {
+    "NAME": "功倍蛊",
+    "DESCRIPTION": "占位描述。"
+  },
+  "GuZhenRen:RenRuGu": {
+    "NAME": "人如故",
+    "DESCRIPTION": "占位描述。"
+  },
+  "GuZhenRen:QuanLiYiFuGu": {
+    "NAME": "全力以赴蛊",
+    "DESCRIPTION": " NL 力量 的加成效果翻倍。"
+  },
+  "GuZhenRen:ShaGu": {
+    "NAME": "杀蛊",
+    "DESCRIPTION": "造成 !D! 点伤害 。失去 !M! 点生命 。 NL 斩杀 时，伤害永久+1 。",
+    "FLAVOR": "杀道的核心蛊虫。可达九转。"
+  },
+  "GuZhenRen:HuoGu": {
+    "NAME": "火蛊",
+    "DESCRIPTION": " 消耗 至多 !M! 张手牌。每 消耗 一张，给予 !GuZhenRen:SecondMagic! 层 guzhenren:焚烧 。 虚无 。",
+    "FLAVOR": "天底下最不挑食的蛊虫之一，能够吞噬万物壮大自身。可达九转。"
+  },
+  "GuZhenRen:HuoMaoSanZhangGu": {
+    "NAME": "火冒三丈蛊",
+    "DESCRIPTION": "给予 guzhenren:焚烧 时，若给予的层数小于 3，将其提高到 3。"
+  },
+  "GuZhenRen:WuZuNiao": {
+    "NAME": "无足鸟",
+    "DESCRIPTION": "抽 !M! 张牌。 NL 虚无 。",
+    "FLAVOR": "些许风霜些许愁， NL 无足之鸟不回头。"
+  },
+  "GuZhenRen:RongYanZhaLieGu": {
+    "NAME": "熔岩炸裂蛊",
+    "DESCRIPTION": "给予 !M! 层 guzhenren:焚烧 。"
+  },
+  "GuZhenRen:HuoLuGu": {
+    "NAME": "火炉蛊",
+    "DESCRIPTION": "消耗 1 张手牌。 NL 加入 !M! 张 *火炭蛊 到手牌。"
+  },
+  "GuZhenRen:HuoTanGu": {
+    "NAME": "火炭蛊",
+    "DESCRIPTION": " 不能被打出 。 NL 保留 。被 消耗 时，给予所有敌人 !M! 层 guzhenren:焚烧 。"
+  },
+  "GuZhenRen:LiLiangGu": {
+    "NAME": "力量蛊",
+    "DESCRIPTION": "获得 !M! 点 力量 。 NL 回合结束时失去 !D! 点 力量 。消耗 。",
+    "FLAVOR": "只会臣服于比自己更加强大的存在。需要付出寿命才能炼化。可达九转。"
+  },
+  "GuZhenRen:YanTongGu": {
+    "NAME": "炎瞳蛊",
+    "DESCRIPTION": "本回合你每打出1张指向敌人的牌，给予其 !M! 层 guzhenren:焚烧 。 NL 触发4次后，每次触发将 *灼伤 加入手牌"
+  },
+  "GuZhenRen:LiaoYuanHuo": {
+    "NAME": "燎原火",
+    "DESCRIPTION": "给予所有敌人 !GuZhenRen:SecondMagic! 层 guzhenren:焚烧 !M! 次。 NL 将1张 *灼伤 加入手牌。",
+    "UPGRADE_DESCRIPTION": "给予所有敌人 !GuZhenRen:SecondMagic! 层 guzhenren:焚烧 !M! 次。 NL 将1张 *灼伤+ 加入手牌。",
+    "FLAVOR": "使用后大火升腾而起，炙热无双，狂放猛烈。"
+  },
+  "GuZhenRen:XingHuoLiaoYuanGu": {
+    "NAME": "星火燎原蛊",
+    "DESCRIPTION": "给予 !M! 层 guzhenren:焚烧 。 NL 当这名敌人死亡时，将其身上的 guzhenren:焚烧 层数均分给所有敌人。 消耗 。",
+    "UPGRADE_DESCRIPTION": "给予所有敌人 !M! 层 guzhenren:焚烧 。 任意敌人死亡时，将其身上的 guzhenren:焚烧 层数均分给所有敌人。 消耗 。",
+    "FLAVOR": "星星之火，可以燎原。"
+  },
+  "GuZhenRen:AngryBird": {
+    "NAME": "愤怒的小鸟",
+    "DESCRIPTION": "给予 !M! 层 guzhenren:焚烧 。"
+  },
+  "GuZhenRen:ChengGongGu": {
+    "NAME": "成功蛊",
+    "DESCRIPTION": "获得本场战斗的胜利。 NL  消耗 。"
+  },
+  "GuZhenRen:ShiBaiGu": {
+    "NAME": "失败蛊",
+    "DESCRIPTION": "失去 !M! 点生命。 NL 5% guzhenren:概率 将一张 *成功蛊 加入手牌。"
+  },
+  "GuZhenRen:KuLiGu": {
+    "NAME": "苦力蛊",
+    "DESCRIPTION": "你每失去 !M! 点生命，获得 1 点 力量 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （获得 !GuZhenRen:SecondMagic! 点力量）"
+    ]
+  },
+  "GuZhenRen:ZhanNianGu": {
+    "NAME": "战念蛊",
+    "DESCRIPTION": "获得 1 点 力量 。 NL 获得 !M! 点 guzhenren:念 。 NL 消耗 。"
+  },
+  "GuZhenRen:WanWuDaTongBian": {
+    "NAME": "万物大同变",
+    "DESCRIPTION": "使你的所有状态转化为同层数的 guzhenren:变化道道痕 。"
+  },
+  "GuZhenRen:JinGangNian": {
+    "NAME": "金刚念",
+    "DESCRIPTION": "获得 !M! 层 guzhenren:念 X 次。 NL 你每由此获得1层 guzhenren:念 ，随机对敌人造成 !D! 点伤害1次。"
+  },
+  "GuZhenRen:HuiGu": {
+    "NAME": "悔蛊",
+    "DESCRIPTION": "从消耗堆选择 !M! 张牌加入手牌。 NL 本回合其耗能为0。 NL 消耗 。"
+  },
+  "GuZhenRen:XingNianGu": {
+    "NAME": "星念蛊",
+    "DESCRIPTION": "预见 !M! 。 NL 每由此丢弃1张牌，获得 !GuZhenRen:SecondMagic! 层 guzhenren:念 。"
+  },
+  "GuZhenRen:ShaYiGu": {
+    "NAME": "杀意蛊",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。 NL 每有一名敌人，获得 !M! 层 guzhenren:意 。"
+  },
+  "GuZhenRen:YiNianGu": {
+    "NAME": "忆念蛊",
+    "DESCRIPTION": "从弃牌堆选择 !M! 张牌放到抽牌堆顶。 NL 获得 !GuZhenRen:SecondMagic! 层 guzhenren:念 。"
+  },
+  "GuZhenRen:YiXinErYongGu": {
+    "NAME": "一心二用蛊",
+    "DESCRIPTION": "本回合下 !M! 次打出手牌时，随机打出手中的1张牌，被打出的牌不消耗能量。"
+  },
+  "GuZhenRen:ZhiZhang": {
+    "NAME": "智障",
+    "DESCRIPTION": "失去所有的 guzhenren:念 、 guzhenren:意 、 guzhenren:情 。获得 guzhenren:念 时，改为获得念层数2倍的 临时生命 。",
+    "UPGRADE_DESCRIPTION": "失去所有的 guzhenren:念 。获得 guzhenren:念 时，改为获得念层数2倍的 临时生命 。"
+  },
+  "GuZhenRen:ZhiHuiGu": {
+    "NAME": "智慧蛊",
+    "DESCRIPTION": "获得 !M! 层 guzhenren:智慧 。"
+  },
+  "GuZhenRen:ZiYiGu": {
+    "NAME": "恣意蛊",
+    "DESCRIPTION": "给予所有单位9层 易伤 。获得 !M! 层 guzhenren:意 。 消耗 。",
+    "UPGRADE_DESCRIPTION": "给予所有单位9层 易伤 。获得 !M! 层 guzhenren:意 。 消耗 。 保留 。"
+  },
+  "GuZhenRen:WanXingFeiYing": {
+    "NAME": "万星飞萤",
+    "DESCRIPTION": "持续 !M! 回合。 NL 你每打出1张牌，获得 !GuZhenRen:SecondMagic! 层 guzhenren:念 。"
+  },
+  "GuZhenRen:TunHuoGu": {
+    "NAME": "吞火蛊",
+    "DESCRIPTION": "你可以打出 *灼伤 。打出 *灼伤 时，将其 消耗 并给予所有敌人 !M! 层 guzhenren:焚烧 。"
+  },
+  "GuZhenRen:YanZhouGu": {
+    "NAME": "炎胄蛊",
+    "DESCRIPTION": "获得 !B! 点格挡。 NL 将 !M! 张 *灼伤 加入抽牌堆。"
+  },
+  "GuZhenRen:YangMangBeiHuoYi": {
+    "NAME": "阳莽被火衣",
+    "DESCRIPTION": "获得 !B! 点格挡。 NL 你在这个回合每次受到攻击，都对攻击者造成 !GuZhenRen:SecondMagic! 层 guzhenren:焚烧 !M! 次。"
+  },
+  "GuZhenRen:ZhuiMingHuo": {
+    "NAME": "追命火",
+    "DESCRIPTION": "给予 !M! 层 guzhenren:追命火 。 NL 消耗 。"
+  }
+}

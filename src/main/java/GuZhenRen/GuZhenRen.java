@@ -1,0 +1,247 @@
+package GuZhenRen;
+
+import GuZhenRen.effects.BenMingGuOpeningEffect;
+import basemod.BaseMod;
+import basemod.interfaces.*;
+import basemod.helpers.RelicType;
+import GuZhenRen.character.FangYuan;
+import GuZhenRen.potions.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.compression.lzma.Base;
+import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import GuZhenRen.cards.*;
+import GuZhenRen.relics.*;
+import GuZhenRen.patches.*;
+import GuZhenRen.variables.SecondMagicNumber;
+import com.megacrit.cardcrawl.localization.Keyword;
+import com.google.gson.Gson;
+import com.badlogic.gdx.Gdx;
+import java.nio.charset.StandardCharsets;
+
+// 【新增】掉落系统所需的导入
+import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import java.util.ArrayList;
+
+@SpireInitializer
+public class GuZhenRen implements
+        EditCardsSubscriber,
+        EditStringsSubscriber,
+        EditRelicsSubscriber,
+        EditCharactersSubscriber,
+        EditKeywordsSubscriber,
+        PostInitializeSubscriber,
+        PostDungeonInitializeSubscriber,
+        PostBattleSubscriber
+{
+    public static final Logger logger = LogManager.getLogger(GuZhenRen.class.getName());
+    public static final String MOD_ID = "GuZhenRen";
+
+    // 用于存储所有配方遗物ID的列表
+    public static ArrayList<String> recipeRelicIDs = new ArrayList<>();
+
+    public static String makeID(String id) {
+        return MOD_ID + ":" + id;
+    }
+
+    public static String assetPath(String path) {
+        return MOD_ID + "/" + path;
+    }
+
+    public static final Color GUZHENREN_COLOR = new Color(0.275F, 0.275F, 0.275F, 1.0F);
+
+    public GuZhenRen() {
+        logger.info("========================= 开始注册订阅 =========================");
+        BaseMod.subscribe(this);
+
+        BaseMod.addColor(CardColorEnum.GUZHENREN_GREY,
+                GUZHENREN_COLOR, GUZHENREN_COLOR, GUZHENREN_COLOR,
+                GUZHENREN_COLOR, GUZHENREN_COLOR, GUZHENREN_COLOR, GUZHENREN_COLOR,
+                assetPath("img/cardui/512/bg_attack_grey.png"),
+                assetPath("img/cardui/512/bg_skill_grey.png"),
+                assetPath("img/cardui/512/bg_power_grey.png"),
+                assetPath("img/cardui/512/card_grey_orb.png"),
+                assetPath("img/cardui/1024/bg_attack_grey.png"),
+                assetPath("img/cardui/1024/bg_skill_grey.png"),
+                assetPath("img/cardui/1024/bg_power_grey.png"),
+                assetPath("img/cardui/1024/card_grey_orb.png"),
+                assetPath("img/cardui/512/card_grey_small_orb.png")
+        );
+        BaseMod.addDynamicVariable(new SecondMagicNumber());
+        logger.info("========================= 订阅完成 =========================");
+    }
+
+    public static void initialize() {
+        new GuZhenRen();
+    }
+
+    @Override
+    public void receivePostDungeonInitialize() {
+        if (AbstractDungeon.player instanceof FangYuan) {
+            if (AbstractDungeon.floorNum <= 1 && !CardCrawlGame.loadingSave) {
+                AbstractDungeon.topLevelEffects.add(new BenMingGuOpeningEffect());
+            }
+        }
+    }
+
+    @Override
+    public void receiveEditCharacters() {
+        BaseMod.addCharacter(
+                new FangYuan("FangYuan"),
+                assetPath("img/character/FangYuan/Button.png"),
+                assetPath("img/character/FangYuan/Portrait.png"),
+                AbstractPlayerEnum.FANG_YUAN
+        );
+    }
+
+    @Override
+    public void receiveEditCards() {
+        logger.info("开始加载卡牌...");
+        BaseMod.addCard(new YueGuangGu());
+        BaseMod.addCard(new YuPiGu());
+        BaseMod.addCard(new XiaoGuangGu());
+        BaseMod.addCard(new JuChiJinWu());
+        BaseMod.addCard(new TouXiGu());
+        BaseMod.addCard(new ZiLiGengShengGu());
+        BaseMod.addCard(new JiuYeShengJiCao());
+        BaseMod.addCard(new ChiLi());
+        BaseMod.addCard(new GongBeiGu());
+        BaseMod.addCard(new ChengGongGu());
+        BaseMod.addCard(new ShiBaiGu());
+        BaseMod.addCard(new RenRuGu());
+        BaseMod.addCard(new QuanLiYiFuGu());
+        BaseMod.addCard(new ShaGu());
+        BaseMod.addCard(new HuoGu());
+        BaseMod.addCard(new HuoMaoSanZhangGu());
+        BaseMod.addCard(new WuZuNiao());
+        BaseMod.addCard(new RongYanZhaLieGu());
+        //BaseMod.addCard(new HuoLuGu());
+        //BaseMod.addCard(new HuoTanGu());
+        BaseMod.addCard(new LiLiangGu());
+        BaseMod.addCard(new YanTongGu());
+        BaseMod.addCard(new LiaoYuanHuo());
+        BaseMod.addCard(new XingHuoLiaoYuanGu());
+        BaseMod.addCard(new AngryBird());
+        BaseMod.addCard(new KuLiGu());
+        BaseMod.addCard(new ZhanNianGu());
+        BaseMod.addCard(new WanWuDaTongBian());
+        BaseMod.addCard(new JinGangNian());
+        BaseMod.addCard(new HuiGu());
+        BaseMod.addCard(new XingNianGu());
+        BaseMod.addCard(new ShaYiGu());
+        BaseMod.addCard(new YiNianGu());
+        BaseMod.addCard(new YiXinErYongGu());
+        BaseMod.addCard(new ZhiZhang());
+        BaseMod.addCard(new ZhiHuiGu());
+        BaseMod.addCard(new ZiYiGu());
+        BaseMod.addCard(new WanXingFeiYing());
+        BaseMod.addCard(new TunHuoGu());
+        BaseMod.addCard(new YanZhouGu());
+        BaseMod.addCard(new YangMangBeiHuoYi());
+        BaseMod.addCard(new ZhuiMingHuo());
+    }
+
+    @Override
+    public void receiveEditRelics() {
+        logger.info("开始加载遗物...");
+        BaseMod.addRelic(new KongQiao_1(), RelicType.SHARED);
+        BaseMod.addRelic(new KongQiao_2(), RelicType.SHARED);
+        BaseMod.addRelic(new KongQiao_3(), RelicType.SHARED);
+        BaseMod.addRelic(new KongQiao_4(), RelicType.SHARED);
+        BaseMod.addRelic(new KongQiao_5(), RelicType.SHARED);
+        BaseMod.addRelic(new XianQiao_6(), RelicType.SHARED);
+        BaseMod.addRelic(new XianQiao_7(), RelicType.SHARED);
+        BaseMod.addRelic(new XianQiao_8(), RelicType.SHARED);
+        BaseMod.addRelic(new XianQiao_9(), RelicType.SHARED);
+        BaseMod.addRelic(new LiDaoDaoHen(), RelicType.SHARED);
+        BaseMod.addRelic(new YanXinGu(), RelicType.SHARED);
+        BaseMod.addRelic(new DingXianYou(), RelicType.SHARED);
+
+
+        // 注册配方遗物并加入掉落池
+        BaseMod.addRelic(new Recipe_AngryBird(), RelicType.SHARED);
+        recipeRelicIDs.add(Recipe_AngryBird.ID);
+        BaseMod.addRelic(new Recipe_WanXingFeiYing(), RelicType.SHARED);
+        recipeRelicIDs.add(Recipe_WanXingFeiYing.ID);
+        BaseMod.addRelic(new Recipe_YangMangBeiHuoYi(), RelicType.SHARED);
+        recipeRelicIDs.add(Recipe_YangMangBeiHuoYi.ID);
+        BaseMod.addRelic(new Recipe_ZhuiMingHuo(), RelicType.SHARED);
+        recipeRelicIDs.add(Recipe_ZhuiMingHuo.ID);
+    }
+
+    @Override
+    public void receivePostInitialize() {
+        BaseMod.addPotion(
+                ShengJiYe.class,
+                Color.GREEN.cpy(),
+                null,
+                null,
+                ShengJiYe.POTION_ID,
+                AbstractPlayerEnum.FANG_YUAN
+        );
+    }
+
+    @Override
+    public void receiveEditStrings() {
+        String language = "eng";
+        if (Settings.language == Settings.GameLanguage.ZHS) {
+            language = "zhs";
+        }
+
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/" + language + "/CardStrings.json"));
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, assetPath("localization/" + language + "/CharacterStrings.json"));
+        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath("localization/" + language + "/RelicStrings.json"));
+        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/" + language + "/PowerStrings.json"));
+        BaseMod.loadCustomStringsFile(PotionStrings.class, assetPath("localization/" + language + "/PotionStrings.json"));
+        BaseMod.loadCustomStringsFile(UIStrings.class, assetPath("localization/" + language + "/UIStrings.json"));
+    }
+
+    @Override
+    public void receiveEditKeywords() {
+        Gson gson = new Gson();
+        String language = "eng";
+        if (Settings.language == Settings.GameLanguage.ZHS) {
+            language = "zhs";
+        }
+
+        String json = Gdx.files.internal(assetPath("localization/" + language + "/KeywordStrings.json"))
+                .readString(String.valueOf(StandardCharsets.UTF_8));
+
+        Keyword[] keywords = gson.fromJson(json, Keyword[].class);
+        if (keywords != null) {
+            for (Keyword keyword : keywords) {
+                BaseMod.addKeyword("guzhenren", keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
+            }
+        }
+    }
+
+    // =========================================================================
+    //  战斗结束掉落逻辑
+    // =========================================================================
+    @Override
+    public void receivePostBattle(AbstractRoom room) {
+        // 1. 15% 概率
+        if (AbstractDungeon.relicRng.randomBoolean(0.15f)) {
+            // 2. 从池子中随机取一个配方
+            if (!recipeRelicIDs.isEmpty()) {
+                String randomID = recipeRelicIDs.get(AbstractDungeon.relicRng.random(recipeRelicIDs.size() - 1));
+
+                // 3. 确保不重复掉落
+                boolean hasRelic = AbstractDungeon.player.hasRelic(randomID);
+
+                if (!hasRelic) {
+                    // 4. 添加到奖励
+                    AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
+                    room.rewards.add(new RewardItem(relic));
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+package GuZhenRen.powers;
+
+import GuZhenRen.GuZhenRen;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+
+public class ZhiDaoDaoHenPower extends AbstractPower {
+    public static final String POWER_ID = GuZhenRen.makeID("ZhiDaoDaoHenPower");
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    public static final String NAME = powerStrings.NAME;
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
+    public boolean isFromBianHua = false;
+
+    public ZhiDaoDaoHenPower(AbstractCreature owner, int amount) {
+        this.name = NAME;
+        this.ID = POWER_ID;
+        this.owner = owner;
+        this.amount = amount;
+        this.type = PowerType.BUFF;
+
+        String pathLarge = GuZhenRen.assetPath("img/powers/ZhiDaoDaoHenPower_p.png");
+        String pathSmall = GuZhenRen.assetPath("img/powers/ZhiDaoDaoHenPower.png");
+
+        this.region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(pathLarge), 0, 0, 88, 88);
+        this.region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(pathSmall), 0, 0, 32, 32);
+
+        updateDescription();
+    }
+
+    @Override
+    public void updateDescription() {
+        // 【修改】 每 3 层 +1
+        int bonus = this.amount / 3;
+        this.description = DESCRIPTIONS[0] + bonus + DESCRIPTIONS[1];
+    }
+
+    @Override
+    public void onInitialApplication() {
+        this.updateDescription();
+    }
+
+    @Override
+    public void stackPower(int stackAmount) {
+        super.stackPower(stackAmount);
+        this.updateDescription();
+    }
+
+    @Override
+    public void atEndOfTurn(boolean isPlayer) {
+        if (isPlayer && this.isFromBianHua) {
+            this.flash();
+            this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
+            this.addToBot(new ApplyPowerAction(this.owner, this.owner,
+                    new BianHuaDaoDaoHenPower(this.owner, this.amount), this.amount));
+        }
+    }
+}

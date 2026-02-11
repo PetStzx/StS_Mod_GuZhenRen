@@ -1,0 +1,114 @@
+{
+  "GuZhenRen:KongQiao_1": {
+    "NAME": "一转空窍",
+    "FLAVOR": "一转蛊师空窍，产出青铜真元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y一转 蛊虫。"
+    ]
+  },
+  "GuZhenRen:KongQiao_2": {
+    "NAME": "二转空窍",
+    "FLAVOR": "二转蛊师空窍，产出赤铁真元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y二转 蛊虫。"
+    ]
+  },
+  "GuZhenRen:KongQiao_3": {
+    "NAME": "三转空窍",
+    "FLAVOR": "三转蛊师空窍，产出白银真元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y三转 蛊虫。"
+    ]
+  },
+  "GuZhenRen:KongQiao_4": {
+    "NAME": "四转空窍",
+    "FLAVOR": "四转蛊师空窍，产出黄金真元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y四转 蛊虫。"
+    ]
+  },
+  "GuZhenRen:KongQiao_5": {
+    "NAME": "五转空窍",
+    "FLAVOR": "五转蛊师空窍，产出紫晶真元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y五转 蛊虫。"
+    ]
+  },
+  "GuZhenRen:XianQiao_6": {
+    "NAME": "六转仙窍",
+    "FLAVOR": "六转蛊仙仙窍，产出青提仙元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y六转 仙蛊。"
+    ]
+  },
+  "GuZhenRen:XianQiao_7": {
+    "NAME": "七转仙窍",
+    "FLAVOR": "七转蛊仙仙窍，产出红枣仙元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y七转 仙蛊。"
+    ]
+  },
+  "GuZhenRen:XianQiao_8": {
+    "NAME": "八转仙窍",
+    "FLAVOR": "八转蛊仙仙窍，产出白荔仙元。",
+    "DESCRIPTIONS": [
+      "允许催动 #y八转 仙蛊。"
+    ]
+  },
+  "GuZhenRen:XianQiao_9": {
+    "NAME": "九转仙窍",
+    "FLAVOR": "世人谨记，我古月方源，乃是大爱仙尊。",
+    "DESCRIPTIONS": [
+      "允许催动 #y九转 仙蛊。"
+    ]
+  },
+  "GuZhenRen:LiDaoDaoHen": {
+    "NAME": "力道道痕",
+    "FLAVOR": "天地大道的痕迹。",
+    "DESCRIPTIONS": [
+      "战斗开始时，获得道痕层数的 #y力量 。"
+    ]
+  },
+  "GuZhenRen:YanXinGu": {
+    "NAME": "炎心蛊",
+    "FLAVOR": "炎心蛊寄托在心脏当中。有增强火类蛊虫攻击的效果。",
+    "DESCRIPTIONS": [
+      "你给予 #y焚烧 时，层数额外增加 #b1 层。"
+    ]
+  },
+  "GuZhenRen:Recipe_AngryBird": {
+    "NAME": "杀招-愤怒的小鸟",
+    "FLAVOR": "灵动的火焰小鸟，蕴藏着巨大的威能。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y熔岩炸裂蛊+ 。"
+    ]
+  },
+  "GuZhenRen:DingXianYou": {
+    "NAME": "定仙游",
+    "FLAVOR": "《人祖传》记载的传奇宇道仙蛊，天下之大，无处不可去。",
+    "DESCRIPTIONS": [
+      "你在选择下一层的房间时可以无视当前路线。"
+    ]
+  },
+  "GuZhenRen:Recipe_WanXingFeiYing": {
+    "NAME": "杀招-万星飞萤",
+    "FLAVOR": "此招一出天地晦暗，方圆千里夜幕降临，蛊仙的一思一念都会形成星念。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y星念蛊+ 、任意 #y智道仙蛊 。"
+    ]
+  },
+  "GuZhenRen:Recipe_YangMangBeiHuoYi": {
+    "NAME": "杀招-阳莽被火衣",
+    "FLAVOR": "使头发熊熊燃烧，化为巨大的火焰披风，护卫周身，乃是炎道的极致奥义。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y炎胄蛊+ 、任意 #y炎道仙蛊 。"
+    ]
+  },
+  "GuZhenRen:Recipe_ZhuiMingHuo": {
+    "NAME": "杀招-追命火",
+    "FLAVOR": "能够感应攻势，追根溯源，直烧仙窍。生命不息，此火就燃烧不止。",
+    "DESCRIPTIONS": [
+      "需要： #y燎原火+ 、任意 #y炎道蛊虫 。"
+    ]
+  }
+}

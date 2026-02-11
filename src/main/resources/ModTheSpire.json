@@ -1,0 +1,10 @@
+{
+  "modid": "GuZhenRenMod",
+  "name": "蛊真人",
+  "author_list": ["PetStzx"],
+  "description": "蛊真人mod。",
+  "version": "0.0.1",
+  "sts_version": "01-25-2026",
+  "mts_version": "3.23.2",
+  "dependencies": ["basemod", "stslib"]
+}

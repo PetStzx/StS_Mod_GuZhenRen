@@ -1,0 +1,139 @@
+[
+  {
+    "NAMES": ["仙蛊"],
+    "DESCRIPTION": "仙蛊唯一。六转及以上的蛊虫为 #y仙蛊 。你无法获得两只相同的仙蛊。"
+  },
+  {
+    "PROPER_NAME": "本命蛊",
+    "NAMES": ["本命蛊"],
+    "DESCRIPTION": " #y本命蛊 会随 #y空窍 等级提升自动升炼。 #y本命蛊 毁灭将导致 #r严重的后果 。你只能有一只 #y本命蛊 。"
+  },
+  {
+    "NAMES": ["修为"],
+    "DESCRIPTION": "战斗结束时，积累 2/3/4 （普通/精英/首领）点 #y修为 。"
+  },
+  {
+    "NAMES": ["一转"],
+    "DESCRIPTION": "蛊虫转数。强行催动高于自身转数的蛊虫需要额外耗能。"
+  },
+  {
+    "NAMES": ["二转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["三转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["四转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["五转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["六转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["七转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["八转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["九转"],
+    "DESCRIPTION": "蛊虫转数。"
+  },
+  {
+    "NAMES": ["光道"],
+    "DESCRIPTION": "光道流派。"
+  },
+  {
+    "NAMES": ["金道"],
+    "DESCRIPTION": "金道流派。"
+  },
+  {
+    "NAMES": ["偷道"],
+    "DESCRIPTION": "偷道流派。"
+  },
+  {
+    "NAMES": ["力道"],
+    "DESCRIPTION": "力道式微已久..."
+  },
+  {
+    "NAMES": ["力道道痕"],
+    "DESCRIPTION": "每层力道道痕在战斗开始时提供1点 #y力量 。"
+  },
+  {
+    "NAMES": ["木道"],
+    "DESCRIPTION": "木道流派。"
+  },
+  {
+    "NAMES": ["食道"],
+    "DESCRIPTION": "食道流派。"
+  },
+  {
+    "NAMES": ["杀道"],
+    "DESCRIPTION": "杀道流派。"
+  },
+  {
+    "NAMES": ["炎道"],
+    "DESCRIPTION": "炎道流派。"
+  },
+  {
+    "NAMES": ["焚烧"],
+    "DESCRIPTION": "获得 焚烧 时，受到等同于当前层数的伤害。"
+  },
+  {
+    "NAMES": ["骨道"],
+    "DESCRIPTION": "骨道流派。"
+  },
+  {
+    "NAMES": ["杀招"],
+    "DESCRIPTION": "由特定的蛊虫组并而成的强力手段，无法升级。"
+  },
+  {
+    "NAMES": ["律道"],
+    "DESCRIPTION": "律道流派。"
+  },
+  {
+    "NAMES": ["概率"],
+    "DESCRIPTION": "可以通过 #y运道 的手段影响。"
+  },
+  {
+    "NAMES": ["智道"],
+    "DESCRIPTION": "智道流派。"
+  },
+  {
+    "NAMES": ["念"],
+    "DESCRIPTION": "每累积 #b3 层念，转化为 #b1 层 #y意 并抽1张牌。"
+  },
+  {
+    "NAMES": ["意"],
+    "DESCRIPTION": "每累积 #b3 层意 ，转化为 #b1 层 #y情 并获得 [E] 。"
+  },
+  {
+    "NAMES": ["情"],
+    "DESCRIPTION": "每累积 #b3 层情，获得 #y念 时层数加1。"
+  },
+  {
+    "NAMES": ["变化道"],
+    "DESCRIPTION": "变化道流派。"
+  },
+  {
+    "NAMES": ["变化道道痕"],
+    "DESCRIPTION": "根据你打出的第一张 #y非变化道 牌的流派，转变为相应的道痕，回合结束时恢复为变化道道痕。"
+  },
+  {
+    "NAMES": ["智慧"],
+    "DESCRIPTION": "回合开始时，获得智慧层数的 #y念 。"
+  },
+  {
+    "NAMES": ["追命火"],
+    "DESCRIPTION": "回合开始时，给予 #b5 层 #y焚烧。若场上存在 #y追命火 ，任意意图为攻击的敌人在行动结束后，将获得 #b1 层 #y追命火 。"
+  }
+]
