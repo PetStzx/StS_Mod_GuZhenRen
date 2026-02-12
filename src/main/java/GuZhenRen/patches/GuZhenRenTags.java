@@ -30,16 +30,25 @@ public class GuZhenRenTags {
 
     @SpireEnum
     public static AbstractCard.CardTags GU_DAO;   //骨道
+
     @SpireEnum
     public static AbstractCard.CardTags XIAN_GU;    // 仙蛊
+
     @SpireEnum
     public static AbstractCard.CardTags BEN_MING_GU; // 本命蛊
+
     @SpireEnum
     public static AbstractCard.CardTags SHA_ZHAO; // 杀招标签
+
     @SpireEnum
     public static AbstractCard.CardTags LU_DAO;   //律道
+
     @SpireEnum
     public static AbstractCard.CardTags ZHI_DAO;   //智道
+
     @SpireEnum
-    public static AbstractCard.CardTags BIANHUA_DAO;   //变化道
+    public static AbstractCard.CardTags BIAN_HUA_DAO;//变化道
+
+    @SpireEnum
+    public static AbstractCard.CardTags YIN_YANG_DAO;  //阴阳道
 }

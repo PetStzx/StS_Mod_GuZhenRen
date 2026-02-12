@@ -40,7 +40,8 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         GU_DAO,    // 18 骨道
         LU_DAO,     // 19 律道
         ZHI_DAO,    // 20 智道
-        BIANHUA_DAO       // 21 变化道
+        BIAN_HUA_DAO,       // 21 变化道
+        YIN_YANG_DAO      // 22 阴阳道
     }
 
     // =========================================================================
@@ -80,7 +81,8 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
             case GU_DAO:    this.tags.add(GuZhenRenTags.GU_DAO); break;
             case LU_DAO:    this.tags.add(GuZhenRenTags.LU_DAO); break;
             case ZHI_DAO:    this.tags.add(GuZhenRenTags.ZHI_DAO); break;
-            case BIANHUA_DAO:    this.tags.add(GuZhenRenTags.BIANHUA_DAO); break;
+            case BIAN_HUA_DAO:    this.tags.add(GuZhenRenTags.BIAN_HUA_DAO); break;
+            case YIN_YANG_DAO:    this.tags.add(GuZhenRenTags.YIN_YANG_DAO); break;
         }
 
         int index = DAO_TEXT_START_INDEX + dao.ordinal();

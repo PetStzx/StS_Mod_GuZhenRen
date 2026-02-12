@@ -22,7 +22,7 @@ public class WanWuDaTongBian extends AbstractShaZhaoCard {
                 CardType.POWER,
                 CardTarget.SELF);
 
-        this.setDao(Dao.BIANHUA_DAO);
+        this.setDao(Dao.BIAN_HUA_DAO);
 
         // 父类默认 RARE，不需要手动设置
         // 父类禁止升级，且 canSpawn=false
