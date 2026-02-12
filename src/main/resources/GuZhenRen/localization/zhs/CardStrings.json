@@ -190,5 +190,10 @@
   "GuZhenRen:ZhuiNian": {
     "NAME": "追念",
     "DESCRIPTION": "选择弃牌堆中的1张牌，将其打出并消耗。 NL 获得其耗能3倍的 guzhenren:念 。"
+  },
+  "GuZhenRen:SheXinGu": {
+    "NAME": "摄心蛊",
+    "DESCRIPTION": "击晕一名敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "击晕所有敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。"
   }
 }
