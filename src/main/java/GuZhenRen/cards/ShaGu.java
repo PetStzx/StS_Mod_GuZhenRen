@@ -39,15 +39,15 @@ public class ShaGu extends AbstractBenMingGuCard {
 
         this.setDao(Dao.SHA_DAO);
 
-
         this.maxRank = 9;
         this.setRank(INITIAL_RANK);
 
-        this.misc = 0;
+        // 初始化时计算一次，确保载入存档时数值正确
         calculateBaseDamage();
         this.exhaust = false;
     }
 
+    // 重新计算基础伤害：基础值 + 转数加成 + 永久加成
     private void calculateBaseDamage() {
         int rankBonus = Math.max(0, this.rank - 1);
         this.baseDamage = DAMAGE + rankBonus + this.misc;
@@ -57,7 +57,6 @@ public class ShaGu extends AbstractBenMingGuCard {
     public void applyPowers() {
         calculateBaseDamage();
         super.applyPowers();
-        // 确保数值更新到描述中
         this.initializeDescription();
     }
 
@@ -77,7 +76,6 @@ public class ShaGu extends AbstractBenMingGuCard {
     @Override
     public void performUpgradeEffect() {
         calculateBaseDamage();
-        // 标记伤害为绿色
         this.upgradedDamage = true;
     }
 
@@ -100,17 +98,42 @@ public class ShaGu extends AbstractBenMingGuCard {
                 this.target.damage(this.info);
 
                 if ((this.target.isDying || this.target.currentHealth <= 0) && !this.target.halfDead && !this.target.hasPower("Minion")) {
+
+                    // --- 1. 修复大师牌组 (Master Deck) 的逻辑 ---
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                         if (c.uuid.equals(this.targetUUID)) {
                             c.misc += INCREASE_AMOUNT;
-                            c.applyPowers();
+
+                            // 更新基础伤害
+                            if (c instanceof ShaGu) {
+                                ((ShaGu) c).calculateBaseDamage();
+                            }
+
+                            // 【核心修复】
+                            // 强制将当前显示伤害 (damage) 重置为 基础伤害 (baseDamage)
+                            // 并且清除 "伤害被修改" 的标记 (isDamageModified)
+                            // 绝对不要在这里调用 c.applyPowers()，因为它会把当前的力量加成算进去！
+                            c.damage = c.baseDamage;
                             c.isDamageModified = false;
+
+                            c.initializeDescription();
                         }
                     }
+
+                    // --- 2. 修复战斗内卡牌 (Hand, Discard, Draw Pile) 的逻辑 ---
                     for (AbstractCard c : GetAllInBattleInstances.get(this.targetUUID)) {
                         c.misc += INCREASE_AMOUNT;
+
+                        // 更新基础伤害
+                        if (c instanceof ShaGu) {
+                            ((ShaGu) c).calculateBaseDamage();
+                        }
+
+                        // 战斗中的卡牌，需要调用 applyPowers()
+                        // 这样玩家在当前战斗中就能立刻看到伤害变高了（且包含了力量加成）
                         c.applyPowers();
                     }
+
                     if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
                         AbstractDungeon.actionManager.clearPostCombatActions();
                     }

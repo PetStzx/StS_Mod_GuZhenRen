@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 
 public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
 
-    // 【新增】静态开关：用于标记当前是否处于杀招组并阶段
-    // static 意味着所有本命蛊共享这个状态
+    // 静态开关：用于标记当前是否处于杀招组并阶段
     public static boolean isSynthesizing = false;
 
     public int maxRank = 9;
@@ -22,7 +21,6 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
 
     @Override
     public void onRemoveFromMasterDeck() {
-        // 【核心修改】 如果正在组并杀招，直接跳过掉血逻辑
         if (isSynthesizing) {
             return;
         }
@@ -53,7 +51,25 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
         if (canUpgrade()) {
             this.upgradeRank(1);
             performUpgradeEffect();
+
+            // 1. 调用 applyPowers 更新数值
+            // 对于战斗中的手牌，这一步是必要的，因为我们要立刻显示力量加成后的伤害
             this.applyPowers();
+
+            // 2. 清洗大师牌组数据
+            // 如果这张牌是大师牌组里的“本体”，它不应该保留战斗中的临时Buff
+            if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck.contains(this)) {
+                // 重置为基础值
+                this.damage = this.baseDamage;
+                this.isDamageModified = false;
+
+                this.block = this.baseBlock;
+                this.isBlockModified = false;
+
+                this.magicNumber = this.baseMagicNumber;
+                this.isMagicNumberModified = false;
+            }
+
             if (!this.upgraded) {
                 this.upgraded = true;
                 this.initializeTitle();
