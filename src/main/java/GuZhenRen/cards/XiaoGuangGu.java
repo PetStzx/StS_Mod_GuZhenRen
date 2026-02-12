@@ -29,25 +29,17 @@ public class XiaoGuangGu extends AbstractGuZhenRenCard {
                 CardTarget.ENEMY); // 目标是敌人
 
         this.setDao(Dao.GUANG_DAO);
-
-
         this.setRank(INITIAL_RANK);
-        this.tags.add(CardTags.STARTER_DEFEND);
 
-        // baseMagicNumber 用来存储"光道增幅"的层数
+        // baseMagicNumber 用来存储"闪耀"的层数 (1层 = +50%)
         this.baseMagicNumber = 1;
         this.magicNumber = this.baseMagicNumber;
 
-        // 我们用第二个魔法数字来存储"虚弱"的层数，如果不升级虚弱层数，直接写死也行
-        // 这里假设虚弱一直是1层
-
-        this.setRank(INITIAL_RANK);
-        this.tags.add(CardTags.STARTER_DEFEND); // 虽然不是防御，但作为基础技能牌，有时也可以加类似标签方便检索
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 给予自己"光道增幅"
+        // 1. 给予自己"闪耀"
         this.addToBot(new ApplyPowerAction(p, p, new ShanYaoPower(p, this.magicNumber), this.magicNumber));
 
         // 2. 给予敌人1层虚弱
@@ -58,12 +50,15 @@ public class XiaoGuangGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            // 升级后，光道增幅变为2层
+
+            // 升级后，闪耀变为2层 (+100%)
             this.upgradeMagicNumber(1);
 
             // 升级后变为 2转
             this.upgradeRank(1);
-            // 或者使用 this.setRank(2);
+
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
 
             this.initializeDescription();
         }

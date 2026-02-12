@@ -10,7 +10,8 @@
   },
   "GuZhenRen:XiaoGuangGu": {
     "NAME": "小光蛊",
-    "DESCRIPTION": "使下 !M! 张 guzhenren:光道 蛊虫伤害翻倍。 NL 给予 1 层 虚弱 。"
+    "DESCRIPTION": "使下1张使用的 guzhenren:光道 牌伤害增加 50% 。 NL 给予 1 层 虚弱 。",
+    "UPGRADE_DESCRIPTION": "使下1张使用的 guzhenren:光道 牌伤害增加 100% 。 NL 给予 1 层 虚弱 。"
   },
   "GuZhenRen:JuChiJinWu": {
     "NAME": "锯齿金蜈",
@@ -185,5 +186,9 @@
   "GuZhenRen:LeShanLeShuiGu": {
     "NAME": "乐山乐水蛊",
     "DESCRIPTION": "获得 !M! 层 guzhenren:意 。 NL 本场战斗，你无法再获得 guzhenren:念 。消耗 。"
+  },
+  "GuZhenRen:ZhuiNian": {
+    "NAME": "追念",
+    "DESCRIPTION": "选择弃牌堆中的1张牌，将其打出并消耗。 NL 获得其耗能3倍的 guzhenren:念 。"
   }
 }

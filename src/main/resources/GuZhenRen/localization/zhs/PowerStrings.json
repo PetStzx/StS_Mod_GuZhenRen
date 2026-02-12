@@ -2,8 +2,8 @@
   "GuZhenRen:ShanYaoPower": {
     "NAME": "闪耀",
     "DESCRIPTIONS": [
-      "下 #b",
-      " 张打出的 #y光道 蛊虫威力翻倍。"
+      "下1张打出的 #y光道 蛊虫伤害增加 #b",
+      "% 。"
     ]
   },
   "GuZhenRen:QuanLiYiFuPower": {

@@ -147,7 +147,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new YangMangBeiHuoYi());
         BaseMod.addCard(new ZhuiMingHuo());
         BaseMod.addCard(new LeShanLeShuiGu());
-
+        BaseMod.addCard(new ZhuiNian());
     }
 
     @Override
