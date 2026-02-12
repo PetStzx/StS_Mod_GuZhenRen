@@ -41,5 +41,5 @@ public class GuZhenRenTags {
     @SpireEnum
     public static AbstractCard.CardTags ZHI_DAO;   //智道
     @SpireEnum
-    public static AbstractCard.CardTags BIANHUA_DAO;   //智道
+    public static AbstractCard.CardTags BIANHUA_DAO;   //变化道
 }
