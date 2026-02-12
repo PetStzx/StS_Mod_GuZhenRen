@@ -148,6 +148,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new ZhuiMingHuo());
         BaseMod.addCard(new LeShanLeShuiGu());
         BaseMod.addCard(new ZhuiNian());
+        BaseMod.addCard(new XingXiuQiPan());
         BaseMod.addCard(new SheXinGu());
     }
 
@@ -177,6 +178,8 @@ public class GuZhenRen implements
         recipeRelicIDs.add(Recipe_YangMangBeiHuoYi.ID);
         BaseMod.addRelic(new Recipe_ZhuiMingHuo(), RelicType.SHARED);
         recipeRelicIDs.add(Recipe_ZhuiMingHuo.ID);
+        BaseMod.addRelic(new Recipe_XingXiuQiPan(), RelicType.SHARED);
+        recipeRelicIDs.add(Recipe_XingXiuQiPan.ID);
     }
 
     @Override

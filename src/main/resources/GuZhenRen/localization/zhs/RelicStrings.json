@@ -110,5 +110,12 @@
     "DESCRIPTIONS": [
       "需要： #y燎原火+ 、任意 #y炎道蛊虫 。"
     ]
+  },
+  "GuZhenRen:Recipe_XingXiuQiPan": {
+    "NAME": "杀招-星宿棋盘",
+    "FLAVOR": "历史上第一座仙蛊屋，有着天下第一的推算能力。",
+    "DESCRIPTIONS": [
+      "需要： #y智慧蛊 、任意 #y智道仙蛊 。"
+    ]
   }
 }

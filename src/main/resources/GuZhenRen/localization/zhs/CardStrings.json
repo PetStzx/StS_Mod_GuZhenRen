@@ -191,6 +191,10 @@
     "NAME": "追念",
     "DESCRIPTION": "选择弃牌堆中的1张牌，将其打出并消耗。 NL 获得其耗能3倍的 guzhenren:念 。"
   },
+  "GuZhenRen:XingXiuQiPan": {
+    "NAME": "星宿棋盘",
+    "DESCRIPTION": "将抽牌堆和弃牌堆中的所有 guzhenren:智道 牌加入手牌。本回合所有 guzhenren:智道 牌首次打出时耗能为0。"
+  },
   "GuZhenRen:SheXinGu": {
     "NAME": "摄心蛊",
     "DESCRIPTION": "击晕一名敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。",
