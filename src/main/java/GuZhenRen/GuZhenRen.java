@@ -112,10 +112,10 @@ public class GuZhenRen implements
         BaseMod.addCard(new ZiLiGengShengGu());
         BaseMod.addCard(new JiuYeShengJiCao());
         BaseMod.addCard(new ChiLi());
-        BaseMod.addCard(new GongBeiGu());
+        //BaseMod.addCard(new GongBeiGu());
         BaseMod.addCard(new ChengGongGu());
         BaseMod.addCard(new ShiBaiGu());
-        BaseMod.addCard(new RenRuGu());
+        //BaseMod.addCard(new RenRuGu());
         BaseMod.addCard(new QuanLiYiFuGu());
         BaseMod.addCard(new ShaGu());
         BaseMod.addCard(new HuoGu());
@@ -150,6 +150,8 @@ public class GuZhenRen implements
         BaseMod.addCard(new ZhuiNian());
         BaseMod.addCard(new XingXiuQiPan());
         BaseMod.addCard(new SheXinGu());
+        BaseMod.addCard(new WuJinXuanGuangQi());
+        BaseMod.addCard(new WuZhiQuanXinJian());
     }
 
     @Override

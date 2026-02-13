@@ -199,5 +199,13 @@
     "NAME": "摄心蛊",
     "DESCRIPTION": "击晕一名敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。",
     "UPGRADE_DESCRIPTION": "击晕所有敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。"
+  },
+  "GuZhenRen:WuJinXuanGuangQi": {
+    "NAME": "五禁玄光气",
+    "DESCRIPTION": "给予所有敌人 99 层 虚弱 和 1 层 缓慢 。 NL 消耗 。"
+  },
+  "GuZhenRen:WuZhiQuanXinJian": {
+    "NAME": "五指拳心剑",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 每次打出，在本场战斗中基础伤害翻倍。 NL stslib:消耗性 !stslib:ex! 。"
   }
 }

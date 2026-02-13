@@ -139,5 +139,9 @@
   {
     "NAMES": ["阴阳道"],
     "DESCRIPTION": "阴阳道流派。"
+  },
+  {
+    "NAMES": ["剑道"],
+    "DESCRIPTION": "五大攻伐流派之最。"
   }
 ]

@@ -51,4 +51,7 @@ public class GuZhenRenTags {
 
     @SpireEnum
     public static AbstractCard.CardTags YIN_YANG_DAO;  //阴阳道
+
+    @SpireEnum
+    public static AbstractCard.CardTags JIAN_DAO;  //剑道
 }
