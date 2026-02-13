@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.powers.SheXinPower;
 import com.evacipated.cardcrawl.mod.stslib.powers.StunMonsterPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -9,7 +10,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DrawReductionPower;
 
 public class SheXinGu extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("SheXinGu");
@@ -19,8 +19,7 @@ public class SheXinGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/SheXinGu.png");
 
     private static final int COST = 1;
-    private static final int INITIAL_RANK = 4; // 四转
-    private static final int DRAW_REDUCE = 1;
+    private static final int INITIAL_RANK = 4;
 
     public SheXinGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -48,7 +47,7 @@ public class SheXinGu extends AbstractGuZhenRenCard {
             }
         }
 
-        addToBot(new ApplyPowerAction(abstractPlayer, abstractPlayer, new DrawReductionPower(abstractPlayer, DRAW_REDUCE)));
+        addToBot(new ApplyPowerAction(abstractPlayer, abstractPlayer, new SheXinPower(abstractPlayer, 1)));
     }
 
     @Override
