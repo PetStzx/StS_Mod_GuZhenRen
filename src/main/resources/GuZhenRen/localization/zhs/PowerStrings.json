@@ -148,5 +148,12 @@
     "DESCRIPTIONS": [
       "你无法再获得 #y念 。"
     ]
+  },
+  "GuZhenRen:JianHenPower": {
+    "NAME": "剑痕",
+    "DESCRIPTIONS": [
+      "本回合从 #y剑道 牌受到的伤害增加 #b",
+      " 点。"
+    ]
   }
 }

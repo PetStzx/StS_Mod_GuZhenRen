@@ -139,7 +139,7 @@
   },
   "GuZhenRen:ShaYiGu": {
     "NAME": "杀意蛊",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。 NL 每有一名敌人，获得 !M! 层 guzhenren:意 。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。每有一名敌人，获得 !M! 层 guzhenren:意 。"
   },
   "GuZhenRen:YiNianGu": {
     "NAME": "忆念蛊",
@@ -207,5 +207,9 @@
   "GuZhenRen:WuZhiQuanXinJian": {
     "NAME": "五指拳心剑",
     "DESCRIPTION": "造成 !D! 点伤害。 NL 每次打出，在本场战斗中基础伤害翻倍。 NL stslib:消耗性 !stslib:ex! 。"
+  },
+  "GuZhenRen:JianYing": {
+    "NAME": "剑影",
+    "DESCRIPTION": " guzhenren:剑道 。 NL 造成 !D! 点伤害。 NL 给予 !M! 层 guzhenren:剑痕 。 NL 虚无 。"
   }
 }
