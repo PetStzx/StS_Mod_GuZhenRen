@@ -64,6 +64,9 @@ public class BianHuaDaoDaoHenPower extends AbstractPower {
             newPowerPrototype = new YanDaoDaoHenPower(this.owner, this.amount);
         } else if (card.hasTag(GuZhenRenTags.ZHI_DAO)) {
             newPowerPrototype = new ZhiDaoDaoHenPower(this.owner, this.amount);
+        } else if (card.hasTag(GuZhenRenTags.JIAN_DAO)) {
+            // 【新增】对剑道流派的判断，转化为剑道道痕
+            newPowerPrototype = new JianDaoDaoHenPower(this.owner, this.amount);
         }
 
         if (newPowerPrototype == null) {
@@ -72,12 +75,9 @@ public class BianHuaDaoDaoHenPower extends AbstractPower {
 
         // 标记该能力是由变化道转化而来
         try {
-            // 优先尝试直接获取字段（支持 public）
             Field f = newPowerPrototype.getClass().getField("isFromBianHua");
             f.set(newPowerPrototype, true);
         } catch (Exception e) {
-            // 如果字段不是 public，可能会抛错，这里可以加日志或忽略
-            // 既然是你自己的代码，建议把道痕里的 isFromBianHua 设为 public
             e.printStackTrace();
         }
 

@@ -18,7 +18,7 @@ public class LiDaoDaoHenPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    // 【新增】标记：是否由变化道转化而来
+    // 标记：是否由变化道转化而来
     public boolean isFromBianHua = false;
 
     public LiDaoDaoHenPower(AbstractCreature owner, int amount) {
@@ -39,11 +39,10 @@ public class LiDaoDaoHenPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        // 如果有需要，可以在描述里提示它是暂时的
         this.description = DESCRIPTIONS[0];
     }
 
-    // 力道效果：视为力量增加伤害（未翻倍）
+    // 力道效果：视为力量增加伤害
     @Override
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
         if (type == DamageInfo.DamageType.NORMAL) {
@@ -52,7 +51,7 @@ public class LiDaoDaoHenPower extends AbstractPower {
         return damage;
     }
 
-    // 【核心新增】回合结束时，如果是暂时的，变回变化道
+    // 回合结束时，如果是暂时的，变回变化道
     @Override
     public void atEndOfTurn(boolean isPlayer) {
         if (isPlayer && this.isFromBianHua) {

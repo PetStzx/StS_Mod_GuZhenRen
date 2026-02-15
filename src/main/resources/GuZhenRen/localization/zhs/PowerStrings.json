@@ -155,5 +155,25 @@
       "本回合从 #y剑道 牌受到的伤害增加 #b",
       " 点。"
     ]
+  },
+  "GuZhenRen:JianFengPower": {
+    "NAME": "剑锋",
+    "DESCRIPTIONS": [
+      "你打出的 #y剑道 牌造成伤害后，给予目标 #b",
+      " 层 #y剑痕 。"
+    ]
+  },
+  "GuZhenRen:JianDaoDaoHenPower": {
+    "NAME": "剑道道痕",
+    "DESCRIPTIONS": [
+      "你打出的 #y剑道 牌造成伤害后，给予目标 #b",
+      " 层 #y剑痕 。"
+    ]
+  },
+  "GuZhenRen:HuiJianPower": {
+    "NAME": "慧剑",
+    "DESCRIPTIONS": [
+      "当你获得 #y情 时，将其转化为同层数的 #y剑锋 。"
+    ]
   }
 }

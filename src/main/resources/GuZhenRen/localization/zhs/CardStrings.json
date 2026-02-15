@@ -94,7 +94,7 @@
   },
   "GuZhenRen:XingHuoLiaoYuanGu": {
     "NAME": "星火燎原蛊",
-    "DESCRIPTION": "给予 !M! 层 guzhenren:焚烧 。 NL 当这名敌人死亡时，将其身上的 guzhenren:焚烧 层数均分给所有敌人。 消耗 。",
+    "DESCRIPTION": "给予 !M! 层 guzhenren:焚烧 。 NL 目标死亡时，将其身上的 guzhenren:焚烧 层数均分给所有敌人。 消耗 。",
     "UPGRADE_DESCRIPTION": "给予所有敌人 !M! 层 guzhenren:焚烧 。 任意敌人死亡时，将其身上的 guzhenren:焚烧 层数均分给所有敌人。 消耗 。",
     "FLAVOR": "星星之火，可以燎原。"
   },
@@ -211,5 +211,18 @@
   "GuZhenRen:JianYing": {
     "NAME": "剑影",
     "DESCRIPTION": " guzhenren:剑道 。 NL 造成 !D! 点伤害。 NL 给予 !M! 层 guzhenren:剑痕 。 NL 虚无 。"
+  },
+  "GuZhenRen:ShanJianGu": {
+    "NAME": "闪剑蛊",
+    "DESCRIPTION": "抽 !M! 张牌。 NL 每次因此抽到 guzhenren:剑道 牌时，再抽 1 张牌。"
+  },
+  "GuZhenRen:HuiJian": {
+    "NAME": "慧剑",
+    "DESCRIPTION": "将所有的 guzhenren:情 转化为同层数的 *剑锋 。 NL 你获得 guzhenren:情 时，改为获得同等层数的 *剑锋 。",
+    "FLAVOR": "慧剑斩情丝，心如止水明。"
+  },
+  "GuZhenRen:JianHenSuoMing": {
+    "NAME": "剑痕索命",
+    "DESCRIPTION": "目标每有1层 guzhenren:剑痕 ，对其造成 !D! 点伤害1次。 NL 结束你的回合。"
   }
 }
