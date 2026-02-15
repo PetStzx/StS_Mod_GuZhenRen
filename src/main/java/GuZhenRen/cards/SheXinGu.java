@@ -2,7 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.powers.SheXinPower;
+import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.mod.stslib.powers.StunMonsterPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.DrawReductionPower;
 
 public class SheXinGu extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("SheXinGu");
@@ -47,7 +48,9 @@ public class SheXinGu extends AbstractGuZhenRenCard {
             }
         }
 
-        addToBot(new ApplyPowerAction(abstractPlayer, abstractPlayer, new SheXinPower(abstractPlayer, 1)));
+        DrawReductionPower drawReductionPower = new DrawReductionPower(abstractPlayer, 1);
+        ReflectionHacks.setPrivate(drawReductionPower, DrawReductionPower.class, "justApplied", false);
+        addToBot(new ApplyPowerAction(abstractPlayer, abstractPlayer, drawReductionPower));
     }
 
     @Override
