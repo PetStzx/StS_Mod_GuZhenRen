@@ -29,13 +29,12 @@ public class LiLiangGu extends AbstractBenMingGuCard {
 
         this.setDao(Dao.LI_DAO);
 
-
         this.exhaust = true; // 消耗
         this.maxRank = 9;
 
-        // 初始化数值
+        // 使用第二魔法值来代替 damage
         this.baseMagicNumber = this.magicNumber = 2; // 获得力量
-        this.baseDamage = 1; // 失去力量 (借用 damage 变量显示)
+        this.baseSecondMagicNumber = this.secondMagicNumber = 1; // 失去力量
 
         this.setRank(INITIAL_RANK);
     }
@@ -50,7 +49,8 @@ public class LiLiangGu extends AbstractBenMingGuCard {
         int loseAmount = (this.rank % 2 == 0) ? 2 : 1;
 
         this.baseMagicNumber = this.magicNumber = gainAmount;
-        this.baseDamage = this.damage = loseAmount;
+        // 将计算结果赋给第二魔法值
+        this.baseSecondMagicNumber = this.secondMagicNumber = loseAmount;
     }
 
     @Override
@@ -69,8 +69,8 @@ public class LiLiangGu extends AbstractBenMingGuCard {
         // 1. 获得力量
         this.addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-        // 2. 回合结束失去力量
-        this.addToBot(new ApplyPowerAction(p, p, new LoseStrengthPower(p, this.damage), this.damage));
+        // 2. 回合结束失去力量 (读取 secondMagicNumber)
+        this.addToBot(new ApplyPowerAction(p, p, new LoseStrengthPower(p, this.secondMagicNumber), this.secondMagicNumber));
     }
 
     @Override
@@ -78,7 +78,11 @@ public class LiLiangGu extends AbstractBenMingGuCard {
         // 升级后重新计算数值
         calculateStats();
 
-        this.upgradedMagicNumber = true; // 绿色数字
-        this.upgradedDamage = true;      // 绿色数字
+        this.upgradedMagicNumber = true;       // 魔法值显示为绿色
+        this.upgradedSecondMagicNumber = true; // 第二魔法值显示为绿色
+    }
+    @Override
+    protected void onRankLoaded() {
+        calculateStats();
     }
 }

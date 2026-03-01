@@ -51,8 +51,6 @@ public class YanTongGu extends AbstractGuZhenRenCard {
             this.upgradeMagicNumber(1);
             this.upgradeRank(1);
 
-            // 【简化】 不需要再手动设置 rawDescription 了
-            // 只需要初始化，游戏会自动读取 !M! 并显示为绿色的 2
             this.initializeDescription();
         }
     }

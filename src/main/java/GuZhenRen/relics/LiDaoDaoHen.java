@@ -14,12 +14,10 @@ import java.lang.reflect.Type;
 public class LiDaoDaoHen extends CustomRelic implements CustomSavable<Integer> {
     public static final String ID = GuZhenRen.makeID("LiDaoDaoHen");
 
-    // 【修改】定义两个路径
     private static final String IMG_PATH = "img/relics/LiDaoDaoHen.png";
     private static final String OUTLINE_PATH = "img/relics/outline/LiDaoDaoHen.png";
 
     public LiDaoDaoHen() {
-        // 【修改】使用包含 outline 的构造函数
         // 参数顺序：ID, 主图, 轮廓图, 稀有度, 音效
         super(ID,
                 ImageMaster.loadImage(GuZhenRen.assetPath(IMG_PATH)),

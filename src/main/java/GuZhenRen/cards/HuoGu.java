@@ -145,4 +145,9 @@ public class HuoGu extends AbstractBenMingGuCard {
             this.isDone = true;
         }
     }
+    @Override
+    protected void onRankLoaded() {
+        this.baseMagicNumber = this.rank;
+        this.magicNumber = this.baseMagicNumber;
+    }
 }

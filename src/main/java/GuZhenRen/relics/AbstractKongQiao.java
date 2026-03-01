@@ -9,11 +9,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.GameDictionary; // 必须导入
+import com.megacrit.cardcrawl.helpers.GameDictionary;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.helpers.PowerTip;      // 必须导入
+import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
-import com.megacrit.cardcrawl.helpers.TipHelper;     // 必须导入
+import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
@@ -30,7 +30,13 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     protected String nextRelicID = "";
 
     public AbstractKongQiao(String id, String imgName, RelicTier tier, LandingSound sound) {
-        super(id, ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/" + imgName)), tier, sound);
+        super(
+                id,
+                ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/" + imgName)),          // 主图
+                ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/outline/" + imgName)),  // 轮廓图
+                tier,
+                sound
+        );
     }
 
     protected void initStats(int rank, int neededXP, String nextRelicID) {
@@ -57,13 +63,13 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
             int remaining = neededXP - xp;
             if (remaining < 0) remaining = 0;
             // 这里的 #y修为 只是为了让正文变黄，右侧提示框由下面的 updateDescription 手动添加
-            xpDesc = " NL 还需 #b" + remaining + " 点 #y修为 晋升。";
+            xpDesc = " 还需 #b" + remaining + " 点 #y修为 突破。";
         }
 
         return baseDesc + xpDesc;
     }
 
-    // 2. 【核心修复】完全手动构建提示框列表，不调用 initializeTips()
+    // 2. 完全手动构建提示框列表，不调用 initializeTips()
     public void updateDescription() {
         // 更新描述字符串
         this.description = getUpdatedDescription();
@@ -82,27 +88,22 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         addKeywordTip(rankKeyword);
     }
 
-    // 【新增辅助方法】安全添加关键词提示
+    // 安全添加关键词提示
     private void addKeywordTip(String keywordName) {
         if (keywordName == null) return;
 
         String description = null;
 
-        // 尝试直接查找 (例如 "修为")
         if (GameDictionary.keywords.containsKey(keywordName)) {
             description = GameDictionary.keywords.get(keywordName);
         }
-        // 尝试加前缀查找 (例如 "guzhenren:修为")，防止 BaseMod 注册时加了前缀
         else if (GameDictionary.keywords.containsKey("guzhenren:" + keywordName)) {
             description = GameDictionary.keywords.get("guzhenren:" + keywordName);
-            // 如果原来的名字查不到，可能是内部名为 guzhenren:xxx，但显示名还是得用 keywordName
         }
-        // 尝试全小写查找 (容错)
         else if (GameDictionary.keywords.containsKey(keywordName.toLowerCase())) {
             description = GameDictionary.keywords.get(keywordName.toLowerCase());
         }
 
-        // 如果找到了描述，就添加提示
         if (description != null) {
             this.tips.add(new PowerTip(TipHelper.capitalize(keywordName), description));
         }

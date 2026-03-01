@@ -80,7 +80,7 @@
     "NAME": "杀招-愤怒的小鸟",
     "FLAVOR": "灵动的火焰小鸟，蕴藏着巨大的威能。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y熔岩炸裂蛊+ 。"
+      "需要蛊虫： #y熔岩炸裂蛊+ 、任意 #y炎道仙蛊 。"
     ]
   },
   "GuZhenRen:DingXianYou": {
@@ -108,14 +108,49 @@
     "NAME": "杀招-追命火",
     "FLAVOR": "能够感应攻势，追根溯源，直烧仙窍。生命不息，此火就燃烧不止。",
     "DESCRIPTIONS": [
-      "需要： #y燎原火+ 、任意 #y炎道蛊虫 。"
+      "需要蛊虫： #y燎原火+ 、任意 #y炎道蛊虫 。"
     ]
   },
   "GuZhenRen:Recipe_XingXiuQiPan": {
     "NAME": "杀招-星宿棋盘",
     "FLAVOR": "历史上第一座仙蛊屋，有着天下第一的推算能力。",
     "DESCRIPTIONS": [
-      "需要： #y智慧蛊 、任意 #y智道仙蛊 。"
+      "需要蛊虫： #y智慧蛊 、任意 #y智道仙蛊 。"
+    ]
+  },
+  "GuZhenRen:Recipe_WuZhiQuanXinJian": {
+    "NAME": "杀招-五指拳心剑",
+    "FLAVOR": "历经五十四次劫，劫云仍旧漫遮天。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y慧剑+ 、任意 #y剑道蛊虫 。"
+    ]
+  },
+  "GuZhenRen:Recipe_JianLangSanDie": {
+    "NAME": "杀招-剑浪三叠",
+    "FLAVOR": "此招共发出三波剑浪，一浪高过一浪。剑浪翻涌，卷起百千浪花，杀伤力惊人。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y浪剑+ 、任意 #y剑道蛊虫 。"
+    ]
+  },
+  "GuZhenRen:Recipe_AnQiSha": {
+    "NAME": "杀招-暗歧杀",
+    "FLAVOR": "此招催动之时毫无气息流露，一旦发动，剑势极快，迅雷不及掩耳。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y飞剑+ 、 #y剑影蛊 或 #y多重剑影蛊 或 #y叠影蛊 。"
+    ]
+  },
+  "GuZhenRen:Recipe_JianHenSuoMing": {
+    "NAME": "杀招-剑痕索命",
+    "FLAVOR": "飞剑仙蛊造成的伤口，能够在目标身上刻印剑道道痕，道痕将自循目标的弱点，加以攻击。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y飞剑+ 、任意 #y剑道蛊虫 。"
+    ]
+  },
+  "GuZhenRen:JianMei": {
+    "NAME": "剑眉",
+    "FLAVOR": "能够在眉毛中刻印剑道道痕。",
+    "DESCRIPTIONS": [
+      "每场战斗开始时，获得 1 层 #y剑锋 。"
     ]
   }
 }

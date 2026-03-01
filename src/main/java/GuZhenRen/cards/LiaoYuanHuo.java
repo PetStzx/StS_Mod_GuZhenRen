@@ -104,17 +104,12 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
             this.upgradeMagicNumber(UPGRADE_TIMES);
             this.upgradeRank(1);
 
-            // 1. 更新预览卡牌为 灼伤+
+            // 更新预览卡牌为 灼伤+
             AbstractCard c = new Burn();
             c.upgrade();
             this.cardsToPreview = c;
 
-            // 2. 【核心修复】 更新基础描述文本变量
-            // 使用 myBaseDescription 而不是 rawDescription
-            // 这样 initializeDescription() 时才不会被旧文本覆盖
-            if (cardStrings.UPGRADE_DESCRIPTION != null) {
-                this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
-            }
+            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
 
             this.initializeDescription();
         }

@@ -27,7 +27,6 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
                 CardTarget.SELF);
 
         this.setDao(Dao.ZHI_DAO);
-
         this.maxRank = 9;
 
         // 初始化
@@ -37,9 +36,6 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
 
     // 计算当前转数对应的数值
     private void calculateStats() {
-        // 1-8转: 获得层数 = rank + 1 (1转2层, 8转9层)
-        // 9转: 获得层数 = 9, 且获得固有属性
-
         int amount = this.rank + 1;
         if (this.rank >= 9) {
             amount = 9;
@@ -50,9 +46,8 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
 
         this.baseMagicNumber = this.magicNumber = amount;
 
-        // 如果变成了固有，需要更新描述以显示“固有”关键词
-        if (this.isInnate && !this.rawDescription.contains("固有")) {
-            this.rawDescription = "GuZhenRen:固有 。 " + this.rawDescription;
+        if (this.isInnate && !this.myBaseDescription.contains("固有")) {
+            this.myBaseDescription = " 固有 。 " + this.myBaseDescription;
         }
     }
 
@@ -77,9 +72,13 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
         calculateStats();
         this.upgradedMagicNumber = true;
 
-        // 如果到了9转，需要更新描述显示固有
         if (this.rank == 9) {
             this.initializeDescription();
         }
+    }
+
+    @Override
+    protected void onRankLoaded() {
+        calculateStats();
     }
 }

@@ -9,7 +9,7 @@
   "GuZhenRen:QuanLiYiFuPower": {
     "NAME": "全力以赴",
     "DESCRIPTIONS": [
-      " #y力量 的加成效果翻倍。"
+      " #y虚影 牌必定触发。"
     ]
   },
   "GuZhenRen:FenShaoPower": {
@@ -174,6 +174,19 @@
     "NAME": "慧剑",
     "DESCRIPTIONS": [
       "当你获得 #y情 时，将其转化为同层数的 #y剑锋 。"
+    ]
+  },
+  "GuZhenRen:JianDunPower": {
+    "NAME": "剑遁",
+    "DESCRIPTIONS": [
+      "打出 #y剑道 牌时，根据其耗能抽等量的牌。"
+    ]
+  },
+  "GuZhenRen:FeiLiPower": {
+    "NAME": "费力",
+    "DESCRIPTIONS": [
+      "回合结束时失去1点 #y力量 ，持续 #b",
+      " 回合。"
     ]
   }
 }

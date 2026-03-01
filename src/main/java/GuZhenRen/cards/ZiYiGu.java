@@ -18,10 +18,12 @@ public class ZiYiGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ZiYiGu.png");
 
-    private static final int COST = 0;
-    private static final int VULN_AMOUNT = 9; // 易伤层数
-    private static final int YI_AMT = 3; // 基础意改为3
-    private static final int INITIAL_RANK = 3; // 3转
+    private static final int COST = 2;
+    private static final int UPGRADE_COST = 1;
+    private static final int ENEMY_VULN_AMOUNT = 99; // 敌人99层易伤
+    private static final int YI_AMT = 3;             // 获得3层意
+    private static final int SELF_VULN_BASE = 2;     // 自己吃2层易伤
+    private static final int INITIAL_RANK = 3;       // 3转
 
     public ZiYiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,24 +34,22 @@ public class ZiYiGu extends AbstractGuZhenRenCard {
 
         this.setDao(Dao.ZHI_DAO);
 
-        // 魔法值控制获得的“意”
         this.baseMagicNumber = this.magicNumber = YI_AMT;
+        this.baseSecondMagicNumber = this.secondMagicNumber = SELF_VULN_BASE;
 
-        // 消耗
         this.exhaust = true;
-
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 给予自己 9 层易伤
-        this.addToBot(new ApplyPowerAction(p, p, new VulnerablePower(p, VULN_AMOUNT, false), VULN_AMOUNT));
+        // 1. 给予自己易伤
+        this.addToBot(new ApplyPowerAction(p, p, new VulnerablePower(p, this.secondMagicNumber, false), this.secondMagicNumber));
 
-        // 2. 给予所有敌人 9 层易伤
+        // 2. 给予所有敌人 99 层易伤
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!mo.isDeadOrEscaped()) {
-                this.addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, VULN_AMOUNT, false), VULN_AMOUNT));
+                this.addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, ENEMY_VULN_AMOUNT, false), ENEMY_VULN_AMOUNT));
             }
         }
 
@@ -62,20 +62,12 @@ public class ZiYiGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
 
-            // 1. 添加保留属性
-            this.selfRetain = true;
+            // 升级后费用减为 1
+            this.upgradeBaseCost(UPGRADE_COST);
 
-            // 2. 升级转数
+            // 升级转数 (3转 -> 4转)
             this.upgradeRank(1);
 
-            // 3. 【核心修复】 更新基础描述文本
-            // 必须同时更新 rawDescription 和 myBaseDescription
-            if (cardStrings.UPGRADE_DESCRIPTION != null) {
-                this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-                this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
-            }
-
-            // 4. 重新构建描述
             this.initializeDescription();
         }
     }

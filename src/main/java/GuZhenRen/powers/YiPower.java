@@ -5,6 +5,7 @@ import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction; // 【新增导入】
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -24,7 +25,6 @@ public class YiPower extends AbstractPower implements CloneablePowerInterface {
         this.amount = amount;
         this.type = PowerType.BUFF;
 
-        // 【修改】替换图标加载方式
         String pathLarge = GuZhenRen.assetPath("img/powers/YiPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/YiPower.png");
 
@@ -43,22 +43,26 @@ public class YiPower extends AbstractPower implements CloneablePowerInterface {
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
-
-        // 【回归消耗逻辑】
-        while (this.amount >= 3) {
-            this.amount -= 3;
-            triggerEffect();
-        }
+        checkThreshold(); // 【修改】统一调用 checkThreshold
         updateDescription();
     }
 
     @Override
     public void onInitialApplication() {
+        checkThreshold(); // 【修改】统一调用 checkThreshold
+        updateDescription();
+    }
+
+    // 【新增】统一的阈值检测与销毁方法
+    private void checkThreshold() {
         while (this.amount >= 3) {
             this.amount -= 3;
             triggerEffect();
         }
-        updateDescription();
+        // 如果转化后层数归零，立即将自己从状态栏移除
+        if (this.amount <= 0) {
+            this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this));
+        }
     }
 
     private void triggerEffect() {

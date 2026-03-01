@@ -14,11 +14,11 @@ public class HuiJian extends AbstractGuZhenRenCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION; // 引入升级描述
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/HuiJian.png");
 
-    private static final int COST = 2;
-    private static final int UPGRADE_COST = 1;
-    private static final int INITIAL_RANK = 7; // 7转
+    private static final int COST = 2; // 始终为 2 费
+    private static final int INITIAL_RANK = 7; // 7转起步
 
     public HuiJian() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -41,8 +41,11 @@ public class HuiJian extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBaseCost(UPGRADE_COST); // 升级后变 1 费
-            this.upgradeRank(1);                // 升级至 8 转
+            this.selfRetain = true; // 升级后获得保留
+            this.upgradeRank(1); // 7转 -> 8转
+
+            this.myBaseDescription = UPGRADE_DESCRIPTION;
+
             this.initializeDescription();
         }
     }

@@ -2,10 +2,15 @@ package GuZhenRen.potions;
 
 import GuZhenRen.GuZhenRen;
 import basemod.abstracts.CustomPotion;
+import basemod.ReflectionHacks;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.localization.PotionStrings;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
@@ -19,18 +24,42 @@ public class ShengJiYe extends CustomPotion {
     public static final String NAME = potionStrings.NAME;
     public static final String[] DESCRIPTIONS = potionStrings.DESCRIPTIONS;
 
-    public ShengJiYe() {
-        // ID, Name, Rarity, Size, Color
-        super(NAME, POTION_ID, PotionRarity.COMMON, PotionSize.H, PotionColor.GREEN);
+    private static final Texture POTION_IMG = ImageMaster.loadImage(GuZhenRen.assetPath("img/potions/ShengJiYe.png"));
+    private static final Texture POTION_OUTLINE = ImageMaster.loadImage(GuZhenRen.assetPath("img/potions/ShengJiYe_outline.png"));
 
-        // 是否是可以投掷的药水（比如火焰药水是true，回血药水是false）
+    // 用于防空指针崩溃的透明隐形贴图
+    private static Texture TRANSPARENT_IMG = null;
+
+    public ShengJiYe() {
+        // PotionSize.T (管状), PotionColor.GREEN (绿色)
+        super(NAME, POTION_ID, PotionRarity.COMMON, PotionSize.T, PotionColor.GREEN);
+
         this.isThrown = false;
+
+        // 设置在图鉴(Lab)中鼠标悬停时的背景高光颜色为绿色
+        this.labOutlineColor = Color.GREEN.cpy();
+
+        // 动态生成一张 1x1 的全透明图片，用于顶替默认的液体贴图，避开图鉴渲染报错
+        if (TRANSPARENT_IMG == null) {
+            Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            pixmap.setColor(0, 0, 0, 0); // 全透明
+            pixmap.fill();
+            TRANSPARENT_IMG = new Texture(pixmap);
+            pixmap.dispose();
+        }
+
+        // 替换各层贴图
+        ReflectionHacks.setPrivate(this, AbstractPotion.class, "containerImg", POTION_IMG);
+        ReflectionHacks.setPrivate(this, AbstractPotion.class, "outlineImg", POTION_OUTLINE);
+        ReflectionHacks.setPrivate(this, AbstractPotion.class, "liquidImg", TRANSPARENT_IMG);
+        ReflectionHacks.setPrivate(this, AbstractPotion.class, "hybridImg", null);
+        ReflectionHacks.setPrivate(this, AbstractPotion.class, "spotsImg", null);
     }
 
     @Override
     public void initializeData() {
         this.potency = getPotency();
-        // 描述：回复 #b6 点生命。
+
         this.description = DESCRIPTIONS[0] + this.potency + DESCRIPTIONS[1];
 
         this.tips.clear();
@@ -38,21 +67,24 @@ public class ShengJiYe extends CustomPotion {
     }
 
     @Override
+    public boolean canUse() {
+        return true;
+    }
+
+    @Override
     public void use(AbstractCreature target) {
-        // 目标通常是玩家自己
         AbstractCreature p = AbstractDungeon.player;
-        // 如果是在战斗中
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             this.addToBot(new HealAction(p, p, this.potency));
         } else {
-            // 如果是在战斗外使用（直接回血）
+            // 战斗外直接调用 heal
             p.heal(this.potency);
         }
     }
 
     @Override
     public int getPotency(int ascensionLevel) {
-        return 6; // 基础回复量 6
+        return 6;
     }
 
     @Override

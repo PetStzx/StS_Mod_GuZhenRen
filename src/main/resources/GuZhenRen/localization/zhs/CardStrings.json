@@ -44,7 +44,8 @@
   },
   "GuZhenRen:QuanLiYiFuGu": {
     "NAME": "全力以赴蛊",
-    "DESCRIPTION": " NL 力量 的加成效果翻倍。"
+    "DESCRIPTION": " guzhenren:虚影 牌的触发 guzhenren:概率 提升至100%。",
+    "UPGRADE_DESCRIPTION": " guzhenren:虚影 牌的触发 guzhenren:概率 提升至100%。 保留 。"
   },
   "GuZhenRen:ShaGu": {
     "NAME": "杀蛊",
@@ -79,7 +80,7 @@
   },
   "GuZhenRen:LiLiangGu": {
     "NAME": "力量蛊",
-    "DESCRIPTION": "获得 !M! 点 力量 。 NL 回合结束时失去 !D! 点 力量 。消耗 。",
+    "DESCRIPTION": "获得 !M! 点 力量 。 NL 回合结束时失去 !GuZhenRen:SecondMagic! 点 力量 。 消耗 。",
     "FLAVOR": "只会臣服于比自己更加强大的存在。需要付出寿命才能炼化。可达九转。"
   },
   "GuZhenRen:YanTongGu": {
@@ -108,7 +109,7 @@
   },
   "GuZhenRen:ShiBaiGu": {
     "NAME": "失败蛊",
-    "DESCRIPTION": "失去 !M! 点生命。 NL 5% guzhenren:概率 将一张 *成功蛊 加入手牌。"
+    "DESCRIPTION": "失去 !M! 点生命。 NL {CHANCE} guzhenren:概率 将一张 *成功蛊 加入手牌。"
   },
   "GuZhenRen:KuLiGu": {
     "NAME": "苦力蛊",
@@ -119,11 +120,14 @@
   },
   "GuZhenRen:ZhanNianGu": {
     "NAME": "战念蛊",
-    "DESCRIPTION": "获得 1 点 力量 。 NL 获得 !M! 点 guzhenren:念 。 NL 消耗 。"
+    "DESCRIPTION": "只有在手牌中 *攻击牌 数量不小于 4 时才能打出。 NL 获得 !GuZhenRen:SecondMagic! 点 力量 。 NL 获得 !M! 层 guzhenren:念 。",
+    "EXTENDED_DESCRIPTION": [
+      "手牌中的攻击牌不足 4 张。"
+    ]
   },
   "GuZhenRen:WanWuDaTongBian": {
     "NAME": "万物大同变",
-    "DESCRIPTION": "使你的所有状态转化为同层数的 guzhenren:变化道道痕 。"
+    "DESCRIPTION": "本场战斗中你的所有状态转化为同层数的 guzhenren:变化道道痕 。"
   },
   "GuZhenRen:JinGangNian": {
     "NAME": "金刚念",
@@ -156,12 +160,12 @@
   },
   "GuZhenRen:ZhiHuiGu": {
     "NAME": "智慧蛊",
-    "DESCRIPTION": "获得 !M! 层 guzhenren:智慧 。"
+    "DESCRIPTION": "获得 !M! 层 guzhenren:智慧 。",
+    "FLAVOR": "能带给人无上的智慧。需要付出寿命才能炼化。可达九转。"
   },
   "GuZhenRen:ZiYiGu": {
     "NAME": "恣意蛊",
-    "DESCRIPTION": "给予所有单位9层 易伤 。获得 !M! 层 guzhenren:意 。 消耗 。",
-    "UPGRADE_DESCRIPTION": "给予所有单位9层 易伤 。获得 !M! 层 guzhenren:意 。 消耗 。 保留 。"
+    "DESCRIPTION": "获得 !GuZhenRen:SecondMagic! 层 易伤 。给予所有敌人 99 层 易伤 。获得 !M! 层 guzhenren:意 。 NL 消耗 。"
   },
   "GuZhenRen:WanXingFeiYing": {
     "NAME": "万星飞萤",
@@ -185,7 +189,7 @@
   },
   "GuZhenRen:LeShanLeShuiGu": {
     "NAME": "乐山乐水蛊",
-    "DESCRIPTION": "获得 !M! 层 guzhenren:意 。 NL 本场战斗，你无法再获得 guzhenren:念 。消耗 。"
+    "DESCRIPTION": "获得 !M! 层 guzhenren:意 。 NL 本场战斗，你无法再获得 guzhenren:念 。 消耗 。"
   },
   "GuZhenRen:ZhuiNian": {
     "NAME": "追念",
@@ -210,7 +214,7 @@
   },
   "GuZhenRen:JianYing": {
     "NAME": "剑影",
-    "DESCRIPTION": " guzhenren:剑道 。 NL 造成 !D! 点伤害。 NL 给予 !M! 层 guzhenren:剑痕 。 NL 虚无 。"
+    "DESCRIPTION": " guzhenren:剑道 。 NL 给予 !M! 层 guzhenren:剑痕 。 NL 被 消耗 时，对 guzhenren:剑痕 层数最高的敌人造成 !D! 点伤害。 虚无 。"
   },
   "GuZhenRen:ShanJianGu": {
     "NAME": "闪剑蛊",
@@ -218,11 +222,147 @@
   },
   "GuZhenRen:HuiJian": {
     "NAME": "慧剑",
-    "DESCRIPTION": "将所有的 guzhenren:情 转化为同层数的 *剑锋 。 NL 你获得 guzhenren:情 时，改为获得同等层数的 *剑锋 。",
+    "DESCRIPTION": "将所有的 guzhenren:情 转化为同层数的 guzhenren:剑锋 。 NL 你获得 guzhenren:情 时，改为获得同等层数的 guzhenren:剑锋 。",
+    "UPGRADE_DESCRIPTION": "将所有的 guzhenren:情 转化为同层数的 guzhenren:剑锋 。 NL 你获得 guzhenren:情 时，改为获得同等层数的 guzhenren:剑锋 。 保留 。",
     "FLAVOR": "慧剑斩情丝，心如止水明。"
   },
   "GuZhenRen:JianHenSuoMing": {
     "NAME": "剑痕索命",
     "DESCRIPTION": "目标每有1层 guzhenren:剑痕 ，对其造成 !D! 点伤害1次。 NL 结束你的回合。"
+  },
+  "GuZhenRen:JianDun": {
+  "NAME": "剑遁",
+  "DESCRIPTION": "打出 guzhenren:剑道 牌时，根据其耗能抽等量的牌。",
+  "UPGRADE_DESCRIPTION": "固有 。 NL 打出 guzhenren:剑道 牌时，根据其耗能抽等量的牌。"
+  },
+  "GuZhenRen:JianQiGu": {
+    "NAME": "剑气蛊",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 目标每有 1 层 *剑痕 ，再对所有敌人造成 !M! 点固定伤害。"
+  },
+  "GuZhenRen:JianQiaoGu": {
+    "NAME": "剑鞘蛊",
+    "DESCRIPTION": "为手牌中的1张 guzhenren:剑道 牌附加 保留 。其每次被保留，下一次打出时基础伤害翻倍且耗能为0。 消耗 。",
+    "UPGRADE_DESCRIPTION": "为手牌中的1张 guzhenren:剑道 牌附加 保留 。其每次被保留，下一次打出时基础伤害翻倍且耗能为0。 消耗 。 保留 。"
+  },
+  "GuZhenRen:DieYingGu": {
+    "NAME": "叠影蛊",
+    "DESCRIPTION": "造成 !D! 点伤害，给予 !M! 层 guzhenren:剑痕 。 NL 消耗堆中每有 1 张 *剑影 ，此牌伤害增加 !GuZhenRen:SecondMagic! 点，额外给予 1 层 *剑痕 。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害，给予 !M! 层 guzhenren:剑痕 。 NL 消耗堆中每有 1 张 *剑影 ，此牌伤害增加 !GuZhenRen:SecondMagic! 点，额外给予 1 层 *剑痕 。"
+  },
+  "GuZhenRen:FeiJian": {
+    "NAME": "飞剑",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 此牌每次造成伤害，给予 1 层 *剑痕 ，并随机对一名敌人造成当前伤害量一半的伤害。"
+  },
+  "GuZhenRen:LangJian": {
+    "NAME": "浪剑",
+    "DESCRIPTION": "造成 !D! 点伤害， NL 给予 !M! 层 *剑痕 。 NL 打出 guzhenren:剑道 牌时，若此牌在弃牌堆中，将其返回手牌。"
+  },
+  "GuZhenRen:JianYingGu": {
+    "NAME": "剑影蛊",
+    "DESCRIPTION": "造成 !D! 点伤害， NL 给予 !M! 层 *剑痕 。 NL 将 1 张 *剑影 加入手牌。"
+  },
+  "GuZhenRen:DuoChongJianYingGu": {
+    "NAME": "多重剑影蛊",
+    "DESCRIPTION": "将 !M! 张 *剑影 加入手牌。",
+    "UPGRADE_DESCRIPTION": "将 !M! 张 *剑影+ 加入手牌。"
+  },
+  "GuZhenRen:RuiYiGu": {
+    "NAME": "锐意蛊",
+    "DESCRIPTION": "获得 1 层 guzhenren:剑锋 。 NL 每有一名意图为攻击的敌人，给予其 !M! 层 guzhenren:剑痕 并获得 !M! 层 guzhenren:意 。 消耗 。"
+  },
+  "GuZhenRen:JianLangSanDie": {
+    "NAME": "剑浪三叠",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害，给予 !M! 层 guzhenren:剑痕 。 NL 触发 3 次。"
+  },
+  "GuZhenRen:AnQiSha": {
+    "NAME": "暗歧杀",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 若此牌是你本回合打出的第一张牌，且目标意图不为攻击，造成的 未被格挡的伤害 乘 10。"
+  },
+  "GuZhenRen:RenGu": {
+    "NAME": "刃蛊",
+    "DESCRIPTION": "随机将 1 张 普通 品质的 guzhenren:剑道 蛊虫加入手牌，这张牌在本回合耗能为 0。 消耗 。",
+    "EXTENDED_DESCRIPTION": [
+      "随机将 1 张 普通 品质的 guzhenren:剑道 蛊虫加入手牌，这张牌在本回合耗能为 0。 消耗 。",
+      "从 2 张 随机普通 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 消耗 。",
+      "从 2 张 随机普通或罕见 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 消耗 。",
+      "从 2 张 随机 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 消耗 。",
+      "从 2 张 已升级的随机 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 消耗 。",
+      "从 2 张 已升级的随机 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 获得 1 层 guzhenren:剑锋 。 消耗 。",
+      "从 3 张 已升级的随机 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 获得 1 层 guzhenren:剑锋 。 消耗 。",
+      "从 3 张 已升级的随机 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 获得 2 层 guzhenren:剑锋 。 消耗 。",
+      "从 3 张 已升级的随机 guzhenren:剑道 蛊虫中选择 1 张加入手牌，这张牌在本回合耗能为 0。 获得 3 层 guzhenren:剑锋 。 消耗 。"
+    ],
+    "FLAVOR": "刀道、剑道的源头。可达九转。"
+  },
+  "GuZhenRen:QingNiuLaoLiGu": {
+    "NAME": "青牛劳力蛊",
+    "DESCRIPTION": "获得 !B! 点格挡。 NL 将1张 *牛力 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点格挡。 NL 将1张 *牛力虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:NiuLiXuYing": {
+    "NAME": "牛力虚影",
+    "DESCRIPTION": "{CHANCE}  guzhenren:概率 触发： NL 造成 !D! 点伤害。"
+  },
+  "GuZhenRen:ChiMaJunLiGu": {
+    "NAME": "驰马骏力蛊",
+    "DESCRIPTION": "抽 !M! 张牌。 NL 将1张 *马力 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "抽 !M! 张牌。 NL 将1张 *马力虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:MaLiXuYing": {
+    "NAME": "马力虚影",
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 抽1张牌， NL 丢弃1张牌。"
+  },
+  "GuZhenRen:HeiMangChanLiGu": {
+    "NAME": "黑蟒缠力蛊",
+    "DESCRIPTION": "给予所有敌人 !M! 层 虚弱 和 !GuZhenRen:SecondMagic! 层 *缠绕 。 NL 将1张 *黑蟒 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "给予所有敌人 !M! 层 虚弱 和 !GuZhenRen:SecondMagic! 层 *缠绕 。 NL 将1张 *黑蟒虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:HeiMangXuYing": {
+    "NAME": "黑蟒虚影",
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 给予 !M! 层 *缠绕 。"
+  },
+  "GuZhenRen:BaiXiangYuanLiGu": {
+    "NAME": "白象元力蛊",
+    "DESCRIPTION": "获得 !M! 点 力量 。 NL 将1张 *白象 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "获得 !M! 点 力量 。 NL 将1张 *白象虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:BaiXiangXuYing": {
+    "NAME": "白象虚影",
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 获得 !M! 点 力量 。"
+  },
+  "GuZhenRen:ShiGuiFuLiGu": {
+    "NAME": "石龟负力蛊",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 将1张 *龟力 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点 格挡 。 NL 将1张 *龟力虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:GuiLiXuYing": {
+    "NAME": "龟力虚影",
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 获得 !B! 点 格挡 。 格挡 值受 力量 加成。"
+  },
+  "GuZhenRen:FeiXiongZhiLiGu": {
+    "NAME": "飞熊之力蛊",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害并给予 !M! 层 易伤 。 NL 将1张 *飞熊 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "对所有敌人造成 !D! 点伤害并给予 !M! 层 易伤 。 NL 将1张 *飞熊虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:FeiXiongXuYing": {
+    "NAME": "飞熊虚影",
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 对所有敌人造成 !D! 点伤害。 力量 在飞熊虚影上发挥 !M! 倍效果。"
+  },
+  "GuZhenRen:WoLi": {
+    "NAME": "我力",
+    "DESCRIPTION": "本回合下1张攻击牌打出2次。 NL 将1张 *我力 guzhenren:虚影 加入手牌。 消耗 。",
+    "UPGRADE_DESCRIPTION": "本回合下1张攻击牌打出2次。 NL 将1张 *我力虚影+ 加入手牌。 消耗 。"
+  },
+  "GuZhenRen:WoLiXuYing": {
+    "NAME": "我力虚影",
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 重复你打出的上一张攻击牌。"
+  },
+  "GuZhenRen:FeiLiGu": {
+    "NAME": "费力蛊",
+    "DESCRIPTION": "使敌人在回合结束时失去1点 力量 ，持续 !M! 回合。 NL 消耗 。"
+  },
+  "GuZhenRen:YunSuan": {
+    "NAME": "运算",
+    "DESCRIPTION": "将 1 张手牌放到抽牌堆顶部。抽 !M! 张牌。 NL 抽到的牌在本场战斗中概率属性提高 !GuZhenRen:SecondMagic! %。"
   }
 }

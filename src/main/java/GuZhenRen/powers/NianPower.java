@@ -5,6 +5,7 @@ import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction; // 【新增导入】
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -31,8 +32,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
         this.amount = amount;
 
-        // 构造函数只负责计算数值加成
-        // 拦截和转化逻辑现已完全移交给 ZhiZhangPower 和 NianTouShouZuPower
         int bonus = getBonus();
         if (bonus > 0) {
             this.amount += bonus;
@@ -59,8 +58,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
 
-        // 只需要处理正常的叠加逻辑
-        // 如果被拦截，stackPower 根本不会被触发
         int bonus = getBonus();
         int totalGain = stackAmount + bonus;
 
@@ -71,7 +68,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
     @Override
     public void onInitialApplication() {
-        // 同理，如果被拦截，此方法不会触发
         checkThreshold();
         updateDescription();
     }
@@ -80,6 +76,10 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         while (this.amount >= 3) {
             this.amount -= 3;
             triggerEffect();
+        }
+        // 【新增】如果转化后层数归零，立即将自己从状态栏移除
+        if (this.amount <= 0) {
+            this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this));
         }
     }
 
@@ -99,12 +99,10 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         return new NianPower(owner, amount);
     }
 
-    // 给金刚念等卡牌使用的预测方法
     public static boolean isConverted(AbstractCreature owner) {
         if (owner == null) return false;
         if (owner.hasPower(WanWuDaTongBianPower.POWER_ID)) return true;
         if (owner.hasPower(ZhiZhangPower.POWER_ID)) return true;
-        // 如果念头受阻，对于伤害卡牌来说，也等同于没有获得念，所以视为被拦截
         if (owner.hasPower(NianTouShouZuPower.POWER_ID)) return true;
         return false;
     }

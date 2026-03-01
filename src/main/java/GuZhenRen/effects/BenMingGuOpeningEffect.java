@@ -103,7 +103,9 @@ public class BenMingGuOpeningEffect extends AbstractGameEffect {
             }
         }
 
-        Collections.shuffle(pool, AbstractDungeon.cardRng.random);
+        java.util.Random independentRng = new java.util.Random(Settings.seed);
+        Collections.shuffle(pool, independentRng);
+
         ArrayList<AbstractCard> choices = new ArrayList<>();
         int count = Math.min(pool.size(), 3);
 
@@ -130,7 +132,6 @@ public class BenMingGuOpeningEffect extends AbstractGameEffect {
             }
 
             for (AbstractCard c : AbstractDungeon.cardRewardScreen.rewardGroup) {
-                // 【核心修改】 渲染警告文字
                 if (c.cardID.equals(LiLiangGu.ID) || c.cardID.equals(ZhiHuiGu.ID)) {
                     float textX = c.current_x;
                     float textY = c.current_y - (AbstractCard.IMG_HEIGHT * c.drawScale / 2.0f) - (20.0f * Settings.scale);

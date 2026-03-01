@@ -20,7 +20,7 @@ public class YanZhouGu extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int BLOCK_AMT = 11;
     private static final int UPGRADE_PLUS_BLOCK = 4; // 升级后 11+4=15
-    private static final int BURN_AMT = 2;
+    private static final int BURN_AMT = 1;
     private static final int INITIAL_RANK = 2; // 初始2转
 
     public YanZhouGu() {

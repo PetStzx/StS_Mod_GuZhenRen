@@ -3,6 +3,7 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction; // 【新增】导入移除能力的动作
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -36,7 +37,26 @@ public class NianTouShouZuPower extends AbstractPower implements OnReceivePowerP
         this.description = DESCRIPTIONS[0];
     }
 
-    //  接口实现：阻断念
+    // 【新增】首次获得该能力时触发：清空身上的“念”
+    @Override
+    public void onInitialApplication() {
+        if (this.owner.hasPower(NianPower.POWER_ID)) {
+            this.flash();
+            this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, NianPower.POWER_ID));
+        }
+    }
+
+    // 重复获得该能力时触发：防范边缘情况，依然清空“念”
+    @Override
+    public void stackPower(int stackAmount) {
+        super.stackPower(stackAmount);
+        if (this.owner.hasPower(NianPower.POWER_ID)) {
+            this.flash();
+            this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, NianPower.POWER_ID));
+        }
+    }
+
+    //  接口实现：阻断后续获得念
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
         if (power instanceof NianPower) {

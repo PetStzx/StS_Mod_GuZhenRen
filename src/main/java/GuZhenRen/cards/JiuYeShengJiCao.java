@@ -24,7 +24,7 @@ public class JiuYeShengJiCao extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON,
+                CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
         // 消耗

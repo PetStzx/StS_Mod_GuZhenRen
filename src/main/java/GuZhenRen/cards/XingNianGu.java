@@ -22,8 +22,8 @@ public class XingNianGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XingNianGu.png");
 
     private static final int COST = 1;
-    private static final int SCRY_AMT = 3;
-    private static final int UPGRADE_SCRY_AMT = 2;
+    private static final int SCRY_AMT = 2;
+    private static final int UPGRADE_SCRY_AMT = 1;
     private static final int NIAN_GAIN = 3;
     private static final int INITIAL_RANK = 5;
 

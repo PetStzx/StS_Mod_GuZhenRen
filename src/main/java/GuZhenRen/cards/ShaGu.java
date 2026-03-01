@@ -142,4 +142,9 @@ public class ShaGu extends AbstractBenMingGuCard {
             this.isDone = true;
         }
     }
+
+    @Override
+    protected void onRankLoaded() {
+        calculateBaseDamage();
+    }
 }

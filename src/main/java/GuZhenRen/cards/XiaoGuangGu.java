@@ -57,7 +57,6 @@ public class XiaoGuangGu extends AbstractGuZhenRenCard {
             // 升级后变为 2转
             this.upgradeRank(1);
 
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
 
             this.initializeDescription();

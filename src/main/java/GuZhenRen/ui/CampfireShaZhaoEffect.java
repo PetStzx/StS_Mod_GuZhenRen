@@ -73,7 +73,7 @@ public class CampfireShaZhaoEffect extends AbstractGameEffect {
                     group.addToTop(r.getRewardCard());
                 }
 
-                String msg = group.isEmpty() ? "没有可组并的杀招 (缺少配方或材料)" : "选择要组并的杀招";
+                String msg = group.isEmpty() ? "没有可组并的杀招 (缺少蛊虫或未习得杀招)" : "选择要组并的杀招";
                 AbstractDungeon.gridSelectScreen.open(group, 1, msg, false, false, true, false);
                 AbstractDungeon.overlayMenu.cancelButton.show(CANCEL_TEXT);
                 hasOpenedScreen = true;
@@ -121,7 +121,7 @@ public class CampfireShaZhaoEffect extends AbstractGameEffect {
                                 group.addToTop(c);
                             }
                         }
-                        msg = "选择材料: " + CardCrawlGame.languagePack.getCardStrings(targetID).NAME;
+                        msg = "选择蛊虫: " + CardCrawlGame.languagePack.getCardStrings(targetID).NAME;
                         if (needUpgrade) msg += "+";
                     }
                     // 情况 B: 泛型材料 (超出列表范围的索引)
@@ -135,7 +135,7 @@ public class CampfireShaZhaoEffect extends AbstractGameEffect {
                                 group.addToTop(c);
                             }
                         }
-                        msg = "选择材料: " + selectedRecipe.getIngredientDescription(ingredientIndex);
+                        msg = "选择蛊虫: " + selectedRecipe.getIngredientDescription(ingredientIndex);
                     }
 
                     AbstractDungeon.gridSelectScreen.open(group, 1, msg, false, false, true, false);

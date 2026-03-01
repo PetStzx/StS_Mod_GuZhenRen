@@ -3,11 +3,9 @@ package GuZhenRen;
 import GuZhenRen.effects.BenMingGuOpeningEffect;
 import basemod.BaseMod;
 import basemod.interfaces.*;
-import basemod.helpers.RelicType;
 import GuZhenRen.character.FangYuan;
 import GuZhenRen.potions.*;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -156,36 +154,76 @@ public class GuZhenRen implements
         BaseMod.addCard(new ShanJianGu());
         BaseMod.addCard(new HuiJian());
         BaseMod.addCard(new JianHenSuoMing());
+        BaseMod.addCard(new JianDun());
+        BaseMod.addCard(new JianQiGu());
+        BaseMod.addCard(new JianQiaoGu());
+        BaseMod.addCard(new DieYingGu());
+        BaseMod.addCard(new FeiJian());
+        BaseMod.addCard(new LangJian());
+        BaseMod.addCard(new JianYingGu());
+        BaseMod.addCard(new DuoChongJianYingGu());
+        BaseMod.addCard(new RuiYiGu());
+        BaseMod.addCard(new JianLangSanDie());
+        BaseMod.addCard(new AnQiSha());
+        BaseMod.addCard(new RenGu());
+        BaseMod.addCard(new QingNiuLaoLiGu());
+        BaseMod.addCard(new NiuLiXuYing());
+        BaseMod.addCard(new ChiMaJunLiGu());
+        BaseMod.addCard(new MaLiXuYing());
+        BaseMod.addCard(new HeiMangChanLiGu());
+        BaseMod.addCard(new HeiMangXuYing());
+        BaseMod.addCard(new BaiXiangYuanLiGu());
+        BaseMod.addCard(new BaiXiangXuYing());
+        BaseMod.addCard(new ShiGuiFuLiGu());
+        BaseMod.addCard(new GuiLiXuYing());
+        BaseMod.addCard(new FeiXiongZhiLiGu());
+        BaseMod.addCard(new FeiXiongXuYing());
+        BaseMod.addCard(new WoLi());
+        BaseMod.addCard(new WoLiXuYing());
+        BaseMod.addCard(new FeiLiGu());
+        BaseMod.addCard(new YunSuan());
     }
 
     @Override
     public void receiveEditRelics() {
         logger.info("开始加载遗物...");
-        BaseMod.addRelic(new KongQiao_1(), RelicType.SHARED);
-        BaseMod.addRelic(new KongQiao_2(), RelicType.SHARED);
-        BaseMod.addRelic(new KongQiao_3(), RelicType.SHARED);
-        BaseMod.addRelic(new KongQiao_4(), RelicType.SHARED);
-        BaseMod.addRelic(new KongQiao_5(), RelicType.SHARED);
-        BaseMod.addRelic(new XianQiao_6(), RelicType.SHARED);
-        BaseMod.addRelic(new XianQiao_7(), RelicType.SHARED);
-        BaseMod.addRelic(new XianQiao_8(), RelicType.SHARED);
-        BaseMod.addRelic(new XianQiao_9(), RelicType.SHARED);
-        BaseMod.addRelic(new LiDaoDaoHen(), RelicType.SHARED);
-        BaseMod.addRelic(new YanXinGu(), RelicType.SHARED);
-        BaseMod.addRelic(new DingXianYou(), RelicType.SHARED);
 
+        //  空窍系列遗物
+        BaseMod.addRelicToCustomPool(new KongQiao_1(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new KongQiao_2(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new KongQiao_3(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new KongQiao_4(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new KongQiao_5(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianQiao_6(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianQiao_7(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianQiao_8(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianQiao_9(), CardColorEnum.GUZHENREN_GREY);
 
-        // 注册配方遗物并加入掉落池
-        BaseMod.addRelic(new Recipe_AngryBird(), RelicType.SHARED);
+        //  常规遗物
+        BaseMod.addRelicToCustomPool(new LiDaoDaoHen(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new YanXinGu(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new DingXianYou(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new JianMei(), CardColorEnum.GUZHENREN_GREY);
+
+        //  注册配方遗物并加入掉落池
+        BaseMod.addRelicToCustomPool(new Recipe_AngryBird(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_AngryBird.ID);
-        BaseMod.addRelic(new Recipe_WanXingFeiYing(), RelicType.SHARED);
+        BaseMod.addRelicToCustomPool(new Recipe_WanXingFeiYing(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_WanXingFeiYing.ID);
-        BaseMod.addRelic(new Recipe_YangMangBeiHuoYi(), RelicType.SHARED);
+        BaseMod.addRelicToCustomPool(new Recipe_YangMangBeiHuoYi(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_YangMangBeiHuoYi.ID);
-        BaseMod.addRelic(new Recipe_ZhuiMingHuo(), RelicType.SHARED);
+        BaseMod.addRelicToCustomPool(new Recipe_ZhuiMingHuo(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_ZhuiMingHuo.ID);
-        BaseMod.addRelic(new Recipe_XingXiuQiPan(), RelicType.SHARED);
+        BaseMod.addRelicToCustomPool(new Recipe_XingXiuQiPan(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_XingXiuQiPan.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_WuZhiQuanXinJian(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_WuZhiQuanXinJian.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_JianLangSanDie(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_JianLangSanDie.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_AnQiSha(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_AnQiSha.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_JianHenSuoMing(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_JianHenSuoMing.ID);
     }
 
     @Override

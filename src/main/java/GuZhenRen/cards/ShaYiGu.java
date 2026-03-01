@@ -11,6 +11,9 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
+import com.megacrit.cardcrawl.vfx.combat.CleaveEffect;
 
 public class ShaYiGu extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("ShaYiGu");
@@ -53,7 +56,9 @@ public class ShaYiGu extends AbstractGuZhenRenCard {
         }
 
         // 2. 造成AOE伤害
-        this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        this.addToBot(new SFXAction("ATTACK_HEAVY"));
+        this.addToBot(new VFXAction(p, new CleaveEffect(), 0.1F));
+        this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.NONE));
 
         // 3. 根据刚才统计的数量给予意
         // 即使 AOE 把怪打死了，因为我们是在打出瞬间统计的，所以依然能获得对应层数

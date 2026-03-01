@@ -29,7 +29,7 @@ public class SheXinGu extends AbstractGuZhenRenCard {
                 CardRarity.UNCOMMON,
                 CardTarget.ENEMY);
 
-        setDao(Dao.YIN_YANG_DAO);
+        setDao(Dao.ZHI_DAO);
         setRank(INITIAL_RANK);
         exhaust = true;
     }

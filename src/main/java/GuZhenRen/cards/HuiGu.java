@@ -32,7 +32,7 @@ public class HuiGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON,
+                CardRarity.RARE,
                 CardTarget.SELF);
 
         this.setDao(Dao.ZHI_DAO);

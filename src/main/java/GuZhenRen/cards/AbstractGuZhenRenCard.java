@@ -126,6 +126,14 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         if (AbstractDungeon.player.masterDeck.contains(this)) return;
         if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) return;
 
+        boolean inCombatGroup = AbstractDungeon.player.hand.contains(this) ||
+                AbstractDungeon.player.drawPile.contains(this) ||
+                AbstractDungeon.player.discardPile.contains(this) ||
+                AbstractDungeon.player.limbo.contains(this) ||
+                AbstractDungeon.player.exhaustPile.contains(this);
+
+        if (!inCombatGroup) return;
+
         int playerRank = getPlayerApertureRank();
 
         if (this.rank > playerRank) {
@@ -229,6 +237,16 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         this.upgradedSecondMagicNumber = true;
     }
 
+    // 2. 重写原版的升级预览渲染方法
+    @Override
+    public void displayUpgrades() {
+        super.displayUpgrades();
+        if (this.upgradedSecondMagicNumber) {
+            this.secondMagicNumber = this.baseSecondMagicNumber;
+            this.isSecondMagicNumberModified = true;
+        }
+    }
+
     @Override
     public boolean canSpawn(ArrayList<AbstractCard> currentRewardCards) {
         boolean isXianGu = this.tags.contains(GuZhenRenTags.XIAN_GU) || this.rank >= 6;
@@ -263,13 +281,17 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
                 this.misc = savedData[1];
             }
 
-            // 【核心修复】 已删除 this.applyPowers();
-            // 在 onLoad 阶段，AbstractDungeon.player 或 room 可能尚未初始化
-            // 此时调用 applyPowers 会导致 NullPointerException
+            // 触发读档后的数据重算钩子
+            this.onRankLoaded();
 
             // 仅更新描述文本即可，数值计算留给游戏正常流程
             this.initializeDescription();
         }
+    }
+
+    // 【新增钩子方法】供子类（如本命蛊）重写，用于在读档后立刻刷新数值
+    protected void onRankLoaded() {
+        // 默认留空，由需要的子类去重写
     }
 
     @Override
@@ -285,6 +307,10 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         c.myBaseDescription = this.myBaseDescription;
         c.guPathString = this.guPathString;
         c.isRankLocked = this.isRankLocked;
+
+        // 复制时也触发一次钩子，确保克隆出来的牌（比如在牌组查看界面）数值正确
+        c.onRankLoaded();
+
         c.initializeDescription();
         return c;
     }

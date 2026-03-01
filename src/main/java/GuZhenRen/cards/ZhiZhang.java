@@ -58,9 +58,6 @@ public class ZhiZhang extends AbstractGuZhenRenCard {
             this.upgradeName();
             this.upgradeRank(1);
 
-            // 【核心修复】 同时更新 myBaseDescription
-            // 这样 initializeDescription() 重新构建文本时才会使用新文本
-            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
 
             this.initializeDescription();
