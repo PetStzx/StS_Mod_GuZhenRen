@@ -23,7 +23,7 @@ public class NiuLiXuYing extends AbstractXuYingCard {
         super(ID, NAME, IMG_PATH, -2, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardTarget.ALL_ENEMY);
+                CardTarget.ENEMY);
 
         this.baseDamage = this.damage = DAMAGE;
         this.baseChanceFloat = 0.25f;

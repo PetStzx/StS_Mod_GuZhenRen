@@ -60,7 +60,7 @@ public class CardRewardPatch {
                     replaceReason = "转数不符(玩家" + playerRank + "转 vs 卡牌" + guCard.rank + "转)";
                 } else if (guCard.isXianGu() && playerXianGuIDs.contains(guCard.cardID)) {
                     needReplace = true;
-                    replaceReason = "仙蛊冲突(已有同名仙蛊)";
+                    replaceReason = "已有同名仙蛊";
                 }
 
                 if (needReplace) {

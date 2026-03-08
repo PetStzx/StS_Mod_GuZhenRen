@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class ZhiHuiGu extends AbstractBenMingGuCard {
     public static final String ID = GuZhenRen.makeID("ZhiHuiGu");
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+    public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ZhiHuiGu.png");
@@ -29,12 +29,10 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
         this.setDao(Dao.ZHI_DAO);
         this.maxRank = 9;
 
-        // 初始化
         this.setRank(INITIAL_RANK);
         calculateStats();
     }
 
-    // 计算当前转数对应的数值
     private void calculateStats() {
         int amount = this.rank + 1;
         if (this.rank >= 9) {
@@ -46,8 +44,11 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
 
         this.baseMagicNumber = this.magicNumber = amount;
 
-        if (this.isInnate && !this.myBaseDescription.contains("固有")) {
-            this.myBaseDescription = " 固有 。 " + this.myBaseDescription;
+        String innatePrefix = ZhiHuiGu.cardStrings.EXTENDED_DESCRIPTION[0]; // " 固有 。 "
+        String innateCheck = ZhiHuiGu.cardStrings.EXTENDED_DESCRIPTION[1];  // "固有"
+
+        if (this.isInnate && !this.myBaseDescription.contains(innateCheck)) {
+            this.myBaseDescription = innatePrefix + this.myBaseDescription;
         }
     }
 
@@ -62,7 +63,6 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         calculateStats();
 
-        // 获得智慧状态
         this.addToBot(new ApplyPowerAction(p, p,
                 new ZhiHuiPower(p, this.magicNumber), this.magicNumber));
     }

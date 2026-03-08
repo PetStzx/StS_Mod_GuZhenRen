@@ -48,17 +48,13 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
         if (index == 1) {
-            // 条件A: 智道
+            // 条件1: 智道
             if (!c.hasTag(GuZhenRenTags.ZHI_DAO)) {
                 return false;
             }
 
-            // 条件B: 排除 智慧蛊
-            if (c.cardID.equals(ZhiHuiGu.ID)) {
-                return false;
-            }
 
-            // 条件C: 六转及以上
+            // 条件2: 六转及以上
             if (c instanceof AbstractGuZhenRenCard) {
                 return ((AbstractGuZhenRenCard) c).rank >= 6;
             }
@@ -72,7 +68,7 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "智道仙蛊";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

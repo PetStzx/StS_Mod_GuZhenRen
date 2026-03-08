@@ -2,7 +2,6 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.powers.LiDaoDaoHenPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -38,30 +37,18 @@ public class FeiXiongXuYing extends AbstractXuYingCard {
         this.initializeDescription();
     }
 
-    /**
-     * 获取力量与力道道痕的总和
-     */
-    private int getStrengthBonus(AbstractPlayer p) {
-        int bonus = 0;
-        if (p.hasPower(StrengthPower.POWER_ID)) {
-            bonus += p.getPower(StrengthPower.POWER_ID).amount;
-        }
-        if (p.hasPower(LiDaoDaoHenPower.POWER_ID)) {
-            bonus += p.getPower(LiDaoDaoHenPower.POWER_ID).amount;
-        }
-        return bonus;
-    }
 
-    // =========================================================================
-    // 【核心逻辑】重刃机制
-    // 我们加上了 (力量 * (倍数-1))，然后 super.applyPowers() 会再自动算上正常的 1 倍。
-    // 最终正好等于 (力量 * 倍数)！这也完美兼容了虚弱等百分比Debuff。
-    // =========================================================================
+    // 重刃机制
     @Override
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
         if (p != null) {
-            int extraStr = getStrengthBonus(p) * (this.magicNumber - 1);
+            int extraStr = 0;
+            if (p.hasPower(StrengthPower.POWER_ID)) {
+                // 计算额外的倍数收益
+                extraStr = p.getPower(StrengthPower.POWER_ID).amount * (this.magicNumber - 1);
+            }
+
             int realBaseDamage = this.baseDamage;
 
             this.baseDamage += extraStr;
@@ -78,7 +65,11 @@ public class FeiXiongXuYing extends AbstractXuYingCard {
     public void calculateCardDamage(AbstractMonster mo) {
         AbstractPlayer p = AbstractDungeon.player;
         if (p != null) {
-            int extraStr = getStrengthBonus(p) * (this.magicNumber - 1);
+            int extraStr = 0;
+            if (p.hasPower(StrengthPower.POWER_ID)) {
+                extraStr = p.getPower(StrengthPower.POWER_ID).amount * (this.magicNumber - 1);
+            }
+
             int realBaseDamage = this.baseDamage;
 
             this.baseDamage += extraStr;

@@ -3,7 +3,6 @@ package GuZhenRen.cards;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.FenShaoPower;
-import GuZhenRen.powers.YanDaoDaoHenPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -32,33 +31,15 @@ public class HuoTanGu extends AbstractGuZhenRenCard {
 
         this.setDao(Dao.YAN_DAO);
 
-        this.baseMagicNumber = this.magicNumber = MAGIC_AMT;
+        this.baseFenShao = this.fenShao = MAGIC_AMT;
 
-        // 【关键】按照文本描述，保留“自我保留”属性
         this.selfRetain = true;
-
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         return false;
-    }
-
-    @Override
-    public void applyPowers() {
-        this.magicNumber = this.baseMagicNumber;
-        super.applyPowers();
-
-        int bonus = 0;
-        if (AbstractDungeon.player.hasPower(YanDaoDaoHenPower.POWER_ID)) {
-            bonus = AbstractDungeon.player.getPower(YanDaoDaoHenPower.POWER_ID).amount / 2;
-        }
-
-        if (bonus > 0) {
-            this.magicNumber += bonus;
-            this.isMagicNumberModified = true;
-        }
     }
 
     @Override
@@ -69,11 +50,12 @@ public class HuoTanGu extends AbstractGuZhenRenCard {
     @Override
     public void triggerOnExhaust() {
         AbstractPlayer p = AbstractDungeon.player;
-        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            if (!mo.isDeadOrEscaped()) {
-                // 使用 baseMagicNumber，让 FenShaoPower 内部自动处理加成
-                this.addToBot(new ApplyPowerAction(mo, p,
-                        new FenShaoPower(mo, this.baseMagicNumber), this.baseMagicNumber));
+        if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+            for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
+                if (!mo.isDead && !mo.isDying) {
+                    this.addToBot(new ApplyPowerAction(mo, p,
+                            new FenShaoPower(mo, this.fenShao), this.fenShao));
+                }
             }
         }
     }
@@ -82,7 +64,7 @@ public class HuoTanGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_MAGIC_AMT);
+            this.upgradeFenShao(UPGRADE_MAGIC_AMT);
             this.upgradeRank(1);
             this.initializeDescription();
         }

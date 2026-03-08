@@ -2,7 +2,6 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.powers.LiDaoDaoHenPower;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -31,20 +30,6 @@ public class GuiLiXuYing extends AbstractXuYingCard {
         this.initializeDescription();
     }
 
-    /**
-     * 获取力量与力道道痕的总和
-     */
-    private int getStrengthBonus(AbstractPlayer p) {
-        int bonus = 0;
-        if (p.hasPower(StrengthPower.POWER_ID)) {
-            bonus += p.getPower(StrengthPower.POWER_ID).amount;
-        }
-        if (p.hasPower(LiDaoDaoHenPower.POWER_ID)) {
-            bonus += p.getPower(LiDaoDaoHenPower.POWER_ID).amount;
-        }
-        return bonus;
-    }
-
     // =========================================================================
     // 重写格挡计算，将力量塞进基础值参与原版敏捷计算
     // =========================================================================
@@ -52,7 +37,10 @@ public class GuiLiXuYing extends AbstractXuYingCard {
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
         if (p != null) {
-            int strengthBonus = getStrengthBonus(p);
+            int strengthBonus = 0;
+            if (p.hasPower(StrengthPower.POWER_ID)) {
+                strengthBonus = p.getPower(StrengthPower.POWER_ID).amount;
+            }
 
             // 记录真实的基础格挡
             int realBaseBlock = this.baseBlock;

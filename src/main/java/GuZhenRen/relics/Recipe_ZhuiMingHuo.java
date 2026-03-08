@@ -1,7 +1,7 @@
 package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
-import GuZhenRen.cards.AbstractGuZhenRenCard; // 关键：引入蛊虫基类以获取 rank
+import GuZhenRen.cards.AbstractGuZhenRenCard;
 import GuZhenRen.cards.LiaoYuanHuo;
 import GuZhenRen.cards.ZhuiMingHuo;
 import GuZhenRen.patches.GuZhenRenTags;
@@ -64,13 +64,11 @@ public class Recipe_ZhuiMingHuo extends AbstractRecipeRelic {
             }
 
             // 判定 3: 必须拥有 1-9 的转数
-            // 这一步完美排除了“杀招”，因为杀招通常没有 Rank 或者 Rank=0
             int rank = ((AbstractGuZhenRenCard) c).rank;
             if (rank < 1 || rank > 9) {
                 return false;
             }
 
-            // (无需排除 LiaoYuanHuo.ID，因为题目允许使用另一张未升级的燎原火作为材料)
 
             return true;
         }
@@ -80,7 +78,7 @@ public class Recipe_ZhuiMingHuo extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "任意炎道蛊虫";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

@@ -4,7 +4,6 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.FenShaoPower;
 import GuZhenRen.powers.XingHuoLiaoYuanPower;
-import GuZhenRen.powers.YanDaoDaoHenPower; // 导入
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -20,7 +19,7 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XingHuoLiaoYuanGu.png");
 
     private static final int COST = 2;
-    private static final int MAGIC_AMT = 1;
+    private static final int FEN_SHAO_AMT = 1;
     private static final int INITIAL_RANK = 4;
 
     public XingHuoLiaoYuanGu() {
@@ -32,42 +31,28 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
 
         this.setDao(Dao.YAN_DAO);
 
-        this.baseMagicNumber = this.magicNumber = MAGIC_AMT;
+        // 【极简】启用专属焚烧变量
+        this.baseFenShao = this.fenShao = FEN_SHAO_AMT;
 
         this.exhaust = true;
         this.setRank(INITIAL_RANK);
     }
 
-    // 【新增】显示逻辑
-    @Override
-    public void applyPowers() {
-        this.magicNumber = this.baseMagicNumber;
-        super.applyPowers();
-
-        int bonus = 0;
-        if (AbstractDungeon.player.hasPower(YanDaoDaoHenPower.POWER_ID)) {
-            bonus = AbstractDungeon.player.getPower(YanDaoDaoHenPower.POWER_ID).amount / 2;
-        }
-
-        if (bonus > 0) {
-            this.magicNumber += bonus;
-            this.isMagicNumberModified = true;
-        }
-    }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (!this.upgraded) {
-            // 【核心修改】使用 baseMagicNumber
-            this.addToBot(new ApplyPowerAction(m, p, new FenShaoPower(m, this.baseMagicNumber), this.baseMagicNumber));
+            // 升级前：单体
+            this.addToBot(new ApplyPowerAction(m, p, new FenShaoPower(m, this.fenShao), this.fenShao));
             this.addToBot(new ApplyPowerAction(m, p, new XingHuoLiaoYuanPower(m)));
         } else {
-            // 升级后全体
-            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                if (!mo.isDeadOrEscaped()) {
-                    // 【核心修改】使用 baseMagicNumber
-                    this.addToBot(new ApplyPowerAction(mo, p, new FenShaoPower(mo, this.baseMagicNumber), this.baseMagicNumber));
-                    this.addToBot(new ApplyPowerAction(mo, p, new XingHuoLiaoYuanPower(mo)));
+            // 升级后：全体
+            if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+                for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
+                    if (!mo.isDead && !mo.isDying) {
+                        this.addToBot(new ApplyPowerAction(mo, p, new FenShaoPower(mo, this.fenShao), this.fenShao));
+                        this.addToBot(new ApplyPowerAction(mo, p, new XingHuoLiaoYuanPower(mo)));
+                    }
                 }
             }
         }
@@ -78,11 +63,7 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.target = CardTarget.ALL_ENEMY;
-
-            if (cardStrings.UPGRADE_DESCRIPTION != null) {
-                this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
-            }
-
+            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.upgradeRank(1);
             this.initializeDescription();
         }

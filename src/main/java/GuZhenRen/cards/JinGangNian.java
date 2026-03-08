@@ -3,8 +3,6 @@ package GuZhenRen.cards;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.NianPower;
-import GuZhenRen.powers.QingPower; // 导入情
-import GuZhenRen.powers.ZhiDaoDaoHenPower; // 导入智道道痕
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
@@ -15,7 +13,6 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 public class JinGangNian extends AbstractGuZhenRenCard {
@@ -39,92 +36,82 @@ public class JinGangNian extends AbstractGuZhenRenCard {
                 CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.ZHI_DAO);
-
         this.baseDamage = DAMAGE;
-        this.baseMagicNumber = this.magicNumber = NIAN_AMT;
+
+        // 【核心修改】抛弃 magicNumber，启用专属念变量
+        this.baseNian = this.nian = NIAN_AMT;
 
         this.setRank(INITIAL_RANK);
     }
 
-    // =========================================================================
-    //  【新增】 动态修改卡面显示的数值 (为了让玩家看到 !M! 变绿并显示实际值)
-    // =========================================================================
-    @Override
-    public void applyPowers() {
-        // 1. 先重置为基础值
-        this.magicNumber = this.baseMagicNumber;
-
-        // 2. 调用父类 (处理 rank lock 等)
-        super.applyPowers();
-
-        // 3. 计算加成 (逻辑与 ZhanNianGu 一致)
-        int bonus = 0;
-
-        // 计算【情】的加成
-        if (AbstractDungeon.player.hasPower(QingPower.POWER_ID)) {
-            // 【修正】 改为 / 3
-            bonus += AbstractDungeon.player.getPower(QingPower.POWER_ID).amount / 3;
-        }
-
-        // 计算【智道道痕】的加成
-        if (AbstractDungeon.player.hasPower(ZhiDaoDaoHenPower.POWER_ID)) {
-            // 【修正】 改为 / 3
-            bonus += AbstractDungeon.player.getPower(ZhiDaoDaoHenPower.POWER_ID).amount / 3;
-        }
-
-        // 4. 应用加成到显示数值
-        if (bonus > 0) {
-            this.magicNumber += bonus;
-            this.isMagicNumberModified = true;
-        }
-    }
+    // 【删除】丑陋的旧版 applyPowers 已被全部抹除
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if (this.energyOnUse < -1) {
-            this.energyOnUse = -1;
-        }
-
-        int effect = EnergyPanel.totalCount;
-        if (this.energyOnUse != -1) {
-            effect = this.energyOnUse;
-        }
-
-        if (p.hasRelic(ChemicalX.ID)) {
-            effect += 2;
-            p.getRelic(ChemicalX.ID).flash();
-        }
-
-        if (effect > 0) {
-            for (int i = 0; i < effect; i++) {
-                // 【核心修改】 这里必须传 this.baseMagicNumber (基础值 2)
-                this.addToBot(new JinGangNianSingleAction(p, this.baseMagicNumber, this.damage));
-            }
-        }
-
-        if (!this.freeToPlayOnce) {
-            p.energy.use(EnergyPanel.totalCount);
-        }
+        // 【极简】传入算好加成的 this.nian
+        this.addToBot(new JinGangNianAction(p, this.nian, this.damage, this.freeToPlayOnce, this.energyOnUse));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_NIAN_AMT);
+            this.upgradeNian(UPGRADE_NIAN_AMT); // 使用专属升级方法
             this.upgradeRank(1);
             this.initializeDescription();
         }
     }
 
+    // =========================================================================
+    // 统筹结算的 X 费 Action
+    // =========================================================================
+    public static class JinGangNianAction extends AbstractGameAction {
+        private boolean freeToPlayOnce;
+        private AbstractPlayer p;
+        private int energyOnUse;
+        private int nianAmount; // 这是加成后的实际层数
+        private int damageAmount;
+
+        public JinGangNianAction(AbstractPlayer p, int nianAmount, int damageAmount, boolean freeToPlayOnce, int energyOnUse) {
+            this.p = p;
+            this.nianAmount = nianAmount;
+            this.damageAmount = damageAmount;
+            this.freeToPlayOnce = freeToPlayOnce;
+            this.energyOnUse = energyOnUse;
+        }
+
+        @Override
+        public void update() {
+            int effect = EnergyPanel.totalCount;
+            if (this.energyOnUse != -1) {
+                effect = this.energyOnUse;
+            }
+            if (this.p.hasRelic("Chemical X")) {
+                effect += 2;
+                this.p.getRelic("Chemical X").flash();
+            }
+
+            if (effect > 0) {
+                for (int i = 0; i < effect; i++) {
+                    // 把加成后的 nianAmount 传给子动作
+                    AbstractDungeon.actionManager.addToBottom(new JinGangNianSingleAction(p, nianAmount, damageAmount));
+                }
+                if (!this.freeToPlayOnce) {
+                    this.p.energy.use(EnergyPanel.totalCount);
+                }
+            }
+            this.isDone = true;
+        }
+    }
+
     public static class JinGangNianSingleAction extends AbstractGameAction {
         private final AbstractPlayer p;
-        private final int baseNianAmount;
+        private final int nianAmount;
         private final int damageAmount;
 
-        public JinGangNianSingleAction(AbstractPlayer p, int baseNianAmount, int damageAmount) {
+        public JinGangNianSingleAction(AbstractPlayer p, int nianAmount, int damageAmount) {
             this.p = p;
-            this.baseNianAmount = baseNianAmount;
+            this.nianAmount = nianAmount;
             this.damageAmount = damageAmount;
             this.actionType = ActionType.SPECIAL;
             this.duration = Settings.ACTION_DUR_FAST;
@@ -132,27 +119,25 @@ public class JinGangNian extends AbstractGuZhenRenCard {
 
         @Override
         public void update() {
-            // NianPower 构造函数负责计算加成后的最终数值
-            NianPower powerToApply = new NianPower(p, baseNianAmount);
-            int actualGain = powerToApply.amount;
+            int actualGain = this.nianAmount;
 
-            // 【核心修复】 使用 NianPower 提供的静态方法检查是否被转化
+            // 处理转换限制（例如被智障能力拦截）
             if (NianPower.isConverted(p)) {
                 actualGain = 0;
             }
 
-            // 造成伤害 (actualGain 为 0 时不造成伤害)
             if (actualGain > 0) {
+                // 根据实际获得的层数，进行多次飞弹伤害
                 for (int i = 0; i < actualGain; i++) {
                     this.addToTop(new DamageRandomEnemyAction(
                             new DamageInfo(p, damageAmount, DamageInfo.DamageType.NORMAL),
                             AbstractGameAction.AttackEffect.BLUNT_LIGHT
                     ));
                 }
+                // 给予纯净的 NianPower
+                this.addToTop(new ApplyPowerAction(p, p, new NianPower(p, actualGain), actualGain));
             }
 
-            // 施加状态 (依然需要执行，以便 NianPower 内部触发 ZhiZhang 的临时生命转化)
-            this.addToTop(new ApplyPowerAction(p, p, powerToApply, powerToApply.amount));
             this.isDone = true;
         }
     }

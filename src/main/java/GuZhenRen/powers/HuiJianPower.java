@@ -52,6 +52,7 @@ public class HuiJianPower extends AbstractPower implements OnReceivePowerPower {
                 this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, QingPower.POWER_ID));
                 // 转化为“剑锋”
                 this.addToTop(new ApplyPowerAction(this.owner, this.owner, new JianFengPower(this.owner, qingAmount), qingAmount));
+                this.addToBot(new ZhuanYiPower.TriggerAction());
             }
         }
     }
@@ -69,6 +70,7 @@ public class HuiJianPower extends AbstractPower implements OnReceivePowerPower {
             if (convertAmt > 0) {
                 // 将“情”的层数转化为等量的“剑锋” (使用 addToTop 确保立即转化生效)
                 this.addToTop(new ApplyPowerAction(target, target, new JianFengPower(target, convertAmt), convertAmt));
+                this.addToBot(new ZhuanYiPower.TriggerAction());
             }
 
             // 返回 false，表示拦截原始状态，不再获得“情”

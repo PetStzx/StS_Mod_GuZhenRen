@@ -10,8 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 public class ShanJianGuAction extends AbstractGameAction {
     private boolean hasDrawn = false; // 标记是否已经执行过抽牌
 
-    public ShanJianGuAction(int amount) {
-        this.amount = amount;
+    public ShanJianGuAction() {
         this.actionType = ActionType.DRAW;
 
         // 根据玩家是否开启了“快速模式”，设置适当的动画间隔时长
@@ -43,7 +42,7 @@ public class ShanJianGuAction extends AbstractGameAction {
             }
 
             if (deckSize == 0) {
-                this.addToTop(new ShanJianGuAction(this.amount));
+                this.addToTop(new ShanJianGuAction());
                 this.addToTop(new EmptyDeckShuffleAction());
                 this.isDone = true;
                 return;
@@ -57,14 +56,8 @@ public class ShanJianGuAction extends AbstractGameAction {
 
             // 判定连抽
             if (c.hasTag(GuZhenRenTags.JIAN_DAO) && AbstractDungeon.player.hand.contains(c)) {
-                this.amount++;
-            }
-
-            this.amount--;
-
-            // 如果还有剩余次数，排入队列。因为使用了 addToTop，下一个动作会紧接着当前动作执行
-            if (this.amount > 0) {
-                this.addToTop(new ShanJianGuAction(this.amount));
+                // 如果还有剩余次数，排入队列。因为使用了 addToTop，下一个动作会紧接着当前动作执行
+                this.addToTop(new ShanJianGuAction());
             }
         }
 

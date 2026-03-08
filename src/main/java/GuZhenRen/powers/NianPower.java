@@ -5,7 +5,7 @@ import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction; // 【新增导入】
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -32,36 +32,16 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
         this.amount = amount;
 
-        int bonus = getBonus();
-        if (bonus > 0) {
-            this.amount += bonus;
-        }
-
         updateDescription();
     }
 
-    private int getBonus() {
-        int bonus = 0;
-        if (owner == null) return 0;
-        if (owner.hasPower(QingPower.POWER_ID)) {
-            int qingAmt = owner.getPower(QingPower.POWER_ID).amount;
-            bonus += qingAmt / 3;
-        }
-        if (owner.hasPower(ZhiDaoDaoHenPower.POWER_ID)) {
-            int daoHenAmt = owner.getPower(ZhiDaoDaoHenPower.POWER_ID).amount;
-            bonus += daoHenAmt / 3;
-        }
-        return bonus;
-    }
 
     @Override
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
 
-        int bonus = getBonus();
-        int totalGain = stackAmount + bonus;
+        this.amount += stackAmount;
 
-        this.amount += totalGain;
         checkThreshold();
         updateDescription();
     }
@@ -77,7 +57,7 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
             this.amount -= 3;
             triggerEffect();
         }
-        // 【新增】如果转化后层数归零，立即将自己从状态栏移除
+
         if (this.amount <= 0) {
             this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this));
         }
@@ -92,6 +72,7 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         this.flash();
         this.addToBot(new DrawCardAction(1));
         this.addToBot(new ApplyPowerAction(owner, owner, new YiPower(owner, 1), 1));
+        this.addToBot(new ZhuanYiPower.TriggerAction());
     }
 
     @Override

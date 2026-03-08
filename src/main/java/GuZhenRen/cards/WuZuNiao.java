@@ -2,11 +2,13 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.BlurPower;
 
 public class WuZuNiao extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("WuZuNiao");
@@ -16,46 +18,43 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WuZuNiao.png");
 
     private static final int COST = 1;
-    private static final int DRAW_AMT = 3;
-    private static final int UPGRADE_DRAW_AMT = 1; // 升级后增加抽1张，即变成4张
-    private static final int INITIAL_RANK = 3; // 初始3转
+    private static final int BLOCK = 6;
+    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 6 -> 9
+    private static final int MAGIC = 2; // 2 层残影
+    private static final int INITIAL_RANK = 3;
 
     public WuZuNiao() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON,
+                CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
-        // 流派：骨道
         this.setDao(Dao.GU_DAO);
-
-
-        // 核心数值：抽牌数
-        this.baseMagicNumber = this.magicNumber = DRAW_AMT;
-
-        // 核心机制：虚无
-        this.isEthereal = true;
-
-        // 初始转数
         this.setRank(INITIAL_RANK);
+
+        this.baseBlock = this.block = BLOCK;
+        this.baseMagicNumber = this.magicNumber = MAGIC;
+
+        this.isEthereal = true;
+        this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 抽牌动作
-        this.addToBot(new DrawCardAction(p, this.magicNumber));
+        // 1. 获得格挡
+        this.addToBot(new GainBlockAction(p, p, this.block));
+
+        // 2. 获得 2 层残影
+        this.addToBot(new ApplyPowerAction(p, p, new BlurPower(p, this.magicNumber), this.magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            // 抽牌数 3 -> 4
-            this.upgradeMagicNumber(UPGRADE_DRAW_AMT);
-            // 转数 3 -> 4
-            this.upgradeRank(1);
-
+            this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+            this.upgradeRank(1); // 3转 -> 4转
             this.initializeDescription();
         }
     }

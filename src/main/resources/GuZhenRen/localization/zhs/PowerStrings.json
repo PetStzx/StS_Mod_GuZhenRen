@@ -2,7 +2,7 @@
   "GuZhenRen:ShanYaoPower": {
     "NAME": "闪耀",
     "DESCRIPTIONS": [
-      "下1张打出的 #y光道 蛊虫伤害增加 #b",
+      "下1张打出的 #y光道 牌伤害增加 #b",
       "% 。"
     ]
   },
@@ -27,8 +27,8 @@
   "GuZhenRen:YanTongPower": {
     "NAME": "炎瞳",
     "DESCRIPTIONS": [
-      "本回合你每打出1张指向敌人的牌，给予其 #b1 层 #y焚烧",
-      " 次。",
+      "本回合你每打出1张指向敌人的牌，给予其 #b",
+      " 层 #y焚烧 。",
       " 触发 #b",
       " 次后，每次触发将 #y灼伤 加入手牌。",
       " 每次触发将1张 #y灼伤 加入手牌。"
@@ -43,20 +43,20 @@
   "GuZhenRen:BianHuaDaoDaoHenPower": {
     "NAME": "变化道道痕",
     "DESCRIPTIONS": [
-      "根据你打出的第一张 #y非变化道 牌的流派，转变为相应的道痕，回合结束时恢复为变化道道痕。"
+      "根据你打出的第一张 #y非变化道 牌的流派，转化为相应的道痕，下回合开始时恢复为变化道道痕。"
     ]
   },
   "GuZhenRen:LiDaoDaoHenPower": {
     "NAME": "力道道痕",
     "DESCRIPTIONS": [
-      "每层视为 1 点 #y力量 。"
+      "每层力道道痕使你获得 1 点 #y力量 。"
     ]
   },
   "GuZhenRen:YanDaoDaoHenPower": {
     "NAME": "炎道道痕",
     "DESCRIPTIONS": [
-      "每 2 层使你给予 #y焚烧 时层数增加 1 层。（当前加值： #b",
-      " ）"
+      "每拥有 2 层炎道道痕，你从卡牌给予的 #y焚烧 层数增加 1 层。（焚烧层数增加 #b",
+      " 层）"
     ]
   },
   "GuZhenRen:NianPower": {
@@ -76,15 +76,16 @@
   "GuZhenRen:QingPower": {
     "NAME": "情",
     "DESCRIPTIONS": [
-      "每累积 #b3 层情，获得 #y念 时层数+ #b1 。(当前加值: #b",
+      "每累积 #b3 层情，从卡牌中获得的 #y念 增加 #b1 。(从卡牌中获得的 #y念 增加 #b",
       " )"
     ]
   },
   "GuZhenRen:ZhiDaoDaoHenPower": {
     "NAME": "智道道痕",
     "DESCRIPTIONS": [
-      "每 #b3 层使你获得 #y念 时层数增加 #b1 层 。(当前加值: #b",
-      " )"
+      "回合结束时，每拥有 1 层 #y智道道痕 ，保留至多 1 张手牌；每拥有 3 层 #y智道道痕 ，保留 1 点未使用的能量到下回合。 NL (回合结束时，保留至多 #b",
+      " 张手牌，保留 #b",
+      " 点能量。)"
     ]
   },
   "GuZhenRen:WanWuDaTongBianPower": {
@@ -124,7 +125,7 @@
   "GuZhenRen:TunHuoPower": {
     "NAME": "吞火",
     "DESCRIPTIONS": [
-      "你可以打出 #y灼伤 。打出 #y灼伤 时，将其 消耗 并给予所有敌人 #b",
+      "你可以打出 #y灼伤 。打出 #y灼伤 时，将其 #y消耗 并给予所有敌人 #b",
       " 层 #y焚烧 。"
     ]
   },
@@ -166,8 +167,7 @@
   "GuZhenRen:JianDaoDaoHenPower": {
     "NAME": "剑道道痕",
     "DESCRIPTIONS": [
-      "你打出的 #y剑道 牌造成伤害后，给予目标 #b",
-      " 层 #y剑痕 。"
+      "每层剑道道痕使你获得 #b1 层 #y剑锋 。"
     ]
   },
   "GuZhenRen:HuiJianPower": {
@@ -179,7 +179,8 @@
   "GuZhenRen:JianDunPower": {
     "NAME": "剑遁",
     "DESCRIPTIONS": [
-      "打出 #y剑道 牌时，根据其耗能抽等量的牌。"
+      "本回合每次打出 #y剑道 牌，获得 #b",
+      " 点格挡。"
     ]
   },
   "GuZhenRen:FeiLiPower": {
@@ -187,6 +188,169 @@
     "DESCRIPTIONS": [
       "回合结束时失去1点 #y力量 ，持续 #b",
       " 回合。"
+    ]
+  },
+  "GuZhenRen:MuDaoDaoHenPower": {
+    "NAME": "木道道痕",
+    "DESCRIPTIONS": [
+      "每层木道道痕提升 15% 回复效果。（提升 #b",
+      "% 回复效果）"
+    ]
+  },
+  "GuZhenRen:GuDaoDaoHenPower": {
+    "NAME": "骨道道痕",
+    "DESCRIPTIONS": [
+      "每层骨道道痕使你获得 #b2 层 #y荆棘 。"
+    ]
+  },
+  "GuZhenRen:GuangDaoDaoHenPower": {
+    "NAME": "光道道痕",
+    "DESCRIPTIONS": [
+      "每层光道道痕提升 20% #y光道 牌的伤害。（提升 #b",
+      "% 光道牌的伤害）"
+    ]
+  },
+  "GuZhenRen:ShaDaoDaoHenPower": {
+    "NAME": "杀道道痕",
+    "DESCRIPTIONS": [
+      "回合结束时，每层杀道道痕对所有敌人造成 3 点伤害。（对所有敌人造成 #b",
+      " 点伤害）"
+    ]
+  },
+  "GuZhenRen:LiQiPower": {
+    "NAME": "力气",
+    "DESCRIPTIONS": [
+      "回合开始时，触发手牌中所有的 #y虚影 牌 #b",
+      " 次。"
+    ]
+  },
+  "GuZhenRen:LongXingHuBuPower": {
+    "NAME": "龙行虎步",
+    "DESCRIPTIONS": [
+      "本回合每打出1张牌，获得 #b",
+      " 点临时 力量 。"
+    ]
+  },
+  "GuZhenRen:ZhuanYiPower": {
+    "NAME": "转意",
+    "DESCRIPTIONS": [
+      "状态发生转化时，获得 #b",
+      " 点 格挡 。"
+    ]
+  },
+  "GuZhenRen:XueChouPower": {
+    "NAME": "血仇",
+    "DESCRIPTIONS": [
+      "受到的攻击伤害翻倍，造成的伤害翻倍。"
+    ]
+  },
+  "GuZhenRen:XinXuePower": {
+    "NAME": "心血",
+    "DESCRIPTIONS": [
+      "每当你失去生命时，所有敌人失去等量的生命。",
+      "每当你失去生命时，所有敌人失去 #b",
+      " 倍的生命。"
+    ]
+  },
+  "GuZhenRen:XueMuTianHuaPower": {
+    "NAME": "血幕天华",
+    "DESCRIPTIONS": [
+      "回合结束时，获得 #b",
+      " 层 缓冲 。回合开始时移除。造成伤害或受到未被格挡的攻击伤害时，失去此能力。"
+    ]
+  },
+  "GuZhenRen:ZhiXuePower": {
+    "NAME": "止血",
+    "DESCRIPTIONS": [
+      "本回合每次失去生命，回复 #b",
+      " 点生命。"
+    ]
+  },
+  "GuZhenRen:XueZhanPower": {
+    "NAME": "血战",
+    "DESCRIPTIONS": [
+      "每当你失去生命时，本回合获得 #b",
+      " 点 力量 。"
+    ]
+  },
+  "GuZhenRen:XueLiuBuZhiPower": {
+    "NAME": "血流不止",
+    "DESCRIPTIONS": [
+      "回合开始时，失去 #b",
+      " 点生命。"
+    ]
+  },
+  "GuZhenRen:XueYuanPower": {
+    "NAME": "血缘",
+    "DESCRIPTIONS": [
+      "每次失去生命时，使玩家获得 #b",
+      " 点格挡。"
+    ]
+  },
+  "GuZhenRen:LengXuePower": {
+    "NAME": "冷血",
+    "DESCRIPTIONS": [
+      "回合开始时，失去生命上限10%的生命。持续 #b",
+      " 回合。"
+    ]
+  },
+  "GuZhenRen:XueJianLeng": {
+    "NAME": "血渐冷",
+    "DESCRIPTION": "所有敌人在回合开始时，失去生命上限 10% 的生命。持续 !M! 回合。 NL 消耗 。"
+  },
+  "GuZhenRen:XuePiaoLiuPower": {
+    "NAME": "血漂流",
+    "DESCRIPTIONS": [
+      "在你的回合内，每当你失去生命时，抽 #b",
+      " 张牌。"
+    ]
+  },
+  "GuZhenRen:TaiGuRongYaoZhiGuangPower": {
+    "NAME": "太古荣耀之光",
+    "DESCRIPTIONS": [
+      "从 光道 牌中受到的伤害增加 #b",
+      "% 。"
+    ]
+  },
+  "GuZhenRen:XueDaoDaoHenPower": {
+    "NAME": "血道道痕",
+    "DESCRIPTIONS": [
+      "造成攻击伤害时，每层血道道痕提供 5% 生命汲取。（提供 #b",
+      "% 生命汲取）"
+    ]
+  },
+  "GuZhenRen:JinDaoDaoHenPower": {
+    "NAME": "金道道痕",
+    "DESCRIPTIONS": [
+      "每层金道道痕使你获得 #b1 层 #y金属化 。"
+    ]
+  },
+  "GuZhenRen:LuDaoDaoHenPower": {
+    "NAME": "律道道痕",
+    "DESCRIPTIONS": [
+      "回合结束时，所有敌人本回合失去 #b",
+      " 点 #y力量 。"
+    ]
+  },
+  "GuZhenRen:TouDaoDaoHenPower": {
+    "NAME": "偷道道痕",
+    "DESCRIPTIONS": [
+      "造成攻击伤害时，获得 #b",
+      " 金币，每场战斗最多通过此方式获得 30 金币。（还可盗取 #b",
+      " 金币）"
+    ]
+  },
+  "GuZhenRen:ZhuanYunPower": {
+    "NAME": "转运",
+    "DESCRIPTIONS": [
+      "每次你的卡牌触发 #y概率 失败时，将其概率值提高 #b",
+      "% 。"
+    ]
+  },
+  "GuZhenRen:HaoYouPower": {
+    "NAME": "好友",
+    "DESCRIPTIONS": [
+      " 成为了你的好友。你与其互相造成伤害时，移除此状态。"
     ]
   }
 }

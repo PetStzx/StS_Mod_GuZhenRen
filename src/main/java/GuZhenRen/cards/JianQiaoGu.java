@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class JianQiaoGu extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("JianQiaoGu");
-    private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
+    public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
@@ -28,7 +28,7 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.JIAN_DAO);
@@ -38,21 +38,20 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new JianQiaoGuAction()); // 调用重命名后的Action
+        this.addToBot(new JianQiaoGuAction(this.upgraded));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeRank(1); // 4转 -> 5转
-            this.selfRetain = true;
+            this.upgradeRank(1);
             this.myBaseDescription = UPGRADE_DESCRIPTION;
+            this.rawDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
     }
 
-    // 【静态内部类】纯净版的 Modifier
     @AbstractCardModifier.SaveIgnore
     public static class JianQiaoModifier extends AbstractCardModifier {
         public static final String MODIFIER_ID = GuZhenRen.makeID("JianQiaoModifier");
@@ -74,14 +73,14 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
         @Override
         public float modifyDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
             if (this.isBuffed && damage > 0) {
-                return damage * 2; // 处于增幅状态时伤害翻倍
+                return damage * 2;
             }
             return damage;
         }
 
         @Override
         public void onUse(AbstractCard card, AbstractCreature target, UseCardAction action) {
-            this.isBuffed = false; // 打出后重置状态
+            this.isBuffed = false;
             card.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }
 
@@ -89,9 +88,12 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
         public String modifyDescription(String rawDescription, AbstractCard card) {
             String trimmed = rawDescription.trim();
 
-            // 只有在文本不以保留结尾时，才给它加上后缀
-            if (!trimmed.endsWith("保留 。") && !trimmed.endsWith("保留。") && !trimmed.endsWith("保留")) {
-                return rawDescription + " 保留 。";
+            String mainSuffix = JianQiaoGu.cardStrings.EXTENDED_DESCRIPTION[1];
+            String check1 = JianQiaoGu.cardStrings.EXTENDED_DESCRIPTION[2];
+            String check2 = JianQiaoGu.cardStrings.EXTENDED_DESCRIPTION[3];
+
+            if (!trimmed.endsWith(mainSuffix.trim()) && !trimmed.endsWith(check1) && !trimmed.endsWith(check2)) {
+                return rawDescription + mainSuffix;
             }
             return rawDescription;
         }

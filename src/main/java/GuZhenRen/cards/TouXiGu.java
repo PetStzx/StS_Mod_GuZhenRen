@@ -2,11 +2,14 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.AbstractDamageModifier;
+import com.evacipated.cardcrawl.mod.stslib.damagemods.DamageModifierManager;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -18,13 +21,14 @@ public class TouXiGu extends AbstractGuZhenRenCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TouXiGu.png");
 
-    private static final int COST = 1;
-    private static final int DAMAGE = 8;
-    private static final int UPGRADE_PLUS_DMG = 3;
+    private static final int COST = 0; // 0 费
+    private static final int DAMAGE = 3; // 基础伤害 3
+    private static final int MAGIC = 1;
 
-    private static final int INITIAL_RANK = 2; // 初始2转
+    private static final int INITIAL_RANK = 2; // 初始 2 转
 
     public TouXiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -34,37 +38,52 @@ public class TouXiGu extends AbstractGuZhenRenCard {
                 CardTarget.ENEMY);
 
         this.baseDamage = DAMAGE;
+        this.baseMagicNumber = this.magicNumber = MAGIC;
 
-        // 设置流派：偷道
         this.setDao(Dao.TOU_DAO);
-
-
-        // 设置转数：2转
         this.setRank(INITIAL_RANK);
+
+        // 使用 StSLib 的伤害修改器实现“无视格挡”攻击
+        DamageModifierManager.addModifier(this, new IgnoreBlockModifier());
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 造成无视格挡的伤害
-        // 技巧：使用 HP_LOSS 类型来实现穿透格挡，但数值使用的是 this.damage (享受力量加成后的数值)
-        this.addToBot(new DamageAction(m,
-                new DamageInfo(p, this.damage, DamageInfo.DamageType.HP_LOSS),
-                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        // 根据是否升级决定攻击次数 (升级后打 2 次)
+        int times = this.upgraded ? 2 : 1;
 
-        // 2. 给予1层易伤
-        this.addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, 1, false), 1));
+        for (int i = 0; i < times; i++) {
+            this.addToBot(new DamageAction(m,
+                    new DamageInfo(p, this.damage, this.damageTypeForTurn),
+                    AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        }
+
+        // 给予易伤
+        this.addToBot(new ApplyPowerAction(m, p, new VulnerablePower(m, this.magicNumber, false), this.magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG);
-
-            // 升级转数：2转 -> 3转
-            this.upgradeRank(1);
-
+            this.upgradeRank(1); // 2转 -> 3转
+            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.initializeDescription();
+        }
+    }
+
+    // ==========================================================
+    // 内部类：StSLib 无视格挡伤害修改器
+    // ==========================================================
+    public static class IgnoreBlockModifier extends AbstractDamageModifier {
+        @Override
+        public boolean ignoresBlock(AbstractCreature target) {
+            return true; // 强制无视格挡
+        }
+
+        @Override
+        public AbstractDamageModifier makeCopy() {
+            return new IgnoreBlockModifier();
         }
     }
 }

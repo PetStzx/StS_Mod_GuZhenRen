@@ -17,7 +17,6 @@ public class MaLiXuYing extends AbstractXuYingCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/MaLiXuYing.png");
 
     public MaLiXuYing() {
-        // 技能牌虚影，Target 设为 NONE，因为抽滤不针对敌人
         super(ID, NAME, IMG_PATH, -2, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,

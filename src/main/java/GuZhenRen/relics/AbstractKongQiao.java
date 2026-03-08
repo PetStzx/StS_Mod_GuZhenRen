@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.TipHelper;
+import com.megacrit.cardcrawl.localization.UIStrings; // 【新增】
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
@@ -23,6 +24,11 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 import java.lang.reflect.Type;
 
 public abstract class AbstractKongQiao extends CustomRelic implements CustomSavable<Integer> {
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("KongQiaoUI"));
+    public static final String[] TEXT = uiStrings.TEXT;
+
+    private static final UIStrings globalStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("CardGlobalText"));
+    public static final String[] GLOBAL_TEXT = globalStrings.TEXT;
 
     public int xp = 0;
     public int rank = 1;
@@ -32,8 +38,8 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     public AbstractKongQiao(String id, String imgName, RelicTier tier, LandingSound sound) {
         super(
                 id,
-                ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/" + imgName)),          // 主图
-                ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/outline/" + imgName)),  // 轮廓图
+                ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/" + imgName)),
+                ImageMaster.loadImage(GuZhenRen.assetPath("img/relics/outline/" + imgName)),
                 tier,
                 sound
         );
@@ -47,7 +53,6 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         updateDescription();
     }
 
-    // 1. 获取完整的动态文本
     @Override
     public String getUpdatedDescription() {
         if (this.DESCRIPTIONS == null || this.DESCRIPTIONS.length == 0) {
@@ -58,37 +63,27 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         String xpDesc;
 
         if (nextRelicID == null || nextRelicID.isEmpty()) {
-            xpDesc = " NL 已达巅峰！";
+            xpDesc = "";
         } else {
             int remaining = neededXP - xp;
             if (remaining < 0) remaining = 0;
-            // 这里的 #y修为 只是为了让正文变黄，右侧提示框由下面的 updateDescription 手动添加
-            xpDesc = " 还需 #b" + remaining + " 点 #y修为 突破。";
+            xpDesc = String.format(TEXT[0], remaining);
         }
 
         return baseDesc + xpDesc;
     }
 
-    // 2. 完全手动构建提示框列表，不调用 initializeTips()
     public void updateDescription() {
-        // 更新描述字符串
         this.description = getUpdatedDescription();
-
-        // 清空旧提示
         this.tips.clear();
-
-        // A. 添加主提示（遗物自己的名字和描述）
         this.tips.add(new PowerTip(this.name, this.description));
 
-        // B. 手动添加 "修为" 关键词
-        addKeywordTip("修为");
+        addKeywordTip(TEXT[1]);
 
-        // C. 手动添加 "一转/二转..." 关键词
         String rankKeyword = getRankKeywordName(this.rank);
         addKeywordTip(rankKeyword);
     }
 
-    // 安全添加关键词提示
     private void addKeywordTip(String keywordName) {
         if (keywordName == null) return;
 
@@ -110,18 +105,10 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     }
 
     private String getRankKeywordName(int r) {
-        switch (r) {
-            case 1: return "一转";
-            case 2: return "二转";
-            case 3: return "三转";
-            case 4: return "四转";
-            case 5: return "五转";
-            case 6: return "六转";
-            case 7: return "七转";
-            case 8: return "八转";
-            case 9: return "九转";
-            default: return "一转";
+        if (r >= 1 && r <= 9) {
+            return GLOBAL_TEXT[r - 1];
         }
+        return GLOBAL_TEXT[0]; // 兜底返回一转
     }
 
     public void gainXP(int amount) {
@@ -177,9 +164,9 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     @Override
     public void onVictory() {
         AbstractRoom room = AbstractDungeon.getCurrRoom();
-        if (room instanceof MonsterRoomBoss) gainXP(4);
+        if (room instanceof MonsterRoomBoss) gainXP(5);
         else if (room instanceof MonsterRoomElite) gainXP(3);
-        else gainXP(2);
+        else gainXP(1);
     }
 
     public static int getCurrentRank() {

@@ -52,10 +52,8 @@ public class ZhuiMingHuoPower extends AbstractPower {
 
         int totalBurn = FEN_SHAO_BASE * this.amount;
 
-        // 传入 true (isPassive)，表示不吃道痕加成
-        // ApplyPowerAction 的 source 是 this.owner (敌人自己)
         this.addToBot(new ApplyPowerAction(this.owner, this.owner,
-                new FenShaoPower(this.owner, totalBurn, true), totalBurn));
+                new FenShaoPower(this.owner, totalBurn), totalBurn));
     }
 
     @Override

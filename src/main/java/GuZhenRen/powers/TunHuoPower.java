@@ -25,7 +25,7 @@ public class TunHuoPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = amount; // amount 代表给予的焚烧层数
+        this.amount = amount;
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/TunHuoPower_p.png");
@@ -43,25 +43,18 @@ public class TunHuoPower extends AbstractPower {
         updateDescription();
     }
 
-    // =========================================================================
-    //  核心逻辑：监听打出灼伤
-    // =========================================================================
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
-        // 判断是否是灼伤 (Burn)
         if (card.cardID.equals(Burn.ID)) {
             this.flash();
 
-            // 1. 强制消耗这张灼伤
-            // 这会让卡牌进入消耗堆，并触发其他相关遗物/能力
+            // 强制消耗灼伤
             card.exhaust = true;
             action.exhaustCard = true;
 
-            // 2. 给予所有敌人焚烧
+            // 给予所有敌人焚烧 (由于这是能力触发，不享受卡牌端的道痕/遗物加成)
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (!mo.isDeadOrEscaped()) {
-                    // 传入基础值 this.amount (即能力层数)
-                    // FenShaoPower 构造函数会自动计算【炎道道痕】加成，无需手动计算
                     this.addToBot(new ApplyPowerAction(mo, this.owner,
                             new FenShaoPower(mo, this.amount), this.amount, true));
                 }

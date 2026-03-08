@@ -18,7 +18,7 @@ public class WuZhiQuanXinJian extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WuZhiQuanXinJian.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 9;
+    private static final int DAMAGE = 10;
     private static final int EXHAUSTIVE_AMT = 5; // 消耗性次数
 
     public WuZhiQuanXinJian() {

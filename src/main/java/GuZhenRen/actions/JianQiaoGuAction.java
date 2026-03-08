@@ -14,18 +14,20 @@ import java.util.ArrayList;
 public class JianQiaoGuAction extends AbstractGameAction {
     private AbstractPlayer p;
     private ArrayList<AbstractCard> cannotBuff = new ArrayList<>();
+    private boolean anyCard;
 
-    public JianQiaoGuAction() {
+    public JianQiaoGuAction(boolean anyCard) {
         this.actionType = ActionType.CARD_MANIPULATION;
         this.p = AbstractDungeon.player;
         this.duration = Settings.ACTION_DUR_FAST;
+        this.anyCard = anyCard;
     }
 
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             for (AbstractCard c : this.p.hand.group) {
-                if (!c.hasTag(GuZhenRenTags.JIAN_DAO) || CardModifierManager.hasModifier(c, JianQiaoGu.JianQiaoModifier.MODIFIER_ID)) {
+                if ((!this.anyCard && !c.hasTag(GuZhenRenTags.JIAN_DAO)) || CardModifierManager.hasModifier(c, JianQiaoGu.JianQiaoModifier.MODIFIER_ID)) {
                     this.cannotBuff.add(c);
                 }
             }
@@ -46,7 +48,8 @@ public class JianQiaoGuAction extends AbstractGameAction {
                 return;
             }
 
-            AbstractDungeon.handCardSelectScreen.open("附加保留", 1, false, false, false, false);
+            String msg = JianQiaoGu.cardStrings.EXTENDED_DESCRIPTION[0];
+            AbstractDungeon.handCardSelectScreen.open(msg, 1, false, false, false, false);
             this.tickDuration();
             return;
         }

@@ -2,7 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.patches.GuZhenRenTags;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch; // 【新增】
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
         super(id, name, img, cost, rawDescription,
                 type,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.SPECIAL, // 【修改】逻辑上设为特殊，防止掉落
+                CardRarity.SPECIAL,
                 target);
 
         this.tags.add(GuZhenRenTags.SHA_ZHAO);
@@ -21,18 +21,11 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
         this.rank = 0;
     }
 
-    // =========================================================================
-    //  【核心新增】渲染欺诈：所有杀招在显示时都伪装成金卡
-    // =========================================================================
     @Override
     public void render(SpriteBatch sb) {
-        // 1. 保存真实稀有度
         CardRarity originalRarity = this.rarity;
-        // 2. 伪装
         this.rarity = CardRarity.RARE;
-        // 3. 绘制
         super.render(sb);
-        // 4. 还原
         this.rarity = originalRarity;
     }
 
@@ -53,7 +46,6 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
     public void upgrade() {
     }
 
-    // 双重保险
     @Override
     public boolean canSpawn(ArrayList<AbstractCard> rewardCards) {
         return false;
@@ -66,12 +58,14 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
         }
 
         StringBuilder sb = new StringBuilder();
+        String separator = (TEXT.length > 9) ? TEXT[9] : " . ";
 
         if (guPathString != null && !guPathString.isEmpty()) {
-            sb.append(guPathString).append(" 。 ");
+            sb.append(guPathString).append(separator);
         }
 
-        sb.append("guzhenren:杀招 。");
+        // TAG_TEXT[2] 即 "杀招"
+        sb.append("guzhenren:").append(TAG_TEXT[2]).append(separator);
         sb.append(" NL ").append(this.myBaseDescription);
 
         return sb.toString();

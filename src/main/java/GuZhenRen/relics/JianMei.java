@@ -13,12 +13,10 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class JianMei extends CustomRelic {
     public static final String ID = GuZhenRen.makeID("JianMei");
-    // 请确保你的图片路径和文件名拼写正确
     private static final String IMG = GuZhenRen.assetPath("img/relics/JianMei.png");
     private static final String OUTLINE = GuZhenRen.assetPath("img/relics/outline/JianMei.png");
 
     public JianMei() {
-        // 设置为普通遗物 (COMMON)，落地音效可以选 FLAT(平淡) 或 MAGICAL(魔法)
         super(ID, ImageMaster.loadImage(IMG), new Texture(OUTLINE), RelicTier.COMMON, LandingSound.FLAT);
     }
 

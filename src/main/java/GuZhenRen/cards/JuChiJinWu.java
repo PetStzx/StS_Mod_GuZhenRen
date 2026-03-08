@@ -56,7 +56,7 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
         }
 
         // 2. 将“减少次数”的动作加入队列
-        // 只有当次数大于0时才减少，避免减成负数
+        // 只有当次数大于0时才减少
         if (this.baseMagicNumber > 0) {
             this.addToBot(new DecreaseMagicAction(this.uuid, 1));
         }
@@ -79,8 +79,7 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    //  自定义 Action
-    //  逻辑：通过 UUID 查找当前战斗中的“这一张牌”及其循环使用的副本
+    //  通过 UUID 查找当前战斗中的“这一张牌”及其循环使用的副本
     // =========================================================================
     public static class DecreaseMagicAction extends AbstractGameAction {
         private final UUID uuid;
@@ -93,10 +92,6 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
 
         @Override
         public void update() {
-            // GetAllInBattleInstances.get(this.uuid)
-            // 这个方法会返回当前战斗中，所有 UUID 匹配的卡牌。
-            // 因为每张牌的 UUID 都是独一无二的（除非你用双发/夜魇复制了它），
-            // 所以它绝对不会影响卡组里其他的“锯齿金蜈”。
             for (AbstractCard c : GetAllInBattleInstances.get(this.uuid)) {
                 c.baseMagicNumber -= this.decreaseAmount;
                 if (c.baseMagicNumber < 0) {

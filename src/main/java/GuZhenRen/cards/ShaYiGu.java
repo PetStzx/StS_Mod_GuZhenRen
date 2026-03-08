@@ -64,7 +64,6 @@ public class ShaYiGu extends AbstractGuZhenRenCard {
         // 即使 AOE 把怪打死了，因为我们是在打出瞬间统计的，所以依然能获得对应层数
         if (enemyCount > 0) {
             int totalYi = enemyCount * this.magicNumber;
-            // YiPower 构造函数会自动计算智道/情加成
             this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, totalYi), totalYi));
         }
     }

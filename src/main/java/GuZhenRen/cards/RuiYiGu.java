@@ -20,22 +20,30 @@ public class RuiYiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/RuiYiGu.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 2; // 基础 2 层剑痕，2 层意
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后变 3 层
-    private static final int INITIAL_RANK = 3; // 3转起步
+
+    // MagicNumber 用于“意”的层数
+    private static final int MAGIC = 2;
+    private static final int UPGRADE_PLUS_MAGIC = 1; // 意：2 -> 3
+
+    // SecondMagicNumber 用于“剑痕”的层数
+    private static final int SECOND_MAGIC = 4;
+    private static final int UPGRADE_PLUS_SECOND_MAGIC = 2; // 剑痕：4 -> 6
+
+    private static final int INITIAL_RANK = 3;
 
     public RuiYiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
-                CardTarget.ALL_ENEMY); // 虽然有针对性，但依然属于全场扫描牌
+                CardRarity.UNCOMMON,
+                CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.ZHI_DAO);
         this.setRank(INITIAL_RANK);
-        this.baseMagicNumber = this.magicNumber = MAGIC;
 
-        this.exhaust = true; // 消耗
+        this.baseMagicNumber = this.magicNumber = MAGIC;
+        this.baseSecondMagicNumber = this.secondMagicNumber = SECOND_MAGIC;
+
     }
 
     private boolean isAttacking(AbstractMonster m) {
@@ -47,27 +55,28 @@ public class RuiYiGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得 1 层剑锋
-        this.addToBot(new ApplyPowerAction(p, p, new JianFengPower(p, 1), 1));
+        boolean allAttacking = true;
+        boolean hasAliveEnemies = false;
 
-        int attackingEnemies = 0;
-
-        // 2. 遍历所有敌人，寻找准备攻击的敌人
+        // 1. 遍历所有敌人，给予剑痕并判断是否全员攻击
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!mo.isDeadOrEscaped()) {
-                // 判断意图是否包含攻击
+                hasAliveEnemies = true;
+
                 if (isAttacking(mo)) {
-                    // 只给有攻击意图的敌人挂剑痕
-                    this.addToBot(new ApplyPowerAction(mo, p, new JianHenPower(mo, this.magicNumber), this.magicNumber));
-                    attackingEnemies++;
+                    // 只要有攻击意图，就给剑痕
+                    this.addToBot(new ApplyPowerAction(mo, p, new JianHenPower(mo, this.secondMagicNumber), this.secondMagicNumber));
+                } else {
+                    // 发现任何一个没有攻击意图的存活敌人，判定失败
+                    allAttacking = false;
                 }
             }
         }
 
-        // 3. 根据准备攻击的敌人数量，获得对应层数的意
-        if (attackingEnemies > 0) {
-            int totalYi = attackingEnemies * this.magicNumber;
-            this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, totalYi), totalYi));
+        // 2. 若场上有存活敌人，且所有存活敌人的意图均为攻击，则获得剑锋和意
+        if (hasAliveEnemies && allAttacking) {
+            this.addToBot(new ApplyPowerAction(p, p, new JianFengPower(p, 1), 1));
+            this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, this.magicNumber), this.magicNumber));
         }
     }
 
@@ -75,8 +84,9 @@ public class RuiYiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 2 -> 3
-            this.upgradeRank(1); // 3转 -> 4转
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeSecondMagicNumber(UPGRADE_PLUS_SECOND_MAGIC);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

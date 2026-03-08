@@ -42,7 +42,7 @@ public class Recipe_JianLangSanDie extends AbstractRecipeRelic {
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (任意剑道蛊虫，1-9转，且不能是浪剑)
+    //  步骤 2：泛型材料 (任意剑道蛊虫)
     // =========================================================================
     @Override
     public int getIngredientCount() {
@@ -52,17 +52,12 @@ public class Recipe_JianLangSanDie extends AbstractRecipeRelic {
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
         if (index == 1) {
-            // 必须有【剑道】标签
+            // 判定 1: 必须有【剑道】标签
             if (!c.hasTag(GuZhenRenTags.JIAN_DAO)) {
                 return false;
             }
 
-            // 不能用另一张浪剑当材料
-            if (c.cardID.equals(LangJian.ID)) {
-                return false;
-            }
-
-            // 必须是蛊虫，且拥有 1-9 的转数
+            // 判定 2: 必须是蛊虫，且拥有 1-9 的转数
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
                 return rank >= 1 && rank <= 9;
@@ -76,7 +71,7 @@ public class Recipe_JianLangSanDie extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "任意剑道蛊虫";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

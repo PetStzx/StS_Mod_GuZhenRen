@@ -70,6 +70,7 @@ public class YiPower extends AbstractPower implements CloneablePowerInterface {
         // 回1费，获得1情
         this.addToBot(new GainEnergyAction(1));
         this.addToBot(new ApplyPowerAction(owner, owner, new QingPower(owner, 1), 1));
+        this.addToBot(new ZhuanYiPower.TriggerAction());
     }
 
     @Override

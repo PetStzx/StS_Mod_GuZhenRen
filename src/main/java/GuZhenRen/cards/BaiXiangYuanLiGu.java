@@ -2,9 +2,12 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -20,32 +23,38 @@ public class BaiXiangYuanLiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/BaiXiangYuanLiGu.png");
 
     private static final int COST = 2;
-    private static final int MAGIC = 1; // 获得1点力量
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级再多获得1点
+    private static final int DAMAGE = 8;
+    private static final int UPGRADE_PLUS_DAMAGE = 4; // 升级伤害 8 -> 12
+    private static final int MAGIC = 1;
+    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级力量 1 -> 2
     private static final int INITIAL_RANK = 4;
 
     public BaiXiangYuanLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL,
+                CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
-                CardTarget.SELF);
+                CardRarity.UNCOMMON,
+                CardTarget.ENEMY);
 
         this.setDao(Dao.LI_DAO);
         this.setRank(INITIAL_RANK);
 
+        this.baseDamage = this.damage = DAMAGE;
         this.baseMagicNumber = this.magicNumber = MAGIC;
-        this.exhaust = true; // 消耗
+        this.exhaust = true;
 
         this.cardsToPreview = new BaiXiangXuYing();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得力量
+        // 1. 造成伤害
+        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+
+        // 2. 获得力量
         this.addToBot(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
 
-        // 2. 生成白象虚影
+        // 3. 生成白象虚影
         AbstractCard c = this.cardsToPreview.makeStatEquivalentCopy();
         this.addToBot(new MakeTempCardInHandAction(c, 1));
     }
@@ -54,8 +63,9 @@ public class BaiXiangYuanLiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 1 -> 2
-            this.upgradeRank(1); // 4转 -> 5转
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeRank(1);
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();

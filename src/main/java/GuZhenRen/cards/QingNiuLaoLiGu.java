@@ -2,9 +2,11 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -19,30 +21,31 @@ public class QingNiuLaoLiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/QingNiuLaoLiGu.png");
 
     private static final int COST = 1;
-    private static final int BLOCK = 5;
-    private static final int UPGRADE_PLUS_BLOCK = 3;
+    private static final int DAMAGE = 5;
+    private static final int UPGRADE_PLUS_DAMAGE = 2;
     private static final int INITIAL_RANK = 2;
 
     public QingNiuLaoLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL,
+                CardType.ATTACK, // 攻击牌
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
-                CardTarget.SELF);
+                CardRarity.COMMON,
+                CardTarget.ENEMY);
 
         this.setDao(Dao.LI_DAO);
         this.setRank(INITIAL_RANK);
 
-        this.baseBlock = BLOCK;
-        this.exhaust = true; // 消耗
+        // 修改为基础伤害
+        this.baseDamage = DAMAGE;
+        this.exhaust = true;
 
         this.cardsToPreview = new NiuLiXuYing();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得格挡
-        this.addToBot(new GainBlockAction(p, p, this.block));
+        // 1. 造成伤害
+        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
 
         // 2. 将预览的卡牌复制一份加入手牌
         AbstractCard c = this.cardsToPreview.makeStatEquivalentCopy();
@@ -53,7 +56,7 @@ public class QingNiuLaoLiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(UPGRADE_PLUS_BLOCK); // 5 -> 8
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 伤害 7 -> 10
             this.upgradeRank(1); // 2转 -> 3转
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;

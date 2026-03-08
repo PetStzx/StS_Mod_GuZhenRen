@@ -24,8 +24,6 @@ public class WanWuDaTongBian extends AbstractShaZhaoCard {
 
         this.setDao(Dao.BIAN_HUA_DAO);
 
-        // 父类默认 RARE，不需要手动设置
-        // 父类禁止升级，且 canSpawn=false
 
         this.baseMagicNumber = this.magicNumber = 1;
 

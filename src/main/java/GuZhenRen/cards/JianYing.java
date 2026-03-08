@@ -46,7 +46,6 @@ public class JianYing extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 手动打出时：没有直接伤害，只是挂剑痕（作为攻击牌的判定依然生效）
         this.addToBot(new ApplyPowerAction(m, p, new JianHenPower(m, this.magicNumber), this.magicNumber));
     }
 

@@ -1,5 +1,6 @@
 package GuZhenRen.util;
 
+import GuZhenRen.cards.FangWeiGu;
 import GuZhenRen.relics.AbstractRecipeRelic;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -28,7 +29,7 @@ public class ShaZhaoHelper {
         // 创建临时牌组模拟
         ArrayList<AbstractCard> tempDeck = new ArrayList<>(AbstractDungeon.player.masterDeck.group);
 
-        // 【修改点 1】 使用总数
+        // 使用总数
         int count = recipe.getIngredientCount();
         ArrayList<String> fixedIDs = recipe.getRequiredCardIDs();
 
@@ -57,6 +58,17 @@ public class ShaZhaoHelper {
                     AbstractCard c = tempDeck.get(j);
                     if (recipe.isGenericIngredient(i, c)) {
                         tempDeck.remove(j); // 消耗掉
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                for (int j = 0; j < tempDeck.size(); j++) {
+                    AbstractCard c = tempDeck.get(j);
+                    if (c.cardID.equals(FangWeiGu.ID) && c.upgraded) {
+                        tempDeck.remove(j);
                         found = true;
                         break;
                     }

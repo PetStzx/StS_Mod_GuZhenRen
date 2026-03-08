@@ -19,28 +19,28 @@ public class XiaoGuangGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XiaoGuangGu.png");
 
     private static final int COST = 0;
-    private static final int INITIAL_RANK = 1; // 初始1转
+    private static final int INITIAL_RANK = 1;
 
     public XiaoGuangGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.BASIC, // 初始牌
-                CardTarget.ENEMY); // 目标是敌人
+                CardRarity.BASIC,
+                CardTarget.ENEMY);
 
         this.setDao(Dao.GUANG_DAO);
         this.setRank(INITIAL_RANK);
 
-        // baseMagicNumber 用来存储"闪耀"的层数 (1层 = +50%)
-        this.baseMagicNumber = 1;
-        this.magicNumber = this.baseMagicNumber;
-
+        // baseMagicNumber 用来存储显示的百分比 (50%)
+        this.baseMagicNumber = this.magicNumber = 50;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        int powerStacks = this.magicNumber / 50;
+
         // 1. 给予自己"闪耀"
-        this.addToBot(new ApplyPowerAction(p, p, new ShanYaoPower(p, this.magicNumber), this.magicNumber));
+        this.addToBot(new ApplyPowerAction(p, p, new ShanYaoPower(p, powerStacks), powerStacks));
 
         // 2. 给予敌人1层虚弱
         this.addToBot(new ApplyPowerAction(m, p, new WeakPower(m, 1, false), 1));
@@ -51,14 +51,9 @@ public class XiaoGuangGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
 
-            // 升级后，闪耀变为2层 (+100%)
-            this.upgradeMagicNumber(1);
-
-            // 升级后变为 2转
+            // 升级后，增加 50%
+            this.upgradeMagicNumber(50);
             this.upgradeRank(1);
-
-            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
-
             this.initializeDescription();
         }
     }

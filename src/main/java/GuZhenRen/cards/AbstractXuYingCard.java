@@ -25,14 +25,11 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         this.setDao(Dao.LI_DAO);
     }
 
-    // ==========================================
-    // 实现 IProbabilityCard 接口
-    // ==========================================
     @Override
     public void increaseBaseChance(float amount) {
         this.baseChanceFloat += amount;
         if (this.baseChanceFloat > 1.0f) this.baseChanceFloat = 1.0f;
-        this.initializeDescription(); // 刷新描述文本
+        this.initializeDescription();
     }
 
     @Override
@@ -40,9 +37,6 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         return this.baseChanceFloat;
     }
 
-    // ==========================================
-    // 重写克隆方法，继承强化后的概率
-    // ==========================================
     @Override
     public AbstractGuZhenRenCard makeStatEquivalentCopy() {
         AbstractXuYingCard c = (AbstractXuYingCard) super.makeStatEquivalentCopy();
@@ -63,7 +57,7 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
     public void update() {
         super.update();
         if (this.isPhantomExecuting && !this.isGlowing) {
-            this.glowColor = Color.GOLD.cpy();
+            this.glowColor = Color.CYAN.cpy();
             this.beginGlowing();
         }
     }
@@ -71,7 +65,7 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
     @Override
     public void triggerOnGlowCheck() {
         if (this.isPhantomExecuting) {
-            this.glowColor = Color.GOLD.cpy();
+            this.glowColor = Color.CYAN.cpy();
             this.beginGlowing();
         }
     }
@@ -88,9 +82,7 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         if (c.tags.contains(GuZhenRenTags.XU_YING_COPY)) return;
 
         if (c.type == CardType.ATTACK && !(c instanceof AbstractXuYingCard)) {
-            float realChance = ProbabilityHelper.getModifiedChance(this, this.baseChanceFloat);
-
-            if (AbstractDungeon.cardRandomRng.randomBoolean(realChance)) {
+            if (ProbabilityHelper.rollProbability(this, this.baseChanceFloat)) {
                 AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                     @Override
                     public void update() {
@@ -106,10 +98,11 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         return this;
     }
 
-    private void queuePhantomAnimationAndEffect(final AbstractMonster originalTarget) {
+    public void queuePhantomAnimationAndEffect(final AbstractMonster originalTarget) {
         this.isPhantomExecuting = true;
-        this.glowColor = Color.GOLD.cpy();
+        this.glowColor = Color.CYAN.cpy();
         this.beginGlowing();
+        this.superFlash(Color.CYAN.cpy());
 
         AbstractCard sourceCard = getCardForAnimation();
         if (sourceCard == null) {
@@ -188,7 +181,11 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         if (this.myBaseDescription == null) return "";
 
         StringBuilder sb = new StringBuilder();
-        sb.append("guzhenren:力道 。 guzhenren:虚影 。 NL ");
+        String separator = (TEXT.length > 9) ? TEXT[9] : " . ";
+
+        sb.append("guzhenren:").append(TEXT[12]).append(separator);
+        sb.append("guzhenren:").append(TAG_TEXT[3]).append(separator).append(" NL ");
+
         sb.append(this.myBaseDescription.replace("{CHANCE}", ProbabilityHelper.getDynamicColorString(this, this.baseChanceFloat)));
 
         return sb.toString();

@@ -30,7 +30,7 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.SPECIAL, // 【修改】逻辑上设为特殊，防止掉落
+                CardRarity.SPECIAL, // 特殊牌
                 CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.LU_DAO);
@@ -40,24 +40,19 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    //  【核心新增】渲染欺诈：在画牌的一瞬间，伪装成金卡
+    //  显示成金卡
     // =========================================================================
     @Override
     public void render(SpriteBatch sb) {
-        // 1. 保存当前的真实稀有度 (SPECIAL)
         CardRarity originalRarity = this.rarity;
 
-        // 2. 临时改成金卡 (RARE)，这样游戏就会画出金色的边框和旗帜
         this.rarity = CardRarity.RARE;
 
-        // 3. 调用父类的渲染方法
         super.render(sb);
 
-        // 4. 立刻改回真实稀有度 (SPECIAL)，以免影响逻辑
         this.rarity = originalRarity;
     }
 
-    // 为了让图鉴里看起来也是金卡，也可以重写这个方法
     @Override
     public void renderInLibrary(SpriteBatch sb) {
         CardRarity originalRarity = this.rarity;
@@ -93,7 +88,7 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
     public void upgrade() {
     }
 
-    // 双重保险：禁止掉落
+    // 防止掉落
     @Override
     public boolean canSpawn(ArrayList<AbstractCard> rewardCards) {
         return false;

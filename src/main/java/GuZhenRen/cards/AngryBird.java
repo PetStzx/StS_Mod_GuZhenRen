@@ -2,11 +2,12 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.powers.FenShaoPower;
-import GuZhenRen.powers.YanDaoDaoHenPower;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -18,51 +19,27 @@ public class AngryBird extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/AngryBird.png");
 
     private static final int COST = 2;
-    private static final int FEN_SHAO_AMT = 20;
+    private static final int DAMAGE = 14;
+    private static final int FEN_SHAO_AMT = 14;
 
     public AngryBird() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL,
+                CardType.ATTACK,
                 CardTarget.ENEMY);
 
-        this.baseMagicNumber = this.magicNumber = FEN_SHAO_AMT;
-
         this.setDao(Dao.YAN_DAO);
+
+        this.baseDamage = DAMAGE;
+        this.baseFenShao = this.fenShao = FEN_SHAO_AMT;
 
         this.initializeDescription();
     }
 
-    // =========================================================================
-    //  【显示逻辑】 只负责让卡面数字变绿，给玩家看
-    // =========================================================================
-    @Override
-    public void applyPowers() {
-        // 1. 重置
-        this.magicNumber = this.baseMagicNumber;
-        super.applyPowers();
-
-        // 2. 计算加成
-        int bonus = 0;
-        if (AbstractDungeon.player.hasPower(YanDaoDaoHenPower.POWER_ID)) {
-            bonus = AbstractDungeon.player.getPower(YanDaoDaoHenPower.POWER_ID).amount / 2;
-        }
-
-        // 3. 修改显示数值
-        if (bonus > 0) {
-            this.magicNumber += bonus;
-            this.isMagicNumberModified = true;
-        }
-    }
-
-    // =========================================================================
-    //  【生效逻辑】 传递基础值，让 Power 内部处理加成
-    // =========================================================================
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 注意：这里传 baseMagicNumber (20)
-        // FenShaoPower 接收到 20 后，会自动加上 bonus (1) = 21
+        this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.FIRE));
         this.addToBot(new ApplyPowerAction(m, p,
-                new FenShaoPower(m, this.baseMagicNumber),
-                this.baseMagicNumber));
+                new FenShaoPower(m, this.fenShao),
+                this.fenShao));
     }
 }

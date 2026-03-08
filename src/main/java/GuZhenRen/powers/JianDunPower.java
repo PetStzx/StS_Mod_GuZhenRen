@@ -3,7 +3,8 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.GuZhenRenTags;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -18,11 +19,11 @@ public class JianDunPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public JianDunPower(AbstractCreature owner) {
+    public JianDunPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = -1; // -1 表示该能力不可叠加，并且在 UI 上不会显示数字
+        this.amount = amount;
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/JianDunPower_p.png");
@@ -36,31 +37,22 @@ public class JianDunPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0];
-    }
-
-    @Override
-    public void stackPower(int stackAmount) {
+        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (card.hasTag(GuZhenRenTags.JIAN_DAO)) {
+            this.flash();
+            this.addToBot(new GainBlockAction(this.owner, this.owner, this.amount));
+        }
+    }
 
-            int cost = card.costForTurn;
-
-            if (card.cost == -1) {
-                cost = card.energyOnUse;
-            }
-            if (card.freeToPlayOnce) {
-                cost = 0;
-            }
-
-            // 直接根据耗能抽牌，不再乘以层数
-            if (cost > 0) {
-                this.flash();
-                this.addToBot(new DrawCardAction(this.owner, cost));
-            }
+    // 回合结束时自动移除
+    @Override
+    public void atEndOfTurn(boolean isPlayer) {
+        if (isPlayer) {
+            this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
         }
     }
 }

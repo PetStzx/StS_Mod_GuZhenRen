@@ -2,14 +2,14 @@ package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
 import basemod.ReflectionHacks;
-import com.badlogic.gdx.graphics.Texture; // 新增导入
-import com.badlogic.gdx.graphics.g2d.TextureAtlas; // 新增导入
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ImageMaster; // 新增导入
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
@@ -32,8 +32,12 @@ public class HuoMaoSanZhangPower extends AbstractPower {
         Texture texLarge = ImageMaster.loadImage(pathLarge);
         Texture texSmall = ImageMaster.loadImage(pathSmall);
 
-        this.region128 = new TextureAtlas.AtlasRegion(texLarge, 0, 0, 88, 88);
-        this.region48 = new TextureAtlas.AtlasRegion(texSmall, 0, 0, 32, 32);
+        if (texLarge != null && texSmall != null) {
+            this.region128 = new TextureAtlas.AtlasRegion(texLarge, 0, 0, 88, 88);
+            this.region48 = new TextureAtlas.AtlasRegion(texSmall, 0, 0, 32, 32);
+        } else {
+            this.loadRegion("firebreathing"); // 防止贴图缺失导致崩溃的兜底
+        }
 
         updateDescription();
     }
@@ -49,25 +53,23 @@ public class HuoMaoSanZhangPower extends AbstractPower {
         if (source == this.owner) {
             // 2. 确保施加的是“焚烧”能力
             if (power instanceof FenShaoPower) {
-                // 3. 如果施加的层数小于 3
-                if (power.amount < 3) {
 
-                    // --- 步骤 A: 修改 Power 对象的数值 ---
-                    // 这对于目标身上【没有】该能力时生效（新建能力）
-                    power.amount = 3;
+                AbstractGameAction curAction = AbstractDungeon.actionManager.currentAction;
+                // 确保当前正在执行的是 ApplyPowerAction
+                if (curAction instanceof ApplyPowerAction) {
 
-                    // --- 步骤 B: 修改 Action 对象的数值 (核心修复) ---
-                    // 这对于目标身上【已有】该能力时生效（叠加层数）
-                    // 因为叠加逻辑使用的是 Action 内部的 amount，而不是 power 对象的 amount
-                    AbstractGameAction curAction = AbstractDungeon.actionManager.currentAction;
+                    int currentAmt = curAction.amount;
+                    // 3. 如果原本要施加的层数大于0（排除清理buff的情况），且小于3
+                    if (currentAmt > 0 && currentAmt < 3) {
 
-                    // 确保当前正在执行的是 ApplyPowerAction
-                    if (curAction instanceof ApplyPowerAction) {
-                        // 使用反射强行修改 Action 内部的 protected amount 字段
+                        // 步骤 A: 修改 Power 对象的数值（针对初次施加，目标身上还没有该能力时生效）
+                        power.amount = 3;
+
+                        // 步骤 B: 修改 Action 对象的数值（针对层数叠加，这才是生效的核心）
                         ReflectionHacks.setPrivate(curAction, AbstractGameAction.class, "amount", 3);
-                    }
 
-                    this.flash();
+                        this.flash();
+                    }
                 }
             }
         }

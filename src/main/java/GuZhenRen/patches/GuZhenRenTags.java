@@ -55,4 +55,14 @@ public class GuZhenRenTags {
 
     @SpireEnum
     public static AbstractCard.CardTags JIAN_DAO;  //剑道
+
+    @SpireEnum
+    public static AbstractCard.CardTags XUE_DAO;  //血道
+
+    @SpireEnum
+    public static AbstractCard.CardTags YUN_DAO;  //运道
+    @SpireEnum
+    public static AbstractCard.CardTags FENG_DAO;  //风道
+    @SpireEnum
+    public static AbstractCard.CardTags ZHOU_DAO;  //宙道
 }

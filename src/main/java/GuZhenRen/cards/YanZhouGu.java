@@ -3,7 +3,7 @@ package GuZhenRen.cards;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction; // 【修改】引入加入手牌的Action
 import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -18,8 +18,8 @@ public class YanZhouGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/YanZhouGu.png");
 
     private static final int COST = 1;
-    private static final int BLOCK_AMT = 11;
-    private static final int UPGRADE_PLUS_BLOCK = 4; // 升级后 11+4=15
+    private static final int BLOCK_AMT = 10;
+    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 10+3=13
     private static final int BURN_AMT = 1;
     private static final int INITIAL_RANK = 2; // 初始2转
 
@@ -48,9 +48,8 @@ public class YanZhouGu extends AbstractGuZhenRenCard {
         // 1. 获得格挡
         this.addToBot(new GainBlockAction(p, p, this.block));
 
-        // 2. 将2张灼伤加入抽牌堆
-        // 参数：卡牌, 数量, 是否随机位置(true=随机洗入, false=放顶端), 是否自动调整位置(true)
-        this.addToBot(new MakeTempCardInDrawPileAction(new Burn(), this.magicNumber, true, true));
+        // 2. 将1张灼伤加入手牌
+        this.addToBot(new MakeTempCardInHandAction(new Burn(), this.magicNumber));
     }
 
     @Override

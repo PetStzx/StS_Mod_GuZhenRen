@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.badlogic.gdx.graphics.Color;
+import com.megacrit.cardcrawl.rooms.AbstractRoom; // 确保导入了这个
 
 public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
 
@@ -53,13 +54,21 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
             performUpgradeEffect();
 
             // 1. 调用 applyPowers 更新数值
-            // 对于战斗中的手牌，这一步是必要的，因为我们要立刻显示力量加成后的伤害
-            this.applyPowers();
+            if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+                // 身份验证
+                boolean inCombatGroup = AbstractDungeon.player.hand.contains(this) ||
+                        AbstractDungeon.player.drawPile.contains(this) ||
+                        AbstractDungeon.player.discardPile.contains(this) ||
+                        AbstractDungeon.player.limbo.contains(this) ||
+                        AbstractDungeon.player.exhaustPile.contains(this);
+
+                if (inCombatGroup) {
+                    this.applyPowers();
+                }
+            }
 
             // 2. 清洗大师牌组数据
-            // 如果这张牌是大师牌组里的“本体”，它不应该保留战斗中的临时Buff
             if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck.contains(this)) {
-                // 重置为基础值
                 this.damage = this.baseDamage;
                 this.isDamageModified = false;
 
@@ -68,6 +77,9 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
 
                 this.magicNumber = this.baseMagicNumber;
                 this.isMagicNumberModified = false;
+
+                this.fenShao = this.baseFenShao;
+                this.isFenShaoModified = false;
             }
 
             if (!this.upgraded) {

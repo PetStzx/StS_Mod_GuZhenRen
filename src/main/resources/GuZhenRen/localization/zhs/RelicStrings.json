@@ -57,14 +57,14 @@
   },
   "GuZhenRen:XianQiao_9": {
     "NAME": "九转仙窍",
-    "FLAVOR": "世人谨记，我古月方源，乃是大爱仙尊。",
+    "FLAVOR": "“世人谨记，我古月方源，乃是大爱仙尊。”",
     "DESCRIPTIONS": [
       "允许催动 #y九转 仙蛊。"
     ]
   },
   "GuZhenRen:LiDaoDaoHen": {
     "NAME": "力道道痕",
-    "FLAVOR": "天地大道的痕迹。",
+    "FLAVOR": "可增强蛊仙的力量。",
     "DESCRIPTIONS": [
       "战斗开始时，获得道痕层数的 #y力量 。"
     ]
@@ -73,14 +73,15 @@
     "NAME": "炎心蛊",
     "FLAVOR": "炎心蛊寄托在心脏当中。有增强火类蛊虫攻击的效果。",
     "DESCRIPTIONS": [
-      "你给予 #y焚烧 时，层数额外增加 #b1 层。"
+      "你从卡牌给予 #y焚烧 时，额外给予 #b1 层。"
     ]
   },
   "GuZhenRen:Recipe_AngryBird": {
     "NAME": "杀招-愤怒的小鸟",
     "FLAVOR": "灵动的火焰小鸟，蕴藏着巨大的威能。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y熔岩炸裂蛊+ 、任意 #y炎道仙蛊 。"
+      "需要蛊虫： #y熔岩炸裂蛊+ 、任意 #y炎道仙蛊 。",
+      "任意炎道仙蛊"
     ]
   },
   "GuZhenRen:DingXianYou": {
@@ -94,56 +95,64 @@
     "NAME": "杀招-万星飞萤",
     "FLAVOR": "此招一出天地晦暗，方圆千里夜幕降临，蛊仙的一思一念都会形成星念。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y星念蛊+ 、任意 #y智道仙蛊 。"
+      "需要蛊虫： #y星念蛊+ 、任意 #y智道仙蛊 。",
+      "任意智道仙蛊"
     ]
   },
   "GuZhenRen:Recipe_YangMangBeiHuoYi": {
     "NAME": "杀招-阳莽被火衣",
     "FLAVOR": "使头发熊熊燃烧，化为巨大的火焰披风，护卫周身，乃是炎道的极致奥义。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y炎胄蛊+ 、任意 #y炎道仙蛊 。"
+      "需要蛊虫： #y炎胄蛊+ 、任意 #y炎道仙蛊 。",
+      "任意炎道仙蛊"
     ]
   },
   "GuZhenRen:Recipe_ZhuiMingHuo": {
     "NAME": "杀招-追命火",
     "FLAVOR": "能够感应攻势，追根溯源，直烧仙窍。生命不息，此火就燃烧不止。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y燎原火+ 、任意 #y炎道蛊虫 。"
+      "需要蛊虫： #y燎原火+ 、任意 #y炎道蛊虫 。",
+      "任意炎道蛊虫"
     ]
   },
   "GuZhenRen:Recipe_XingXiuQiPan": {
     "NAME": "杀招-星宿棋盘",
     "FLAVOR": "历史上第一座仙蛊屋，有着天下第一的推算能力。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y智慧蛊 、任意 #y智道仙蛊 。"
+      "需要蛊虫： #y智慧蛊 、任意 #y智道仙蛊 。",
+      "任意智道仙蛊"
     ]
   },
   "GuZhenRen:Recipe_WuZhiQuanXinJian": {
     "NAME": "杀招-五指拳心剑",
     "FLAVOR": "历经五十四次劫，劫云仍旧漫遮天。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y慧剑+ 、任意 #y剑道蛊虫 。"
+      "需要蛊虫： #y慧剑+ 、任意 #y剑道蛊虫 。",
+      "任意剑道蛊虫"
     ]
   },
   "GuZhenRen:Recipe_JianLangSanDie": {
     "NAME": "杀招-剑浪三叠",
     "FLAVOR": "此招共发出三波剑浪，一浪高过一浪。剑浪翻涌，卷起百千浪花，杀伤力惊人。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y浪剑+ 、任意 #y剑道蛊虫 。"
+      "需要蛊虫： #y浪剑+ 、任意 #y剑道仙蛊 。",
+      "任意剑道仙蛊"
     ]
   },
   "GuZhenRen:Recipe_AnQiSha": {
     "NAME": "杀招-暗歧杀",
     "FLAVOR": "此招催动之时毫无气息流露，一旦发动，剑势极快，迅雷不及掩耳。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y飞剑+ 、 #y剑影蛊 或 #y多重剑影蛊 或 #y叠影蛊 。"
+      "需要蛊虫： #y飞剑+ 、 #y剑影蛊 或 #y多重剑影蛊 或 #y叠影蛊 。",
+      "剑影蛊/多重剑影蛊/叠影蛊"
     ]
   },
   "GuZhenRen:Recipe_JianHenSuoMing": {
     "NAME": "杀招-剑痕索命",
     "FLAVOR": "飞剑仙蛊造成的伤口，能够在目标身上刻印剑道道痕，道痕将自循目标的弱点，加以攻击。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y飞剑+ 、任意 #y剑道蛊虫 。"
+      "需要蛊虫： #y飞剑+ 、任意 #y剑道蛊虫 。",
+      "任意剑道蛊虫"
     ]
   },
   "GuZhenRen:JianMei": {
@@ -151,6 +160,79 @@
     "FLAVOR": "能够在眉毛中刻印剑道道痕。",
     "DESCRIPTIONS": [
       "每场战斗开始时，获得 1 层 #y剑锋 。"
+    ]
+  },
+  "GuZhenRen:Recipe_WanWo": {
+    "NAME": "杀招-万我",
+    "FLAVOR": "万般皆是我。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y我力+ 、任意 #y力道蛊虫 。",
+      "任意力道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_WanWoDaShouYin": {
+    "NAME": "杀招-万我大手印",
+    "FLAVOR": "万我第一式，可凝聚万千群力于一身。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y拔山+ 、任意 #y力道仙蛊 。",
+      "任意力道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_ShangFangJieWa": {
+    "NAME": "杀招-上房揭瓦",
+    "FLAVOR": "极为克制仙蛊屋的力道杀招，连仙蛊屋的防御手段都可轻易突破。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y横冲直撞蛊+ 、任意 #y力道仙蛊 。",
+      "任意力道仙蛊"
+    ]
+  },
+  "GuZhenRen:XianGuCanHai": {
+    "NAME": "仙蛊残骸",
+    "FLAVOR": "仙蛊毁灭后留下的残骸，仍然残留部分道痕，可作为蛊材使用。",
+    "DESCRIPTIONS": [
+      "你在篝火处的下 #b",
+      " 次锻造不消耗行动次数。",
+      "此遗物的效果已耗尽。"
+    ]
+  },
+  "GuZhenRen:Recipe_XueJianLeng": {
+    "NAME": "杀招-血渐冷",
+    "FLAVOR": "以冷血仙蛊为核心，可使敌人的血液迅速冷却，直至冻结。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y冷血+ 、任意 #y血道蛊虫 。",
+      "任意血道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_XuePiaoLiu": {
+    "NAME": "杀招-血漂流",
+    "FLAVOR": "血光长河承载使用者在空中飞行，所到之处，皆逸散浓烈的血腥之气。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y血走蛊+ 、任意 #y血道仙蛊 。",
+      "任意血道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_ZhuMoBang": {
+    "NAME": "杀招-诛魔榜",
+    "FLAVOR": "天庭所创的八转血道仙蛊屋，记录着五域魔道的信息，几乎没有短板。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y血缘+ 、任意 #y血道仙蛊 。",
+      "任意血道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_SanShiSanTianGuang": {
+    "NAME": "杀招-三十三天光",
+    "FLAVOR": "以蛊仙为灯芯，照射出猛烈的强光，每一次闪烁，强光威力都会更强。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y光蛊 、任意 #y光道蛊虫 。",
+      "任意光道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_TianPuGuangHe": {
+    "NAME": "杀招-天瀑光河",
+    "FLAVOR": "光河滚滚，洪波翻腾，滔天的光水每一滴都好似太阳碎片，璀璨耀眼至极。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y太光蛊+ 、任意 #y光道蛊虫 。",
+      "任意光道蛊虫"
     ]
   }
 }

@@ -3,7 +3,6 @@ package GuZhenRen.cards;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.FenShaoPower;
-import GuZhenRen.powers.YanDaoDaoHenPower;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -41,11 +40,9 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
 
         this.setDao(Dao.YAN_DAO);
 
-        // 1. 第一魔法值：次数
         this.baseMagicNumber = this.magicNumber = TIMES;
 
-        // 2. 第二魔法值：层数
-        this.baseSecondMagicNumber = this.secondMagicNumber = FEN_SHAO_BASE;
+        this.baseFenShao = this.fenShao = FEN_SHAO_BASE;
 
         this.setRank(INITIAL_RANK);
 
@@ -53,46 +50,30 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
         this.cardsToPreview = new Burn();
     }
 
-    @Override
-    public void applyPowers() {
-        // 每次计算前重置基础值
-        this.baseSecondMagicNumber = FEN_SHAO_BASE;
-        this.secondMagicNumber = this.baseSecondMagicNumber;
-
-        super.applyPowers();
-
-        // 道痕加成逻辑
-        int bonus = 0;
-        if (AbstractDungeon.player.hasPower(YanDaoDaoHenPower.POWER_ID)) {
-            bonus = AbstractDungeon.player.getPower(YanDaoDaoHenPower.POWER_ID).amount / 2;
-        }
-
-        if (bonus > 0) {
-            this.secondMagicNumber += bonus;
-            this.isSecondMagicNumberModified = true;
-        }
-
-        this.initializeDescription();
-    }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        // 华丽的屏幕燃烧特效
         this.addToBot(new VFXAction(p, new ScreenOnFireEffect(), 1.0F));
 
+        // 进行 magicNumber 次全体焚烧施加
         for (int i = 0; i < this.magicNumber; i++) {
-            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                if (!mo.isDeadOrEscaped()) {
-                    this.addToBot(new ApplyPowerAction(mo, p,
-                            new FenShaoPower(mo, this.baseSecondMagicNumber),
-                            this.baseSecondMagicNumber, true));
+            if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+                for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
+                    if (!mo.isDead && !mo.isDying) {
+                        // 【极简】传入 this.fenShao 即可享受所有加成
+                        this.addToBot(new ApplyPowerAction(mo, p,
+                                new FenShaoPower(mo, this.fenShao),
+                                this.fenShao, true));
+                    }
                 }
             }
         }
 
-        // 生成灼伤
+        // 生成灼伤卡
         AbstractCard c = new Burn();
         if (this.upgraded) {
-            c.upgrade(); // 如果燎原火升级了，生成的灼伤也升级
+            c.upgrade();
         }
         this.addToBot(new MakeTempCardInHandAction(c, 1));
     }
@@ -101,7 +82,7 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_TIMES);
+            this.upgradeMagicNumber(UPGRADE_TIMES); // 升级提升次数 3 -> 4
             this.upgradeRank(1);
 
             // 更新预览卡牌为 灼伤+

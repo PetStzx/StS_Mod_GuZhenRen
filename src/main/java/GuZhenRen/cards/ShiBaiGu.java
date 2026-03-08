@@ -24,7 +24,7 @@ public class ShiBaiGu extends AbstractGuZhenRenCard implements IProbabilityCard 
     private static final int HP_LOSS = 4;
     private static final int UPGRADE_HP_LOSS = -2;
 
-    public float baseChance = 0.05f;
+    public float baseChance = 0.01f;
 
     public ShiBaiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -66,9 +66,7 @@ public class ShiBaiGu extends AbstractGuZhenRenCard implements IProbabilityCard 
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new LoseHPAction(p, p, this.magicNumber));
 
-        float realChance = ProbabilityHelper.getModifiedChance(this, this.baseChance);
-
-        if (AbstractDungeon.cardRandomRng.randomBoolean(realChance)) {
+        if (ProbabilityHelper.rollProbability(this, this.baseChance)) {
             this.addToBot(new MakeTempCardInHandAction(new ChengGongGu(), 1));
         }
     }

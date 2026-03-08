@@ -1,66 +1,85 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 
-public class LiDaoDaoHenPower extends AbstractPower {
+public class LiDaoDaoHenPower extends AbstractDaoHenPower {
     public static final String POWER_ID = GuZhenRen.makeID("LiDaoDaoHenPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
-    public static final String NAME = powerStrings.NAME;
-    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
-
-    // 标记：是否由变化道转化而来
-    public boolean isFromBianHua = false;
 
     public LiDaoDaoHenPower(AbstractCreature owner, int amount) {
-        this.name = NAME;
-        this.ID = POWER_ID;
-        this.owner = owner;
-        this.amount = amount;
-        this.type = PowerType.BUFF;
-
-        String pathLarge = GuZhenRen.assetPath("img/powers/LiDaoDaoHenPower_p.png");
-        String pathSmall = GuZhenRen.assetPath("img/powers/LiDaoDaoHenPower.png");
-
-        this.region128 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(pathLarge), 0, 0, 88, 88);
-        this.region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(pathSmall), 0, 0, 32, 32);
-
+        super(POWER_ID, powerStrings.NAME, owner, amount);
         updateDescription();
     }
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0];
+        this.description = powerStrings.DESCRIPTIONS[0];
     }
 
-    // 力道效果：视为力量增加伤害
-    @Override
-    public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
-        if (type == DamageInfo.DamageType.NORMAL) {
-            return damage + this.amount;
-        }
-        return damage;
+    // 发放力量，同时开启/关闭免检标记
+    private void applyCompanionStrength(int amt) {
+        // addToTop 是后进先出，所以队列排布顺序是：关闭 -> 发放 -> 开启
+        this.addToTop(new AbstractGameAction() {
+            @Override
+            public void update() {
+                AbstractDaoHenPower.isDerivedPower = false;
+                this.isDone = true;
+            }
+        });
+
+        this.addToTop(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, amt), amt));
+
+        this.addToTop(new AbstractGameAction() {
+            @Override
+            public void update() {
+                AbstractDaoHenPower.isDerivedPower = true;
+                this.isDone = true;
+            }
+        });
     }
 
-    // 回合结束时，如果是暂时的，变回变化道
+    // 获得时发放力量
     @Override
-    public void atEndOfTurn(boolean isPlayer) {
-        if (isPlayer && this.isFromBianHua) {
-            this.flash();
-            // 1. 移除自己
-            this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
-            // 2. 变回变化道道痕
-            this.addToBot(new ApplyPowerAction(this.owner, this.owner,
-                    new BianHuaDaoDaoHenPower(this.owner, this.amount), this.amount));
+    public void onInitialApplication() {
+        super.onInitialApplication();
+        applyCompanionStrength(this.amount);
+    }
+
+    // 叠加时发放力量
+    @Override
+    public void stackPower(int stackAmount) {
+        super.stackPower(stackAmount);
+        applyCompanionStrength(stackAmount);
+    }
+
+    // 减少层数时同步扣减力量（防止原版 reducePower 导致双重扣减的严密逻辑）
+    @Override
+    public void reducePower(int reduceAmount) {
+        int actualReduce = Math.min(reduceAmount, this.amount);
+        this.addToTop(new ReducePowerAction(this.owner, this.owner, StrengthPower.POWER_ID, actualReduce));
+        super.reducePower(reduceAmount);
+    }
+
+    // 被彻底移除时扣除力量
+    @Override
+    public void onRemove() {
+        if (this.amount > 0) {
+            this.addToTop(new ReducePowerAction(this.owner, this.owner, StrengthPower.POWER_ID, this.amount));
         }
+    }
+
+    @Override
+    public int getDerivedPowerAmount(String powerID) {
+        if (StrengthPower.POWER_ID.equals(powerID)) {
+            return this.amount;
+        }
+        return 0;
     }
 }

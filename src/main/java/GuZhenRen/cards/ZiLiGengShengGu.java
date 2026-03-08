@@ -2,7 +2,6 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.powers.LiDaoDaoHenPower;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -39,29 +38,15 @@ public class ZiLiGengShengGu extends AbstractGuZhenRenCard {
         this.tags.add(CardTags.HEALING);
     }
 
-    /**
-     * 辅助方法：计算 力量 + 力道道痕
-     */
-    private int calculateTotalStrength(AbstractPlayer p) {
-        int totalStrength = 0;
-
-        if (p.hasPower(StrengthPower.POWER_ID)) {
-            totalStrength += p.getPower(StrengthPower.POWER_ID).amount;
-        }
-
-        if (p.hasPower(LiDaoDaoHenPower.POWER_ID)) {
-            totalStrength += p.getPower(LiDaoDaoHenPower.POWER_ID).amount;
-        }
-
-        return totalStrength;
-    }
-
     @Override
     public void applyPowers() {
         this.magicNumber = this.baseMagicNumber;
         AbstractPlayer p = AbstractDungeon.player;
         if (p != null) {
-            this.magicNumber += calculateTotalStrength(p);
+            if (p.hasPower(StrengthPower.POWER_ID)) {
+                this.magicNumber += p.getPower(StrengthPower.POWER_ID).amount;
+            }
+
             if (this.magicNumber != this.baseMagicNumber) {
                 this.isMagicNumberModified = true;
             }
@@ -71,8 +56,7 @@ public class ZiLiGengShengGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int finalHeal = this.baseMagicNumber + calculateTotalStrength(p);
-        this.addToBot(new HealAction(p, p, finalHeal));
+        this.addToBot(new HealAction(p, p, this.magicNumber));
     }
 
     @Override

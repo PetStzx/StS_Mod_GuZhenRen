@@ -14,7 +14,6 @@ public class SecondMagicNumber extends DynamicVariable {
     @Override
     public boolean isModified(AbstractCard card) {
         if (card instanceof AbstractGuZhenRenCard) {
-            // 战斗中，只有吃到Buff或在升级预览界面时，才会变色
             return ((AbstractGuZhenRenCard) card).isSecondMagicNumberModified;
         }
         return false;
@@ -39,8 +38,7 @@ public class SecondMagicNumber extends DynamicVariable {
     @Override
     public boolean upgraded(AbstractCard card) {
         if (card instanceof AbstractGuZhenRenCard) {
-
-            return ((AbstractGuZhenRenCard) card).isSecondMagicNumberModified;
+            return ((AbstractGuZhenRenCard) card).upgradedSecondMagicNumber;
         }
         return false;
     }

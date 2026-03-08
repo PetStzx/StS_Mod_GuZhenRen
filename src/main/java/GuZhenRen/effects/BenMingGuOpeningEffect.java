@@ -1,5 +1,6 @@
 package GuZhenRen.effects;
 
+import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.LiLiangGu;
 import GuZhenRen.cards.ZhiHuiGu;
 import GuZhenRen.patches.CardColorEnum;
@@ -15,6 +16,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.localization.UIStrings; // 【新增】
 import com.megacrit.cardcrawl.screens.CardRewardScreen;
 import com.megacrit.cardcrawl.ui.buttons.PeekButton;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
@@ -25,8 +27,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BenMingGuOpeningEffect extends AbstractGameEffect {
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("BenMingGuScreen"));
+    public static final String[] TEXT = uiStrings.TEXT;
+
     private boolean screenOpened = false;
-    private static final String WARNING_TEXT = "失去33%生命上限";
     private boolean isTextHidden = false;
 
     public BenMingGuOpeningEffect() {
@@ -116,7 +120,7 @@ public class BenMingGuOpeningEffect extends AbstractGameEffect {
             choices.add(c);
         }
 
-        AbstractDungeon.cardRewardScreen.customCombatOpen(choices, "选择你的本命蛊", false);
+        AbstractDungeon.cardRewardScreen.customCombatOpen(choices, TEXT[0], false);
     }
 
     @Override
@@ -139,7 +143,7 @@ public class BenMingGuOpeningEffect extends AbstractGameEffect {
                     FontHelper.renderFontCentered(
                             sb,
                             FontHelper.topPanelInfoFont,
-                            WARNING_TEXT,
+                            TEXT[1],
                             textX,
                             textY,
                             Settings.RED_TEXT_COLOR

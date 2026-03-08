@@ -16,13 +16,15 @@ import org.apache.logging.log4j.Logger;
 import GuZhenRen.cards.*;
 import GuZhenRen.relics.*;
 import GuZhenRen.patches.*;
+import GuZhenRen.powers.*;
 import GuZhenRen.variables.SecondMagicNumber;
+import GuZhenRen.variables.FenShaoVariable;
+import GuZhenRen.variables.NianVariable;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.google.gson.Gson;
 import com.badlogic.gdx.Gdx;
 import java.nio.charset.StandardCharsets;
 
-// 【新增】掉落系统所需的导入
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -37,6 +39,8 @@ public class GuZhenRen implements
         EditKeywordsSubscriber,
         PostInitializeSubscriber,
         PostDungeonInitializeSubscriber,
+        OnStartBattleSubscriber,
+        PostEnergyRechargeSubscriber,
         PostBattleSubscriber
 {
     public static final Logger logger = LogManager.getLogger(GuZhenRen.class.getName());
@@ -73,6 +77,8 @@ public class GuZhenRen implements
                 assetPath("img/cardui/512/card_grey_small_orb.png")
         );
         BaseMod.addDynamicVariable(new SecondMagicNumber());
+        BaseMod.addDynamicVariable(new FenShaoVariable());
+        BaseMod.addDynamicVariable(new NianVariable());
         logger.info("========================= 订阅完成 =========================");
     }
 
@@ -110,18 +116,14 @@ public class GuZhenRen implements
         BaseMod.addCard(new ZiLiGengShengGu());
         BaseMod.addCard(new JiuYeShengJiCao());
         BaseMod.addCard(new ChiLi());
-        //BaseMod.addCard(new GongBeiGu());
         BaseMod.addCard(new ChengGongGu());
         BaseMod.addCard(new ShiBaiGu());
-        //BaseMod.addCard(new RenRuGu());
         BaseMod.addCard(new QuanLiYiFuGu());
         BaseMod.addCard(new ShaGu());
         BaseMod.addCard(new HuoGu());
         BaseMod.addCard(new HuoMaoSanZhangGu());
         BaseMod.addCard(new WuZuNiao());
         BaseMod.addCard(new RongYanZhaLieGu());
-        //BaseMod.addCard(new HuoLuGu());
-        //BaseMod.addCard(new HuoTanGu());
         BaseMod.addCard(new LiLiangGu());
         BaseMod.addCard(new YanTongGu());
         BaseMod.addCard(new LiaoYuanHuo());
@@ -182,13 +184,56 @@ public class GuZhenRen implements
         BaseMod.addCard(new WoLiXuYing());
         BaseMod.addCard(new FeiLiGu());
         BaseMod.addCard(new YunSuan());
+        BaseMod.addCard(new BaShan());
+        BaseMod.addCard(new LiQiGu());
+        BaseMod.addCard(new QunLiGu());
+        BaseMod.addCard(new DingLi());
+        BaseMod.addCard(new WanWoDaShouYin());
+        BaseMod.addCard(new WanWo());
+        BaseMod.addCard(new ShangFangJieWa());
+        BaseMod.addCard(new WanLan());
+        BaseMod.addCard(new HengChongZhiZhuangGu());
+        BaseMod.addCard(new LongXingHuBuGu());
+        BaseMod.addCard(new ZhuanYiGu());
+        BaseMod.addCard(new XueChou());
+        BaseMod.addCard(new XinXue());
+        BaseMod.addCard(new DaoChiXueFu());
+        BaseMod.addCard(new XueShenZi());
+        BaseMod.addCard(new XueKuangGu());
+        BaseMod.addCard(new XueMuTianHuaGu());
+        BaseMod.addCard(new XueHeMang());
+        BaseMod.addCard(new XueRenGu());
+        BaseMod.addCard(new XueZouGu());
+        BaseMod.addCard(new XueQiGu());
+        BaseMod.addCard(new ZhiXueGu());
+        BaseMod.addCard(new XueZhanGu());
+        BaseMod.addCard(new XueYueGu());
+        BaseMod.addCard(new XueYuan());
+        BaseMod.addCard(new XueShouYinGu());
+        BaseMod.addCard(new LengXue());
+        BaseMod.addCard(new XueJianLeng());
+        BaseMod.addCard(new XuePiaoLiu());
+        BaseMod.addCard(new ZhuMoBang());
+        BaseMod.addCard(new TaiGuangGu());
+        BaseMod.addCard(new GuangGu());
+        BaseMod.addCard(new TianPuGuangHe());
+        BaseMod.addCard(new SanShiSanTianGuang());
+        BaseMod.addCard(new BianTong());
+        BaseMod.addCard(new TouSheng());
+        BaseMod.addCard(new FangWeiGu());
+        BaseMod.addCard(new ZhuanYun());
+        BaseMod.addCard(new SongYouFeng());
+        BaseMod.addCard(new SongYouFengSongBie());
+        BaseMod.addCard(new GuangYinFeiRen());
+        BaseMod.addCard(new BaMianWeiFengGu());
+        BaseMod.addCard(new ShiZhen());
+        BaseMod.addCard(new RenRuGu());
     }
 
     @Override
     public void receiveEditRelics() {
         logger.info("开始加载遗物...");
 
-        //  空窍系列遗物
         BaseMod.addRelicToCustomPool(new KongQiao_1(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new KongQiao_2(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new KongQiao_3(), CardColorEnum.GUZHENREN_GREY);
@@ -199,13 +244,12 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new XianQiao_8(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianQiao_9(), CardColorEnum.GUZHENREN_GREY);
 
-        //  常规遗物
         BaseMod.addRelicToCustomPool(new LiDaoDaoHen(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianGuCanHai(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new YanXinGu(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new DingXianYou(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new JianMei(), CardColorEnum.GUZHENREN_GREY);
 
-        //  注册配方遗物并加入掉落池
         BaseMod.addRelicToCustomPool(new Recipe_AngryBird(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_AngryBird.ID);
         BaseMod.addRelicToCustomPool(new Recipe_WanXingFeiYing(), CardColorEnum.GUZHENREN_GREY);
@@ -224,6 +268,22 @@ public class GuZhenRen implements
         recipeRelicIDs.add(Recipe_AnQiSha.ID);
         BaseMod.addRelicToCustomPool(new Recipe_JianHenSuoMing(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_JianHenSuoMing.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_WanWo(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_WanWo.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_WanWoDaShouYin(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_WanWoDaShouYin.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_ShangFangJieWa(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_ShangFangJieWa.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_XueJianLeng(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_XueJianLeng.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_XuePiaoLiu(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_XuePiaoLiu.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_ZhuMoBang(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_ZhuMoBang.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_SanShiSanTianGuang(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_SanShiSanTianGuang.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_TianPuGuangHe(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_TianPuGuangHe.ID);
     }
 
     @Override
@@ -272,22 +332,39 @@ public class GuZhenRen implements
         }
     }
 
-    // =========================================================================
-    //  战斗结束掉落逻辑
-    // =========================================================================
+    // =================================================================================
+    // “人如故” 回溯血量机制 - 账本管理
+    // =================================================================================
+    @Override
+    public void receiveOnBattleStart(AbstractRoom room) {
+        RenRuGu.hpHistory.clear();
+        RenRuGu.hpHistory.add(com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.currentHealth);
+    }
+
+    @Override
+    public void receivePostEnergyRecharge() {
+        // 玩家每回合开始（能量恢复完成）时，记录当下的生命值
+        while (RenRuGu.hpHistory.size() < com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.turn) {
+            RenRuGu.hpHistory.add(com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.currentHealth);
+        }
+    }
+
     @Override
     public void receivePostBattle(AbstractRoom room) {
-        // 1. 15% 概率
+        //1. 静态变量清理区 (防止下一场战斗数据残留)
+        SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
+        TouDaoDaoHenPower.totalGoldStolenThisCombat = 0;
+
+        // 清空时间轴，防止内存泄漏或数据污染下一场战斗
+        RenRuGu.hpHistory.clear();
+
+        //2. 杀招合成遗物掉落逻辑
         if (AbstractDungeon.relicRng.randomBoolean(0.15f)) {
-            // 2. 从池子中随机取一个配方
             if (!recipeRelicIDs.isEmpty()) {
                 String randomID = recipeRelicIDs.get(AbstractDungeon.relicRng.random(recipeRelicIDs.size() - 1));
-
-                // 3. 确保不重复掉落
                 boolean hasRelic = AbstractDungeon.player.hasRelic(randomID);
 
                 if (!hasRelic) {
-                    // 4. 添加到奖励
                     AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
                     room.rewards.add(new RewardItem(relic));
                 }

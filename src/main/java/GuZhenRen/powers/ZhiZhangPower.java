@@ -48,7 +48,6 @@ public class ZhiZhangPower extends AbstractPower implements OnReceivePowerPower 
             this.flash();
 
             // 2. 实际效果：获得临时生命
-            // power.amount 此时已经是计算过加成（情/道痕）的数值了
             int tempHp = power.amount * 2;
             if (tempHp > 0) {
                 // 使用 addToTop 确保立即执行

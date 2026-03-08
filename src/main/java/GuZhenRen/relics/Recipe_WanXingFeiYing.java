@@ -59,13 +59,8 @@ public class Recipe_WanXingFeiYing extends AbstractRecipeRelic {
                 return false;
             }
 
-            // 条件B: 排除星念蛊
-            if (c.cardID.equals(XingNianGu.ID)) {
-                return false;
-            }
 
-            // 条件C: 六转及以上
-            // 只要继承自 AbstractGuZhenRenCard 都有 rank 属性 (包括本命蛊、普通牌)
+            // 条件B: 六转及以上
             if (c instanceof AbstractGuZhenRenCard) {
                 return ((AbstractGuZhenRenCard) c).rank >= 6;
             }
@@ -79,7 +74,7 @@ public class Recipe_WanXingFeiYing extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "智道仙蛊";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

@@ -1,5 +1,7 @@
 package GuZhenRen.util;
 
+import GuZhenRen.GuZhenRen;
+import GuZhenRen.powers.ZhuanYunPower;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -67,5 +69,21 @@ public class ProbabilityHelper {
         }
 
         return currentPct + "%";
+    }
+
+    public static boolean rollProbability(AbstractCard card, float baseChance) {
+        float realChance = getModifiedChance(card, baseChance);
+        boolean success = AbstractDungeon.cardRandomRng.randomBoolean(realChance);
+
+        // 如果判定失败，寻找玩家身上的“转运”能力并触发
+        if (!success && AbstractDungeon.player != null) {
+            String zhuanYunId = GuZhenRen.makeID("ZhuanYunPower");
+            if (AbstractDungeon.player.hasPower(zhuanYunId)) {
+                ZhuanYunPower power = (ZhuanYunPower) AbstractDungeon.player.getPower(zhuanYunId);
+                power.onProbabilityRollFailed(card);
+            }
+        }
+
+        return success;
     }
 }

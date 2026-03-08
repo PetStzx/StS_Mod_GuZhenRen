@@ -15,7 +15,7 @@ public class ZhuiMingHuo extends AbstractShaZhaoCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ZhuiMingHuo.png");
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     private static final int POWER_AMT = 1;
 
     public ZhuiMingHuo() {
@@ -24,10 +24,8 @@ public class ZhuiMingHuo extends AbstractShaZhaoCard {
                 CardType.SKILL,
                 CardTarget.ENEMY);
 
-        // 设置流派 (父类会自动将其名字加到描述开头)
         this.setDao(Dao.YAN_DAO);
 
-        // 设置本卡特有的属性：消耗
         this.exhaust = true;
 
         this.baseMagicNumber = this.magicNumber = POWER_AMT;

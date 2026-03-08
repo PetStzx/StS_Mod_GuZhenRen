@@ -65,7 +65,7 @@ public class Recipe_AnQiSha extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "剑影蛊/多重剑影蛊/叠影蛊";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

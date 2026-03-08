@@ -36,7 +36,7 @@ public class LangJian extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.RARE, // 金卡
                 CardTarget.ENEMY);
 
         this.setDao(Dao.JIAN_DAO);

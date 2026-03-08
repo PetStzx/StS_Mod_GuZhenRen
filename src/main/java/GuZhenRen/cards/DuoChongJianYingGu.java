@@ -18,21 +18,20 @@ public class DuoChongJianYingGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/DuoChongJianYingGu.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 3; // 数量永远固定为 3 张
-    private static final int INITIAL_RANK = 4; // 4转起步
+    private static final int MAGIC = 3; // 发 3 张
+    private static final int INITIAL_RANK = 4; // 4转
 
     public DuoChongJianYingGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.COMMON, // 白卡
-                CardTarget.NONE); // 不指定敌人
+                CardTarget.NONE);
 
         this.setDao(Dao.JIAN_DAO);
         this.setRank(INITIAL_RANK);
         this.baseMagicNumber = this.magicNumber = MAGIC;
 
-        // 设置悬停时预览的衍生牌《剑影》
         this.cardsToPreview = new JianYing();
     }
 
@@ -41,7 +40,7 @@ public class DuoChongJianYingGu extends AbstractGuZhenRenCard {
         // 1. 实例化一张新的剑影
         AbstractCard jianYing = new JianYing();
 
-        // 2. 如果当前这张《多重剑影蛊》已经升级，就把生成的剑影也升级！
+        // 2. 如果多重剑影蛊已经升级，就把生成的剑影也升级
         if (this.upgraded) {
             jianYing.upgrade();
         }

@@ -4,7 +4,7 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.AbstractGuZhenRenCard;
 import GuZhenRen.cards.AngryBird;
 import GuZhenRen.cards.RongYanZhaLieGu;
-import GuZhenRen.patches.GuZhenRenTags; // 别忘了导入标签
+import GuZhenRen.patches.GuZhenRenTags;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import java.util.ArrayList;
 
@@ -56,12 +56,8 @@ public class Recipe_AngryBird extends AbstractRecipeRelic {
                 return false;
             }
 
-            // 判定 2: 排除熔岩炸裂蛊本身
-            if (c.cardID.equals(RongYanZhaLieGu.ID)) {
-                return false;
-            }
 
-            // 判定 3: 必须是蛊虫，且转数 >= 6 (仙蛊级别)，最高为9
+            // 判定 2: 必须是蛊虫，且转数 >= 6 (仙蛊级别)
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
                 return rank >= 6 && rank <= 9;
@@ -75,7 +71,7 @@ public class Recipe_AngryBird extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "任意炎道仙蛊";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

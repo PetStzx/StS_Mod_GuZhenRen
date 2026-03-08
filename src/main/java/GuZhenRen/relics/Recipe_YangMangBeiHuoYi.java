@@ -61,12 +61,8 @@ public class Recipe_YangMangBeiHuoYi extends AbstractRecipeRelic {
                 return false;
             }
 
-            // 条件B: 排除【炎胄蛊】(防止重复使用或逻辑混淆)
-            if (c.cardID.equals(YanZhouGu.ID)) {
-                return false;
-            }
 
-            // 条件C: 六转及以上 (判定为仙蛊)
+            // 条件C: 六转及以上
             if (c instanceof AbstractGuZhenRenCard) {
                 return ((AbstractGuZhenRenCard) c).rank >= 6;
             }
@@ -79,7 +75,7 @@ public class Recipe_YangMangBeiHuoYi extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "6转及以上的炎道蛊虫";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

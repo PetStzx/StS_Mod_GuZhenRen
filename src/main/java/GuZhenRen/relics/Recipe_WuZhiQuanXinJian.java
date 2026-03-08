@@ -42,7 +42,7 @@ public class Recipe_WuZhiQuanXinJian extends AbstractRecipeRelic {
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (任意剑道蛊虫，1-9转，且不能是慧剑)
+    //  步骤 2：泛型材料 (任意剑道蛊虫，1-9转)
     // =========================================================================
     @Override
     public int getIngredientCount() {
@@ -57,12 +57,8 @@ public class Recipe_WuZhiQuanXinJian extends AbstractRecipeRelic {
                 return false;
             }
 
-            // 判定 2: 排除慧剑本身
-            if (c.cardID.equals(HuiJian.ID)) {
-                return false;
-            }
 
-            // 判定 3: 必须是蛊虫，且拥有 1-9 的转数
+            // 判定 2: 必须是蛊虫，且拥有 1-9 的转数
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
                 return rank >= 1 && rank <= 9;
@@ -76,7 +72,7 @@ public class Recipe_WuZhiQuanXinJian extends AbstractRecipeRelic {
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
-            return "任意剑道蛊虫";
+            return this.DESCRIPTIONS[1];
         }
         return super.getIngredientDescription(index);
     }

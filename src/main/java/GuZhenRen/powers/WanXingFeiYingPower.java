@@ -19,25 +19,23 @@ public class WanXingFeiYingPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private int nianBaseAmount; // 基础念数量
+    private int nianBaseAmount;
 
     public WanXingFeiYingPower(AbstractCreature owner, int turns, int nianBaseAmount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = turns; // amount 代表剩余回合数
+        this.amount = turns;
         this.nianBaseAmount = nianBaseAmount;
         this.type = PowerType.BUFF;
         this.isTurnBased = true;
 
-        // 图片加载逻辑 (带安全检查)
         String pathLarge = GuZhenRen.assetPath("img/powers/WanXingFeiYingPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/WanXingFeiYingPower.png");
         Texture largeTexture = ImageMaster.loadImage(pathLarge);
         Texture smallTexture = ImageMaster.loadImage(pathSmall);
 
         if (largeTexture == null || smallTexture == null) {
-            // 如果没图，暂时用“星念”的图或者其他替代
             pathLarge = GuZhenRen.assetPath("img/powers/XingNianGuPower_p.png");
             pathSmall = GuZhenRen.assetPath("img/powers/XingNianGuPower.png");
             largeTexture = ImageMaster.loadImage(pathLarge);
@@ -48,28 +46,20 @@ public class WanXingFeiYingPower extends AbstractPower {
             this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
             this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
         } else {
-            this.loadRegion("starlight"); // 原版备用图标
+            this.loadRegion("starlight");
         }
 
         updateDescription();
     }
 
-    // =========================================================================
-    //  核心效果：每打出一张牌，获得念
-    // =========================================================================
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         this.flash();
-        // 关键点：我们传入 nianBaseAmount (1)
-        // new NianPower(owner, 1) 会在其构造函数中自动读取玩家身上的【情】和【智道道痕】
-        // 从而加上对应的 Bonus。
+        // 直接给予干净的 NianPower，固定为传进来的基础值
         this.addToBot(new ApplyPowerAction(owner, owner,
                 new NianPower(owner, this.nianBaseAmount), this.nianBaseAmount));
     }
 
-    // =========================================================================
-    //  回合递减逻辑
-    // =========================================================================
     @Override
     public void atEndOfRound() {
         this.amount--;
@@ -82,10 +72,6 @@ public class WanXingFeiYingPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        // 描述示例： "每当你打出1张牌，获得 #b1 点念。持续 #b3 回合。"
-        // DESCRIPTIONS[0] = "每当你打出1张牌，获得 #b"
-        // DESCRIPTIONS[1] = " 点念。 NL 持续 #b"
-        // DESCRIPTIONS[2] = " 回合。"
         this.description = DESCRIPTIONS[0] + this.nianBaseAmount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
     }
 }

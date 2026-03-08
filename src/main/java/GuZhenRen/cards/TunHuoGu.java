@@ -19,7 +19,7 @@ public class TunHuoGu extends AbstractGuZhenRenCard {
     private static final int COST = 2;
     private static final int UPGRADE_COST = 1;
     private static final int INITIAL_RANK = 4;
-    private static final int BURN_AMT = 1; // 基础给予1层焚烧
+    private static final int BURN_AMT = 1;
 
     public TunHuoGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -29,16 +29,12 @@ public class TunHuoGu extends AbstractGuZhenRenCard {
                 CardTarget.SELF);
 
         this.setDao(Dao.YAN_DAO);
-
-        // 魔法值：焚烧层数
         this.baseMagicNumber = this.magicNumber = BURN_AMT;
-
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 获得吞火能力
         this.addToBot(new ApplyPowerAction(p, p,
                 new TunHuoPower(p, this.magicNumber), this.magicNumber));
     }
@@ -47,8 +43,8 @@ public class TunHuoGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBaseCost(UPGRADE_COST); // 2 -> 1
-            this.upgradeRank(1); // 4 -> 5
+            this.upgradeBaseCost(UPGRADE_COST);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

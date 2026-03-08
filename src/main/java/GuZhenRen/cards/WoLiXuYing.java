@@ -10,10 +10,10 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class WoLiXuYing extends AbstractXuYingCard {
     public static final String ID = GuZhenRen.makeID("WoLiXuYing");
@@ -22,7 +22,8 @@ public class WoLiXuYing extends AbstractXuYingCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WoLiXuYing.png");
 
-    private UUID previewTargetUUID = null;
+    // 用于存储当前随机选中的攻击牌
+    private AbstractCard randomAttackCard = null;
 
     public WoLiXuYing() {
         super(ID, NAME, IMG_PATH, -2, DESCRIPTION,
@@ -43,44 +44,59 @@ public class WoLiXuYing extends AbstractXuYingCard {
         }
     }
 
+    // =========================================================================
+    // 从玩家真实的牌组 (Master Deck) 中随机抽取一张攻击牌
+    // =========================================================================
+    private void rollRandomAttack() {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck != null) {
+            ArrayList<AbstractCard> attacks = new ArrayList<>();
+            // 遍历玩家的初始牌库
+            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                // 筛选攻击牌，同时排除虚影牌自己（防止无限套娃）
+                if (c.type == CardType.ATTACK && !(c instanceof AbstractXuYingCard)) {
+                    attacks.add(c);
+                }
+            }
+
+            if (!attacks.isEmpty()) {
+                // 随机抽取并克隆一个干净的副本
+                AbstractCard picked = attacks.get(AbstractDungeon.cardRandomRng.random(attacks.size() - 1));
+                this.randomAttackCard = picked.makeStatEquivalentCopy();
+                this.cardsToPreview = this.randomAttackCard;
+            } else {
+                this.randomAttackCard = null;
+                this.cardsToPreview = null;
+            }
+        }
+    }
+
     @Override
     public void applyPowers() {
         super.applyPowers();
-        updatePreviewCard();
-    }
 
-    private void updatePreviewCard() {
-        if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.actionManager != null) {
-            AbstractCard lastAttack = getValidLastAttack();
-            if (lastAttack != null) {
-                if (this.previewTargetUUID == null || !this.previewTargetUUID.equals(lastAttack.uuid)) {
-                    this.cardsToPreview = lastAttack.makeStatEquivalentCopy();
-                    this.previewTargetUUID = lastAttack.uuid;
-                }
-            } else {
-                this.cardsToPreview = null;
-                this.previewTargetUUID = null;
-            }
+        // 如果还没抽取过，或者进战斗第一回合，抽一张
+        if (this.randomAttackCard == null && AbstractDungeon.isPlayerInDungeon()) {
+            rollRandomAttack();
+        }
+
+        // 核心细节：让悬停展示的那张牌也应用一下力量等属性加成
+        // 这样玩家就能直观地看到它打出去到底能造成多少伤害
+        if (this.randomAttackCard != null && AbstractDungeon.player != null) {
+            this.randomAttackCard.applyPowers();
         }
     }
 
-    private AbstractCard getValidLastAttack() {
-        for (int i = AbstractDungeon.actionManager.cardsPlayedThisCombat.size() - 1; i >= 0; i--) {
-            AbstractCard c = AbstractDungeon.actionManager.cardsPlayedThisCombat.get(i);
-            if (c.type == CardType.ATTACK && !(c instanceof AbstractXuYingCard) && !c.tags.contains(GuZhenRenTags.XU_YING_COPY)) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    // 动画逻辑
+    // =========================================================================
+    // 动画与触发逻辑
+    // =========================================================================
     @Override
     public void triggerPhantomEffect(AbstractMonster m) {
-        AbstractCard lastAttack = getValidLastAttack();
+        if (this.randomAttackCard == null) {
+            rollRandomAttack(); // 兜底保护
+        }
 
-        if (lastAttack != null && this.animatedPhantomCard != null) {
-            final AbstractCard tmp = lastAttack.makeStatEquivalentCopy();
+        if (this.randomAttackCard != null && this.animatedPhantomCard != null) {
+            final AbstractCard tmp = this.randomAttackCard.makeStatEquivalentCopy();
             final AbstractCard phantom = this.animatedPhantomCard;
             final AbstractMonster finalTarget = m;
 
@@ -90,20 +106,18 @@ public class WoLiXuYing extends AbstractXuYingCard {
 
             tmp.tags.add(GuZhenRenTags.XU_YING_COPY);
             tmp.purgeOnUse = true;
-            tmp.energyOnUse = lastAttack.energyOnUse;
+            // X 费卡牌会读取当前剩余能量
+            tmp.energyOnUse = EnergyPanel.totalCount;
 
-            // 1. 将复制的新牌放入悬浮层顶层，初始状态设为【极小且全透明】
             AbstractDungeon.player.limbo.addToTop(tmp);
             tmp.current_x = Settings.WIDTH / 2.0F;
             tmp.current_y = Settings.HEIGHT / 2.0F;
             tmp.target_x = Settings.WIDTH / 2.0F;
             tmp.target_y = Settings.HEIGHT / 2.0F;
-            tmp.drawScale = 0.1F; // 初始极小
-            tmp.targetDrawScale = 0.9F; // 目标正常大小
-            tmp.transparency = 0.01F; // 初始近乎透明
-            tmp.targetTransparency = 1.0F; // 目标完全清晰
-
-            // addToTop 是插队逻辑，后压入的代码会最先执行
+            tmp.drawScale = 0.1F;
+            tmp.targetDrawScale = 0.9F;
+            tmp.transparency = 0.01F;
+            tmp.targetTransparency = 1.0F;
 
             // 5.攻击特效演示完，从屏幕上抹除这张克隆牌
             this.addToTop(new AbstractGameAction() {
@@ -146,12 +160,12 @@ public class WoLiXuYing extends AbstractXuYingCard {
             // 2.变身完成后，定格一会儿
             this.addToTop(new com.megacrit.cardcrawl.actions.utility.WaitAction(Settings.FAST_MODE ? 0.15F : 0.25F));
 
-            // 1.最先执行的变身动画，拉长了变形时间，让淡入淡出更舒缓自然
+            // 1.最先执行的变身动画
             this.addToTop(new AbstractGameAction() {
                 private boolean first = true;
                 {
                     this.actionType = ActionType.WAIT;
-                    this.duration = Settings.FAST_MODE ? 0.3F : 0.45F; // 动画时间拉长到 0.45 秒
+                    this.duration = Settings.FAST_MODE ? 0.3F : 0.45F;
                 }
                 @Override
                 public void update() {
@@ -163,6 +177,8 @@ public class WoLiXuYing extends AbstractXuYingCard {
                     this.tickDuration();
                 }
             });
+
+            rollRandomAttack();
         }
     }
 }
