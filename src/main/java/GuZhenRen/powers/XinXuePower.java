@@ -36,7 +36,6 @@ public class XinXuePower extends AbstractPower {
         this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
 
-
         updateDescription();
     }
 
@@ -54,7 +53,9 @@ public class XinXuePower extends AbstractPower {
     // =========================================================================
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        if (damageAmount > 0) {
+        // 加入判定 !AbstractDungeon.actionManager.turnHasEnded
+        // 确保只有在玩家回合内（未点击结束回合）失去生命时，才会触发群体反伤
+        if (damageAmount > 0 && !AbstractDungeon.actionManager.turnHasEnded) {
             this.flash();
             // 1. 播放“祭品”特效
             this.addToBot(new VFXAction(new OfferingEffect(), 0.1F));

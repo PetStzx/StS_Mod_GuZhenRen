@@ -25,35 +25,35 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int INITIAL_RANK = 5;
 
-    private static final int TIMES = 3;
-    private static final int UPGRADE_TIMES = 1;
+    // 次数（魔法值）设定：基础 2 次，升级加 1 次
+    private static final int TIMES = 2;
+    private static final int UPGRADE_PLUS_TIMES = 1;
 
-    // 基础焚烧层数
-    private static final int FEN_SHAO_BASE = 2;
+    // 焚烧层数设定：基础 3 层，升级减 1 层
+    private static final int FEN_SHAO_BASE = 3;
+    private static final int UPGRADE_PLUS_FEN_SHAO = -1;
 
     public LiaoYuanHuo() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE,
+                CardRarity.UNCOMMON,
                 CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.YAN_DAO);
 
         this.baseMagicNumber = this.magicNumber = TIMES;
-
         this.baseFenShao = this.fenShao = FEN_SHAO_BASE;
 
         this.setRank(INITIAL_RANK);
 
-        // 初始预览：普通灼伤
+        // 统一预览普通的灼伤
         this.cardsToPreview = new Burn();
     }
 
-
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 华丽的屏幕燃烧特效
+        // 特效：全屏火焰
         this.addToBot(new VFXAction(p, new ScreenOnFireEffect(), 1.0F));
 
         // 进行 magicNumber 次全体焚烧施加
@@ -61,7 +61,6 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
             if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
                 for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
                     if (!mo.isDead && !mo.isDying) {
-                        // 【极简】传入 this.fenShao 即可享受所有加成
                         this.addToBot(new ApplyPowerAction(mo, p,
                                 new FenShaoPower(mo, this.fenShao),
                                 this.fenShao, true));
@@ -70,27 +69,17 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
             }
         }
 
-        // 生成灼伤卡
-        AbstractCard c = new Burn();
-        if (this.upgraded) {
-            c.upgrade();
-        }
-        this.addToBot(new MakeTempCardInHandAction(c, 1));
+        this.addToBot(new MakeTempCardInHandAction(new Burn(), 1));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_TIMES); // 升级提升次数 3 -> 4
             this.upgradeRank(1);
 
-            // 更新预览卡牌为 灼伤+
-            AbstractCard c = new Burn();
-            c.upgrade();
-            this.cardsToPreview = c;
-
-            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
+            this.upgradeMagicNumber(UPGRADE_PLUS_TIMES); // 次数：2 -> 3
+            this.upgradeFenShao(UPGRADE_PLUS_FEN_SHAO);  // 层数：3 -> 2
 
             this.initializeDescription();
         }

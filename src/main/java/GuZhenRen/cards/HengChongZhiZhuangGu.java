@@ -21,9 +21,9 @@ public class HengChongZhiZhuangGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/HengChongZhiZhuangGu.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 6;
-    private static final int UPGRADE_PLUS_DAMAGE = 2; // 6 -> 8
-    private static final int SELF_DAMAGE = 3;
+    private static final int DAMAGE = 7;
+    private static final int UPGRADE_PLUS_DAMAGE = 2; // 升级+2， 7 -> 9
+    private static final int SELF_DAMAGE = 2;
     private static final int INITIAL_RANK = 4;
 
     public HengChongZhiZhuangGu() {
@@ -46,20 +46,19 @@ public class HengChongZhiZhuangGu extends AbstractGuZhenRenCard {
     // =========================================================================
     @Override
     public void applyPowers() {
-        super.applyPowers(); // 先让父类计算对敌人的常规 damage
-        calculateSelfDamageDisplay(); // 再手动计算对自己造成的伤害
+        super.applyPowers();
+        calculateSelfDamageDisplay();
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        super.calculateCardDamage(mo); // 先计算对特定敌人的伤害
-        calculateSelfDamageDisplay(); // 同步计算对自己造成的伤害
+        super.calculateCardDamage(mo);
+        calculateSelfDamageDisplay();
     }
 
     private void calculateSelfDamageDisplay() {
         AbstractPlayer p = AbstractDungeon.player;
         if (p != null) {
-            // 模拟一次“我打我自己”的过程
             DamageInfo selfInfo = new DamageInfo(p, this.baseMagicNumber, DamageInfo.DamageType.NORMAL);
             selfInfo.applyPowers(p, p);
 
@@ -86,7 +85,7 @@ public class HengChongZhiZhuangGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 自定义动作：分段判定格挡与反伤
+    // 自定义动作：分段判定完全格挡与反伤
     // =========================================================================
     public static class HengChongZhiZhuangAction extends AbstractGameAction {
         private final DamageInfo info;
@@ -95,7 +94,7 @@ public class HengChongZhiZhuangGu extends AbstractGuZhenRenCard {
         public HengChongZhiZhuangAction(AbstractMonster target, DamageInfo info, int baseSelfDamage) {
             this.info = info;
             this.target = target;
-            this.baseSelfDamage = baseSelfDamage; // 接收传进来的基础值 (3)
+            this.baseSelfDamage = baseSelfDamage;
             this.actionType = ActionType.DAMAGE;
             this.duration = 0.1F;
         }
@@ -103,15 +102,15 @@ public class HengChongZhiZhuangGu extends AbstractGuZhenRenCard {
         @Override
         public void update() {
             if (this.duration == 0.1F && this.target != null) {
-                // 1. 在伤害结算前，检测敌人身上是否有格挡
-                boolean hitBlock = this.target.currentBlock > 0;
+                // 在伤害结算前，检测敌人的格挡是否 >= 预计造成的伤害（即完全格挡），并且伤害值本身大于 0
+                boolean completelyBlocked = (this.info.output > 0) && (this.target.currentBlock >= this.info.output);
 
                 // 2. 播放特效并造成伤害
                 AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.BLUNT_HEAVY));
                 this.target.damage(this.info);
 
                 // 3. 判定反伤
-                if (hitBlock) {
+                if (completelyBlocked) {
                     AbstractPlayer p = AbstractDungeon.player;
 
                     DamageInfo selfInfo = new DamageInfo(p, this.baseSelfDamage, DamageInfo.DamageType.NORMAL);

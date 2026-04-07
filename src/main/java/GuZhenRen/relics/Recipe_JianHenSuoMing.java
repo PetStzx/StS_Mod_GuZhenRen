@@ -42,7 +42,7 @@ public class Recipe_JianHenSuoMing extends AbstractRecipeRelic {
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (任意剑道蛊虫)
+    //  步骤 2：泛型材料 (任意剑道仙蛊)
     // =========================================================================
     @Override
     public int getIngredientCount() {
@@ -60,7 +60,7 @@ public class Recipe_JianHenSuoMing extends AbstractRecipeRelic {
             // 判定 2: 必须是蛊虫，且拥有 1-9 的转数
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
-                return rank >= 1 && rank <= 9;
+                return rank >= 6 && rank <= 9;
             }
 
             return false;

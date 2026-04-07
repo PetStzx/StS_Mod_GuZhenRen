@@ -16,8 +16,7 @@ public class WanXingFeiYing extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WanXingFeiYing.png");
 
     private static final int COST = 1;
-    private static final int DURATION = 4;
-    private static final int NIAN_BASE = 1;
+    private static final int MAGIC = 1;
 
     public WanXingFeiYing() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -26,21 +25,13 @@ public class WanXingFeiYing extends AbstractShaZhaoCard {
 
         this.setDao(Dao.ZHI_DAO);
 
-        // MagicNumber: 持续回合数
-        this.baseMagicNumber = this.magicNumber = DURATION;
-
-        // SecondMagicNumber: 获得的念数量 (固定为1，不吃加成)
-        this.baseSecondMagicNumber = this.secondMagicNumber = NIAN_BASE;
+        this.baseMagicNumber = this.magicNumber = MAGIC;
 
         this.initializeDescription();
     }
 
-
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 直接传入基础的 magicNumber 和 secondMagicNumber
-        this.addToBot(new ApplyPowerAction(p, p,
-                new WanXingFeiYingPower(p, this.magicNumber, this.secondMagicNumber),
-                this.magicNumber));
+        this.addToBot(new ApplyPowerAction(p, p, new WanXingFeiYingPower(p, this.magicNumber), this.magicNumber));
     }
 }

@@ -4,7 +4,7 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.relics.AbstractKongQiao;
 import GuZhenRen.relics.YanXinGu;
 import GuZhenRen.powers.YanDaoDaoHenPower;
-import GuZhenRen.powers.QingPower; // 导入情能力
+import GuZhenRen.powers.QingPower;
 import GuZhenRen.patches.GuZhenRenTags;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
@@ -47,13 +47,12 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         LU_DAO,     // 19 律道
         ZHI_DAO,    // 20 智道
         BIAN_HUA_DAO,       // 21 变化道
-        YIN_YANG_DAO,      // 22 阴阳道
+        YIN_YANG_DAO,      // 22 阴阳道，暂未使用
         JIAN_DAO,      // 23 剑道
         XUE_DAO,      // 24 血道
         YUN_DAO,      // 25 运道
         FENG_DAO,      // 26 风道
         ZHOU_DAO,      // 27 宙道
-
     }
 
     // =========================================================================
@@ -64,7 +63,9 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     public boolean upgradedRank = false;
     public String myBaseDescription = "";
     public String guPathString = "";
-    public boolean isRankLocked = false;
+
+    // 标记该牌当前是否受到了空窍遗物的免费增益
+    public boolean isKongQiaoFree = false;
 
     // 第二魔法值 (用于显示特殊数值)
     public int secondMagicNumber = -1;
@@ -75,7 +76,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     // =========================================================================
     // 模组专属底层属性：焚烧 (FenShao)
     // =========================================================================
-    public int baseFenShao = -1; // -1表示该牌不使用焚烧机制
+    public int baseFenShao = -1;
     public int fenShao = -1;
     public boolean isFenShaoModified = false;
     public boolean upgradedFenShao = false;
@@ -83,7 +84,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     // =========================================================================
     // 模组专属底层属性：念 (Nian)
     // =========================================================================
-    public int baseNian = -1; // -1表示该牌不使用念机制
+    public int baseNian = -1;
     public int nian = -1;
     public boolean isNianModified = false;
     public boolean upgradedNian = false;
@@ -116,15 +117,12 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
             case YUN_DAO:    this.tags.add(GuZhenRenTags.YUN_DAO); break;
             case FENG_DAO:    this.tags.add(GuZhenRenTags.FENG_DAO); break;
             case ZHOU_DAO:    this.tags.add(GuZhenRenTags.ZHOU_DAO); break;
-
-
-
         }
 
         int index = DAO_TEXT_START_INDEX + dao.ordinal();
 
         if (index < TEXT.length) {
-            this.guPathString = "guzhenren:" + TEXT[index];
+            this.guPathString = "guzhenren:" + TEXT[index].replace(" ", "_");
         } else {
             this.guPathString = "";
         }
@@ -138,19 +136,6 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     private void calculateFenShaoBonus() {
         if (this.baseFenShao > -1) {
             this.fenShao = this.baseFenShao;
-
-            if (AbstractDungeon.player != null) {
-                // 1. 道痕加成
-                if (AbstractDungeon.player.hasPower(YanDaoDaoHenPower.POWER_ID)) {
-                    this.fenShao += AbstractDungeon.player.getPower(YanDaoDaoHenPower.POWER_ID).amount / 2;
-                }
-
-                // 2. 炎心蛊遗物加成
-                if (AbstractDungeon.player.hasRelic(YanXinGu.ID)) {
-                    this.fenShao += 1; // 拥有炎心蛊，焚烧层数 +1
-                }
-            }
-
             this.isFenShaoModified = (this.fenShao != this.baseFenShao);
         }
     }
@@ -159,15 +144,40 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         if (this.baseNian > -1) {
             this.nian = this.baseNian;
 
-            if (AbstractDungeon.player != null) {
-                // 智道“情”能力加成
-                if (AbstractDungeon.player.hasPower(QingPower.POWER_ID)) {
-                    this.nian += AbstractDungeon.player.getPower(QingPower.POWER_ID).amount / 3;
-                }
-            }
-
             this.isNianModified = (this.nian != this.baseNian);
         }
+    }
+
+    // =========================================================================
+    // 动态计算是否享受空窍免耗能福利
+    // =========================================================================
+    private void applyKongQiaoCost() {
+        if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return;
+
+        AbstractKongQiao kq = AbstractKongQiao.getInstance();
+
+        // 判定：空窍存在、未使用过效果、满足转数压制
+        if (kq != null && !kq.effectUsedThisCombat && kq.rank > 1 && this.rank >= 1 && this.rank < kq.rank) {
+            if (!this.isKongQiaoFree) {
+                this.isKongQiaoFree = true;
+                this.freeToPlayOnce = true; // 开启底层免费开关
+            }
+        } else if (this.isKongQiaoFree) {
+            // 如果已经被使用过了，撤销免费
+            this.isKongQiaoFree = false;
+            this.freeToPlayOnce = false;
+        }
+    }
+
+    // =========================================================================
+    // 终极防线：在扣费的最后一刻拦截
+    // =========================================================================
+    @Override
+    public boolean freeToPlay() {
+        if (this.isKongQiaoFree) {
+            return true;
+        }
+        return super.freeToPlay();
     }
 
     // =========================================================================
@@ -179,61 +189,19 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
             initializeDescription();
             return;
         }
-        applyRankLock();
         super.applyPowers();
-        calculateFenShaoBonus(); // 计算焚烧加成
-        calculateNianBonus();    // 计算念的加成
+        calculateFenShaoBonus();
+        calculateNianBonus();
+        applyKongQiaoCost();
         initializeDescription();
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        applyRankLock();
         super.calculateCardDamage(mo);
-        calculateFenShaoBonus(); // 计算焚烧加成
-        calculateNianBonus();    // 计算念的加成
+        calculateFenShaoBonus();
+        calculateNianBonus();
         initializeDescription();
-    }
-
-    public void applyRankLock() {
-        if (this.isRankLocked) return;
-        if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return;
-        if (AbstractDungeon.player.masterDeck.contains(this)) return;
-        if (AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) return;
-
-        boolean inCombatGroup = AbstractDungeon.player.hand.contains(this) ||
-                AbstractDungeon.player.drawPile.contains(this) ||
-                AbstractDungeon.player.discardPile.contains(this) ||
-                AbstractDungeon.player.limbo.contains(this) ||
-                AbstractDungeon.player.exhaustPile.contains(this);
-
-        if (!inCombatGroup) return;
-
-        int playerRank = getPlayerApertureRank();
-
-        if (this.rank > playerRank) {
-            int diff = this.rank - playerRank;
-            if (this.cost >= 0) {
-                int oldCost = this.cost;
-                this.cost += diff;
-                if (this.costForTurn == oldCost && !this.isCostModifiedForTurn) {
-                    this.costForTurn = this.cost;
-                }
-                this.isCostModified = true;
-            }
-        }
-        this.isRankLocked = true;
-    }
-
-    public int getPlayerApertureRank() {
-        AbstractPlayer p = AbstractDungeon.player;
-        if (p == null) return 1;
-        for (AbstractRelic r : p.relics) {
-            if (r instanceof AbstractKongQiao) {
-                return ((AbstractKongQiao) r).rank;
-            }
-        }
-        return 1;
     }
 
     protected void setRank(int amount) {
@@ -274,7 +242,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
 
         StringBuilder sb = new StringBuilder();
 
-        String rankKeyword = getRankKeywordText(this.rank);
+        String rankKeyword = getRankKeywordText(this.rank).replace(" ", "_");
         sb.append("guzhenren:").append(rankKeyword);
 
         String separator = (TEXT.length > 9) ? TEXT[9] : " . ";
@@ -286,12 +254,12 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         boolean isXianGu = this.isXianGu();
 
         if (this.tags.contains(GuZhenRenTags.BEN_MING_GU)) {
-            sb.append(" guzhenren:").append(TAG_TEXT[0]).append(" ").append(separator);
+            sb.append(" guzhenren:").append(TAG_TEXT[0].replace(" ", "_")).append(" ").append(separator);
         } else if (isXianGu) {
             if (!this.tags.contains(GuZhenRenTags.XIAN_GU)) {
                 this.tags.add(GuZhenRenTags.XIAN_GU);
             }
-            sb.append(" guzhenren:").append(TAG_TEXT[1]).append(" ").append(separator);
+            sb.append(" guzhenren:").append(TAG_TEXT[1].replace(" ", "_")).append(" ").append(separator);
         } else {
             this.tags.remove(GuZhenRenTags.XIAN_GU);
         }
@@ -403,7 +371,6 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         c.rank = this.rank;
         c.myBaseDescription = this.myBaseDescription;
         c.guPathString = this.guPathString;
-        c.isRankLocked = this.isRankLocked;
 
         // 同步专属的底层变量状态
         c.baseFenShao = this.baseFenShao;
@@ -420,6 +387,9 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         c.nian = this.nian;
         c.isNianModified = this.isNianModified;
         c.upgradedNian = this.upgradedNian;
+
+        // 同步空窍免减费的状态标签
+        c.isKongQiaoFree = this.isKongQiaoFree;
 
         // 继承虚影标签，用于仙蛊唯一豁免
         if (this.tags.contains(GuZhenRenTags.XU_YING_COPY)) {

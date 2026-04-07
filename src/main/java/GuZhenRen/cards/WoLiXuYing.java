@@ -39,7 +39,7 @@ public class WoLiXuYing extends AbstractXuYingCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.baseChanceFloat = 0.30f;
+            this.baseChanceFloat = 0.25f;
             this.initializeDescription();
         }
     }

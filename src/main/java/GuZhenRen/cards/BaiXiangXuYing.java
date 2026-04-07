@@ -19,8 +19,8 @@ public class BaiXiangXuYing extends AbstractXuYingCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/BaiXiangXuYing.png");
 
-    private static final int DAMAGE = 4;
-    private static final int UPGRADE_PLUS_DAMAGE = 2; // 升级虚影伤害 4 -> 6
+    private static final int DAMAGE = 5;
+    private static final int UPGRADE_PLUS_DAMAGE = 1; // 升级虚影伤害 5 -> 6
 
     public BaiXiangXuYing() {
         super(ID, NAME, IMG_PATH, -2, DESCRIPTION,

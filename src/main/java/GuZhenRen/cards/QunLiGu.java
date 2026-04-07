@@ -22,11 +22,11 @@ public class QunLiGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int BASE_DAMAGE = 8;
-    private static final int UPGRADE_PLUS_DMG = 3;  // 升级后伤害 8 -> 11
+    private static final int UPGRADE_PLUS_DMG = 2;  // 升级后伤害 8 -> 10
 
     // 魔法值代表：每张虚影牌提供的额外伤害
-    private static final int BASE_MAGIC = 5;
-    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后额外伤害 5 -> 7
+    private static final int BASE_MAGIC = 8;
+    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后额外伤害 8 -> 10
 
     private static final int INITIAL_RANK = 5; // 5转蛊虫
 

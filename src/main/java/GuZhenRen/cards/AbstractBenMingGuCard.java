@@ -53,8 +53,14 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
             this.upgradeRank(1);
             performUpgradeEffect();
 
+            //
+            boolean inCombat = CardCrawlGame.isInARun() &&
+                    AbstractDungeon.currMapNode != null &&
+                    AbstractDungeon.getCurrRoom() != null &&
+                    AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT;
+
             // 1. 调用 applyPowers 更新数值
-            if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            if (inCombat) {
                 // 身份验证
                 boolean inCombatGroup = AbstractDungeon.player.hand.contains(this) ||
                         AbstractDungeon.player.drawPile.contains(this) ||
@@ -68,7 +74,12 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
             }
 
             // 2. 清洗大师牌组数据
-            if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck.contains(this)) {
+            // 在主菜单查看图鉴时，player 或 masterDeck 可能处于未初始化状态，需增加判空
+            if (CardCrawlGame.isInARun() &&
+                    AbstractDungeon.player != null &&
+                    AbstractDungeon.player.masterDeck != null &&
+                    AbstractDungeon.player.masterDeck.contains(this)) {
+
                 this.damage = this.baseDamage;
                 this.isDamageModified = false;
 

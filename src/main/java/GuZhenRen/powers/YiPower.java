@@ -43,17 +43,16 @@ public class YiPower extends AbstractPower implements CloneablePowerInterface {
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
-        checkThreshold(); // 【修改】统一调用 checkThreshold
+        checkThreshold();
         updateDescription();
     }
 
     @Override
     public void onInitialApplication() {
-        checkThreshold(); // 【修改】统一调用 checkThreshold
+        checkThreshold();
         updateDescription();
     }
 
-    // 【新增】统一的阈值检测与销毁方法
     private void checkThreshold() {
         while (this.amount >= 3) {
             this.amount -= 3;

@@ -54,7 +54,16 @@ public class BianHuaDaoDaoHenPower extends AbstractDaoHenPower {
             newPowerPrototype = new TouDaoDaoHenPower(this.owner, this.amount);
         } else if (card.hasTag(GuZhenRenTags.LU_DAO)) {
             newPowerPrototype = new LuDaoDaoHenPower(this.owner, this.amount);
+        } else if (card.hasTag(GuZhenRenTags.FENG_DAO)) {
+            newPowerPrototype = new FengDaoDaoHenPower(this.owner, this.amount);
+        } else if (card.hasTag(GuZhenRenTags.SHI_DAO)) {
+            newPowerPrototype = new ShiDaoDaoHenPower(this.owner, this.amount);
+        } else if (card.hasTag(GuZhenRenTags.YUN_DAO)) {
+            newPowerPrototype = new YunDaoDaoHenPower(this.owner, this.amount);
+        } else if (card.hasTag(GuZhenRenTags.ZHOU_DAO)) {
+            newPowerPrototype = new ZhouDaoDaoHenPower(this.owner, this.amount);
         }
+
 
         if (newPowerPrototype == null) {
             return;

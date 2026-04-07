@@ -19,7 +19,7 @@ public class XueQiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueQiGu.png");
 
     private static final int COST = 1;
-    private static final int BASE_HEAL = 4; // 基础回复 4 点
+    private static final int BASE_HEAL = 2; // 基础回复 2 点
     private static final int INITIAL_RANK = 2; // 2转
 
     public XueQiGu() {

@@ -5,6 +5,7 @@ import GuZhenRen.actions.ShanJianGuAction;
 import GuZhenRen.patches.CardColorEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -19,8 +20,10 @@ public class ShanJianGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ShanJianGu.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 6;
-    private static final int UPGRADE_PLUS_DMG = 3;
+    private static final int DAMAGE = 8;
+    private static final int UPGRADE_PLUS_DMG = 1; // 升级伤害 8 -> 9
+    private static final int MAGIC = 5; // 抽5张
+    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级额外抽2张 (抽7张)
     private static final int INITIAL_RANK = 3;   // 3转起步
 
     public ShanJianGu() {
@@ -34,20 +37,22 @@ public class ShanJianGu extends AbstractGuZhenRenCard {
         this.setRank(INITIAL_RANK);
 
         this.baseDamage = this.damage = DAMAGE;
+        this.baseMagicNumber = this.magicNumber = MAGIC;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        this.addToBot(new ShanJianGuAction());
+        this.addToBot(new DrawCardAction(this.magicNumber, new ShanJianGuAction()));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG);
-            this.upgradeRank(1);                    // 转数 3 -> 4转
+            this.upgradeDamage(UPGRADE_PLUS_DMG); // 8 -> 9
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 5 -> 7
+            this.upgradeRank(1); // 3转 -> 4转
             this.initializeDescription();
         }
     }

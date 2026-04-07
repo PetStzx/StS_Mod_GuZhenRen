@@ -3,77 +3,77 @@
     "NAME": "一转空窍",
     "FLAVOR": "一转蛊师空窍，产出青铜真元。",
     "DESCRIPTIONS": [
-      "允许催动 #y一转 蛊虫。"
+      ""
     ]
   },
   "GuZhenRen:KongQiao_2": {
     "NAME": "二转空窍",
     "FLAVOR": "二转蛊师空窍，产出赤铁真元。",
     "DESCRIPTIONS": [
-      "允许催动 #y二转 蛊虫。"
+      "每场战斗，你打出的第 1 张低于 #y二转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:KongQiao_3": {
     "NAME": "三转空窍",
     "FLAVOR": "三转蛊师空窍，产出白银真元。",
     "DESCRIPTIONS": [
-      "允许催动 #y三转 蛊虫。"
+      "每场战斗，你打出的第 1 张低于 #y三转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:KongQiao_4": {
     "NAME": "四转空窍",
     "FLAVOR": "四转蛊师空窍，产出黄金真元。",
     "DESCRIPTIONS": [
-      "允许催动 #y四转 蛊虫。"
+      "每场战斗，你打出的第 1 张低于 #y四转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:KongQiao_5": {
     "NAME": "五转空窍",
     "FLAVOR": "五转蛊师空窍，产出紫晶真元。",
     "DESCRIPTIONS": [
-      "允许催动 #y五转 蛊虫。"
+      "每场战斗，你打出的第 1 张低于 #y五转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:XianQiao_6": {
     "NAME": "六转仙窍",
     "FLAVOR": "六转蛊仙仙窍，产出青提仙元。",
     "DESCRIPTIONS": [
-      "允许催动 #y六转 仙蛊。"
+      "每场战斗，你打出的第 1 张低于 #y六转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:XianQiao_7": {
     "NAME": "七转仙窍",
     "FLAVOR": "七转蛊仙仙窍，产出红枣仙元。",
     "DESCRIPTIONS": [
-      "允许催动 #y七转 仙蛊。"
+      "每场战斗，你打出的第 1 张低于 #y七转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:XianQiao_8": {
     "NAME": "八转仙窍",
     "FLAVOR": "八转蛊仙仙窍，产出白荔仙元。",
     "DESCRIPTIONS": [
-      "允许催动 #y八转 仙蛊。"
+      "每场战斗，你打出的第 1 张低于 #y八转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:XianQiao_9": {
     "NAME": "九转仙窍",
-    "FLAVOR": "“世人谨记，我古月方源，乃是大爱仙尊。”",
+    "FLAVOR": "“世人谨记，我古月方源乃是大爱仙尊！”",
     "DESCRIPTIONS": [
-      "允许催动 #y九转 仙蛊。"
+      "每场战斗，你打出的第 1 张低于 #y九转 的蛊虫牌耗能变为 0。"
     ]
   },
   "GuZhenRen:LiDaoDaoHen": {
     "NAME": "力道道痕",
     "FLAVOR": "可增强蛊仙的力量。",
     "DESCRIPTIONS": [
-      "战斗开始时，获得道痕层数的 #y力量 。"
+      "战斗开始时，获得等同于道痕层数的 #y力量 。"
     ]
   },
   "GuZhenRen:YanXinGu": {
     "NAME": "炎心蛊",
-    "FLAVOR": "炎心蛊寄托在心脏当中。有增强火类蛊虫攻击的效果。",
+    "FLAVOR": "炎心蛊寄托在心脏当中。有增强火类蛊虫的效果。",
     "DESCRIPTIONS": [
-      "你从卡牌给予 #y焚烧 时，额外给予 #b1 层。"
+      "每回合开始时，将 1 张 #y火势 加入你的手牌。"
     ]
   },
   "GuZhenRen:Recipe_AngryBird": {
@@ -111,8 +111,8 @@
     "NAME": "杀招-追命火",
     "FLAVOR": "能够感应攻势，追根溯源，直烧仙窍。生命不息，此火就燃烧不止。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y燎原火+ 、任意 #y炎道蛊虫 。",
-      "任意炎道蛊虫"
+      "需要蛊虫： #y燎原火+ 、任意 #y炎道仙蛊 。",
+      "任意炎道仙蛊"
     ]
   },
   "GuZhenRen:Recipe_XingXiuQiPan": {
@@ -135,7 +135,7 @@
     "NAME": "杀招-剑浪三叠",
     "FLAVOR": "此招共发出三波剑浪，一浪高过一浪。剑浪翻涌，卷起百千浪花，杀伤力惊人。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y浪剑+ 、任意 #y剑道仙蛊 。",
+      "需要蛊虫： #y浪剑+ 、任意 #y剑道蛊虫 。",
       "任意剑道仙蛊"
     ]
   },
@@ -151,7 +151,7 @@
     "NAME": "杀招-剑痕索命",
     "FLAVOR": "飞剑仙蛊造成的伤口，能够在目标身上刻印剑道道痕，道痕将自循目标的弱点，加以攻击。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y飞剑+ 、任意 #y剑道蛊虫 。",
+      "需要蛊虫： #y飞剑+ 、任意 #y剑道仙蛊 。",
       "任意剑道蛊虫"
     ]
   },
@@ -223,7 +223,7 @@
     "NAME": "杀招-三十三天光",
     "FLAVOR": "以蛊仙为灯芯，照射出猛烈的强光，每一次闪烁，强光威力都会更强。",
     "DESCRIPTIONS": [
-      "需要蛊虫： #y光蛊 、任意 #y光道蛊虫 。",
+      "需要蛊虫： #y江河日下蛊+ 、任意 #y光道蛊虫 。",
       "任意光道蛊虫"
     ]
   },
@@ -233,6 +233,45 @@
     "DESCRIPTIONS": [
       "需要蛊虫： #y太光蛊+ 、任意 #y光道蛊虫 。",
       "任意光道蛊虫"
+    ]
+  },
+  "GuZhenRen:HongYunQiTianGu": {
+    "NAME": "鸿运齐天蛊",
+    "FLAVOR": "众生运的巅峰精髓。",
+    "DESCRIPTIONS": [
+      "所有卡牌的最终 #y概率 值翻倍。"
+    ]
+  },
+  "GuZhenRen:Recipe_WanWuDaTongBian": {
+    "NAME": "杀招-万物大同变",
+    "FLAVOR": "变化道的至高奥义，能使得万道归变，万物大同。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y变通+ 、任意 #y变化道 或 #y力道 蛊虫。",
+      "任意变化道或力道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_WuJinXuanGuangQi": {
+    "NAME": "杀招-五禁玄光气",
+    "FLAVOR": "五禁玄光两天昏，八转杀招困双尊。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y限+ 、任意 #y律道蛊虫 。",
+      "任意律道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_GuangYinFeiRen": {
+    "NAME": "杀招-光阴飞刃",
+    "FLAVOR": "“此刃一出，例无虚发，无不中的，中无不死。”",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y刃蛊 、任意 #y宙道仙蛊 。",
+      "任意宙道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_SongYouFeng": {
+    "NAME": "杀招-送友风",
+    "FLAVOR": "“你我一见如故，你却要走。分别在即，好友，让我送你一送。”",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y八面威风蛊 、任意 #y风道 或 #y律道 蛊虫。",
+      "任意风道或律道蛊虫"
     ]
   }
 }

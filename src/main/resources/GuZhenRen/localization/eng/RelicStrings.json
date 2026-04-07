@@ -1,9 +1,277 @@
 {
-  "GuZhenRen:KongQiao": {
-    "NAME": "空窍",
-    "FLAVOR": "修行的基础",
+  "GuZhenRen:KongQiao_1": {
+    "NAME": "Rank 1 Aperture",
+    "FLAVOR": "A Rank 1 Gu Master's aperture, produces green copper primeval essence.",
     "DESCRIPTIONS": [
-      "战斗结束时，回复 #b99 点生命。"
+      ""
+    ]
+  },
+  "GuZhenRen:KongQiao_2": {
+    "NAME": "Rank 2 Aperture",
+    "FLAVOR": "A Rank 2 Gu Master's aperture, produces red steel primeval essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y2 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:KongQiao_3": {
+    "NAME": "Rank 3 Aperture",
+    "FLAVOR": "A Rank 3 Gu Master's aperture, produces white silver primeval essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y3 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:KongQiao_4": {
+    "NAME": "Rank 4 Aperture",
+    "FLAVOR": "A Rank 4 Gu Master's aperture, produces yellow gold primeval essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y4 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:KongQiao_5": {
+    "NAME": "Rank 5 Aperture",
+    "FLAVOR": "A Rank 5 Gu Master's aperture, produces purple crystal primeval essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y5 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:XianQiao_6": {
+    "NAME": "Rank 6 Immortal Aperture",
+    "FLAVOR": "A Rank 6 Gu Immortal's immortal aperture, produces green grape immortal essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y6 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:XianQiao_7": {
+    "NAME": "Rank 7 Immortal Aperture",
+    "FLAVOR": "A Rank 7 Gu Immortal's immortal aperture, produces red date immortal essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y7 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:XianQiao_8": {
+    "NAME": "Rank 8 Immortal Aperture",
+    "FLAVOR": "A Rank 8 Gu Immortal's immortal aperture, produces white litchi immortal essence.",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y8 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:XianQiao_9": {
+    "NAME": "Rank 9 Immortal Aperture",
+    "FLAVOR": "\"Everyone, I want you to remember, I, Gu Yue Fang Yuan, am Great Love Immortal Venerable!\"",
+    "DESCRIPTIONS": [
+      "The first Gu worm card below #yRank #y9 you play each combat costs 0."
+    ]
+  },
+  "GuZhenRen:LiDaoDaoHen": {
+    "NAME": "Strength Path Dao Mark",
+    "FLAVOR": "Can increase the strength of a Gu Immortal.",
+    "DESCRIPTIONS": [
+      "At the start of combat, gain #yStrength equal to your Dao mark stacks."
+    ]
+  },
+  "GuZhenRen:YanXinGu": {
+    "NAME": "Fire Heart Gu",
+    "FLAVOR": "Fire Heart Gu resides in the heart. It has the effect of strengthening fire-type Gu worms.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, add 1 #yBlaze to your hand."
+    ]
+  },
+  "GuZhenRen:Recipe_AngryBird": {
+    "NAME": "Killer Move - Angry Bird",
+    "FLAVOR": "A vivid little fire bird containing massive destructive power.",
+    "DESCRIPTIONS": [
+      "Requires: #yMagma #yBurst #yGu+ , any #yFire #yPath #yImmortal #yGu .",
+      "Any Fire Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:DingXianYou": {
+    "NAME": "Fixed Immortal Travel",
+    "FLAVOR": "A legendary Space path Immortal Gu recorded in <The Legends of Ren Zu>. The world is vast, but there is nowhere it cannot go.",
+    "DESCRIPTIONS": [
+      "When choosing the next room on the map, you can ignore the current path."
+    ]
+  },
+  "GuZhenRen:Recipe_WanXingFeiYing": {
+    "NAME": "Killer Move - Myriad Star Firefly",
+    "FLAVOR": "Once used, heaven and earth turn dim, night descends for a thousand li, and every thought of the Gu Immortal forms a star thought.",
+    "DESCRIPTIONS": [
+      "Requires: #yStar #yThought #yGu+ , any #yWisdom #yPath #yImmortal #yGu .",
+      "Any Wisdom Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_YangMangBeiHuoYi": {
+    "NAME": "Killer Move - Yang Mang Wears Fire Cloak",
+    "FLAVOR": "Igniting the hair to form a giant flaming cloak that protects the body, this is the profound culmination of Fire path.",
+    "DESCRIPTIONS": [
+      "Requires: #yFire #yArmor #yGu+ , any #yFire #yPath #yImmortal #yGu .",
+      "Any Fire Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_ZhuiMingHuo": {
+    "NAME": "Killer Move - Chasing Life Fire",
+    "FLAVOR": "It senses attacks, traces the origin, and burns the immortal aperture directly. As long as life persists, this fire burns endlessly.",
+    "DESCRIPTIONS": [
+      "Requires: #yPrairie #yFire #yGu+ , any #yFire #yPath #yImmortal #yGu .",
+      "Any Fire Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_XingXiuQiPan": {
+    "NAME": "Killer Move - Star Constellation Chessboard",
+    "FLAVOR": "The first Immortal Gu House in history, possessing the number one deduction capability in the world.",
+    "DESCRIPTIONS": [
+      "Requires: #yWisdom #yGu , any #yWisdom #yPath #yImmortal #yGu .",
+      "Any Wisdom Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_WuZhiQuanXinJian": {
+    "NAME": "Killer Move - Five Finger Fist Heart Sword",
+    "FLAVOR": "Having endured fifty-four tribulations, the tribulation clouds still cover the sky.",
+    "DESCRIPTIONS": [
+      "Requires: #yWisdom #ySword #yGu+ , any #ySword #yPath #yGu .",
+      "Any Sword Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_JianLangSanDie": {
+    "NAME": "Killer Move - Triple Layered Sword Wave",
+    "FLAVOR": "This move unleashes three waves of swords, each higher than the last. The surging sword waves possess astonishing lethal power.",
+    "DESCRIPTIONS": [
+      "Requires: #yWave #ySword #yGu+ , any #ySword #yPath #yGu .",
+      "Any Sword Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_AnQiSha": {
+    "NAME": "Killer Move - Dark Assassination",
+    "FLAVOR": "This move leaks no aura when activated. Once unleashed, the sword momentum is extremely fast, striking like sudden lightning.",
+    "DESCRIPTIONS": [
+      "Requires: #yFlying #ySword #yGu+ , #ySword #yPhantom #yGu or #yMultiple #ySword #yPhantom #yGu or #yOverlapping #yPhantom #yGu .",
+      "Sword Phantom Gu / Multiple Sword Phantom Gu / Overlapping Phantom Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_JianHenSuoMing": {
+    "NAME": "Killer Move - Sword Marks Claiming Life",
+    "FLAVOR": "Wounds caused by Flying Sword Immortal Gu carve Sword path dao marks on the target, which will automatically seek out and attack their weaknesses.",
+    "DESCRIPTIONS": [
+      "Requires: #yFlying #ySword #yGu+ , any #ySword #yPath #yImmortal #yGu .",
+      "Any Sword Path Gu worm"
+    ]
+  },
+  "GuZhenRen:JianMei": {
+    "NAME": "Sword Eyebrows",
+    "FLAVOR": "Capable of carving Sword path dao marks into the eyebrows.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, gain 1 #ySword #yEdge ."
+    ]
+  },
+  "GuZhenRen:Recipe_WanWo": {
+    "NAME": "Killer Move - Myriad Self",
+    "FLAVOR": "All forms are but my own self.",
+    "DESCRIPTIONS": [
+      "Requires: #ySelf #yStrength #yGu+ , any #yStrength #yPath #yGu .",
+      "Any Strength Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_WanWoDaShouYin": {
+    "NAME": "Killer Move - Myriad Self Giant Hand",
+    "FLAVOR": "The first style of Myriad Self, capable of condensing the strength of thousands into one.",
+    "DESCRIPTIONS": [
+      "Requires: #yPulling #yMountain #yGu+ , any #yStrength #yPath #yImmortal #yGu .",
+      "Any Strength Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_ShangFangJieWa": {
+    "NAME": "Killer Move - Tearing Off Roof Tiles",
+    "FLAVOR": "A Strength path killer move that heavily counters Immortal Gu Houses, easily breaching even their defensive methods.",
+    "DESCRIPTIONS": [
+      "Requires: #yRampaging #yGu+ , any #yStrength #yPath #yImmortal #yGu .",
+      "Any Strength Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:XianGuCanHai": {
+    "NAME": "Immortal Gu Carcass",
+    "FLAVOR": "The remains left behind after an Immortal Gu is destroyed still retain some dao marks and can be used as Gu refinement material.",
+    "DESCRIPTIONS": [
+      "Your next #b",
+      " Smithing at Rest Sites will not consume an action.",
+      "The effect of this Relic has been exhausted."
+    ]
+  },
+  "GuZhenRen:Recipe_XueJianLeng": {
+    "NAME": "Killer Move - Blood Turning Cold",
+    "FLAVOR": "With Cold Blood Immortal Gu as the core, it rapidly cools the enemy's blood until it freezes.",
+    "DESCRIPTIONS": [
+      "Requires: #yCold #yBlood #yGu+ , any #yBlood #yPath #yGu .",
+      "Any Blood Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_XuePiaoLiu": {
+    "NAME": "Killer Move - Blood Drift",
+    "FLAVOR": "A long river of blood light carries the user through the air, scattering intense bloody odors wherever it goes.",
+    "DESCRIPTIONS": [
+      "Requires: #yBlood #ySprint #yGu+ , any #yBlood #yPath #yImmortal #yGu .",
+      "Any Blood Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_ZhuMoBang": {
+    "NAME": "Killer Move - Demon Judgment Board",
+    "FLAVOR": "A Rank 8 Blood path Immortal Gu House created by Heavenly Court, recording the information of demonic path members across the five regions. It has almost no shortcomings.",
+    "DESCRIPTIONS": [
+      "Requires: #yBloodline #yGu+ , any #yBlood #yPath #yImmortal #yGu .",
+      "Any Blood Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_SanShiSanTianGuang": {
+    "NAME": "Killer Move - Thirty-Three Heavenly Lights",
+    "FLAVOR": "Using the Gu Immortal as the wick to radiate intense light. With every flicker, the power of the strong light increases.",
+    "DESCRIPTIONS": [
+      "Requires: #yDeclining #yGu+ , any #yLight #yPath #yGu .",
+      "Any Light Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_TianPuGuangHe": {
+    "NAME": "Killer Move - Heavenly Waterfall Light River",
+    "FLAVOR": "The river of light rolls and churns. Every drop of this monstrous light water is like a fragment of the sun, dazzling to the extreme.",
+    "DESCRIPTIONS": [
+      "Requires: #yExtreme #yLight #yGu+ , any #yLight #yPath #yGu .",
+      "Any Light Path Gu worm"
+    ]
+  },
+  "GuZhenRen:HongYunQiTianGu": {
+    "NAME": "Fortune Rivaling Heaven Gu",
+    "FLAVOR": "The absolute pinnacle essence of all living beings' luck.",
+    "DESCRIPTIONS": [
+      "The final #yProbability value of all your cards is doubled."
+    ]
+  },
+  "GuZhenRen:Recipe_WanWuDaTongBian": {
+    "NAME": "Killer Move - Myriad Beings Assimilation Transformation",
+    "FLAVOR": "The supreme profoundness of Transformation path, capable of causing myriad paths to converge and all living beings to assimilate.",
+    "DESCRIPTIONS": [
+      "Requires: #yAdaption #yGu+ , any #yTransformation #yPath or #yStrength #yPath Gu.",
+      "Any Transformation Path or Strength Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_WuJinXuanGuangQi": {
+    "NAME": "Killer Move - Five Restrictions Profound Light Qi",
+    "FLAVOR": "Five restrictions profound light dims heaven and earth, a rank eight killer move traps two venerables.",
+    "DESCRIPTIONS": [
+      "Requires: #yLimit #yGu+ , any #yRule #yPath #yGu .",
+      "Any Rule Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_GuangYinFeiRen": {
+    "NAME": "Killer Move - Flying Time Edge",
+    "FLAVOR": "\"Once this blade is unleashed, it never misses, it hits without fail, and those hit will surely die.\"",
+    "DESCRIPTIONS": [
+      "Requires: #yBlade #yGu , any #yTime #yPath #yImmortal #yGu .",
+      "Any Time Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_SongYouFeng": {
+    "NAME": "Killer Move - Farewell Friend Wind",
+    "FLAVOR": "\"We hit it off from the start, but now you are leaving. Since we are parting, my good friend, let me send you off.\"",
+    "DESCRIPTIONS": [
+      "Requires: #yEight-faced #yPrestige #yWind #yGu , any #yWind #yPath or #yRule #yPath Gu.",
+      "Any Wind Path or Rule Path Gu worm"
     ]
   }
 }

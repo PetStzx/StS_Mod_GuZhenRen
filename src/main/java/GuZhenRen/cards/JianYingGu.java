@@ -23,7 +23,7 @@ public class JianYingGu extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int DAMAGE = 4;
     private static final int MAGIC = 2; // 基础给予 2 层剑痕
-    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级增加 2 层剑痕
+    private static final int UPGRADE_PLUS_MAGIC = 3; // 升级增加 3 层剑痕
     private static final int INITIAL_RANK = 2; // 2转起步
 
     public JianYingGu() {

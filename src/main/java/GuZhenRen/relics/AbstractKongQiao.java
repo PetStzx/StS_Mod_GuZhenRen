@@ -5,6 +5,7 @@ import GuZhenRen.cards.AbstractGuZhenRenCard;
 import GuZhenRen.patches.GuZhenRenTags;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -14,7 +15,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.TipHelper;
-import com.megacrit.cardcrawl.localization.UIStrings; // 【新增】
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
@@ -35,6 +36,8 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     protected int neededXP = 1;
     protected String nextRelicID = "";
 
+    public boolean effectUsedThisCombat = false;
+
     public AbstractKongQiao(String id, String imgName, RelicTier tier, LandingSound sound) {
         super(
                 id,
@@ -45,12 +48,53 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         );
     }
 
+    public static AbstractKongQiao getInstance() {
+        if (AbstractDungeon.player == null) return null;
+        for (AbstractRelic r : AbstractDungeon.player.relics) {
+            if (r instanceof AbstractKongQiao) {
+                return (AbstractKongQiao) r;
+            }
+        }
+        return null;
+    }
+
     protected void initStats(int rank, int neededXP, String nextRelicID) {
         this.rank = rank;
         this.neededXP = neededXP;
         this.nextRelicID = nextRelicID;
         this.counter = this.rank;
         updateDescription();
+    }
+
+    @Override
+    public void atPreBattle() {
+        this.effectUsedThisCombat = false;
+        if (this.rank > 1) {
+            this.beginLongPulse();
+        }
+    }
+
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action) {
+        if (!this.effectUsedThisCombat && this.rank > 1) {
+            if (card instanceof AbstractGuZhenRenCard) {
+                int cardRank = ((AbstractGuZhenRenCard) card).rank;
+                // 判定：转数大于等于1，且严格低于当前空窍转数
+                if (cardRank >= 1 && cardRank < this.rank) {
+                    this.effectUsedThisCombat = true; // 标记本场战斗已使用
+                    this.flash();
+                    this.stopPulse();
+
+                    for (AbstractCard c : AbstractDungeon.player.hand.group) {
+                        if (c != card && c instanceof AbstractGuZhenRenCard) {
+                            ((AbstractGuZhenRenCard) c).isKongQiaoFree = false;
+                            c.freeToPlayOnce = false;
+                            c.applyPowers();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -80,8 +124,10 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
 
         addKeywordTip(TEXT[1]);
 
-        String rankKeyword = getRankKeywordName(this.rank);
-        addKeywordTip(rankKeyword);
+        if (this.rank > 1) {
+            String rankKeyword = getRankKeywordName(this.rank);
+            addKeywordTip(rankKeyword);
+        }
     }
 
     private void addKeywordTip(String keywordName) {
@@ -108,7 +154,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         if (r >= 1 && r <= 9) {
             return GLOBAL_TEXT[r - 1];
         }
-        return GLOBAL_TEXT[0]; // 兜底返回一转
+        return GLOBAL_TEXT[0];
     }
 
     public void gainXP(int amount) {
@@ -163,9 +209,10 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
 
     @Override
     public void onVictory() {
+        this.stopPulse();
         AbstractRoom room = AbstractDungeon.getCurrRoom();
-        if (room instanceof MonsterRoomBoss) gainXP(5);
-        else if (room instanceof MonsterRoomElite) gainXP(3);
+        if (room instanceof MonsterRoomBoss) gainXP(4);
+        else if (room instanceof MonsterRoomElite) gainXP(2);
         else gainXP(1);
     }
 

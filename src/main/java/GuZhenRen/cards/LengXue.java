@@ -19,7 +19,7 @@ public class LengXue extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int MAGIC = 3; // 升级前持续 3 回合
     private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后增加 1 回合 (变为 4)
-    private static final int INITIAL_RANK = 5; // 5转
+    private static final int INITIAL_RANK = 6; // 5转
 
     public LengXue() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

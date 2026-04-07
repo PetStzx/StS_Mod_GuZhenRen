@@ -17,8 +17,8 @@ public class XueZhanGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueZhanGu.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 2; // 升级前给 2 层
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后变 3 层
+    private static final int UPGRADE_COST = 0; // 升级后0费
+    private static final int MAGIC = 1;
     private static final int INITIAL_RANK = 5;
 
     public XueZhanGu() {
@@ -29,9 +29,7 @@ public class XueZhanGu extends AbstractGuZhenRenCard {
                 CardTarget.SELF);
 
         this.setDao(Dao.XUE_DAO);
-
         this.baseMagicNumber = this.magicNumber = MAGIC;
-
         this.setRank(INITIAL_RANK);
     }
 
@@ -44,7 +42,7 @@ public class XueZhanGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeBaseCost(UPGRADE_COST); // 1费 -> 0费
             this.upgradeRank(1); // 5转 -> 6转
             this.initializeDescription();
         }

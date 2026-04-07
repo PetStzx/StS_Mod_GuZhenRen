@@ -32,12 +32,9 @@ public class HuoMaoSanZhangPower extends AbstractPower {
         Texture texLarge = ImageMaster.loadImage(pathLarge);
         Texture texSmall = ImageMaster.loadImage(pathSmall);
 
-        if (texLarge != null && texSmall != null) {
-            this.region128 = new TextureAtlas.AtlasRegion(texLarge, 0, 0, 88, 88);
-            this.region48 = new TextureAtlas.AtlasRegion(texSmall, 0, 0, 32, 32);
-        } else {
-            this.loadRegion("firebreathing"); // 防止贴图缺失导致崩溃的兜底
-        }
+        this.region128 = new TextureAtlas.AtlasRegion(texLarge, 0, 0, 88, 88);
+        this.region48 = new TextureAtlas.AtlasRegion(texSmall, 0, 0, 32, 32);
+
 
         updateDescription();
     }

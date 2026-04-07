@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 
 public class ZiYiGu extends AbstractGuZhenRenCard {
@@ -18,24 +19,28 @@ public class ZiYiGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ZiYiGu.png");
 
-    private static final int COST = 2;
-    private static final int UPGRADE_COST = 1;
-    private static final int ENEMY_VULN_AMOUNT = 99; // 敌人99层易伤
-    private static final int YI_AMT = 3;             // 获得3层意
-    private static final int SELF_VULN_BASE = 2;     // 自己吃2层易伤
-    private static final int INITIAL_RANK = 3;       // 3转
+    private static final int COST = 1;
+    private static final int STR_AMT = 1;
+
+    private static final int MAGIC = 3;
+    private static final int UPGRADE_PLUS_MAGIC = 2;
+
+    private static final int YI_AMT = 3;
+    private static final int UPGRADE_PLUS_YI = 2;
+
+    private static final int INITIAL_RANK = 3;
 
     public ZiYiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.COMMON,
-                CardTarget.ALL);
+                CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.ZHI_DAO);
 
-        this.baseMagicNumber = this.magicNumber = YI_AMT;
-        this.baseSecondMagicNumber = this.secondMagicNumber = SELF_VULN_BASE;
+        this.baseMagicNumber = this.magicNumber = MAGIC;
+        this.baseSecondMagicNumber = this.secondMagicNumber = YI_AMT;
 
         this.exhaust = true;
         this.setRank(INITIAL_RANK);
@@ -43,31 +48,25 @@ public class ZiYiGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 给予自己易伤
-        this.addToBot(new ApplyPowerAction(p, p, new VulnerablePower(p, this.secondMagicNumber, false), this.secondMagicNumber));
-
-        // 2. 给予所有敌人 99 层易伤
-        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            if (!mo.isDeadOrEscaped()) {
-                this.addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, ENEMY_VULN_AMOUNT, false), ENEMY_VULN_AMOUNT));
+        if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
+            for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
+                if (!mo.isDeadOrEscaped()) {
+                    this.addToBot(new ApplyPowerAction(mo, p, new StrengthPower(mo, STR_AMT), STR_AMT));
+                    this.addToBot(new ApplyPowerAction(mo, p, new VulnerablePower(mo, this.magicNumber, false), this.magicNumber));
+                }
             }
         }
 
-        // 3. 获得意
-        this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, this.magicNumber), this.magicNumber));
+        this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, this.secondMagicNumber), this.secondMagicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-
-            // 升级后费用减为 1
-            this.upgradeBaseCost(UPGRADE_COST);
-
-            // 升级转数 (3转 -> 4转)
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeSecondMagicNumber(UPGRADE_PLUS_YI);
             this.upgradeRank(1);
-
             this.initializeDescription();
         }
     }

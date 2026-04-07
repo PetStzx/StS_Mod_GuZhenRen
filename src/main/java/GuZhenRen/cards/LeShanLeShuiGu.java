@@ -17,8 +17,8 @@ public class LeShanLeShuiGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/LeShanLeShuiGu.png");
 
-    private static final int COST = 1;
-    private static final int YI_AMT = 12;
+    private static final int COST = 0;
+    private static final int YI_AMT = 8;
     private static final int UPGRADE_YI_AMT = 3;
     private static final int INITIAL_RANK = 6;
 

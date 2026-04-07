@@ -18,7 +18,7 @@ public class AnQiSha extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/AnQiSha.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 7;
+    private static final int DAMAGE = 10;
 
     public AnQiSha() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -29,7 +29,6 @@ public class AnQiSha extends AbstractShaZhaoCard {
         this.baseDamage = DAMAGE;
     }
 
-    // 判断敌人是否正在准备攻击
     private boolean isAttacking(AbstractMonster m) {
         if (m == null) return false;
         return m.intent == AbstractMonster.Intent.ATTACK ||
@@ -40,25 +39,16 @@ public class AnQiSha extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 条件 1：是否是本回合打出的第一张牌
         boolean isFirstCard = AbstractDungeon.actionManager.cardsPlayedThisTurn.size() <= 1;
-
-        // 条件 2：目标的意图不为攻击
         boolean notAttacking = !isAttacking(m);
-
-        // 综合判定
         boolean trigger = isFirstCard && notAttacking;
 
-        // 将逻辑交给暗歧杀动作结算
         this.addToBot(new AnQiShaAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), trigger));
     }
 
-    // 卡牌边框高亮提示
     @Override
     public void triggerOnGlowCheck() {
-        // 在手里捏着还没打出去时，列表应该是空的
-        boolean isFirstCard = AbstractDungeon.actionManager.cardsPlayedThisTurn.isEmpty();
-        if (isFirstCard) {
+        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.isEmpty()) {
             this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
@@ -66,5 +56,6 @@ public class AnQiSha extends AbstractShaZhaoCard {
     }
 
     @Override
-    public void upgrade() {}
+    public void upgrade() {
+    }
 }

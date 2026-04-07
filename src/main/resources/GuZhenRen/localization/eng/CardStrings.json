@@ -1,6 +1,706 @@
 {
   "GuZhenRen:YueGuangGu": {
-    "NAME": "月光蛊",
-    "DESCRIPTION": "造成 !D! 点伤害。"
+    "NAME": "Moonlight Gu",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "GuZhenRen:YuPiGu": {
+    "NAME": "Jade Skin Gu",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "GuZhenRen:XiaoGuangGu": {
+    "NAME": "Little Light Gu",
+    "DESCRIPTION": "The damage of the next guzhenren:Light_Path card you play is increased by !M!% . NL Apply 1 Weak."
+  },
+  "GuZhenRen:JuChiJinWu": {
+    "NAME": "Chainsaw Golden Centipede",
+    "DESCRIPTION": "Deal !D! damage !M! times. NL Each time this card is played, the number of hits is reduced by 1 for this combat.",
+    "EXTENDED_DESCRIPTION": ["Electric-tooth Murderous Centipede"]
+  },
+  "GuZhenRen:TouXiGu": {
+    "NAME": "Sneak Attack Gu",
+    "DESCRIPTION": "Deal !D! damage, ignoring Block. NL Apply !M! Vulnerable.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage, ignoring Block 2 times. NL Apply !M! Vulnerable."
+  },
+  "GuZhenRen:ZiLiGengShengGu": {
+    "NAME": "Self-Reliance Gu",
+    "DESCRIPTION": "Heal !M! HP. NL Healing is affected by Strength. NL Exhaust."
+  },
+  "GuZhenRen:JiuYeShengJiCao": {
+    "NAME": "Nine Leaf Vitality Grass",
+    "DESCRIPTION": "Gain a guzhenren:Vitality_Leaf . NL Exhaust."
+  },
+  "GuZhenRen:ChiLi": {
+    "NAME": "Eat Strength Gu",
+    "DESCRIPTION": "Deal !D! damage. NL For every 2 Fatal strikes, permanently gain 1 Strength. Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Requires !M! more Fatal(s))",
+      "+1 Strength Path Dao Mark"
+    ]
+  },
+  "GuZhenRen:GongBeiGu": {
+    "NAME": "Double Result Gu",
+    "DESCRIPTION": "Placeholder description."
+  },
+  "GuZhenRen:QuanLiYiFuGu": {
+    "NAME": "All-out Effort Gu",
+    "DESCRIPTION": "The guzhenren:Probability of triggering guzhenren:Phantom cards increases to 100%.",
+    "UPGRADE_DESCRIPTION": "The guzhenren:Probability of triggering guzhenren:Phantom cards increases to 100%. Retain."
+  },
+  "GuZhenRen:ShaGu": {
+    "NAME": "Kill Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Lose !M! HP. NL Fatal: Lose 2 HP and permanently increase this card's damage by 2.",
+    "FLAVOR": "The core Gu worm of Killing Path. Can reach rank nine."
+  },
+  "GuZhenRen:HuoGu": {
+    "NAME": "Fire Gu",
+    "DESCRIPTION": "Exhaust up to !M! cards from your hand. NL For each card Exhausted, apply !GuZhenRen:FenShao! guzhenren:Burning 1 time. NL Ethereal.",
+    "FLAVOR": "One of the least picky Gu worms in the world, capable of devouring myriad things to strengthen itself. Can reach rank nine.",
+    "EXTENDED_DESCRIPTION": [
+      "Exhaust: Up to %d card(s)"
+    ]
+  },
+  "GuZhenRen:HuoMaoSanZhangGu": {
+    "NAME": "Furious Fire Gu",
+    "DESCRIPTION": "When applying guzhenren:Burning , if the stacks are less than 3, increase them to 3."
+  },
+  "GuZhenRen:WuZuNiao": {
+    "NAME": "Footless Bird",
+    "DESCRIPTION": "Gain !B! Block. NL Your Block is not removed at the start of your next turn. NL Ethereal."
+  },
+  "GuZhenRen:RongYanZhaLieGu": {
+    "NAME": "Magma Burst Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !GuZhenRen:FenShao! guzhenren:Burning ."
+  },
+  "GuZhenRen:HuoLuGu": {
+    "NAME": "Furnace Gu",
+    "DESCRIPTION": "Exhaust 1 card from your hand. NL Add !M! *Charcoal *Gu into your hand.",
+    "EXTENDED_DESCRIPTION": [
+      "Exhaust"
+    ]
+  },
+  "GuZhenRen:HuoTanGu": {
+    "NAME": "Charcoal Gu",
+    "DESCRIPTION": "Unplayable. NL Retain. When Exhausted, apply !GuZhenRen:FenShao! guzhenren:Burning to all enemies."
+  },
+  "GuZhenRen:LiLiangGu": {
+    "NAME": "Strength Gu",
+    "DESCRIPTION": "Gain !M! Strength. NL At the end of your turn, lose !GuZhenRen:SecondMagic! Strength. Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Gain !M! Strength. NL At the end of your turn, lose !GuZhenRen:SecondMagic! Strength. Exhaust.",
+      "Gain !M! Strength. Exhaust."
+    ],
+    "FLAVOR": "It will only submit to existences more powerful than itself. Requires lifespan to refine. Can reach rank nine."
+  },
+  "GuZhenRen:YanTongGu": {
+    "NAME": "Blazing Eyes Gu",
+    "DESCRIPTION": "Whenever you play a card targeting an enemy this turn, apply !M! guzhenren:Burning to it. NL After triggering 4 times, each trigger adds a *Burn into your hand."
+  },
+  "GuZhenRen:XingHuoLiaoYuanGu": {
+    "NAME": "Prairie Fire Gu",
+    "DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning . NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning !M! times. NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust."
+  },
+  "GuZhenRen:LiaoYuanHuo": {
+    "NAME": "Prairie Fire",
+    "DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning to all enemies !M! times. NL Add 1 *Burn into your hand."
+  },
+  "GuZhenRen:AngryBird": {
+    "NAME": "Angry Bird",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !GuZhenRen:FenShao! guzhenren:Burning ."
+  },
+  "GuZhenRen:ChengGongGu": {
+    "NAME": "Success Gu",
+    "DESCRIPTION": "Choose: Gain 300 Gold, NL Gain 16 Max HP, NL Remove 2 cards from your deck. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose 2 cards to remove"
+    ]
+  },
+  "GuZhenRen:OptionCaiFu": {
+    "NAME": "Wealth",
+    "DESCRIPTION": "Gain 300 Gold."
+  },
+  "GuZhenRen:OptionYongSheng": {
+    "NAME": "Eternal Life",
+    "DESCRIPTION": "Gain 16 Max HP."
+  },
+  "GuZhenRen:OptionZiYou": {
+    "NAME": "Freedom",
+    "DESCRIPTION": "Permanently remove 2 cards from your deck."
+  },
+  "GuZhenRen:ShiBaiGu": {
+    "NAME": "Failure Gu",
+    "DESCRIPTION": "Lose !M! HP. NL {CHANCE} guzhenren:Probability to add a *Success *Gu into your hand, then remove this card from your deck."
+  },
+  "GuZhenRen:KuLiGu": {
+    "NAME": "Bitter Strength Gu",
+    "DESCRIPTION": "For every !M! HP you lose, gain 1 Strength.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Gain !GuZhenRen:SecondMagic! Strength)"
+    ]
+  },
+  "GuZhenRen:ZhanNianGu": {
+    "NAME": "Battle Thought Gu",
+    "DESCRIPTION": "Deal !D! damage. NL If the last card you played was an Attack, gain !GuZhenRen:Nian! guzhenren:Thought ."
+  },
+  "GuZhenRen:WanWuDaTongBian": {
+    "NAME": "Myriad Beings Assimilation Transformation",
+    "DESCRIPTION": "Convert all your statuses this combat into an equal amount of guzhenren:Transformation_Path_Dao_Marks ."
+  },
+  "GuZhenRen:JinGangNian": {
+    "NAME": "Vajra Thought",
+    "DESCRIPTION": "Deal 6 damage X times. NL For each stack of guzhenren:Thought you gained this turn, deal !GuZhenRen:SecondMagic! additional damage.",
+    "UPGRADE_DESCRIPTION": "Deal 6 damage X+1 times. NL For each stack of guzhenren:Thought you gained this turn, deal !GuZhenRen:SecondMagic! additional damage.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Deal !D! damage !M! times)"
+    ]
+  },
+  "GuZhenRen:HuiGu": {
+    "NAME": "Regret Gu",
+    "DESCRIPTION": "Choose !M! card(s) from your Exhaust pile and add them to your hand. NL They cost 0 this turn. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose %d card(s) to add to your hand"
+    ]
+  },
+  "GuZhenRen:XingNianGu": {
+    "NAME": "Star Thought Gu",
+    "DESCRIPTION": "Scry !M!. NL For each card discarded during Scry, gain !GuZhenRen:Nian! guzhenren:Thought ."
+  },
+  "GuZhenRen:ShaYiGu": {
+    "NAME": "Killing Intent Gu",
+    "DESCRIPTION": "Deal !D! damage to all enemies. For each enemy hit, gain !M! guzhenren:Will ."
+  },
+  "GuZhenRen:YiNianGu": {
+    "NAME": "Memory Thought Gu",
+    "DESCRIPTION": "Choose !M! card(s) from your discard pile and put them on top of your draw pile. NL Gain !GuZhenRen:Nian! guzhenren:Thought .",
+    "EXTENDED_DESCRIPTION": [
+      "Choose %d card(s) to put on top of your draw pile"
+    ]
+  },
+  "GuZhenRen:YiXinErYongGu": {
+    "NAME": "Divided Mind Gu",
+    "DESCRIPTION": "Gain 3 guzhenren:Thought . NL The next !M! time(s) you play a card this turn, randomly play 1 card from your hand for free."
+  },
+  "GuZhenRen:ZhiZhang": {
+    "NAME": "Wisdom Block",
+    "DESCRIPTION": "Lose all guzhenren:Thought . NL All effects that grant guzhenren:Thought instead grant Temporary HP."
+  },
+  "GuZhenRen:ZhiHuiGu": {
+    "NAME": "Wisdom Gu",
+    "DESCRIPTION": "At the start of your turn, gain !M! guzhenren:Thought .",
+    "FLAVOR": "Can bring supreme wisdom to its user. Requires lifespan to refine. Can reach rank nine.",
+    "EXTENDED_DESCRIPTION": [
+      " Innate . ",
+      "Innate"
+    ]
+  },
+  "GuZhenRen:ZiYiGu": {
+    "NAME": "Unrestrained Will Gu",
+    "DESCRIPTION": "Gain !GuZhenRen:SecondMagic! guzhenren:Will . NL Apply 1 Strength and !M! Vulnerable to all enemies. NL Exhaust ."
+  },
+  "GuZhenRen:WanXingFeiYing": {
+    "NAME": "Myriad Star Firefly",
+    "DESCRIPTION": "Whenever you play a card, gain !M! guzhenren:Thought ."
+  },
+  "GuZhenRen:TunHuoGu": {
+    "NAME": "Swallow Fire Gu",
+    "DESCRIPTION": " *Burns no longer deal damage to you. NL When you Exhaust a *Burn , add 1 *Blaze into your hand.",
+    "UPGRADE_DESCRIPTION": "Add 1 *Blaze into your hand. NL  *Burns no longer deal damage to you. NL When you Exhaust a *Burn , add 1 *Blaze into your hand."
+  },
+  "GuZhenRen:HuoShi": {
+    "NAME": "Blaze",
+    "DESCRIPTION": " guzhenren:Fire_Path . NL Apply !GuZhenRen:FenShao! guzhenren:Burning . NL Retain . Exhaust ."
+  },
+  "GuZhenRen:YanZhouGu": {
+    "NAME": "Fire Armor Gu",
+    "DESCRIPTION": "Gain !B! Block . NL Add !M! *Burn into your hand."
+  },
+  "GuZhenRen:YangMangBeiHuoYi": {
+    "NAME": "Yang Mang Wears Fire Cloak",
+    "DESCRIPTION": "Gain !B! Block . NL Whenever you are attacked this turn, apply !GuZhenRen:SecondMagic! guzhenren:Burning !M! times to the attacker."
+  },
+  "GuZhenRen:ZhuiMingHuo": {
+    "NAME": "Chasing Life Fire",
+    "DESCRIPTION": "Apply !M! guzhenren:Chasing_Life_Fire . NL Exhaust ."
+  },
+  "GuZhenRen:LeShanLeShuiGu": {
+    "NAME": "Joy in Water and Mountain Gu",
+    "DESCRIPTION": "Gain !M! guzhenren:Will . NL Whenever you would gain guzhenren:Thought this combat, prevent it. Exhaust ."
+  },
+  "GuZhenRen:ZhuiNian": {
+    "NAME": "Recollect Thought",
+    "DESCRIPTION": "Choose 1 card from your discard pile, play it, and Exhaust it. NL Gain guzhenren:Thought equal to twice its cost.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose 1 card to play and Exhaust"
+    ]
+  },
+  "GuZhenRen:XingXiuQiPan": {
+    "NAME": "Star Constellation Chessboard",
+    "DESCRIPTION": "Limit one per turn. NL Return all guzhenren:Wisdom_Path cards not in your Exhaust pile to your hand. Their first time played this turn, they cost 0.",
+    "EXTENDED_DESCRIPTION": [
+      "You have already used Star Constellation Chessboard this turn."
+    ]
+  },
+  "GuZhenRen:SheXinGu": {
+    "NAME": "Capture Heart Gu",
+    "DESCRIPTION": "Stun an enemy for 1 turn. Draw 1 less card next turn. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Stun all enemies for 1 turn. Draw 1 less card next turn. NL Exhaust ."
+  },
+  "GuZhenRen:WuJinXuanGuangQi": {
+    "NAME": "Five Restrictions Profound Light Qi",
+    "DESCRIPTION": "Apply 99 Weak , 99 Vulnerable , and 1 Slow to all enemies. NL Exhaust ."
+  },
+  "GuZhenRen:WuZhiQuanXinJian": {
+    "NAME": "Five Finger Fist Heart Sword",
+    "DESCRIPTION": "Deal !D! damage. NL Each time this card is played, double its base damage for this combat. NL stslib:Exhaustive !stslib:ex! ."
+  },
+  "GuZhenRen:JianYing": {
+    "NAME": "Sword Phantom",
+    "DESCRIPTION": " guzhenren:Sword_Path . NL Unplayable . NL When Exhausted , deal !D! damage to the enemy with the most guzhenren:Sword_Mark . Ethereal ."
+  },
+  "GuZhenRen:ShanJianGu": {
+    "NAME": "Flash Sword Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Discard any drawn non- guzhenren:Sword_Path cards."
+  },
+  "GuZhenRen:HuiJian": {
+    "NAME": "Wisdom Sword",
+    "DESCRIPTION": "Deal !D! damage. NL Gain !M! guzhenren:Thought . NL Convert 1 stack of your guzhenren:Emotion into guzhenren:Sword_Edge ."
+  },
+  "GuZhenRen:JianHenSuoMing": {
+    "NAME": "Sword Marks Claiming Life",
+    "DESCRIPTION": "Deal !D! damage to the target 1 time for each stack of guzhenren:Sword_Mark it has. NL End your turn."
+  },
+  "GuZhenRen:JianDun": {
+    "NAME": "Sword Escape",
+    "DESCRIPTION": "Deal !D! damage. NL Whenever you deal attack damage to an enemy with guzhenren:Sword_Mark this turn, gain !M! Block ."
+  },
+  "GuZhenRen:JianQiGu": {
+    "NAME": "Sword Qi Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! guzhenren:Sword_Mark to the target next turn."
+  },
+  "GuZhenRen:JianQiaoGu": {
+    "NAME": "Sword Sheath Gu",
+    "DESCRIPTION": "Gain !B! Block . NL Put 1 Attack from your hand on top of your draw pile. NL The next time it is played, its damage is doubled and it costs 0.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose 1 Attack to put on top of your draw pile."
+    ]
+  },
+  "GuZhenRen:DieYingGu": {
+    "NAME": "Overlapping Phantom Gu",
+    "DESCRIPTION": "Deal !D! damage, NL Apply !M! guzhenren:Sword_Mark . NL For each *Sword *Phantom in your Exhaust pile, this card's values increase by !GuZhenRen:SecondMagic!."
+  },
+  "GuZhenRen:FeiJian": {
+    "NAME": "Flying Sword",
+    "DESCRIPTION": "Deal !D! damage. NL Each time this card deals damage, it deals damage again at half the amount randomly."
+  },
+  "GuZhenRen:LangJian": {
+    "NAME": "Wave Sword",
+    "DESCRIPTION": "Deal !D! damage. NL When you play a guzhenren:Sword_Path card, return this card from your discard pile to your hand."
+  },
+  "GuZhenRen:JianYingGu": {
+    "NAME": "Sword Phantom Gu",
+    "DESCRIPTION": "Deal !D! damage, NL Apply !M! *Sword *Mark . NL Add 1 *Sword *Phantom into your hand."
+  },
+  "GuZhenRen:DuoChongJianYingGu": {
+    "NAME": "Multiple Sword Phantom Gu",
+    "DESCRIPTION": "Add !M! *Sword *Phantom into your hand.",
+    "UPGRADE_DESCRIPTION": "Add !M! *Sword *Phantom+ into your hand."
+  },
+  "GuZhenRen:RuiYiGu": {
+    "NAME": "Sharp Intent Gu",
+    "DESCRIPTION": "Apply !M! guzhenren:Sword_Mark to all enemies. NL Apply 2 times to enemies intending to attack."
+  },
+  "GuZhenRen:JianLangSanDie": {
+    "NAME": "Triple Layered Sword Wave",
+    "DESCRIPTION": "Deal !D! damage to all enemies and apply !M! guzhenren:Sword_Mark . NL Hits 3 times."
+  },
+  "GuZhenRen:AnQiSha": {
+    "NAME": "Dark Assassination",
+    "DESCRIPTION": "Deal !D! damage. NL If this is the first card you play this turn and the target does not intend to attack, deal 10 times the damage."
+  },
+  "GuZhenRen:RenGu": {
+    "NAME": "Blade Gu",
+    "DESCRIPTION": "Add 1 random Common guzhenren:Sword_Path Gu worm into your hand. It costs 0 this turn. Exhaust .",
+    "EXTENDED_DESCRIPTION": [
+      "Add 1 random Common guzhenren:Sword_Path Gu worm into your hand. It costs 0 this turn. Exhaust .",
+      "Choose 1 of 2 random Common guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Exhaust .",
+      "Choose 1 of 2 random Common or Uncommon guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Exhaust .",
+      "Choose 1 of 2 random guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Exhaust .",
+      "Choose 1 of 2 random Upgraded guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Exhaust .",
+      "Choose 1 of 2 random Upgraded guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Gain 1 guzhenren:Sword_Edge . Exhaust .",
+      "Choose 1 of 3 random Upgraded guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Gain 1 guzhenren:Sword_Edge . Exhaust .",
+      "Choose 1 of 3 random Upgraded guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Gain 2 guzhenren:Sword_Edge . Exhaust .",
+      "Choose 1 of 3 random Upgraded guzhenren:Sword_Path Gu worms to add to your hand. It costs 0 this turn. Gain 3 guzhenren:Sword_Edge . Exhaust .",
+      "Choose 1 card to add to your hand"
+    ],
+    "FLAVOR": "The source of Blade path and Sword path. Can reach rank nine."
+  },
+  "GuZhenRen:QingNiuLaoLiGu": {
+    "NAME": "Green Bull Labor Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Add 1 *Bull *Strength guzhenren:Phantom into your hand. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL Add 1 *Bull *Strength *Phantom+ into your hand. NL Exhaust ."
+  },
+  "GuZhenRen:NiuLiXuYing": {
+    "NAME": "Bull Strength Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Deal !D! damage."
+  },
+  "GuZhenRen:ChiMaJunLiGu": {
+    "NAME": "Galloping Horse Strength Gu",
+    "DESCRIPTION": "Draw !M! cards. NL Add 1 *Horse *Strength guzhenren:Phantom into your hand. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Add 1 *Horse *Strength *Phantom+ into your hand. NL Exhaust ."
+  },
+  "GuZhenRen:MaLiXuYing": {
+    "NAME": "Horse Strength Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Draw 1 card, NL Discard 1 card."
+  },
+  "GuZhenRen:HeiMangChanLiGu": {
+    "NAME": "Black Python Coil Strength Gu",
+    "DESCRIPTION": "Apply !M! Weak and !GuZhenRen:SecondMagic! guzhenren:Constricted to all enemies. NL Add 1 *Black *Python guzhenren:Phantom into your hand. Exhaust .",
+    "UPGRADE_DESCRIPTION": "Apply !M! Weak and !GuZhenRen:SecondMagic! guzhenren:Constricted to all enemies. NL Add 1 *Black *Python *Phantom+ into your hand. Exhaust ."
+  },
+  "GuZhenRen:HeiMangXuYing": {
+    "NAME": "Black Python Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Apply !M! *Constricted ."
+  },
+  "GuZhenRen:BaiXiangYuanLiGu": {
+    "NAME": "White Elephant Origin Strength Gu",
+    "DESCRIPTION": "Deal !D! damage, NL Gain !M! Strength . NL Add 1 *White *Elephant guzhenren:Phantom into your hand. Exhaust .",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage, NL Gain !M! Strength . NL Add 1 *White *Elephant *Phantom+ into your hand. Exhaust ."
+  },
+  "GuZhenRen:BaiXiangXuYing": {
+    "NAME": "White Elephant Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Deal !D! damage. NL Gain !M! Strength ."
+  },
+  "GuZhenRen:ShiGuiFuLiGu": {
+    "NAME": "Stone Turtle Bearing Strength Gu",
+    "DESCRIPTION": "Gain !B! Block . NL Add 1 *Turtle *Strength guzhenren:Phantom into your hand. Exhaust .",
+    "UPGRADE_DESCRIPTION": "Gain !B! Block . NL Add 1 *Turtle *Strength *Phantom+ into your hand. Exhaust ."
+  },
+  "GuZhenRen:GuiLiXuYing": {
+    "NAME": "Turtle Strength Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Gain !B! Block . NL Block is affected by Strength ."
+  },
+  "GuZhenRen:FeiXiongZhiLiGu": {
+    "NAME": "Flying Bear Strength Gu",
+    "DESCRIPTION": "Deal !D! damage to all enemies and apply !M! Vulnerable . NL Add 1 *Flying *Bear guzhenren:Phantom into your hand. Exhaust .",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage to all enemies and apply !M! Vulnerable . NL Add 1 *Flying *Bear *Phantom+ into your hand. Exhaust ."
+  },
+  "GuZhenRen:FeiXiongXuYing": {
+    "NAME": "Flying Bear Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Deal !D! damage to all enemies. Strength affects Flying Bear Phantom !M! times as much."
+  },
+  "GuZhenRen:WoLi": {
+    "NAME": "Self Strength Gu",
+    "DESCRIPTION": "Play the next Attack card you play this turn twice. NL Add 1 *Self *Strength guzhenren:Phantom into your hand. Exhaust .",
+    "UPGRADE_DESCRIPTION": "Play the next Attack card you play this turn twice. NL Add 1 *Self *Strength *Phantom+ into your hand. Exhaust ."
+  },
+  "GuZhenRen:WoLiXuYing": {
+    "NAME": "Self Strength Phantom",
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Randomly play 1 Attack card from your draw pile."
+  },
+  "GuZhenRen:FeiLiGu": {
+    "NAME": "Strenuous Gu",
+    "DESCRIPTION": "At the end of its turn, the target loses 1 Strength for !M! turn(s). NL Exhaust ."
+  },
+  "GuZhenRen:YunSuan": {
+    "NAME": "Calculation",
+    "DESCRIPTION": " Exhaust 2 cards. Draw !M! cards. NL The guzhenren:Probability of all cards in your hand increases by !GuZhenRen:SecondMagic! % for this combat."
+  },
+  "GuZhenRen:BaShan": {
+    "NAME": "Pulling Mountain",
+    "DESCRIPTION": "Deal !D! damage to all enemies. NL Strength affects Pulling Mountain !M! times as much."
+  },
+  "GuZhenRen:LiQiGu": {
+    "NAME": "Strength Qi Gu",
+    "DESCRIPTION": "At the start of your turn, trigger all guzhenren:Phantom cards in your hand !M! time(s).",
+    "UPGRADE_DESCRIPTION": "At the start of your turn, trigger all guzhenren:Phantom cards in your hand !M! time(s)."
+  },
+  "GuZhenRen:QunLiGu": {
+    "NAME": "Group Strength Gu",
+    "DESCRIPTION": "Deal !D! damage. NL For each guzhenren:Phantom card in your hand, deal !M! additional damage."
+  },
+  "GuZhenRen:DingLi": {
+    "NAME": "Tripod Strength",
+    "DESCRIPTION": "Gain !B! Block . NL Block is affected by Strength !M! times as much. NL Retain ."
+  },
+  "GuZhenRen:WanWoDaShouYin": {
+    "NAME": "Myriad Self Giant Hand",
+    "DESCRIPTION": "Deal !D! damage to all enemies. NL Strength affects Myriad Self Giant Hand !M! times as much."
+  },
+  "GuZhenRen:WanWo": {
+    "NAME": "Myriad Self",
+    "DESCRIPTION": "Add X *Self *Strength *Phantom+ into your hand and trigger them 1 time. NL Exhaust ."
+  },
+  "GuZhenRen:ShangFangJieWa": {
+    "NAME": "Tearing Off Roof Tiles",
+    "DESCRIPTION": "Remove all Block and guzhenren:Defensive_Powers from a target. NL Deal !D! damage. Affected by Strength 3 times as much."
+  },
+  "GuZhenRen:WanLan": {
+    "NAME": "Pulling Water",
+    "DESCRIPTION": "Deal !D! damage 4 times. NL After playing this card, if you have no Energy, gain [E] .",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage 4 times. NL After playing this card, if you have no Energy, gain [E] [E] ."
+  },
+  "GuZhenRen:HengChongZhiZhuangGu": {
+    "NAME": "Rampaging Gu",
+    "DESCRIPTION": "Deal !D! damage 2 times. NL Whenever you deal damage that is completely blocked, take !M! damage."
+  },
+  "GuZhenRen:LongXingHuBuGu": {
+    "NAME": "Dragon Travel Tiger Steps Gu",
+    "DESCRIPTION": "Gain !B! Block . NL When you gain Strength , return this from your discard pile to your hand."
+  },
+  "GuZhenRen:ZhuanYiGu": {
+    "NAME": "Shift Will Gu",
+    "DESCRIPTION": "Whenever different statuses convert into each other, gain !M! Block ."
+  },
+  "GuZhenRen:XueChou": {
+    "NAME": "Blood Enmity",
+    "DESCRIPTION": "Mark an enemy. Attack damage dealt to and received from it is doubled. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Mark an enemy. Attack damage dealt to and received from it is doubled. NL Exhaust . Retain ."
+  },
+  "GuZhenRen:XinXue": {
+    "NAME": "Heart Blood",
+    "DESCRIPTION": "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose an equal amount of HP.",
+    "EXTENDED_DESCRIPTION": [
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose an equal amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP.",
+      "Heal !M! HP. NL Whenever you lose HP during your turn, all enemies lose !GuZhenRen:SecondMagic! times that amount of HP."
+    ],
+    "FLAVOR": "If you listen closely, you can seem to hear a thumping heartbeat from within the Gu worm. Can reach rank eight."
+  },
+  "GuZhenRen:DaoChiXueFu": {
+    "NAME": "Bladed Wing Blood Bat",
+    "DESCRIPTION": "Deal !D! damage to a random enemy. NL Hits 1 time for each *Bladed *Wing *Blood *Bat in your deck.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Hits !M! times)"
+    ]
+  },
+  "GuZhenRen:XueShenZi": {
+    "NAME": "Blood Guillotine",
+    "DESCRIPTION": "Lose !M! HP. NL Deal !D! damage. NL For the rest of the game, this card's damage is increased by !GuZhenRen:SecondMagic! . NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Deal !D! damage. NL For the rest of the game, this card's damage is increased by !GuZhenRen:SecondMagic! .",
+    "EXTENDED_DESCRIPTION": [
+      "Blood Deity"
+    ]
+  },
+  "GuZhenRen:XueKuangGu": {
+    "NAME": "Blood Frenzy Gu",
+    "DESCRIPTION": "Add guzhenren:Blood_Frenzy to the cards adjacent to this one in your hand.",
+    "EXTENDED_DESCRIPTION": [
+      " NL guzhenren:Blood_Frenzy ."
+    ]
+  },
+  "GuZhenRen:XueMuTianHuaGu": {
+    "NAME": "Blood Curtain Sky Flower Gu",
+    "DESCRIPTION": "At the end of each turn, if you lost HP this turn, gain !M! Buffer ."
+  },
+  "GuZhenRen:XueHeMang": {
+    "NAME": "Blood River Python",
+    "DESCRIPTION": "Deal !D! damage. NL For each time you have lost HP this combat, deal !M! additional damage."
+  },
+  "GuZhenRen:XueRenGu": {
+    "NAME": "Blood Blade Gu",
+    "DESCRIPTION": "Lose !GuZhenRen:SecondMagic! HP !M! times. NL Deal !D! damage !M! times."
+  },
+  "GuZhenRen:XueZouGu": {
+    "NAME": "Blood Sprint Gu",
+    "DESCRIPTION": "Lose !M! HP. NL Draw !GuZhenRen:SecondMagic! cards.",
+    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Draw !GuZhenRen:SecondMagic! cards. NL At the start of your next turn, draw 1 additional card."
+  },
+  "GuZhenRen:XueQiGu": {
+    "NAME": "Blood Qi Gu",
+    "DESCRIPTION": "Heal !M! HP. NL For each time you have lost HP this combat, heal 1 additional HP. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Heal !M! HP. NL For each time you have lost HP this combat, heal 1 additional HP. NL Exhaust . Retain ."
+  },
+  "GuZhenRen:ZhiXueGu": {
+    "NAME": "Stop Bleeding Gu",
+    "DESCRIPTION": "Whenever you lose HP this turn, heal !M! HP.",
+    "UPGRADE_DESCRIPTION": " Retain . NL Whenever you lose HP this turn, heal !M! HP."
+  },
+  "GuZhenRen:XueZhanGu": {
+    "NAME": "Blood Battle Gu",
+    "DESCRIPTION": "Whenever you lose HP during your turn, gain !M! Strength ."
+  },
+  "GuZhenRen:XueYueGu": {
+    "NAME": "Blood Moon Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Apply !M! guzhenren:Bleeding ."
+  },
+  "GuZhenRen:XueYuan": {
+    "NAME": "Bloodline",
+    "DESCRIPTION": "Mark an enemy. Whenever you lose HP, it loses !M! times that amount of HP. NL Exhaust ."
+  },
+  "GuZhenRen:XueShouYinGu": {
+    "NAME": "Blood Handprint Gu",
+    "DESCRIPTION": "Deal !D! damage. NL Exhaust 1 card from your hand. NL If the exhausted card is an Attack, play it."
+  },
+  "GuZhenRen:LengXue": {
+    "NAME": "Cold Blood",
+    "DESCRIPTION": "At the start of its turn, the target loses 10% of its Max HP. NL Lasts for !M! turns. NL Exhaust ."
+  },
+  "GuZhenRen:XueJianLeng": {
+    "NAME": "Blood Turning Cold",
+    "DESCRIPTION": "At the start of their turn, all enemies lose 10% of their Max HP. NL Lasts for !M! turns. NL Exhaust ."
+  },
+  "GuZhenRen:XuePiaoLiu": {
+    "NAME": "Blood Drift",
+    "DESCRIPTION": "During your turn, whenever you lose HP, draw !M! card(s)."
+  },
+  "GuZhenRen:ZhuMoBang": {
+    "NAME": "Demon Judgment Board",
+    "DESCRIPTION": "Deal !D! damage to all enemies. Gain !B! Block . NL Fatal to enemies with HP below 30% of their Max HP."
+  },
+  "GuZhenRen:TaiGuangGu": {
+    "NAME": "Extreme Light Gu",
+    "DESCRIPTION": "Whenever all enemies take damage from a guzhenren:Light_Path card, they take an equal amount of damage !M! more time(s). NL Exhaust ."
+  },
+  "GuZhenRen:TianPuGuangHe": {
+    "NAME": "Heavenly Waterfall Light River",
+    "DESCRIPTION": "Whenever all enemies take damage from a guzhenren:Light_Path card, they take an equal amount of damage !M! more time(s). NL Exhaust ."
+  },
+  "GuZhenRen:GuangGu": {
+    "NAME": "Light Gu",
+    "DESCRIPTION": "Gain !M! guzhenren:Radiance . NL The next time you play a guzhenren:Light_Path Attack card, guzhenren:Radiance will not be consumed."
+  },
+  "GuZhenRen:SanShiSanTianGuang": {
+    "NAME": "Thirty-Three Heavenly Lights",
+    "DESCRIPTION": "Deal !D! damage to all enemies. NL Gain guzhenren:Radiance equal to the total amount of guzhenren:Radiance you have gained this combat.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Gain !GuZhenRen:SecondMagic! guzhenren:Radiance )"
+    ]
+  },
+  "GuZhenRen:BianTong": {
+    "NAME": "Adaption",
+    "DESCRIPTION": "Remove all negative statuses. NL For each type removed, gain !M! guzhenren:Transformation_Path_Dao_Marks .",
+    "UPGRADE_DESCRIPTION": "Remove all negative statuses. NL For each type removed, gain !M! guzhenren:Transformation_Path_Dao_Marks . NL Retain ."
+  },
+  "GuZhenRen:TouSheng": {
+    "NAME": "Steal Life",
+    "DESCRIPTION": "Steal !M! Max HP from all enemies. NL Exhaust ."
+  },
+  "GuZhenRen:FangWeiGu": {
+    "NAME": "Forgery Gu",
+    "DESCRIPTION": "Choose 1 Gu worm card in your deck other than your guzhenren:Vital_Gu , *transform it into its unupgraded copy and add it to your hand. Ignores the Immortal Gu uniqueness rule.",
+    "UPGRADE_DESCRIPTION": "Choose 1 Gu worm card from all cards other than your guzhenren:Vital_Gu , *transform it into its unupgraded copy and add it to your hand. Ignores the Immortal Gu uniqueness rule.",
+    "EXTENDED_DESCRIPTION": [
+      "Choose a Gu worm to transform"
+    ],
+    "FLAVOR": "Ranked eighth on the list of mystical Gu. Rank eight Forgery Gu can transform into any Gu worm, replacing its assembly killer moves."
+  },
+  "GuZhenRen:ZhuanYun": {
+    "NAME": "Turn Luck",
+    "DESCRIPTION": "Whenever a guzhenren:Probability card fails to trigger, increase its probability value by !M!% ."
+  },
+  "GuZhenRen:SongYouFeng": {
+    "NAME": "Farewell Friend Wind",
+    "DESCRIPTION": "Become a guzhenren:Friend with an enemy. NL Add a *Farewell *Friend *Wind *· *Parting into your discard pile."
+  },
+  "GuZhenRen:SongYouFengSongBie": {
+    "NAME": "Farewell Friend Wind · Parting",
+    "DESCRIPTION": "If the target has the guzhenren:Friend status, apply 2 guzhenren:Fading to it. NL Exhaust . Ethereal ."
+  },
+  "GuZhenRen:GuangYinFeiRen": {
+    "NAME": "Flying Time Edge",
+    "DESCRIPTION": "Erase an enemy from existence. NL After being played !M! times, remove this card from your deck."
+  },
+  "GuZhenRen:BaMianWeiFengGu": {
+    "NAME": "Seven-faced Prestige Gu",
+    "DESCRIPTION": "Draw cards until your hand has !M! cards. NL For each drawn card of a different path, deal !D! damage to all enemies.",
+    "EXTENDED_DESCRIPTION": [
+      "Eight-faced Prestige Gu"
+    ]
+  },
+  "GuZhenRen:ShiZhen": {
+    "NAME": "Time Hand",
+    "DESCRIPTION": "Deal !D! damage. NL Gain !B! Block . NL Each time you draw this card, its values increase by !M! for this combat."
+  },
+  "GuZhenRen:RenRuGu": {
+    "NAME": "Man as Before",
+    "DESCRIPTION": "Revert your HP to what it was at the start of your previous turn. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "Revert your HP to what it was at the start of your previous turn. NL Exhaust . Retain .",
+    "EXTENDED_DESCRIPTION": [
+      " NL (HP reverts to !GuZhenRen:SecondMagic! )"
+    ]
+  },
+  "GuZhenRen:LongXiGu": {
+    "NAME": "Dragon Breath Gu",
+    "DESCRIPTION": "Apply !M! guzhenren:Burning . NL Then apply guzhenren:Sword_Mark equal to the target's current guzhenren:Burning stacks."
+  },
+  "GuZhenRen:YuHuo": {
+    "NAME": "Bathe in Fire",
+    "DESCRIPTION": "For each card you have Exhausted this turn, apply !GuZhenRen:FenShao! guzhenren:Burning to all enemies 1 time.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Hits !GuZhenRen:SecondMagic! times)"
+    ]
+  },
+  "GuZhenRen:FenShenGu": {
+    "NAME": "Burning Body Gu",
+    "DESCRIPTION": "At the start of your turn, gain [E] and add 1 *Burn into your hand."
+  },
+  "GuZhenRen:AiQingGu": {
+    "NAME": "Love Gu",
+    "DESCRIPTION": " Unplayable . NL When you draw this card, execute a random guzhenren:Positive_Effect and a random guzhenren:Negative_Effect , then Exhaust it."
+  },
+  "GuZhenRen:Xian": {
+    "NAME": "Limit",
+    "DESCRIPTION": "Deal !D! damage. NL The target loses Strength equal to the unblocked damage dealt for this turn."
+  },
+  "GuZhenRen:TianYuanBaoLian": {
+    "NAME": "Heavenly Essence Treasure Lotus",
+    "DESCRIPTION": "Gain {ENERGY} . NL For this combat, the Energy gained from this card is reduced by 1.",
+    "EXTENDED_DESCRIPTION": [
+      "0 [E]"
+    ]
+  },
+  "GuZhenRen:HuoYuanGu": {
+    "NAME": "Fire Source Gu",
+    "DESCRIPTION": " Exhaust 1 card from your hand. NL Add !M! *Blaze into your hand.",
+    "UPGRADE_DESCRIPTION": " Exhaust 1 card from your hand. NL Add !M! *Blaze+ into your hand."
+  },
+  "GuZhenRen:TaiDuGu": {
+    "NAME": "Attitude Gu",
+    "DESCRIPTION": "If the target intends to attack: NL Gain !B! Block , NL Apply !M! Weak . NL Otherwise: Deal !D! damage, NL Apply !M! Vulnerable ."
+  },
+  "GuZhenRen:MuJiaGu": {
+    "NAME": "Wood Armor Gu",
+    "DESCRIPTION": "Gain !B! Block . NL When Exhausted , apply !GuZhenRen:FenShao! guzhenren:Burning to all enemies."
+  },
+  "GuZhenRen:TieGuGu": {
+    "NAME": "Iron Bone Gu",
+    "DESCRIPTION": "Lose !M! HP. NL Gain !B! Block ."
+  },
+  "GuZhenRen:ShiYin": {
+    "NAME": "Time Concealment",
+    "DESCRIPTION": "Can only be played on odd-numbered turns. NL If you do not have Intangible , gain !M! Intangible . NL Ethereal .",
+    "UPGRADE_DESCRIPTION": "Can only be played on odd-numbered turns. NL If you do not have Intangible , gain !M! Intangible .",
+    "EXTENDED_DESCRIPTION": [
+      "It is not time yet."
+    ]
+  },
+  "GuZhenRen:PaiNanGu": {
+    "NAME": "Resolve Difficulty Gu",
+    "DESCRIPTION": "Whenever you draw a Status card, Exhaust it and draw !M! card(s).",
+    "UPGRADE_DESCRIPTION": " Innate . NL Whenever you draw a Status card, Exhaust it and draw !M! card(s)."
+  },
+  "GuZhenRen:BianXing": {
+    "NAME": "Transformation",
+    "DESCRIPTION": "Gain !M! guzhenren:Transformation_Path_Dao_Marks .",
+    "FLAVOR": "The essence Gu worm of Transformation path. Can reach rank nine."
+  },
+  "GuZhenRen:JuGuangGu": {
+    "NAME": "Gather Light Gu",
+    "DESCRIPTION": "For each guzhenren:Light_Path card in your hand, gain !M! guzhenren:Radiance .",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Gain !GuZhenRen:SecondMagic! Radiance)"
+    ]
+  },
+  "GuZhenRen:JiangHeRiXiaGu": {
+    "NAME": "Declining Gu",
+    "DESCRIPTION": "Deal !D! damage to all enemies. NL Hits 1 time for each guzhenren:Light_Path card in your hand.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Hits !GuZhenRen:SecondMagic! times)"
+    ]
   }
 }

@@ -4,7 +4,6 @@ import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -19,35 +18,23 @@ public class WanXingFeiYingPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private int nianBaseAmount;
-
-    public WanXingFeiYingPower(AbstractCreature owner, int turns, int nianBaseAmount) {
+    public WanXingFeiYingPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = turns;
-        this.nianBaseAmount = nianBaseAmount;
+        this.amount = amount;
         this.type = PowerType.BUFF;
-        this.isTurnBased = true;
+        this.isTurnBased = false;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/WanXingFeiYingPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/WanXingFeiYingPower.png");
         Texture largeTexture = ImageMaster.loadImage(pathLarge);
         Texture smallTexture = ImageMaster.loadImage(pathSmall);
 
-        if (largeTexture == null || smallTexture == null) {
-            pathLarge = GuZhenRen.assetPath("img/powers/XingNianGuPower_p.png");
-            pathSmall = GuZhenRen.assetPath("img/powers/XingNianGuPower.png");
-            largeTexture = ImageMaster.loadImage(pathLarge);
-            smallTexture = ImageMaster.loadImage(pathSmall);
-        }
 
-        if (largeTexture != null && smallTexture != null) {
-            this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
-            this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
-        } else {
-            this.loadRegion("starlight");
-        }
+        this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
+        this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
+
 
         updateDescription();
     }
@@ -55,23 +42,12 @@ public class WanXingFeiYingPower extends AbstractPower {
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         this.flash();
-        // 直接给予干净的 NianPower，固定为传进来的基础值
-        this.addToBot(new ApplyPowerAction(owner, owner,
-                new NianPower(owner, this.nianBaseAmount), this.nianBaseAmount));
-    }
-
-    @Override
-    public void atEndOfRound() {
-        this.amount--;
-        if (this.amount == 0) {
-            this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
-        } else {
-            updateDescription();
-        }
+        this.addToBot(new ApplyPowerAction(this.owner, this.owner,
+                new NianPower(this.owner, this.amount), this.amount));
     }
 
     @Override
     public void updateDescription() {
-        this.description = DESCRIPTIONS[0] + this.nianBaseAmount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
+        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 }

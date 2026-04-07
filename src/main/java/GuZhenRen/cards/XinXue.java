@@ -4,7 +4,7 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.XinXuePower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.actions.common.HealAction; // 【新增导包】：回血动作
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -39,13 +39,13 @@ public class XinXue extends AbstractBenMingGuCard {
     //  核心数值与文本调度器
     // =========================================================================
     private void calculateStats() {
-        // 1-8转对应的打出扣血量
-        int[] hpLoss = {4, 4, 3, 3, 2, 2, 0, 0};
+        // 1-8转对应的回血量
+        int[] healAmt = {2, 2, 3, 3, 4, 4, 5, 5};
 
         // 1-8转对应的反伤倍率
         int[] mult = {1, 2, 2, 3, 3, 4, 4, 5};
 
-        this.baseMagicNumber = this.magicNumber = hpLoss[this.rank - 1];
+        this.baseMagicNumber = this.magicNumber = healAmt[this.rank - 1];
         this.baseSecondMagicNumber = this.secondMagicNumber = mult[this.rank - 1];
 
         if (cardStrings.EXTENDED_DESCRIPTION != null && cardStrings.EXTENDED_DESCRIPTION.length >= 8) {
@@ -65,7 +65,7 @@ public class XinXue extends AbstractBenMingGuCard {
         calculateStats();
 
         if (this.magicNumber > 0) {
-            this.addToBot(new LoseHPAction(p, p, this.magicNumber));
+            this.addToBot(new HealAction(p, p, this.magicNumber));
         }
 
         this.addToBot(new ApplyPowerAction(p, p, new XinXuePower(p, this.secondMagicNumber), this.secondMagicNumber));

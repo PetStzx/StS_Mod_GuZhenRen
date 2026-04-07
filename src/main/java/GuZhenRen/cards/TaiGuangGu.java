@@ -17,9 +17,9 @@ public class TaiGuangGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TaiGuangGu.png");
 
-    private static final int COST = 1;
-    private static final int MAGIC = 50;
-    private static final int UPGRADE_PLUS_MAGIC = 25; // 升级增加 25% (变成 75%)
+    private static final int COST = 2;
+    private static final int MAGIC = 1;
+    private static final int UPGRADE_PLUS_MAGIC = 1;
     private static final int INITIAL_RANK = 4;
 
     public TaiGuangGu() {
@@ -30,22 +30,16 @@ public class TaiGuangGu extends AbstractGuZhenRenCard {
                 CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.GUANG_DAO);
-
-        // baseMagicNumber 直接等于 50
         this.baseMagicNumber = this.magicNumber = MAGIC;
         this.exhaust = true;
-
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 除以 25 换算成层数 (例如 50% -> 2层, 75% -> 3层)
-        int powerStacks = this.magicNumber / 25;
-
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!mo.isDeadOrEscaped()) {
-                this.addToBot(new ApplyPowerAction(mo, p, new TaiGuRongYaoZhiGuangPower(mo, powerStacks), powerStacks));
+                this.addToBot(new ApplyPowerAction(mo, p, new TaiGuRongYaoZhiGuangPower(mo, this.magicNumber), this.magicNumber));
             }
         }
     }
@@ -54,7 +48,7 @@ public class TaiGuangGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 50 变 75
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
             this.upgradeRank(1);
             this.initializeDescription();
         }

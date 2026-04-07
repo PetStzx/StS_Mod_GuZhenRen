@@ -17,7 +17,7 @@ public class XueJianLeng extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueJianLeng.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 5; // 持续 5 回合
+    private static final int MAGIC = 4; // 持续 5 回合
 
     public XueJianLeng() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

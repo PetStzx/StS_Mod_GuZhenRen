@@ -27,6 +27,9 @@ public class ShaGu extends AbstractBenMingGuCard {
     private static final int HP_LOSS = 1;
     private static final int INITIAL_RANK = 1;
 
+    // 每次升级带来的伤害加成
+    private static final int UPGRADE_PLUS_DMG = 1;
+
     public ShaGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
@@ -42,14 +45,12 @@ public class ShaGu extends AbstractBenMingGuCard {
         this.maxRank = 9;
         this.setRank(INITIAL_RANK);
 
-        // 初始化时计算一次，确保载入存档时数值正确
         calculateBaseDamage();
         this.exhaust = false;
     }
 
-    // 重新计算基础伤害：基础值 + 转数加成 + 永久加成
     private void calculateBaseDamage() {
-        int rankBonus = Math.max(0, this.rank - 1);
+        int rankBonus = Math.max(0, (this.rank - 1) * UPGRADE_PLUS_DMG);
         this.baseDamage = DAMAGE + rankBonus + this.misc;
     }
 
@@ -82,7 +83,10 @@ public class ShaGu extends AbstractBenMingGuCard {
     public static class ShaGuFatalAction extends AbstractGameAction {
         private final DamageInfo info;
         private final UUID targetUUID;
-        private static final int INCREASE_AMOUNT = 1;
+
+        private static final int INCREASE_AMOUNT = 2;
+        // 回血变量改为失去生命变量
+        private static final int FATAL_HP_LOSS = 2;
 
         public ShaGuFatalAction(AbstractMonster target, DamageInfo info, UUID targetUUID) {
             this.info = info;
@@ -97,25 +101,23 @@ public class ShaGu extends AbstractBenMingGuCard {
                 AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.SLASH_DIAGONAL));
                 this.target.damage(this.info);
 
+                // 判定是否斩杀
                 if ((this.target.isDying || this.target.currentHealth <= 0) && !this.target.halfDead && !this.target.hasPower("Minion")) {
+
+                    // 触发失去生命效果
+                    AbstractDungeon.actionManager.addToTop(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, FATAL_HP_LOSS));
 
                     // --- 1. 修复大师牌组 (Master Deck) 的逻辑 ---
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                         if (c.uuid.equals(this.targetUUID)) {
                             c.misc += INCREASE_AMOUNT;
 
-                            // 更新基础伤害
                             if (c instanceof ShaGu) {
                                 ((ShaGu) c).calculateBaseDamage();
                             }
 
-                            // 【核心修复】
-                            // 强制将当前显示伤害 (damage) 重置为 基础伤害 (baseDamage)
-                            // 并且清除 "伤害被修改" 的标记 (isDamageModified)
-                            // 绝对不要在这里调用 c.applyPowers()，因为它会把当前的力量加成算进去！
                             c.damage = c.baseDamage;
                             c.isDamageModified = false;
-
                             c.initializeDescription();
                         }
                     }
@@ -124,13 +126,10 @@ public class ShaGu extends AbstractBenMingGuCard {
                     for (AbstractCard c : GetAllInBattleInstances.get(this.targetUUID)) {
                         c.misc += INCREASE_AMOUNT;
 
-                        // 更新基础伤害
                         if (c instanceof ShaGu) {
                             ((ShaGu) c).calculateBaseDamage();
                         }
 
-                        // 战斗中的卡牌，需要调用 applyPowers()
-                        // 这样玩家在当前战斗中就能立刻看到伤害变高了（且包含了力量加成）
                         c.applyPowers();
                     }
 

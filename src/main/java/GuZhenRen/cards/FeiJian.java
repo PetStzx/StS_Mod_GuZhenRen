@@ -16,15 +16,15 @@ public class FeiJian extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/FeiJian.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 8;
-    private static final int UPGRADE_PLUS_DMG = 4; // 升级后变 12
-    private static final int INITIAL_RANK = 7; // 7转
+    private static final int DAMAGE = 6;
+    private static final int UPGRADE_PLUS_DMG = 2; // 升级后变 8
+    private static final int INITIAL_RANK = 6;
 
     public FeiJian() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.UNCOMMON,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.JIAN_DAO);
@@ -41,8 +41,8 @@ public class FeiJian extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG); // 8 -> 12
-            this.upgradeRank(1); // 7转 -> 8转
+            this.upgradeDamage(UPGRADE_PLUS_DMG); // 6 -> 8
+            this.upgradeRank(1); // 6转 -> 7转
             this.initializeDescription();
         }
     }

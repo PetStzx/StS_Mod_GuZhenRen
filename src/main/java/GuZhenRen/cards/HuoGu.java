@@ -15,7 +15,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class HuoGu extends AbstractBenMingGuCard {
     public static final String ID = GuZhenRen.makeID("HuoGu");
-    // 【修改】改为 public static
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -33,28 +32,41 @@ public class HuoGu extends AbstractBenMingGuCard {
 
         this.setDao(Dao.YAN_DAO);
         this.isEthereal = true;
-        this.baseMagicNumber = this.magicNumber = 1;
-        this.baseFenShao = this.fenShao = 1;
         this.maxRank = 9;
+
+        this.baseFenShao = this.fenShao = 1;
+
         this.setRank(INITIAL_RANK);
+        calculateStats();
+    }
+
+    private void calculateStats() {
+        this.baseMagicNumber = this.magicNumber = this.rank;
+        this.myBaseDescription = cardStrings.DESCRIPTION;
+        this.initializeDescription();
     }
 
     @Override
     public void applyPowers() {
-        this.baseMagicNumber = this.rank;
-        this.magicNumber = this.baseMagicNumber;
+        calculateStats();
         super.applyPowers();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int maxExhaust = this.rank;
-        this.addToBot(new HuoGuAction(maxExhaust, this.fenShao, m));
+        calculateStats();
+        this.addToBot(new HuoGuAction(this.magicNumber, this.fenShao, m));
     }
 
     @Override
     public void performUpgradeEffect() {
+        calculateStats();
         this.upgradedMagicNumber = true;
+    }
+
+    @Override
+    protected void onRankLoaded() {
+        calculateStats();
     }
 
     public static class HuoGuAction extends AbstractGameAction {
@@ -86,6 +98,7 @@ public class HuoGu extends AbstractBenMingGuCard {
 
             if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
                 int count = 0;
+
                 for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
                     AbstractDungeon.player.hand.moveToExhaustPile(c);
                     count++;
@@ -96,18 +109,12 @@ public class HuoGu extends AbstractBenMingGuCard {
 
                 if (count > 0 && target != null && !target.isDeadOrEscaped()) {
                     for (int i = 0; i < count; i++) {
-                        this.addToBot(new ApplyPowerAction(target, AbstractDungeon.player,
+                        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(target, AbstractDungeon.player,
                                 new FenShaoPower(target, burnAmount), burnAmount, true));
                     }
                 }
             }
             this.isDone = true;
         }
-    }
-
-    @Override
-    protected void onRankLoaded() {
-        this.baseMagicNumber = this.rank;
-        this.magicNumber = this.baseMagicNumber;
     }
 }

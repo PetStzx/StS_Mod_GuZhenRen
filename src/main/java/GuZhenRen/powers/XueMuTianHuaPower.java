@@ -3,8 +3,6 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -19,8 +17,7 @@ public class XueMuTianHuaPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    private boolean isRemoved = false;
-    private int bufferGivenThisTurn = 0; // 用于追踪回合结束时给的缓冲层数
+    private boolean hpLostThisTurn = false;
 
     public XueMuTianHuaPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -43,48 +40,26 @@ public class XueMuTianHuaPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // 回合开始时，检查并收回上一回合给出的缓冲
-    @Override
-    public void atStartOfTurn() {
-        if (this.bufferGivenThisTurn > 0) {
-            AbstractPower buffer = this.owner.getPower(BufferPower.POWER_ID);
-            if (buffer != null) {
-                // 最多收回我们给出的层数
-                int amountToRemove = Math.min(buffer.amount, this.bufferGivenThisTurn);
-                if (amountToRemove > 0) {
-                    this.addToBot(new ReducePowerAction(this.owner, this.owner, BufferPower.POWER_ID, amountToRemove));
-                }
-            }
-            this.bufferGivenThisTurn = 0;
-        }
-    }
-
-    // 回合结束时给缓冲，并记录层数
-    @Override
-    public void atEndOfTurnPreEndTurnCards(boolean isPlayer) {
-        if (!this.isRemoved) {
-            this.flash();
-            this.addToBot(new ApplyPowerAction(this.owner, this.owner, new BufferPower(this.owner, this.amount), this.amount));
-            this.bufferGivenThisTurn = this.amount;
-        }
-    }
-
-    @Override
-    public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-        if (!this.isRemoved && info.type == DamageInfo.DamageType.NORMAL && info.owner == this.owner && target != this.owner) {
-            this.flash();
-            this.isRemoved = true;
-            this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-        }
-    }
-
-
+    // 监听生命流失（无论是被怪打的，还是自残的，只要掉了血就记录）
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        if (!this.isRemoved && damageAmount > 0 && info != null && info.type != DamageInfo.DamageType.HP_LOSS) {
+        if (damageAmount > 0) {
+            this.hpLostThisTurn = true;
+        }
+    }
+
+    // 回合开始时，重置开关
+    @Override
+    public void atStartOfTurn() {
+        this.hpLostThisTurn = false;
+    }
+
+    // 回合结束时，如果本回合掉过血，就给予缓冲
+    @Override
+    public void atEndOfTurnPreEndTurnCards(boolean isPlayer) {
+        if (this.hpLostThisTurn) {
             this.flash();
-            this.isRemoved = true;
-            this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+            this.addToBot(new ApplyPowerAction(this.owner, this.owner, new BufferPower(this.owner, this.amount), this.amount));
         }
     }
 }

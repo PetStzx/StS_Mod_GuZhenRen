@@ -64,8 +64,7 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
             sb.append(guPathString).append(separator);
         }
 
-        // TAG_TEXT[2] 即 "杀招"
-        sb.append("guzhenren:").append(TAG_TEXT[2]).append(separator);
+        sb.append("guzhenren:").append(TAG_TEXT[2].replace(" ", "_")).append(separator);
         sb.append(" NL ").append(this.myBaseDescription);
 
         return sb.toString();

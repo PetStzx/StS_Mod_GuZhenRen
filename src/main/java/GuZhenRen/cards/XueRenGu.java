@@ -21,10 +21,13 @@ public class XueRenGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueRenGu.png");
 
     private static final int COST = 1;
+
     private static final int DAMAGE = 7;
+    private static final int UPGRADE_PLUS_DAMAGE = 2; // 升级单次伤害 7 -> 9
+
     private static final int HITS = 3;
-    private static final int HP_LOSS = 2;
-    private static final int UPGRADE_NEW_HP_LOSS = 1;
+    private static final int HP_LOSS = 1; // 固定每次失去 1 点生命
+
     private static final int INITIAL_RANK = 3;
 
     public XueRenGu() {
@@ -35,9 +38,11 @@ public class XueRenGu extends AbstractGuZhenRenCard {
                 CardTarget.ENEMY);
 
         this.setDao(Dao.XUE_DAO);
-        this.baseDamage = DAMAGE;
+
+        this.baseDamage = this.damage = DAMAGE;
         this.baseMagicNumber = this.magicNumber = HITS;
         this.baseSecondMagicNumber = this.secondMagicNumber = HP_LOSS;
+
         this.setRank(INITIAL_RANK);
     }
 
@@ -52,7 +57,7 @@ public class XueRenGu extends AbstractGuZhenRenCard {
         for (int i = 0; i < this.magicNumber; i++) {
             // 失去生命
             this.addToBot(new LoseHPAction(p, p, this.secondMagicNumber));
-            //造成伤害
+            // 造成伤害
             this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         }
     }
@@ -61,9 +66,9 @@ public class XueRenGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.baseSecondMagicNumber = UPGRADE_NEW_HP_LOSS;
-            this.secondMagicNumber = this.baseSecondMagicNumber;
-            this.upgradedSecondMagicNumber = true;
+
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
+
             this.upgradeRank(1);
             this.initializeDescription();
         }

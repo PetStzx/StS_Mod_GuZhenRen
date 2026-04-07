@@ -7,10 +7,10 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.LoseStrengthPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class XueZhanPower extends AbstractPower {
@@ -27,7 +27,6 @@ public class XueZhanPower extends AbstractPower {
         this.type = PowerType.BUFF;
         this.isTurnBased = false;
 
-        // 默认你已准备好素材
         String pathLarge = GuZhenRen.assetPath("img/powers/XueZhanPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/XueZhanPower.png");
         Texture largeTexture = ImageMaster.loadImage(pathLarge);
@@ -35,7 +34,6 @@ public class XueZhanPower extends AbstractPower {
 
         this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
-
 
         this.updateDescription();
     }
@@ -48,11 +46,9 @@ public class XueZhanPower extends AbstractPower {
     // 监听生命值流失
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        // 只要实际掉血，就立刻给予力量和等量临时力量
-        if (damageAmount > 0) {
+        if (damageAmount > 0 && !AbstractDungeon.actionManager.turnHasEnded) {
             this.flash();
             this.addToBot(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, this.amount), this.amount));
-            this.addToBot(new ApplyPowerAction(this.owner, this.owner, new LoseStrengthPower(this.owner, this.amount), this.amount));
         }
     }
 }

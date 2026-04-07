@@ -1,0 +1,422 @@
+{
+  "GuZhenRen:ShanYaoPower": {
+    "NAME": "Radiance",
+    "DESCRIPTIONS": [
+      "The damage of the next #yLight #yPath Attack card you play is increased by #b",
+      "% ."
+    ]
+  },
+  "GuZhenRen:QuanLiYiFuPower": {
+    "NAME": "All-out Effort",
+    "DESCRIPTIONS": [
+      " #yPhantom cards are guaranteed to trigger."
+    ]
+  },
+  "GuZhenRen:FenShaoPower": {
+    "NAME": "Burning",
+    "DESCRIPTIONS": [
+      "When #yBurning stacks change, take damage equal to the current stacks. At the end of your turn, #yBurning stacks are halved."
+    ]
+  },
+  "GuZhenRen:HuoMaoSanZhangPower": {
+    "NAME": "Furious Fire",
+    "DESCRIPTIONS": [
+      "When applying #yBurning , if the applied stacks are less than 3, increase them to 3."
+    ]
+  },
+  "GuZhenRen:YanTongPower": {
+    "NAME": "Blazing Eyes",
+    "DESCRIPTIONS": [
+      "Whenever you play a card targeting an enemy this turn, apply #b",
+      " stacks of #yBurning to it.",
+      " After triggering #b",
+      " times, each trigger adds a #yBurn into your hand.",
+      " Each trigger adds a #yBurn into your hand."
+    ]
+  },
+  "GuZhenRen:XingHuoLiaoYuanPower": {
+    "NAME": "Prairie Fire",
+    "DESCRIPTIONS": [
+      "When this enemy receives #yBurning from sources other than this status, all other enemies also receive an equal amount of #yBurning ."
+    ]
+  },
+  "GuZhenRen:BianHuaDaoDaoHenPower": {
+    "NAME": "Transformation Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Transforms into the corresponding Dao mark based on the path of the first #ynon-Transformation #yPath card you play. Reverts to Transformation Path Dao Mark at the start of your turn."
+    ]
+  },
+  "GuZhenRen:LiDaoDaoHenPower": {
+    "NAME": "Strength Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack of Strength Path Dao Mark gives you 1 #yStrength ."
+    ]
+  },
+  "GuZhenRen:YanDaoDaoHenPower": {
+    "NAME": "Fire Path Dao Mark",
+    "DESCRIPTIONS": [
+      "At the end of your turn, apply #b",
+      " stacks of #yBurning to all enemies."
+    ]
+  },
+  "GuZhenRen:NianPower": {
+    "NAME": "Thought",
+    "DESCRIPTIONS": [
+      "For every 3 stacks of #yThought accumulated, convert them into 1 stack of #yWill and draw 1 card. ( #b",
+      " / 3 )"
+    ]
+  },
+  "GuZhenRen:YiPower": {
+    "NAME": "Will",
+    "DESCRIPTIONS": [
+      "For every 3 stacks of #yWill accumulated, convert them into 1 stack of #yEmotion and gain [E] . ( #b",
+      " / 3 )"
+    ]
+  },
+  "GuZhenRen:QingPower": {
+    "NAME": "Emotion",
+    "DESCRIPTIONS": [
+      "For every #b3 stacks of #yEmotion accumulated, draw #b1 additional card at the start of your turn. ( Draw #b",
+      " additional card(s) )"
+    ]
+  },
+  "GuZhenRen:ZhiDaoDaoHenPower": {
+    "NAME": "Wisdom Path Dao Mark",
+    "DESCRIPTIONS": [
+      "At the end of your turn, Retain up to #b",
+      " cards and #b",
+      " Energy."
+    ]
+  },
+  "GuZhenRen:WanWuDaTongBianPower": {
+    "NAME": "Myriad Beings Assimilation Transformation",
+    "DESCRIPTIONS": [
+      "Convert all your statuses into an equal amount of #yTransformation #yPath #yDao #yMarks ."
+    ]
+  },
+  "GuZhenRen:YiXinErYongPower": {
+    "NAME": "Divided Mind",
+    "DESCRIPTIONS": [
+      "The next #b",
+      " times you play a card from your hand this turn, randomly play 1 card from your hand for free."
+    ]
+  },
+  "GuZhenRen:ZhiZhangPower": {
+    "NAME": "Wisdom Block",
+    "DESCRIPTIONS": [
+      "All effects that grant guzhenren:Thought instead grant Temporary HP."
+    ]
+  },
+  "GuZhenRen:ZhiHuiPower": {
+    "NAME": "Wisdom",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b",
+      " stacks of #yThought ."
+    ]
+  },
+  "GuZhenRen:WanXingFeiYingPower": {
+    "NAME": "Myriad Star Firefly",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, gain #b",
+      " stacks of #yThought ."
+    ]
+  },
+  "GuZhenRen:TunHuoPower": {
+    "NAME": "Swallow Fire",
+    "DESCRIPTIONS": [
+      " #yBurns no longer deal damage to you. When you Exhaust a #yBurn , add #b",
+      " #yBlaze into your hand."
+    ]
+  },
+  "GuZhenRen:YangMangBeiHuoYiPower": {
+    "NAME": "Yang Mang Wears Fire Cloak",
+    "DESCRIPTIONS": [
+      "Whenever you are attacked this turn, apply #b",
+      " stacks of #yBurning to the attacker #b",
+      " times."
+    ]
+  },
+  "GuZhenRen:ZhuiMingHuoPower": {
+    "NAME": "Chasing Life Fire",
+    "DESCRIPTIONS": [
+      "At the start of your turn, apply #b",
+      " stacks of #yBurning . NL If #yChasing #yLife #yFire is present, any enemy with an attack intent will gain #b1 stack of #yChasing #yLife #yFire after acting."
+    ]
+  },
+  "GuZhenRen:NianTouShouZuPower": {
+    "NAME": "Obstructed Thoughts",
+    "DESCRIPTIONS": [
+      "Whenever you would gain #yThought , prevent it."
+    ]
+  },
+  "GuZhenRen:JianHenPower": {
+    "NAME": "Sword Mark",
+    "DESCRIPTIONS": [
+      "Damage taken from #ySword #yPath cards this turn is increased by #b",
+      " ."
+    ]
+  },
+  "GuZhenRen:JianFengPower": {
+    "NAME": "Sword Edge",
+    "DESCRIPTIONS": [
+      "After your #ySword #yPath cards deal damage, apply #b",
+      " stacks of #ySword #yMark to the target."
+    ]
+  },
+  "GuZhenRen:JianDaoDaoHenPower": {
+    "NAME": "Sword Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack of Sword Path Dao Mark gives you #b1 #ySword #yEdge ."
+    ]
+  },
+  "GuZhenRen:HuiJianPower": {
+    "NAME": "Wisdom Sword",
+    "DESCRIPTIONS": [
+      "Whenever you gain #yEmotion , convert it into an equal number of #ySword #yEdge stacks."
+    ]
+  },
+  "GuZhenRen:JianDunPower": {
+    "NAME": "Sword Escape",
+    "DESCRIPTIONS": [
+      "Whenever you deal attack damage to an enemy with #ySword #yMark this turn, gain #b",
+      " Block."
+    ]
+  },
+  "GuZhenRen:FeiLiPower": {
+    "NAME": "Strenuous",
+    "DESCRIPTIONS": [
+      "At the end of your turn, lose 1 #yStrength for #b",
+      " turns."
+    ]
+  },
+  "GuZhenRen:MuDaoDaoHenPower": {
+    "NAME": "Wood Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack of Wood Path Dao Mark increases healing effectiveness by 15%. (Increases healing by #b",
+      "% )"
+    ]
+  },
+  "GuZhenRen:GuDaoDaoHenPower": {
+    "NAME": "Bone Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack of Bone Path Dao Mark gives you #b2 #yThorns ."
+    ]
+  },
+  "GuZhenRen:GuangDaoDaoHenPower": {
+    "NAME": "Light Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack of Light Path Dao Mark increases the damage of #yLight #yPath cards by 20%. (Increases Light Path card damage by #b",
+      "% )"
+    ]
+  },
+  "GuZhenRen:ShaDaoDaoHenPower": {
+    "NAME": "Killing Path Dao Mark",
+    "DESCRIPTIONS": [
+      "At the end of your turn, each stack of Killing Path Dao Mark deals 3 damage to all enemies. (Deals #b",
+      " damage to all enemies)"
+    ]
+  },
+  "GuZhenRen:LiQiPower": {
+    "NAME": "Strength Qi",
+    "DESCRIPTIONS": [
+      "At the start of your turn, trigger all #yPhantom cards in your hand #b",
+      " time(s)."
+    ]
+  },
+  "GuZhenRen:LongXingHuBuPower": {
+    "NAME": "Dragon Travel Tiger Steps",
+    "DESCRIPTIONS": [
+      "Whenever you play a card this turn, gain #b",
+      " Temporary #yStrength ."
+    ]
+  },
+  "GuZhenRen:ZhuanYiPower": {
+    "NAME": "Shift Will",
+    "DESCRIPTIONS": [
+      "Whenever different statuses convert into each other, gain #b",
+      " Block."
+    ]
+  },
+  "GuZhenRen:XueChouPower": {
+    "NAME": "Blood Enmity",
+    "DESCRIPTIONS": [
+      "Attack damage received is doubled, and damage dealt is doubled."
+    ]
+  },
+  "GuZhenRen:XinXuePower": {
+    "NAME": "Heart Blood",
+    "DESCRIPTIONS": [
+      "During your turn, whenever you lose HP, all enemies lose an equal amount of HP.",
+      "During your turn, whenever you lose HP, all enemies lose #b",
+      " times that amount of HP."
+    ]
+  },
+  "GuZhenRen:XueMuTianHuaPower": {
+    "NAME": "Blood Curtain Sky Flower",
+    "DESCRIPTIONS": [
+      "At the end of each turn, if you lost HP this turn, gain #b",
+      " #yBuffer ."
+    ]
+  },
+  "GuZhenRen:ZhiXuePower": {
+    "NAME": "Stop Bleeding",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP this turn, heal #b",
+      " HP."
+    ]
+  },
+  "GuZhenRen:XueZhanPower": {
+    "NAME": "Blood Battle",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP during your turn, gain #b",
+      " #yStrength ."
+    ]
+  },
+  "GuZhenRen:XueLiuBuZhiPower": {
+    "NAME": "Bleeding",
+    "DESCRIPTIONS": [
+      "At the start of your turn, lose #b",
+      " HP."
+    ]
+  },
+  "GuZhenRen:XueYuanPower": {
+    "NAME": "Bloodline",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP, all enemies marked by Bloodline lose an equal amount of HP."
+    ]
+  },
+  "GuZhenRen:XueYuanMarkPower": {
+    "NAME": "Bloodline",
+    "DESCRIPTIONS": [
+      " When you lose HP, ",
+      " loses #b",
+      " times that amount of HP."
+    ]
+  },
+  "GuZhenRen:LengXuePower": {
+    "NAME": "Cold Blood",
+    "DESCRIPTIONS": [
+      "At the start of your turn, lose HP equal to 10% of your Max HP. Lasts for #b",
+      " turns."
+    ]
+  },
+  "GuZhenRen:XuePiaoLiuPower": {
+    "NAME": "Blood Drift",
+    "DESCRIPTIONS": [
+      "During your turn, whenever you lose HP, draw #b",
+      " card(s)."
+    ]
+  },
+  "GuZhenRen:TaiGuRongYaoZhiGuangPower": {
+    "NAME": "Light of Immemorial Glory",
+    "DESCRIPTIONS": [
+      "Whenever you receive damage from a #yLight #yPath card, receive the same amount of damage #b",
+      " more time(s)."
+    ]
+  },
+  "GuZhenRen:XueDaoDaoHenPower": {
+    "NAME": "Blood Path Dao Mark",
+    "DESCRIPTIONS": [
+      "When dealing attack damage, each stack of Blood Path Dao Mark provides 1% Lifesteal. (Provides #b",
+      "% Lifesteal)"
+    ]
+  },
+  "GuZhenRen:JinDaoDaoHenPower": {
+    "NAME": "Metal Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack of Metal Path Dao Mark gives you #b1 #yMetallicize ."
+    ]
+  },
+  "GuZhenRen:LuDaoDaoHenPower": {
+    "NAME": "Rule Path Dao Mark",
+    "DESCRIPTIONS": [
+      "At the end of your turn, all enemies lose #b",
+      " #yStrength for this turn."
+    ]
+  },
+  "GuZhenRen:TouDaoDaoHenPower": {
+    "NAME": "Theft Path Dao Mark",
+    "DESCRIPTIONS": [
+      "When dealing attack damage, gain #b",
+      " Gold. You can gain at most 30 Gold per combat this way. (Can still steal #b",
+      " Gold)"
+    ]
+  },
+  "GuZhenRen:ZhuanYunPower": {
+    "NAME": "Turn Luck",
+    "DESCRIPTIONS": [
+      "Whenever your card's #yProbability effect fails, increase its probability by #b",
+      "% ."
+    ]
+  },
+  "GuZhenRen:HaoYouPower": {
+    "NAME": "Friend",
+    "DESCRIPTIONS": [
+      " has become your Friend. When you and your Friend deal damage to each other, remove this status."
+    ]
+  },
+  "GuZhenRen:FenShenPower": {
+    "NAME": "Burning Body",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b",
+      " [E] and add #b",
+      " #yBurn(s) into your hand."
+    ]
+  },
+  "GuZhenRen:XianPower": {
+    "NAME": "Limit",
+    "DESCRIPTIONS": [
+      "Unblocked attack damage dealt this turn cannot exceed #b",
+      " per hit."
+    ]
+  },
+  "GuZhenRen:FengDaoDaoHenPower": {
+    "NAME": "Wind Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Whenever you draw a card, deal #b",
+      " damage to a random enemy."
+    ]
+  },
+  "GuZhenRen:ShiDaoDaoHenPower": {
+    "NAME": "Food Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Upon #yFatal , heal #b",
+      " HP."
+    ]
+  },
+  "GuZhenRen:ZhouDaoDaoHenPower": {
+    "NAME": "Time Path Dao Mark",
+    "DESCRIPTIONS": [
+      "At the end of your turn, deal #b",
+      " damage to a random enemy a number of times equal to the current turn number."
+    ]
+  },
+  "GuZhenRen:YunDaoDaoHenPower": {
+    "NAME": "Luck Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Each stack increases the #yProbability of all cards in your hand by 3%. (Currently increased by #b",
+      "% )"
+    ]
+  },
+  "GuZhenRen:PaiNanPower": {
+    "NAME": "Resolve Difficulty",
+    "DESCRIPTIONS": [
+      "Whenever you draw a #yStatus card, #yExhaust it and draw #b",
+      " card(s)."
+    ]
+  },
+  "GuZhenRen:JianQiPower": {
+    "NAME": "Sword Qi",
+    "DESCRIPTIONS": [
+      "At the start of your next turn, gain #b",
+      " stacks of #ySword #yMark , then lose this status."
+    ]
+  },
+  "GuZhenRen:RiGuangPower": {
+    "NAME": "Sunlight",
+    "DESCRIPTIONS": [
+      "The next #b",
+      " time(s) you play a #yLight #yPath Attack card, it will not consume #yRadiance stacks."
+    ]
+  }
+}

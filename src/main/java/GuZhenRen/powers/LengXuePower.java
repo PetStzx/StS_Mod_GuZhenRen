@@ -17,13 +17,16 @@ public class LengXuePower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
+    // 【新增】：联机防多重触发锁
+    private boolean triggeredThisRound = false;
+
     public LengXuePower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
-        this.type = PowerType.DEBUFF; // 这是一个负面效果
-        this.isTurnBased = true; // 有持续回合
+        this.type = PowerType.DEBUFF;
+        this.isTurnBased = true;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/LengXuePower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/LengXuePower.png");
@@ -44,6 +47,14 @@ public class LengXuePower extends AbstractPower {
     // =========================================================================
     @Override
     public void atStartOfTurn() {
+        // 【新增】：检查本轮是否已经触发过，如果是，直接拦截并跳过
+        if (this.triggeredThisRound) {
+            return;
+        }
+
+        // 标记本轮已触发
+        this.triggeredThisRound = true;
+
         this.flash();
 
         // 计算最大生命值的 10%，至少为 1
@@ -58,5 +69,14 @@ public class LengXuePower extends AbstractPower {
         } else {
             this.addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
         }
+    }
+
+    // =========================================================================
+    // 轮次结束时，重置触发锁
+    // =========================================================================
+    @Override
+    public void atEndOfRound() {
+        // 当所有玩家和怪物的行动彻底结束，一轮大循环走完时，把锁打开
+        this.triggeredThisRound = false;
     }
 }

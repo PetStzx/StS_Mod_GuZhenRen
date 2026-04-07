@@ -24,7 +24,7 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int DAMAGE = 2;
-    private static final int HITS = 6;   // 初始攻击次数 6
+    private static final int HITS = 5;   // 初始攻击次数 5
     private static final int UPGRADE_PLUS_HITS = 1; // 升级后 +1 次
 
     private static final int INITIAL_RANK = 3;

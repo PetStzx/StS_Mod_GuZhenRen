@@ -13,6 +13,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
+import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import GuZhenRen.cards.*;
 import GuZhenRen.relics.*;
 import GuZhenRen.patches.*;
@@ -207,7 +209,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new XueQiGu());
         BaseMod.addCard(new ZhiXueGu());
         BaseMod.addCard(new XueZhanGu());
-        BaseMod.addCard(new XueYueGu());
+        //BaseMod.addCard(new XueYueGu());
         BaseMod.addCard(new XueYuan());
         BaseMod.addCard(new XueShouYinGu());
         BaseMod.addCard(new LengXue());
@@ -228,6 +230,22 @@ public class GuZhenRen implements
         BaseMod.addCard(new BaMianWeiFengGu());
         BaseMod.addCard(new ShiZhen());
         BaseMod.addCard(new RenRuGu());
+        BaseMod.addCard(new HuoShi());
+        BaseMod.addCard(new LongXiGu());
+        BaseMod.addCard(new YuHuo());
+        BaseMod.addCard(new FenShenGu());
+        BaseMod.addCard(new AiQingGu());
+        BaseMod.addCard(new Xian());
+        BaseMod.addCard(new TianYuanBaoLian());
+        BaseMod.addCard(new HuoYuanGu());
+        BaseMod.addCard(new TaiDuGu());
+        BaseMod.addCard(new MuJiaGu());
+        BaseMod.addCard(new TieGuGu());
+        BaseMod.addCard(new ShiYin());
+        BaseMod.addCard(new PaiNanGu());
+        BaseMod.addCard(new BianXing());
+        BaseMod.addCard(new JuGuangGu());
+        BaseMod.addCard(new JiangHeRiXiaGu());
     }
 
     @Override
@@ -249,6 +267,7 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new YanXinGu(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new DingXianYou(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new JianMei(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new HongYunQiTianGu(), CardColorEnum.GUZHENREN_GREY);
 
         BaseMod.addRelicToCustomPool(new Recipe_AngryBird(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_AngryBird.ID);
@@ -284,6 +303,14 @@ public class GuZhenRen implements
         recipeRelicIDs.add(Recipe_SanShiSanTianGuang.ID);
         BaseMod.addRelicToCustomPool(new Recipe_TianPuGuangHe(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_TianPuGuangHe.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_WanWuDaTongBian(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_WanWuDaTongBian.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_WuJinXuanGuangQi(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_WuJinXuanGuangQi.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_GuangYinFeiRen(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_GuangYinFeiRen.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_SongYouFeng(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_SongYouFeng.ID);
     }
 
     @Override
@@ -359,14 +386,29 @@ public class GuZhenRen implements
         RenRuGu.hpHistory.clear();
 
         //2. 杀招合成遗物掉落逻辑
-        if (AbstractDungeon.relicRng.randomBoolean(0.15f)) {
-            if (!recipeRelicIDs.isEmpty()) {
-                String randomID = recipeRelicIDs.get(AbstractDungeon.relicRng.random(recipeRelicIDs.size() - 1));
-                boolean hasRelic = AbstractDungeon.player.hasRelic(randomID);
+        if (AbstractDungeon.player instanceof FangYuan) {
+            // 默认普通战斗掉落率为 15%
+            float dropRate = 0.15f;
 
-                if (!hasRelic) {
-                    AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
-                    room.rewards.add(new RewardItem(relic));
+            // 判断房间类型，动态修改掉落率
+            if (room instanceof MonsterRoomBoss) {
+                dropRate = 1.00f; // Boss战 100%
+            } else if (room instanceof MonsterRoomElite) {
+                dropRate = 0.50f; // 精英战 50%
+            }
+
+            // 根据当前的掉落率进行随机判定
+            if (AbstractDungeon.relicRng.randomBoolean(dropRate)) {
+                if (!recipeRelicIDs.isEmpty()) {
+                    // 随机抽取一个杀招配方
+                    String randomID = recipeRelicIDs.get(AbstractDungeon.relicRng.random(recipeRelicIDs.size() - 1));
+                    boolean hasRelic = AbstractDungeon.player.hasRelic(randomID);
+
+                    // 如果玩家身上还没有这个配方，则作为奖励掉落
+                    if (!hasRelic) {
+                        AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
+                        room.rewards.add(new RewardItem(relic));
+                    }
                 }
             }
         }

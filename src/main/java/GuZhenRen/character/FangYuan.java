@@ -1,13 +1,13 @@
 package GuZhenRen.character;
 
 import GuZhenRen.GuZhenRen;
-import GuZhenRen.cards.AbstractGuZhenRenCard;
 import GuZhenRen.cards.*;
 import GuZhenRen.patches.AbstractPlayerEnum;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.relics.KongQiao_1;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,37 +15,40 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.events.city.Vampires;
+import com.megacrit.cardcrawl.cutscenes.CutscenePanel;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class FangYuan extends CustomPlayer {
     // 1. 注册角色字符串ID
     public static final String ID = GuZhenRen.makeID("FangYuan");
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
 
+    private static final UIStrings eventStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("CharacterEvents"));
+
     // 2. 能量球纹理
-    // 请确保你已将原版提取的图片放入 resources/GuZhenRen/img/ui/orb/ 文件夹中
     private static final String[] ORB_TEXTURES = {
-            GuZhenRen.assetPath("img/ui/orb/1.png"),      // 原版文件名是 1.png
+            GuZhenRen.assetPath("img/ui/orb/1.png"),
             GuZhenRen.assetPath("img/ui/orb/2.png"),
             GuZhenRen.assetPath("img/ui/orb/3.png"),
             GuZhenRen.assetPath("img/ui/orb/4.png"),
             GuZhenRen.assetPath("img/ui/orb/5.png"),
-            GuZhenRen.assetPath("img/ui/orb/border.png"), // 边框
-            GuZhenRen.assetPath("img/ui/orb/1d.png"),     // 耗尽状态
+            GuZhenRen.assetPath("img/ui/orb/border.png"),
+            GuZhenRen.assetPath("img/ui/orb/1d.png"),
             GuZhenRen.assetPath("img/ui/orb/2d.png"),
             GuZhenRen.assetPath("img/ui/orb/3d.png"),
             GuZhenRen.assetPath("img/ui/orb/4d.png"),
             GuZhenRen.assetPath("img/ui/orb/5d.png")
     };
 
-    // 3. 能量球特效路径 (请确保提取了 energyRedVFX.png 并重命名为 vfx.png 或者是保留原名)
-    // 这里假设你把它重命名为了 vfx.png 放在了同级目录，如果没改名，请填 "img/ui/orb/energyRedVFX.png"
+    // 3. 能量球特效路径
     private static final String ORB_VFX = GuZhenRen.assetPath("img/ui/orb/vfx.png");
 
     // 4. 能量球每层的转速
@@ -59,7 +62,6 @@ public class FangYuan extends CustomPlayer {
         this.dialogY = (this.drawY + 220.0F * Settings.scale);
 
         // 6. 初始化角色设置
-        // 确保 Idle.png 存在
         initializeClass(
                 GuZhenRen.assetPath("img/character/FangYuan/Idle.png"),
                 GuZhenRen.assetPath("img/character/FangYuan/shoulder2.png"),
@@ -71,7 +73,6 @@ public class FangYuan extends CustomPlayer {
         );
     }
 
-    // 初始卡组
     @Override
     public ArrayList<String> getStartingDeck() {
         ArrayList<String> retVal = new ArrayList<>();
@@ -87,7 +88,6 @@ public class FangYuan extends CustomPlayer {
         return retVal;
     }
 
-    // 初始遗物
     @Override
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
@@ -95,7 +95,6 @@ public class FangYuan extends CustomPlayer {
         return retVal;
     }
 
-    // 角色配置信息
     @Override
     public CharSelectInfo getLoadout() {
         return new CharSelectInfo(
@@ -163,18 +162,8 @@ public class FangYuan extends CustomPlayer {
     }
 
     @Override
-    public String getSpireHeartText() {
-        return characterStrings.TEXT[1];
-    }
-
-    @Override
     public Color getSlashAttackColor() {
         return Color.GRAY;
-    }
-
-    @Override
-    public String getVampireText() {
-        return Vampires.DESCRIPTIONS[0];
     }
 
     @Override
@@ -189,14 +178,37 @@ public class FangYuan extends CustomPlayer {
     @Override
     public void applyStartOfCombatPreDrawLogic() {
         super.applyStartOfCombatPreDrawLogic();
-
-        // 遍历当前的抽牌堆（此时所有的牌都在抽牌堆里）
-        for (AbstractCard c : AbstractDungeon.player.drawPile.group) {
-            if (c instanceof AbstractGuZhenRenCard) {
-                // 对每一张蛊真人牌，执行费用锁定
-                ((AbstractGuZhenRenCard) c).applyRankLock();
-            }
-        }
     }
 
+    // =========================================================================
+    //  文本与动画防崩溃专区：规范化读取 UIStrings，复用原版图像
+    // =========================================================================
+
+    @Override
+    public String getSpireHeartText() {
+        // 读取 JSON 中的占位文本，用于攻击心脏
+        return eventStrings.TEXT[0];
+    }
+
+    @Override
+    public String getVampireText() {
+        return CardCrawlGame.languagePack.getEventString("Vampires").DESCRIPTIONS[0];
+    }
+
+
+    @Override
+    public Texture getCutsceneBg() {
+        return ImageMaster.loadImage("images/scenes/redBg.jpg");
+    }
+
+    @Override
+    public List<CutscenePanel> getCutscenePanels() {
+        List<CutscenePanel> panels = new ArrayList<>();
+
+        panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene1.png"), "WATCHER_HEART_PUNCH"));
+        panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene2.png")));
+        panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene3.png")));
+
+        return panels;
+    }
 }

@@ -1,7 +1,7 @@
 {
   "GuZhenRen:AssembleOption": {
     "TEXT": [
-      "杀招",
+      "杀招（不消耗行动）",
       "将蛊虫组并成一记杀招。",
       "未习得杀招或缺少所需的蛊虫。",
       "返回",
@@ -46,7 +46,7 @@
   "GuZhenRen:BenMingGuScreen": {
     "TEXT": [
       "选择你的本命蛊",
-      "失去33%生命上限"
+      "失去33%最大生命"
     ]
   },
   "GuZhenRen:ActionUI": {
@@ -63,6 +63,11 @@
   "GuZhenRen:RecipeUI": {
     "TEXT": [
       "未知材料"
+    ]
+  },
+  "GuZhenRen:CharacterEvents": {
+    "TEXT": [
+      "你催动一身蛊虫……"
     ]
   }
 }

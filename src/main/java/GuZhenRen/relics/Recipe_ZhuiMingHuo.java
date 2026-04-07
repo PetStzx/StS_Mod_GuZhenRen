@@ -42,7 +42,7 @@ public class Recipe_ZhuiMingHuo extends AbstractRecipeRelic {
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (任意炎道蛊虫，1-9转)
+    //  步骤 2：泛型材料 (任意炎道仙蛊)
     // =========================================================================
 
     @Override
@@ -58,19 +58,14 @@ public class Recipe_ZhuiMingHuo extends AbstractRecipeRelic {
                 return false;
             }
 
-            // 判定 2: 必须是【蛊虫】(继承自 AbstractGuZhenRenCard)
-            if (!(c instanceof AbstractGuZhenRenCard)) {
-                return false;
+
+            // 判定 2: 必须是仙蛊，转数 >= 6
+            if (c instanceof AbstractGuZhenRenCard) {
+                int rank = ((AbstractGuZhenRenCard) c).rank;
+                return rank >= 6;
             }
 
-            // 判定 3: 必须拥有 1-9 的转数
-            int rank = ((AbstractGuZhenRenCard) c).rank;
-            if (rank < 1 || rank > 9) {
-                return false;
-            }
-
-
-            return true;
+            return false;
         }
         return false;
     }

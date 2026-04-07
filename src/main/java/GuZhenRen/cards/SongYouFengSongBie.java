@@ -16,7 +16,7 @@ public class SongYouFengSongBie extends AbstractShaZhaoCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/SongYouFengSongBie.png");
 
-    private static final int COST = 1;
+    private static final int COST = 0;
     private static final int MAGIC = 2; // 给 2 层消逝
 
     public SongYouFengSongBie() {
@@ -28,6 +28,7 @@ public class SongYouFengSongBie extends AbstractShaZhaoCard {
         this.baseMagicNumber = this.magicNumber = MAGIC;
 
         this.exhaust = true; // 消耗
+        this.isEthereal = true;  //虚无
     }
 
     @Override

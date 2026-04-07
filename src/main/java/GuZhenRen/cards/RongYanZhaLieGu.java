@@ -20,9 +20,9 @@ public class RongYanZhaLieGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/RongYanZhaLieGu.png");
 
     private static final int COST = 2;
-    private static final int DAMAGE = 6;
+    private static final int DAMAGE = 7;
     private static final int UPGRADE_PLUS_DMG = 2;
-    private static final int MAGIC_AMT = 6;
+    private static final int MAGIC_AMT = 7;
     private static final int UPGRADE_MAGIC_AMT = 2;
     private static final int INITIAL_RANK = 3;
 

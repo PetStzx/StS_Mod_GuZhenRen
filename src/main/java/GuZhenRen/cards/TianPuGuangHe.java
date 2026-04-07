@@ -17,7 +17,7 @@ public class TianPuGuangHe extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TianPuGuangHe.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 150;
+    private static final int MAGIC = 3;
 
     public TianPuGuangHe() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -25,19 +25,15 @@ public class TianPuGuangHe extends AbstractShaZhaoCard {
                 CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.GUANG_DAO);
-
         this.baseMagicNumber = this.magicNumber = MAGIC;
-        this.exhaust = true; // 消耗
+        this.exhaust = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 除以 25 换算成层数 (150% -> 6层)
-        int powerStacks = this.magicNumber / 25;
-
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!mo.isDeadOrEscaped()) {
-                this.addToBot(new ApplyPowerAction(mo, p, new TaiGuRongYaoZhiGuangPower(mo, powerStacks), powerStacks));
+                this.addToBot(new ApplyPowerAction(mo, p, new TaiGuRongYaoZhiGuangPower(mo, this.magicNumber), this.magicNumber));
             }
         }
     }

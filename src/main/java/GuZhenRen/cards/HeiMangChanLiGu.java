@@ -23,7 +23,7 @@ public class HeiMangChanLiGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 2;
     private static final int WEAK = 2;
-    private static final int CONSTRICT = 5;
+    private static final int CONSTRICT = 4;
 
     public HeiMangChanLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -59,8 +59,8 @@ public class HeiMangChanLiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(2); // 虚弱 +2
-            this.upgradeSecondMagicNumber(3); // 缠绕 +3
+            this.upgradeMagicNumber(1); // 虚弱 +1
+            this.upgradeSecondMagicNumber(2); // 缠绕 +2
             this.upgradeRank(1);
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;

@@ -22,11 +22,11 @@ public class XueHeMang extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueHeMang.png");
 
-    private static final int COST = 1;
-    private static final int DAMAGE = 7;
-    private static final int UPGRADE_PLUS_DAMAGE = 2; // 7 -> 9
-    private static final int MAGIC = 3; // 初始每次加 3 伤
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后每次加 4 伤
+    private static final int COST = 2;
+    private static final int DAMAGE = 14;
+    private static final int UPGRADE_PLUS_DAMAGE = 4; // 14 -> 18
+    private static final int MAGIC = 4; // 初始每次加 4 伤
+    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后每次加 6 伤
     private static final int INITIAL_RANK = 4;
 
     public XueHeMang() {

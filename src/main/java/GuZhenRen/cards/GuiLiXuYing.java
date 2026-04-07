@@ -25,7 +25,7 @@ public class GuiLiXuYing extends AbstractXuYingCard {
                 CardColorEnum.GUZHENREN_GREY,
                 CardTarget.SELF);
 
-        this.baseChanceFloat = 0.35f;
+        this.baseChanceFloat = 0.30f;
         this.baseBlock = this.block = BASE_BLOCK;
         this.initializeDescription();
     }
@@ -66,7 +66,7 @@ public class GuiLiXuYing extends AbstractXuYingCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBlock(1); // 基础格挡 3 -> 4
-            this.baseChanceFloat = 0.50f; // 概率 35% -> 50%
+            this.baseChanceFloat = 0.40f; // 概率 30% -> 40%
             this.initializeDescription();
         }
     }

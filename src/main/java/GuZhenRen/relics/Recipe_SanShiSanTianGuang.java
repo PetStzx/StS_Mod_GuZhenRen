@@ -2,8 +2,8 @@ package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.AbstractGuZhenRenCard;
-import GuZhenRen.cards.GuangGu; // 固定材料：光蛊
-import GuZhenRen.cards.SanShiSanTianGuang; // 奖励牌：三十三天光
+import GuZhenRen.cards.JiangHeRiXiaGu;
+import GuZhenRen.cards.SanShiSanTianGuang;
 import GuZhenRen.patches.GuZhenRenTags;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
@@ -24,25 +24,21 @@ public class Recipe_SanShiSanTianGuang extends AbstractRecipeRelic {
         return DESCRIPTIONS[0];
     }
 
-    // =========================================================================
-    //  步骤 1：固定材料 (光蛊)
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(GuangGu.ID); // 第一个固定位：光蛊
+        list.add(JiangHeRiXiaGu.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
-        // 光蛊不需要升级 (任何转数都可以)
+        if (cardID.equals(JiangHeRiXiaGu.ID)) {
+            return true;
+        }
         return false;
     }
 
-    // =========================================================================
-    //  步骤 2：泛型材料 (任意光道蛊虫)
-    // =========================================================================
     @Override
     public int getIngredientCount() {
         return 2;
@@ -50,13 +46,11 @@ public class Recipe_SanShiSanTianGuang extends AbstractRecipeRelic {
 
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
-        if (index == 1) { // 第二个材料槽
-            // 判定 1: 必须有【光道】标签
+        if (index == 1) {
             if (!c.hasTag(GuZhenRenTags.GUANG_DAO)) {
                 return false;
             }
 
-            // 判定 2: 必须是蛊虫
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
                 return rank >= 1 && rank <= 9;
@@ -75,9 +69,6 @@ public class Recipe_SanShiSanTianGuang extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
-    //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

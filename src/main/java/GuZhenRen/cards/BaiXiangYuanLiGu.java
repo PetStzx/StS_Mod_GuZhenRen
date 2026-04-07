@@ -23,10 +23,9 @@ public class BaiXiangYuanLiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/BaiXiangYuanLiGu.png");
 
     private static final int COST = 2;
-    private static final int DAMAGE = 8;
-    private static final int UPGRADE_PLUS_DAMAGE = 4; // 升级伤害 8 -> 12
-    private static final int MAGIC = 1;
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级力量 1 -> 2
+    private static final int DAMAGE = 10;
+    private static final int UPGRADE_PLUS_DAMAGE = 4; // 升级伤害 10 -> 14
+    private static final int MAGIC = 2;
     private static final int INITIAL_RANK = 4;
 
     public BaiXiangYuanLiGu() {
@@ -64,7 +63,7 @@ public class BaiXiangYuanLiGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            // 移除了 upgradeMagicNumber
             this.upgradeRank(1);
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;

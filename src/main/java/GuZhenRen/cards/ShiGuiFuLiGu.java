@@ -19,8 +19,8 @@ public class ShiGuiFuLiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ShiGuiFuLiGu.png");
 
     private static final int COST = 2;
-    private static final int BLOCK = 10;
-    private static final int UPGRADE_PLUS_BLOCK = 5; // 升级后+5，总共15
+    private static final int BLOCK = 11;
+    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后+3，总共14
     private static final int INITIAL_RANK = 3;
 
     public ShiGuiFuLiGu() {

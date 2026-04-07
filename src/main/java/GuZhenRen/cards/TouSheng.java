@@ -16,8 +16,8 @@ public class TouSheng extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TouSheng.png");
 
     private static final int COST = 3;
-    private static final int MAGIC = 2; // 默认偷 1 点
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后偷 3 点
+    private static final int MAGIC = 1; // 默认偷 1 点
+    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后偷 2 点
 
     private static final int INITIAL_RANK = 8; // 8转仙蛊
 

@@ -183,8 +183,8 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         StringBuilder sb = new StringBuilder();
         String separator = (TEXT.length > 9) ? TEXT[9] : " . ";
 
-        sb.append("guzhenren:").append(TEXT[12]).append(separator);
-        sb.append("guzhenren:").append(TAG_TEXT[3]).append(separator).append(" NL ");
+        sb.append("guzhenren:").append(TEXT[12].replace(" ", "_")).append(separator);
+        sb.append("guzhenren:").append(TAG_TEXT[3].replace(" ", "_")).append(separator).append(" NL ");
 
         sb.append(this.myBaseDescription.replace("{CHANCE}", ProbabilityHelper.getDynamicColorString(this, this.baseChanceFloat)));
 

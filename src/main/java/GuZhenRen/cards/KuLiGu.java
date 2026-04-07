@@ -22,7 +22,7 @@ public class KuLiGu extends AbstractGuZhenRenCard {
     private static final int UPGRADE_THRESHOLD = -2;
     private static final int INITIAL_RANK = 4;
 
-    // 【关键】状态开关：控制是否显示括号
+    // 状态开关：控制是否显示括号
     // 默认为 false，保证在图鉴、商店、弃牌堆里不显示
     private boolean showDynamicText = false;
 

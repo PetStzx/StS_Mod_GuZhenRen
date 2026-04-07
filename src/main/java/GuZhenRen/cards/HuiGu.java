@@ -3,6 +3,7 @@ package GuZhenRen.cards;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.AbstractPlayerEnum;
 import GuZhenRen.patches.CardColorEnum;
+import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -43,6 +44,7 @@ public class HuiGu extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new HuiGuAction(this.magicNumber));
+
         if (p.chosenClass != AbstractPlayerEnum.FANG_YUAN) {
             this.addToBot(new MakeTempCardInHandAction(new Regret(), 1));
         }
@@ -75,15 +77,19 @@ public class HuiGu extends AbstractGuZhenRenCard {
                     return;
                 }
 
+                // 快速分支：消耗堆牌数小于等于捞取数量，直接全部捞回
                 if (AbstractDungeon.player.exhaustPile.size() <= this.amount) {
                     ArrayList<AbstractCard> cardsToRetrieve = new ArrayList<>(AbstractDungeon.player.exhaustPile.group);
                     for (AbstractCard c : cardsToRetrieve) {
-                        retrieveCard(c);
+                        retrieveCard(c); // 这里依然会调用检测逻辑！
                     }
+                    // 修复：补上手牌排版刷新，防止卡牌视觉重叠
+                    AbstractDungeon.player.hand.refreshHandLayout();
                     this.isDone = true;
                     return;
                 }
 
+                // 正常分支：打开选牌界面
                 String msg = String.format(HuiGu.cardStrings.EXTENDED_DESCRIPTION[0], this.amount);
                 AbstractDungeon.gridSelectScreen.open(
                         AbstractDungeon.player.exhaustPile,
@@ -98,9 +104,10 @@ public class HuiGu extends AbstractGuZhenRenCard {
                 return;
             }
 
+            // 处理选牌界面的返回结果
             if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                    retrieveCard(c);
+                    retrieveCard(c); // 这里也会调用检测逻辑！
                 }
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 AbstractDungeon.player.hand.refreshHandLayout();
@@ -109,14 +116,35 @@ public class HuiGu extends AbstractGuZhenRenCard {
             this.isDone = true;
         }
 
+        // 统一的捞牌与判定处理逻辑
         private void retrieveCard(AbstractCard c) {
             c.unhover();
             c.fadingOut = false;
+
             if (AbstractDungeon.player.exhaustPile.contains(c)) {
                 AbstractDungeon.player.exhaustPile.removeCard(c);
-                AbstractDungeon.player.hand.addToHand(c);
-                c.setCostForTurn(0);
-                c.flash();
+
+                // 1. 先塞悔恨（瞬间结算），动态获取 BaseMod.MAX_HAND_SIZE
+                if (c.cardID.equals(HuiGu.ID)) {
+                    AbstractCard regret = new Regret();
+                    if (AbstractDungeon.player.hand.size() < BaseMod.MAX_HAND_SIZE) {
+                        AbstractDungeon.player.hand.addToHand(regret);
+                        regret.flash();
+                    } else {
+                        AbstractDungeon.player.createHandIsFullDialog();
+                        AbstractDungeon.player.discardPile.addToTop(regret);
+                    }
+                }
+
+                // 2. 再塞目标牌
+                if (AbstractDungeon.player.hand.size() < BaseMod.MAX_HAND_SIZE) {
+                    AbstractDungeon.player.hand.addToHand(c);
+                    c.setCostForTurn(0);
+                    c.flash();
+                } else {
+                    AbstractDungeon.player.createHandIsFullDialog();
+                    AbstractDungeon.player.discardPile.addToTop(c);
+                }
             }
             c.applyPowers();
         }

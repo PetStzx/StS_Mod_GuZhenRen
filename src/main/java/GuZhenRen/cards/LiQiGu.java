@@ -24,7 +24,7 @@ public class LiQiGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.RARE,
                 CardTarget.SELF);
 
         this.setDao(Dao.LI_DAO);

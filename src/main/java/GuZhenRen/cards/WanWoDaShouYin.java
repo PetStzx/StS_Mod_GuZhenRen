@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class WanWoDaShouYin extends AbstractShaZhaoCard {
 
@@ -19,6 +20,7 @@ public class WanWoDaShouYin extends AbstractShaZhaoCard {
 
     private static final int COST = 2;
     private static final int BASE_DAMAGE = 24;
+    private static final int MAGIC = 8; // 8倍力量
 
     public WanWoDaShouYin() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -26,50 +28,45 @@ public class WanWoDaShouYin extends AbstractShaZhaoCard {
                 CardTarget.ALL_ENEMY);
 
         this.baseDamage = BASE_DAMAGE;
-        this.isMultiDamage = true; // 标记为群体伤害
+        this.baseMagicNumber = this.magicNumber = MAGIC;
+        this.isMultiDamage = true;
 
         // 杀招流派设定
         this.setDao(Dao.LI_DAO);
     }
 
-    // =========================================================================
-    // 满血三倍伤害
-    // =========================================================================
     @Override
     public void applyPowers() {
-        super.applyPowers(); // 先让引擎计算所有的力量、虚弱等常规加成
+        AbstractPlayer p = AbstractDungeon.player;
+        int realBaseDamage = this.baseDamage;
 
-        if (this.multiDamage != null) {
-            // 遍历房间里的所有怪物，单独修改伤害数组
-            for (int i = 0; i < AbstractDungeon.getCurrRoom().monsters.monsters.size(); i++) {
-                AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.monsters.get(i);
-                if (m != null && !m.isDeadOrEscaped() && m.currentHealth == m.maxHealth) {
-                    this.multiDamage[i] *= 3; // 满血怪受到 3 倍伤害
-                }
-            }
+        if (p != null && p.hasPower(StrengthPower.POWER_ID)) {
+            int strAmt = p.getPower(StrengthPower.POWER_ID).amount;
+            this.baseDamage += strAmt * (this.magicNumber - 1);
         }
+
+        super.applyPowers();
+
+        this.baseDamage = realBaseDamage;
+        this.isDamageModified = (this.damage != this.baseDamage);
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
+        AbstractPlayer p = AbstractDungeon.player;
+        int realBaseDamage = this.baseDamage;
+
+        if (p != null && p.hasPower(StrengthPower.POWER_ID)) {
+            int strAmt = p.getPower(StrengthPower.POWER_ID).amount;
+            this.baseDamage += strAmt * (this.magicNumber - 1);
+        }
+
         super.calculateCardDamage(mo);
 
-        if (this.multiDamage != null) {
-            for (int i = 0; i < AbstractDungeon.getCurrRoom().monsters.monsters.size(); i++) {
-                AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.monsters.get(i);
-                if (m != null && !m.isDeadOrEscaped() && m.currentHealth == m.maxHealth) {
-                    this.multiDamage[i] *= 3;
-                }
-            }
-        }
-
-        // 当玩家鼠标悬停在某一只特定的怪物上时，修改牌面显示的绿色大数字
-        if (mo != null && mo.currentHealth == mo.maxHealth) {
-            this.damage *= 3;
-        }
-
+        this.baseDamage = realBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
     }
+
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {

@@ -26,8 +26,8 @@ public class XueShenZi extends AbstractGuZhenRenCard {
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueShenZi.png");
 
-    private static final int COST = 1;
-    private static final int INITIAL_DAMAGE = 1;
+    private static final int COST = 0;
+    private static final int INITIAL_DAMAGE = 6;
     private static final int HP_LOSS = 6;
     private static final int DAMAGE_GROWTH = 6;
     private static final int INITIAL_RANK = 5;

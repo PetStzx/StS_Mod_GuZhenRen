@@ -3,7 +3,7 @@ package GuZhenRen.cards;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.powers.HaoYouPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction; // 【修改点1】：引入弃牌堆动作
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -34,7 +34,7 @@ public class SongYouFeng extends AbstractShaZhaoCard {
         // 1. 结交好友
         this.addToBot(new ApplyPowerAction(m, p, new HaoYouPower(m)));
 
-        // 2. 将“送别”随机洗入抽牌堆
-        this.addToBot(new MakeTempCardInDrawPileAction(this.cardsToPreview.makeStatEquivalentCopy(), 1, true, true));
+        // 2. 将“送别”放入弃牌堆
+        this.addToBot(new MakeTempCardInDiscardAction(this.cardsToPreview.makeStatEquivalentCopy(), 1));
     }
 }

@@ -18,9 +18,9 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WuZuNiao.png");
 
     private static final int COST = 1;
-    private static final int BLOCK = 6;
-    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 6 -> 9
-    private static final int MAGIC = 2; // 2 层残影
+    private static final int BLOCK = 7;
+    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 7 -> 10
+    private static final int MAGIC = 1; // 修改为 1 层残影
     private static final int INITIAL_RANK = 3;
 
     public WuZuNiao() {
@@ -36,8 +36,7 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
         this.baseBlock = this.block = BLOCK;
         this.baseMagicNumber = this.magicNumber = MAGIC;
 
-        this.isEthereal = true;
-        this.exhaust = true;
+        this.isEthereal = true; // 虚无
     }
 
     @Override
@@ -45,7 +44,7 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
         // 1. 获得格挡
         this.addToBot(new GainBlockAction(p, p, this.block));
 
-        // 2. 获得 2 层残影
+        // 2. 获得 1 层残影
         this.addToBot(new ApplyPowerAction(p, p, new BlurPower(p, this.magicNumber), this.magicNumber));
     }
 

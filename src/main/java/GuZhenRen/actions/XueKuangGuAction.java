@@ -8,14 +8,13 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 public class XueKuangGuAction extends AbstractGameAction {
-    private int amount;
+    private AbstractCard leftCard;
+    private AbstractCard rightCard;
 
-    public XueKuangGuAction(int amount) {
-        this.amount = amount;
+    public XueKuangGuAction(AbstractCard leftCard, AbstractCard rightCard) {
+        this.leftCard = leftCard;
+        this.rightCard = rightCard;
         this.actionType = ActionType.CARD_MANIPULATION;
         this.duration = Settings.ACTION_DUR_FAST;
     }
@@ -23,23 +22,20 @@ public class XueKuangGuAction extends AbstractGameAction {
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
-            ArrayList<AbstractCard> eligibleCards = new ArrayList<>();
-            for (AbstractCard c : AbstractDungeon.player.hand.group) {
-                if (!CardModifierManager.hasModifier(c, XueKuangGu.XueKuangModifier.MODIFIER_ID)) {
-                    eligibleCards.add(c);
+
+            // 判定左侧卡牌是否合法
+            if (this.leftCard != null && AbstractDungeon.player.hand.contains(this.leftCard)) {
+                if (!CardModifierManager.hasModifier(this.leftCard, XueKuangGu.XueKuangModifier.MODIFIER_ID)) {
+                    CardModifierManager.addModifier(this.leftCard, new XueKuangGu.XueKuangModifier());
+                    this.leftCard.superFlash(Color.SCARLET.cpy());
                 }
             }
 
-            if (!eligibleCards.isEmpty()) {
-                Collections.shuffle(eligibleCards, new java.util.Random(AbstractDungeon.cardRandomRng.randomLong()));
-                int cardsToModify = Math.min(this.amount, eligibleCards.size());
-
-                for (int i = 0; i < cardsToModify; i++) {
-                    AbstractCard c = eligibleCards.get(i);
-
-                    // 打词条和播放特效
-                    CardModifierManager.addModifier(c, new XueKuangGu.XueKuangModifier());
-                    c.superFlash(Color.SCARLET.cpy());
+            // 判定右侧卡牌是否合法
+            if (this.rightCard != null && AbstractDungeon.player.hand.contains(this.rightCard)) {
+                if (!CardModifierManager.hasModifier(this.rightCard, XueKuangGu.XueKuangModifier.MODIFIER_ID)) {
+                    CardModifierManager.addModifier(this.rightCard, new XueKuangGu.XueKuangModifier());
+                    this.rightCard.superFlash(Color.SCARLET.cpy());
                 }
             }
         }

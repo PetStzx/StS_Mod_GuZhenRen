@@ -32,7 +32,7 @@ public class ShengJiYe extends CustomPotion {
 
     public ShengJiYe() {
         // PotionSize.T (管状), PotionColor.GREEN (绿色)
-        super(NAME, POTION_ID, PotionRarity.COMMON, PotionSize.T, PotionColor.GREEN);
+        super(NAME, POTION_ID, PotionRarity.PLACEHOLDER, PotionSize.T, PotionColor.GREEN);
 
         this.isThrown = false;
 

@@ -1,0 +1,73 @@
+{
+  "GuZhenRen:AssembleOption": {
+    "TEXT": [
+      "Killer Move (Free Action)",
+      "Assemble Gu worms into a killer move.",
+      "No killer move learned or missing required Gu worms.",
+      "Return",
+      "No killer moves available to assemble (Missing Gu worms or unlearned).",
+      "Select a killer move to assemble",
+      "Select Gu worm: %s"
+    ]
+  },
+  "GuZhenRen:CardGlobalText": {
+    "TEXT": [
+      "Rank 1", "Rank 2", "Rank 3", "Rank 4", "Rank 5",
+      "Rank 6", "Rank 7", "Rank 8", "Rank 9",
+      " . ",
+      "Light Path",
+      "Fire Path",
+      "Strength Path",
+      "Metal Path",
+      "Theft Path",
+      "Wood Path",
+      "Food Path",
+      "Killing Path",
+      "Bone Path",
+      "Rule Path",
+      "Wisdom Path",
+      "Transformation Path",
+      "Yin Yang Path",
+      "Sword Path",
+      "Blood Path",
+      "Luck Path",
+      "Wind Path",
+      "Time Path"
+    ]
+  },
+  "GuZhenRen:CardTags": {
+    "TEXT": [
+      "Vital Gu",
+      "Immortal Gu",
+      "Killer Move",
+      "Phantom"
+    ]
+  },
+  "GuZhenRen:BenMingGuScreen": {
+    "TEXT": [
+      "Choose your Vital Gu",
+      "Lose 33% Max HP"
+    ]
+  },
+  "GuZhenRen:ActionUI": {
+    "TEXT": [
+      "Immortal Gu are unique!"
+    ]
+  },
+  "GuZhenRen:KongQiaoUI": {
+    "TEXT": [
+      " Requires #b%d more #yCultivation to break through.",
+      "Cultivation"
+    ]
+  },
+  "GuZhenRen:RecipeUI": {
+    "TEXT": [
+      "Unknown Material"
+    ]
+  },
+  "GuZhenRen:CharacterEvents": {
+    "TEXT": [
+      "You activate all your Gu worms..."
+    ]
+  }
+}

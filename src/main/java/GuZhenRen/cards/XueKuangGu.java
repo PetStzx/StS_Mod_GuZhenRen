@@ -21,13 +21,14 @@ public class XueKuangGu extends AbstractGuZhenRenCard {
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueKuangGu.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 2;
-    private static final int UPGRADE_PLUS_MAGIC = 1;
     private static final int INITIAL_RANK = 4;
+
+    // 缓存两侧的卡牌
+    private AbstractCard leftCard = null;
+    private AbstractCard rightCard = null;
 
     public XueKuangGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,22 +38,31 @@ public class XueKuangGu extends AbstractGuZhenRenCard {
                 CardTarget.SELF);
 
         this.setDao(Dao.XUE_DAO);
-        this.baseMagicNumber = this.magicNumber = MAGIC;
         this.setRank(INITIAL_RANK);
     }
 
     @Override
+    public void update() {
+        super.update();
+        // 每帧实时获取当前在手牌中的左右邻居，确保打出瞬间能精准抓取
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hand.contains(this)) {
+            int index = AbstractDungeon.player.hand.group.indexOf(this);
+            this.leftCard = (index > 0) ? AbstractDungeon.player.hand.group.get(index - 1) : null;
+            this.rightCard = (index < AbstractDungeon.player.hand.group.size() - 1) ? AbstractDungeon.player.hand.group.get(index + 1) : null;
+        }
+    }
+
+    @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new XueKuangGuAction(this.magicNumber));
+        // 将刚才缓存好的邻居直接传给 Action
+        this.addToBot(new XueKuangGuAction(this.leftCard, this.rightCard));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
-            this.upgradeRank(1);
-            this.myBaseDescription = UPGRADE_DESCRIPTION;
+            this.upgradeBaseCost(0); // 【修改点】：升级后减为 0 费
             this.initializeDescription();
         }
     }

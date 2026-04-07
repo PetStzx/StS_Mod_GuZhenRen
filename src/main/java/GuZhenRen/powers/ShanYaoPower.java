@@ -5,6 +5,7 @@ import GuZhenRen.cards.SanShiSanTianGuang;
 import GuZhenRen.patches.GuZhenRenTags;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -38,7 +39,7 @@ public class ShanYaoPower extends AbstractPower {
         this.region128 = new TextureAtlas.AtlasRegion(texLarge, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(texSmall, 0, 0, 32, 32);
 
-        updateDescription();
+        this.updateDescription();
     }
 
     @Override
@@ -53,8 +54,15 @@ public class ShanYaoPower extends AbstractPower {
     @Override
     public void onUseCard(AbstractCard card, com.megacrit.cardcrawl.actions.utility.UseCardAction action) {
         if (card.hasTag(GuZhenRenTags.GUANG_DAO) && card.type == AbstractCard.CardType.ATTACK) {
-            this.flash();
-            this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
+            AbstractPower riGuang = this.owner.getPower(RiGuangPower.POWER_ID);
+
+            if (riGuang != null) {
+                riGuang.flash();
+                this.addToBot(new ReducePowerAction(this.owner, this.owner, riGuang, 1));
+            } else {
+                this.flash();
+                this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
+            }
         }
     }
 
@@ -63,7 +71,6 @@ public class ShanYaoPower extends AbstractPower {
         int percentage = (int)(this.amount * MULTIPLIER_PER_STACK * 100);
         this.description = DESCRIPTIONS[0] + percentage + DESCRIPTIONS[1];
     }
-
 
     @Override
     public void onInitialApplication() {
@@ -74,7 +81,6 @@ public class ShanYaoPower extends AbstractPower {
     public void stackPower(int stackAmount) {
         super.stackPower(stackAmount);
         SanShiSanTianGuang.totalShanYaoGainedThisCombat += stackAmount;
-
         this.updateDescription();
     }
 }

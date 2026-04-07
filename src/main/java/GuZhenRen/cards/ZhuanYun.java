@@ -18,8 +18,8 @@ public class ZhuanYun extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ZhuanYun.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 3;
-    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后增加 2，变为 5
+    private static final int MAGIC = 4;
+    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后增加 2，变为 6
     private static final int INITIAL_RANK = 6;
 
     public ZhuanYun() {

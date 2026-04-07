@@ -18,10 +18,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RenGu extends AbstractBenMingGuCard {
     public static final String ID = GuZhenRen.makeID("RenGu");
-    // 【修改】改为 public static
     public static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -93,6 +94,15 @@ public class RenGu extends AbstractBenMingGuCard {
 
                 boolean doUpgrade = (rank >= 5);
 
+                Set<String> playerXianGuIDs = new HashSet<>();
+                if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck != null) {
+                    for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                        if (c instanceof AbstractGuZhenRenCard && ((AbstractGuZhenRenCard) c).isXianGu()) {
+                            playerXianGuIDs.add(c.cardID);
+                        }
+                    }
+                }
+
                 ArrayList<AbstractCard> validCards = new ArrayList<>();
                 for (AbstractCard c : CardLibrary.getAllCards()) {
                     if (c instanceof AbstractGuZhenRenCard) {
@@ -106,6 +116,15 @@ public class RenGu extends AbstractBenMingGuCard {
                             if (poolType == 1 && c.rarity == CardRarity.COMMON) match = true;
                             if (poolType == 2 && (c.rarity == CardRarity.COMMON || c.rarity == CardRarity.UNCOMMON)) match = true;
                             if (poolType == 3 && (c.rarity == CardRarity.COMMON || c.rarity == CardRarity.UNCOMMON || c.rarity == CardRarity.RARE)) match = true;
+
+                            if (match) {
+                                int simulatedRank = Math.min(9, guCard.baseRank + (doUpgrade ? 1 : 0));
+                                boolean simulatedXianGu = guCard.hasTag(GuZhenRenTags.XIAN_GU) || simulatedRank >= 6;
+
+                                if (simulatedXianGu && playerXianGuIDs.contains(guCard.cardID)) {
+                                    match = false;
+                                }
+                            }
 
                             if (match) {
                                 validCards.add(c.makeCopy());
@@ -130,7 +149,6 @@ public class RenGu extends AbstractBenMingGuCard {
 
                 if (choices == 1 || group.size() == 1) {
                     AbstractCard c = group.getTopCard();
-                    ((AbstractGuZhenRenCard) c).isRankLocked = true;
                     c.setCostForTurn(0);
                     processSelectedCard(c);
                     this.isDone = true;
@@ -147,10 +165,6 @@ public class RenGu extends AbstractBenMingGuCard {
                 if (AbstractDungeon.cardRewardScreen.discoveryCard != null) {
 
                     AbstractCard c = AbstractDungeon.cardRewardScreen.discoveryCard.makeStatEquivalentCopy();
-
-                    if (c instanceof AbstractGuZhenRenCard) {
-                        ((AbstractGuZhenRenCard) c).isRankLocked = true;
-                    }
 
                     c.setCostForTurn(0);
                     processSelectedCard(c);
@@ -176,6 +190,7 @@ public class RenGu extends AbstractBenMingGuCard {
             }
         }
     }
+
     @Override
     protected void onRankLoaded() {
         calculateStats();

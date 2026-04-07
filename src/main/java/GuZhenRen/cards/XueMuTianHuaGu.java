@@ -14,12 +14,11 @@ public class XueMuTianHuaGu extends AbstractGuZhenRenCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueMuTianHuaGu.png");
 
     private static final int COST = 2;
-    private static final int MAGIC = 1; // 初始 1 层缓冲
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级变 2 层缓冲
+    private static final int UPGRADE_COST = 1; // 升级后变 1 费
+    private static final int MAGIC = 1; // 固定 1 层缓冲
     private static final int INITIAL_RANK = 5;
 
     public XueMuTianHuaGu() {
@@ -45,8 +44,7 @@ public class XueMuTianHuaGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
-            this.myBaseDescription = UPGRADE_DESCRIPTION;
+            this.upgradeBaseCost(UPGRADE_COST); // 2 -> 1 费
             this.upgradeRank(1);
             this.initializeDescription();
         }

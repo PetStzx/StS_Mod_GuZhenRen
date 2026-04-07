@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.GuZhenRenTags;
+import basemod.BaseMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -21,7 +22,7 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XingXiuQiPan.png");
 
-    private static final int COST = 1;
+    private static final int COST = 2;
 
     public XingXiuQiPan() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -29,8 +30,24 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
                 CardTarget.SELF);
 
         this.setDao(Dao.ZHI_DAO);
-
         this.initializeDescription();
+    }
+
+    @Override
+    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+        boolean canUse = super.canUse(p, m);
+        if (!canUse) {
+            return false;
+        }
+
+        for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn) {
+            if (c.cardID.equals(ID)) {
+                // 使用 EXTENDED_DESCRIPTION 调用 JSON 中的文本
+                this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -38,9 +55,6 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         this.addToBot(new XingXiuQiPanAction());
     }
 
-    // =========================================================================
-    //  自定义 Action
-    // =========================================================================
     public static class XingXiuQiPanAction extends AbstractGameAction {
 
         public XingXiuQiPanAction() {
@@ -53,32 +67,22 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
             if (this.duration == Settings.ACTION_DUR_MED) {
                 AbstractPlayer p = AbstractDungeon.player;
 
-                // --- 1. 先把牌捞上手 ---
-                // 处理抽牌堆
-                moveCardsToHand(p.drawPile, p);
-                // 处理弃牌堆
-                moveCardsToHand(p.discardPile, p);
-
-                // --- 2. 对手牌中的智道牌减费 ---
                 for (AbstractCard c : p.hand.group) {
                     if (isZhiDaoCard(c)) {
-                        // 本回合耗能为0
                         c.setCostForTurn(0);
                         c.superFlash();
                     }
                 }
 
-                // 刷新手牌布局
-                p.hand.refreshHandLayout();
+                moveCardsToHandAndReduceCost(p.drawPile, p, false);
+                moveCardsToHandAndReduceCost(p.discardPile, p, true);
 
+                p.hand.refreshHandLayout();
                 this.isDone = true;
             }
         }
 
-        /**
-         * 将指定牌堆中的智道牌移动到手牌
-         */
-        private void moveCardsToHand(CardGroup group, AbstractPlayer p) {
+        private void moveCardsToHandAndReduceCost(CardGroup group, AbstractPlayer p, boolean isFromDiscardPile) {
             ArrayList<AbstractCard> cardsToMove = new ArrayList<>();
 
             for (AbstractCard c : group.group) {
@@ -88,24 +92,28 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
             }
 
             for (AbstractCard c : cardsToMove) {
-                if (p.hand.size() < 10) {
+                c.setCostForTurn(0);
+
+                if (p.hand.size() < BaseMod.MAX_HAND_SIZE) {
                     group.removeCard(c);
                     p.hand.addToHand(c);
                     c.lighten(false);
                     c.unhover();
-                    c.applyPowers();
                 } else {
                     p.createHandIsFullDialog();
+                    if (!isFromDiscardPile) {
+                        group.removeCard(c);
+                        p.discardPile.addToTop(c);
+                    }
                 }
+                c.applyPowers();
             }
         }
 
         private boolean isZhiDaoCard(AbstractCard c) {
-            // 排除自身
             if (c.cardID.equals(XingXiuQiPan.ID)) {
                 return false;
             }
-            // 使用 Tag 判断
             return c.hasTag(GuZhenRenTags.ZHI_DAO);
         }
     }

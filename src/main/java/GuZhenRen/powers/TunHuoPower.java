@@ -33,12 +33,9 @@ public class TunHuoPower extends AbstractPower {
         Texture largeTexture = ImageMaster.loadImage(pathLarge);
         Texture smallTexture = ImageMaster.loadImage(pathSmall);
 
-        if (largeTexture != null && smallTexture != null) {
-            this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
-            this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
-        } else {
-            this.loadRegion("firebreathing");
-        }
+        this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
+        this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
+
 
         updateDescription();
     }
@@ -52,7 +49,7 @@ public class TunHuoPower extends AbstractPower {
             card.exhaust = true;
             action.exhaustCard = true;
 
-            // 给予所有敌人焚烧 (由于这是能力触发，不享受卡牌端的道痕/遗物加成)
+            // 给予所有敌人焚烧
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (!mo.isDeadOrEscaped()) {
                     this.addToBot(new ApplyPowerAction(mo, this.owner,

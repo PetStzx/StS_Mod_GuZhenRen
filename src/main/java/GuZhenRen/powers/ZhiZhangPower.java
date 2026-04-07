@@ -37,24 +37,18 @@ public class ZhiZhangPower extends AbstractPower implements OnReceivePowerPower 
         this.description = DESCRIPTIONS[0];
     }
 
-    // =========================================================================
-    //  接口实现：拦截并转化念
-    // =========================================================================
+
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
         // 判定：如果即将获得的是“念”
         if (power instanceof NianPower) {
-            // 1. 视觉效果：仅闪烁图标 (无飘字)
             this.flash();
 
-            // 2. 实际效果：获得临时生命
-            int tempHp = power.amount * 2;
+            int tempHp = power.amount;
             if (tempHp > 0) {
-                // 使用 addToTop 确保立即执行
                 this.addToTop(new AddTemporaryHPAction(target, target, tempHp));
             }
 
-            // 3. 返回 false，表示“拒绝接收这个 Power”，即拦截了念
             return false;
         }
 

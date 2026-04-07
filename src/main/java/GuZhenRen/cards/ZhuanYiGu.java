@@ -17,7 +17,7 @@ public class ZhuanYiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ZhuanYiGu.png");
 
     private static final int COST = 1;
-    private static final int MAGIC_AMT = 4;
+    private static final int MAGIC_AMT = 3;
     private static final int UPGRADE_PLUS_MAGIC = 1;
     private static final int INITIAL_RANK = 4;
 

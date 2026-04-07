@@ -8,15 +8,46 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class NianPower extends AbstractPower implements CloneablePowerInterface {
     public static final String POWER_ID = GuZhenRen.makeID("NianPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
+    private static int nianGainedThisTurn = 0;
+    private static int lastTurn = -1;
+
+    public static void recordNianGain(int amount) {
+        if (amount <= 0) return;
+        int currentTurn = 0;
+        if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            currentTurn = AbstractDungeon.actionManager.turn;
+        }
+        // 如果回合数变了，说明是新回合，重置计数器
+        if (currentTurn != lastTurn) {
+            nianGainedThisTurn = 0;
+            lastTurn = currentTurn;
+        }
+        nianGainedThisTurn += amount;
+    }
+
+    public static int getNianGainedThisTurn() {
+        int currentTurn = 0;
+        if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            currentTurn = AbstractDungeon.actionManager.turn;
+        }
+        if (currentTurn != lastTurn) {
+            return 0; // 回合已变，当前回合还没获得过念
+        }
+        return nianGainedThisTurn;
+    }
+    // ==========================================
 
     public NianPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -35,12 +66,13 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         updateDescription();
     }
 
-
     @Override
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
-
         this.amount += stackAmount;
+
+        // 记录获取的层数
+        recordNianGain(stackAmount);
 
         checkThreshold();
         updateDescription();
@@ -48,6 +80,9 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
     @Override
     public void onInitialApplication() {
+        // 记录初始获取的层数
+        recordNianGain(this.amount);
+
         checkThreshold();
         updateDescription();
     }
@@ -82,9 +117,9 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
     public static boolean isConverted(AbstractCreature owner) {
         if (owner == null) return false;
-        if (owner.hasPower(WanWuDaTongBianPower.POWER_ID)) return true;
-        if (owner.hasPower(ZhiZhangPower.POWER_ID)) return true;
-        if (owner.hasPower(NianTouShouZuPower.POWER_ID)) return true;
+        if (owner.hasPower(GuZhenRen.makeID("WanWuDaTongBianPower"))) return true;
+        if (owner.hasPower(GuZhenRen.makeID("ZhiZhangPower"))) return true;
+        if (owner.hasPower(GuZhenRen.makeID("NianTouShouZuPower"))) return true;
         return false;
     }
 }

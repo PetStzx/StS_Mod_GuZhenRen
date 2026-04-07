@@ -23,7 +23,7 @@ public class FeiXiongZhiLiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/FeiXiongZhiLiGu.png");
 
     private static final int COST = 2;
-    private static final int DAMAGE = 10;
+    private static final int DAMAGE = 12;
     private static final int VULN = 2;
     private static final int UPGRADE_PLUS_VULN = 2; // 升级+2，总共4层易伤
     private static final int INITIAL_RANK = 6; // 金卡（仙蛊）起步6转

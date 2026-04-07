@@ -1,0 +1,249 @@
+[
+  {
+    "NAMES": ["immortal gu", "immortal_gu"],
+    "DESCRIPTION": "Immortal Gu are unique. Gu worms of Rank 6 and above are #yImmortal #yGu . You cannot obtain duplicate Immortal Gu. Immortal Gu you already own will not appear in combat rewards."
+  },
+  {
+    "PROPER_NAME": "Vital Gu",
+    "NAMES": ["vital gu", "vital_gu"],
+    "DESCRIPTION": " #yVital #yGu will automatically be refined and upgraded as your #yAperture level increases. The destruction of your #yVital #yGu will lead to #rsevere #rconsequences ."
+  },
+  {
+    "NAMES": ["cultivation"],
+    "DESCRIPTION": "At the end of combat, accumulate 1/2/4 (Normal/Elite/Boss) points of #yCultivation ."
+  },
+  {
+    "NAMES": ["rank 1", "rank_1"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 2", "rank_2"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 3", "rank_3"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 4", "rank_4"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 5", "rank_5"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 6", "rank_6"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 7", "rank_7"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 8", "rank_8"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "NAMES": ["rank 9", "rank_9"],
+    "DESCRIPTION": "Gu worm rank."
+  },
+  {
+    "PROPER_NAME": "Light Path",
+    "NAMES": ["light path", "light_path"],
+    "DESCRIPTION": "Light Path."
+  },
+  {
+    "PROPER_NAME": "Metal Path",
+    "NAMES": ["metal path", "metal_path"],
+    "DESCRIPTION": "Metal Path."
+  },
+  {
+    "PROPER_NAME": "Theft Path",
+    "NAMES": ["theft path", "theft_path"],
+    "DESCRIPTION": "Theft Path."
+  },
+  {
+    "PROPER_NAME": "Strength Path",
+    "NAMES": ["strength path", "strength_path"],
+    "DESCRIPTION": "Strength Path has been in decline for a long time..."
+  },
+  {
+    "PROPER_NAME": "Strength Path Dao Mark",
+    "NAMES": ["strength path dao mark", "strength path dao marks", "strength_path_dao_mark", "strength_path_dao_marks"],
+    "DESCRIPTION": "Each stack of Strength Path Dao Mark provides 1 #yStrength at the start of combat."
+  },
+  {
+    "PROPER_NAME": "Wood Path",
+    "NAMES": ["wood path", "wood_path"],
+    "DESCRIPTION": "Wood Path."
+  },
+  {
+    "PROPER_NAME": "Food Path",
+    "NAMES": ["food path", "food_path"],
+    "DESCRIPTION": "Food Path."
+  },
+  {
+    "PROPER_NAME": "Killing Path",
+    "NAMES": ["killing path", "killing_path"],
+    "DESCRIPTION": "Killing Path."
+  },
+  {
+    "PROPER_NAME": "Fire Path",
+    "NAMES": ["fire path", "fire_path"],
+    "DESCRIPTION": "Fire Path."
+  },
+  {
+    "PROPER_NAME": "Blood Path",
+    "NAMES": ["blood path", "blood_path"],
+    "DESCRIPTION": "Blood Path."
+  },
+  {
+    "PROPER_NAME": "Luck Path",
+    "NAMES": ["luck path", "luck_path"],
+    "DESCRIPTION": "Luck Path."
+  },
+  {
+    "PROPER_NAME": "Wind Path",
+    "NAMES": ["wind path", "wind_path"],
+    "DESCRIPTION": "Wind Path."
+  },
+  {
+    "PROPER_NAME": "Time Path",
+    "NAMES": ["time path", "time_path"],
+    "DESCRIPTION": "Time Path."
+  },
+  {
+    "PROPER_NAME": "Burning",
+    "NAMES": ["burning"],
+    "DESCRIPTION": "When #yBurning stacks change, take damage equal to the current stacks. At the end of your turn, #yBurning stacks are halved."
+  },
+  {
+    "PROPER_NAME": "Bone Path",
+    "NAMES": ["bone path", "bone_path"],
+    "DESCRIPTION": "Bone Path."
+  },
+  {
+    "PROPER_NAME": "Killer Move",
+    "NAMES": ["killer move", "killer moves", "killer_move", "killer_moves"],
+    "DESCRIPTION": "A powerful method assembled from specific Gu worms, cannot be upgraded."
+  },
+  {
+    "PROPER_NAME": "Rule Path",
+    "NAMES": ["rule path", "rule_path"],
+    "DESCRIPTION": "Rule Path."
+  },
+  {
+    "NAMES": ["probability", "chance"],
+    "DESCRIPTION": "Can be influenced by #yLuck #yPath methods."
+  },
+  {
+    "PROPER_NAME": "Wisdom Path",
+    "NAMES": ["wisdom path", "wisdom_path"],
+    "DESCRIPTION": "Wisdom Path."
+  },
+  {
+    "PROPER_NAME": "Thought",
+    "NAMES": ["thought", "thoughts"],
+    "DESCRIPTION": "For every #b3 stacks of Thought accumulated, convert them into #b1 stack of #yWill and draw 1 card."
+  },
+  {
+    "PROPER_NAME": "Will",
+    "NAMES": ["will", "wills"],
+    "DESCRIPTION": "For every #b3 stacks of Will accumulated, convert them into #b1 stack of #yEmotion and gain [E] ."
+  },
+  {
+    "PROPER_NAME": "Emotion",
+    "NAMES": ["emotion", "emotions"],
+    "DESCRIPTION": "For every #b3 stacks of Emotion accumulated, draw #b1 additional card at the start of your turn."
+  },
+  {
+    "PROPER_NAME": "Transformation Path",
+    "NAMES": ["transformation path", "transformation_path"],
+    "DESCRIPTION": "Transformation Path."
+  },
+  {
+    "PROPER_NAME": "Transformation Path Dao Marks",
+    "NAMES": ["transformation path dao mark", "transformation path dao marks", "transformation_path_dao_mark", "transformation_path_dao_marks"],
+    "DESCRIPTION": "Transforms into the corresponding Dao mark based on the path of the first #ynon-Transformation #yPath card you play. Reverts to Transformation Path Dao Mark at the start of your next turn."
+  },
+  {
+    "NAMES": ["wisdom"],
+    "DESCRIPTION": "At the start of your turn, gain #yThought equal to your Wisdom stacks."
+  },
+  {
+    "PROPER_NAME": "Chasing Life Fire",
+    "NAMES": ["chasing life fire", "chasing_life_fire"],
+    "DESCRIPTION": "At the start of your turn, apply #b5 stacks of #yBurning . If #yChasing #yLife #yFire is present, any enemy with an attack intent will gain #b1 stack of #yChasing #yLife #yFire after acting."
+  },
+  {
+    "PROPER_NAME": "Yin Yang Path",
+    "NAMES": ["yin yang path", "yin_yang_path"],
+    "DESCRIPTION": "Yin Yang Path."
+  },
+  {
+    "PROPER_NAME": "Sword Path",
+    "NAMES": ["sword path", "sword_path"],
+    "DESCRIPTION": "The greatest of the five main offensive paths."
+  },
+  {
+    "PROPER_NAME": "Sword Mark",
+    "NAMES": ["sword mark", "sword marks", "sword_mark", "sword_marks"],
+    "DESCRIPTION": "Each stack of Sword Mark increases damage taken from #ySword #yPath cards this turn by 1."
+  },
+  {
+    "PROPER_NAME": "Sword Edge",
+    "NAMES": ["sword edge", "sword_edge"],
+    "DESCRIPTION": "After your #ySword #yPath cards deal damage, apply an equal amount of #ySword #yMark to the target."
+  },
+  {
+    "PROPER_NAME": "Phantom",
+    "NAMES": ["phantom", "phantoms"],
+    "DESCRIPTION": "Phantom cards are #yUnplayable and #yRetain . Phantom cards have a chance to trigger their effects after you play an #yAttack card. If triggered, they do not enter the discard pile."
+  },
+  {
+    "PROPER_NAME": "Defensive Powers",
+    "NAMES": ["defensive power", "defensive powers", "defensive_power", "defensive_powers"],
+    "DESCRIPTION": "Includes #yIntangible , #yInvincible , #yPlated #yArmor , #yMetallicize , #yBarricade , #yCurl #yUp , and #yMalleable ."
+  },
+  {
+    "PROPER_NAME": "Blood Frenzy",
+    "NAMES": ["blood frenzy", "blood_frenzy"],
+    "DESCRIPTION": "Automatically played from your hand. Lose #b2 HP when played."
+  },
+  {
+    "NAMES": ["bleeding", "bleed"],
+    "DESCRIPTION": "At the start of your turn, lose #bX HP."
+  },
+  {
+    "NAMES": ["radiance"],
+    "DESCRIPTION": "Each stack of Radiance increases the damage of the next #yLight #yPath card played by #b50% ."
+  },
+  {
+    "NAMES": ["friend"],
+    "DESCRIPTION": "When you and your Friend deal damage to each other, remove this status."
+  },
+  {
+    "PROPER_NAME": "Positive Effect",
+    "NAMES": ["positive effect", "positive_effect"],
+    "DESCRIPTION": "60%: Add a random #yKiller #yMove to your hand. NL 15%: Gain a random Relic. NL 15%: Heal #b15 HP. NL 10%: Escape from this combat."
+  },
+  {
+    "PROPER_NAME": "Negative Effect",
+    "NAMES": ["negative effect", "negative_effect"],
+    "DESCRIPTION": "25%: Lose #b6 HP. NL 25%: Lose #b3 Max HP. NL 25%: Lose #b2 #yStrength . NL 25%: Lose #b2 #yDexterity ."
+  },
+  {
+    "NAMES": ["constricted"],
+    "DESCRIPTION": "At the end of your turn, take #bX damage."
+  },
+  {
+    "PROPER_NAME": "Vitality Leaf",
+    "NAMES": ["vitality leaf", "vitality_leaf"],
+    "DESCRIPTION": "Potion, heal #b6 HP."
+  },
+  {
+    "NAMES": ["fading"],
+    "DESCRIPTION": "Dies in #bX turns."
+  }
+]

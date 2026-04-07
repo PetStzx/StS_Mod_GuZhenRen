@@ -24,8 +24,8 @@ public class YiNianGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int CARD_AMT = 1;
-    private static final int UPGRADE_CARD_AMT = 1;
     private static final int NIAN_AMT = 3;
+    private static final int UPGRADE_NIAN_AMT = 2; // 升级后增加的“念”数量
     private static final int INITIAL_RANK = 4;
 
     public YiNianGu() {
@@ -38,7 +38,6 @@ public class YiNianGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.ZHI_DAO);
         this.baseMagicNumber = this.magicNumber = CARD_AMT;
         this.baseNian = this.nian = NIAN_AMT;
-        this.exhaust = true;
         this.setRank(INITIAL_RANK);
     }
 
@@ -52,7 +51,7 @@ public class YiNianGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_CARD_AMT);
+            this.upgradeNian(UPGRADE_NIAN_AMT);
             this.upgradeRank(1);
             this.initializeDescription();
         }

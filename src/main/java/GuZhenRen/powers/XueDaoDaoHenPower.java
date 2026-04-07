@@ -12,8 +12,8 @@ public class XueDaoDaoHenPower extends AbstractDaoHenPower {
     public static final String POWER_ID = GuZhenRen.makeID("XueDaoDaoHenPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    // 每层 5% 的生命汲取
-    private static final float LIFESTEAL_PER_STACK = 0.05F;
+    // 每层 1% 的生命汲取
+    private static final float LIFESTEAL_PER_STACK = 0.01F;
 
     public XueDaoDaoHenPower(AbstractCreature owner, int amount) {
         super(POWER_ID, powerStrings.NAME, owner, amount);

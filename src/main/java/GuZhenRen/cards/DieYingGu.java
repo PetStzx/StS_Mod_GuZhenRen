@@ -19,15 +19,11 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/DieYingGu.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 6;
-    private static final int UPGRADE_PLUS_DMG = 2; // 升级后基础变 8
-
-    // 移除 DMG_MULTIPLIER，改用 SecondMagicNumber
-
+    private static final int DAMAGE = 8;
+    private static final int JIAN_HEN = 1; // 新增：基础剑痕层数
     private static final int INITIAL_RANK = 4;
 
     public DieYingGu() {
@@ -39,15 +35,15 @@ public class DieYingGu extends AbstractGuZhenRenCard {
 
         this.setDao(Dao.JIAN_DAO);
         this.setRank(INITIAL_RANK);
+
+        // 基础伤害
         this.baseDamage = DAMAGE;
 
-        // baseMagicNumber 专门用来代表“动态剑痕层数”，初始是 0
-        this.baseMagicNumber = 0;
-        this.magicNumber = 0;
+        // baseMagicNumber 用来代表基础剑痕层数
+        this.baseMagicNumber = this.magicNumber = JIAN_HEN;
 
-        // baseSecondMagicNumber 用来代表每张剑影提供的额外伤害
-        this.baseSecondMagicNumber = 2;
-        this.secondMagicNumber = 2;
+        // baseSecondMagicNumber 用来代表每张剑影提供的全数值增益
+        this.baseSecondMagicNumber = this.secondMagicNumber = 2;
 
         this.cardsToPreview = new JianYing();
     }
@@ -65,18 +61,17 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     }
 
     // ==========================================================
-    // 动态更新逻辑
+    // 动态更新逻辑：同时修改伤害和剑痕层数
     // ==========================================================
     @Override
     public void applyPowers() {
         int count = countJianYingInExhaust();
 
-        // 动态更新代表剑痕层数的 magicNumber
-        this.baseMagicNumber = count;
-        this.magicNumber = count;
-        this.isMagicNumberModified = (count > 0);
+        // 1. 动态更新代表剑痕层数的 magicNumber
+        this.magicNumber = this.baseMagicNumber + (count * this.secondMagicNumber);
+        this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
 
-        // 动态更新伤害，直接乘以 secondMagicNumber
+        // 2. 动态更新伤害
         int realBaseDamage = this.baseDamage;
         this.baseDamage += count * this.secondMagicNumber;
         super.applyPowers();
@@ -88,11 +83,11 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     public void calculateCardDamage(AbstractMonster mo) {
         int count = countJianYingInExhaust();
 
-        this.baseMagicNumber = count;
-        this.magicNumber = count;
-        this.isMagicNumberModified = (count > 0);
+        // 1. 动态更新代表剑痕层数的 magicNumber
+        this.magicNumber = this.baseMagicNumber + (count * this.secondMagicNumber);
+        this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
 
-        // 动态更新伤害，直接乘以 secondMagicNumber
+        // 2. 动态更新伤害
         int realBaseDamage = this.baseDamage;
         this.baseDamage += count * this.secondMagicNumber;
         super.calculateCardDamage(mo);
@@ -100,12 +95,10 @@ public class DieYingGu extends AbstractGuZhenRenCard {
         this.isDamageModified = (this.damage != this.baseDamage);
     }
 
-    // 当离开手牌时，将 magicNumber 规矩地重置为 0
     @Override
     public void resetAttributes() {
         super.resetAttributes();
-        this.baseMagicNumber = 0;
-        this.magicNumber = 0;
+        this.magicNumber = this.baseMagicNumber;
         this.isMagicNumberModified = false;
     }
 
@@ -116,6 +109,7 @@ public class DieYingGu extends AbstractGuZhenRenCard {
                 new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
+        // 赋予总剑痕
         if (this.magicNumber > 0) {
             this.addToBot(new ApplyPowerAction(m, p, new JianHenPower(m, this.magicNumber), this.magicNumber));
         }
@@ -125,17 +119,14 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG);
             this.upgradeRank(1);
 
-            // 升级第二魔法值：伤害倍率 2 -> 3
             this.upgradeSecondMagicNumber(1);
 
             AbstractCard upgradedPreview = new JianYing();
             upgradedPreview.upgrade();
             this.cardsToPreview = upgradedPreview;
 
-            this.myBaseDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
     }

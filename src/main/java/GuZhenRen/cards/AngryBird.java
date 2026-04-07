@@ -19,8 +19,8 @@ public class AngryBird extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/AngryBird.png");
 
     private static final int COST = 2;
-    private static final int DAMAGE = 14;
-    private static final int FEN_SHAO_AMT = 14;
+    private static final int DAMAGE = 19;
+    private static final int FEN_SHAO_AMT = 19;
 
     public AngryBird() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
