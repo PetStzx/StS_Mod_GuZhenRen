@@ -36,7 +36,7 @@ public class XueChou extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         // 仅给目标敌人施加“血仇”状态
-        this.addToBot(new ApplyPowerAction(m, p, new XueChouPower(m)));
+        this.addToBot(new ApplyPowerAction(m, p, new XueChouPower(m,-1)));
     }
 
     @Override

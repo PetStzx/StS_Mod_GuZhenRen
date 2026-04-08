@@ -32,7 +32,7 @@ public class SongYouFeng extends AbstractShaZhaoCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         // 1. 结交好友
-        this.addToBot(new ApplyPowerAction(m, p, new HaoYouPower(m)));
+        this.addToBot(new ApplyPowerAction(m, p, new HaoYouPower(m,-1)));
 
         // 2. 将“送别”放入弃牌堆
         this.addToBot(new MakeTempCardInDiscardAction(this.cardsToPreview.makeStatEquivalentCopy(), 1));

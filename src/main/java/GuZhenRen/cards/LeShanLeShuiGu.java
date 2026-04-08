@@ -43,7 +43,7 @@ public class LeShanLeShuiGu extends AbstractGuZhenRenCard {
         this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, this.magicNumber), this.magicNumber));
 
         // 2. 施加负面状态：念头受阻
-        this.addToBot(new ApplyPowerAction(p, p, new NianTouShouZuPower(p)));
+        this.addToBot(new ApplyPowerAction(p, p, new NianTouShouZuPower(p,-1)));
     }
 
     @Override

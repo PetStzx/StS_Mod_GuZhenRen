@@ -19,11 +19,11 @@ public class QuanLiYiFuPower extends AbstractPower implements IProbabilityModifi
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public QuanLiYiFuPower(AbstractCreature owner) {
+    public QuanLiYiFuPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = -1; // -1 表示没有层数的状态
+        this.amount = -1;
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/QuanLiYiFuPower_p.png");

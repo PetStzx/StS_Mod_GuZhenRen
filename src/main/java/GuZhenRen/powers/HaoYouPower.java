@@ -17,7 +17,7 @@ public class HaoYouPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public HaoYouPower(AbstractCreature owner) {
+    public HaoYouPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
@@ -31,7 +31,6 @@ public class HaoYouPower extends AbstractPower {
         Texture smallTexture = ImageMaster.loadImage(pathSmall);
         this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
-
 
         updateDescription();
     }

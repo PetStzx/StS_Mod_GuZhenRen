@@ -19,11 +19,11 @@ public class HuoMaoSanZhangPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public HuoMaoSanZhangPower(AbstractCreature owner) {
+    public HuoMaoSanZhangPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = -1; // -1 表示不可叠加
+        this.amount = -1;
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/HuoMaoSanZhangPower_p.png");
@@ -34,7 +34,6 @@ public class HuoMaoSanZhangPower extends AbstractPower {
 
         this.region128 = new TextureAtlas.AtlasRegion(texLarge, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(texSmall, 0, 0, 32, 32);
-
 
         updateDescription();
     }

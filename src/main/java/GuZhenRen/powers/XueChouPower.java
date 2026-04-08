@@ -16,13 +16,11 @@ public class XueChouPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public XueChouPower(AbstractCreature owner) {
+    public XueChouPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-
         this.amount = -1;
-
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/XueChouPower_p.png");
@@ -32,7 +30,6 @@ public class XueChouPower extends AbstractPower {
 
         this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
-
 
         updateDescription();
     }

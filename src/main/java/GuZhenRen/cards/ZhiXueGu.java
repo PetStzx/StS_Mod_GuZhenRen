@@ -47,7 +47,7 @@ public class ZhiXueGu extends AbstractGuZhenRenCard {
             this.upgradeName();
 
             // 升级获得保留属性
-            this.retain = true;
+            this.selfRetain = true;
             this.myBaseDescription = UPGRADE_DESCRIPTION;
 
             this.upgradeRank(1); // 3转 -> 4转

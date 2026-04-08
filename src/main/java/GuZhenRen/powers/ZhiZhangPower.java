@@ -16,7 +16,7 @@ public class ZhiZhangPower extends AbstractPower implements OnReceivePowerPower 
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public ZhiZhangPower(AbstractCreature owner) {
+    public ZhiZhangPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;

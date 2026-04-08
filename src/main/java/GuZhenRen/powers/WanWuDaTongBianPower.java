@@ -19,7 +19,7 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
     public static final String POWER_ID = GuZhenRen.makeID("WanWuDaTongBianPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    public WanWuDaTongBianPower(AbstractCreature owner) {
+    public WanWuDaTongBianPower(AbstractCreature owner, int amount) {
         this.name = powerStrings.NAME;
         this.ID = POWER_ID;
         this.owner = owner;

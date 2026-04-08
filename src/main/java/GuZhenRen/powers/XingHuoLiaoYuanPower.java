@@ -22,11 +22,11 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
     // 【极其核心的安全锁】：防止 A传给B，B传给A 的无限死循环
     public static boolean isSpreading = false;
 
-    public XingHuoLiaoYuanPower(AbstractCreature owner) {
+    public XingHuoLiaoYuanPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = -1; // -1 表示不显示层数
+        this.amount = -1;
         this.type = PowerType.DEBUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/XingHuoLiaoYuanPower_p.png");

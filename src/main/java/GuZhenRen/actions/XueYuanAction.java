@@ -30,7 +30,7 @@ public class XueYuanAction extends AbstractGameAction {
             boolean pHasImmunity = this.p.hasPower(GuZhenRen.makeID("WanWuDaTongBianPower"));
 
             if (pHasImmunity) {
-                this.addToTop(new ApplyPowerAction(this.p, this.p, new XueYuanPower(this.p)));
+                this.addToTop(new ApplyPowerAction(this.p, this.p, new XueYuanPower(this.p,-1)));
             }
             if (mHasArtifact) {
                 this.addToTop(new ApplyPowerAction(this.m, this.p, new XueYuanMarkPower(this.m, this.magic), this.magic));
@@ -38,7 +38,7 @@ public class XueYuanAction extends AbstractGameAction {
 
             if (!pHasImmunity && !mHasArtifact) {
                 if (!this.p.hasPower(XueYuanPower.POWER_ID)) {
-                    this.addToTop(new ApplyPowerAction(this.p, this.p, new XueYuanPower(this.p)));
+                    this.addToTop(new ApplyPowerAction(this.p, this.p, new XueYuanPower(this.p,-1)));
                 }
                 this.addToTop(new ApplyPowerAction(this.m, this.p, new XueYuanMarkPower(this.m, this.magic), this.magic));
             }

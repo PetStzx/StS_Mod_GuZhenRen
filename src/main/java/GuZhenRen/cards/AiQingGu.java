@@ -12,13 +12,16 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.BottledFlame;
+import com.megacrit.cardcrawl.relics.BottledLightning;
+import com.megacrit.cardcrawl.relics.BottledTornado;
 import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/AiQingGu.png");
 
-    private static final int COST = -2; // 不可被打出
+    private static final int COST = -2; // 不能被打出
     private static final int INITIAL_RANK = 9;
 
     public AiQingGu() {
@@ -68,7 +71,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 专属 Action
+    // Action
     // =========================================================================
     public static class AiQingGuAction extends AbstractGameAction {
         private final AbstractCard card;
@@ -83,7 +86,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
         public void update() {
             AbstractPlayer p = AbstractDungeon.player;
 
-            // 1. 判定随机正面效果 (0-99)
+            // 1. 判定随机正面效果
             int posRoll = AbstractDungeon.cardRandomRng.random(0, 99);
 
             if (posRoll < 60) {
@@ -91,7 +94,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                 if (shaZhaoCache == null) {
                     shaZhaoCache = new ArrayList<>();
                     for (AbstractCard c : CardLibrary.getAllCards()) {
-                        // 排除特殊衍生杀招“送友风·送别”
+                        // 排除特殊衍生杀招
                         if (c instanceof AbstractShaZhaoCard && !c.cardID.equals(SongYouFengSongBie.ID)) {
                             shaZhaoCache.add(c);
                         }
@@ -103,14 +106,28 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(randomShaZhao, 1));
                 }
             } else if (posRoll < 75) {
-                // 15%：获得随机遗物 (保持纯净原生逻辑)
+                // 15%：获得随机遗物
                 AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                     @Override
                     public void update() {
-                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(
-                                (float)Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F,
-                                AbstractDungeon.returnRandomRelic(AbstractDungeon.returnRandomRelicTier())
-                        );
+                        AbstractRelic relicToObtain = null;
+                        int safetyCounter = 0;
+
+                        // 剔除“瓶装”系列遗物
+                        do {
+                            relicToObtain = AbstractDungeon.returnRandomRelic(AbstractDungeon.returnRandomRelicTier());
+                            safetyCounter++;
+                        } while (safetyCounter < 50 && (
+                                relicToObtain.relicId.equals(BottledFlame.ID) ||
+                                        relicToObtain.relicId.equals(BottledLightning.ID) ||
+                                        relicToObtain.relicId.equals(BottledTornado.ID)
+                        ));
+
+                        if (relicToObtain != null) {
+                            relicToObtain.instantObtain(AbstractDungeon.player, AbstractDungeon.player.relics.size(), true);
+                            CardCrawlGame.sound.play("RELIC_DROP_HEAVY");
+                        }
+
                         this.isDone = true;
                     }
                 });
@@ -136,7 +153,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                 });
             }
 
-            // 2. 判定随机负面效果 (0-99)
+            // 2. 判定随机负面效果
             int negRoll = AbstractDungeon.cardRandomRng.random(0, 99);
 
             if (negRoll < 25) {

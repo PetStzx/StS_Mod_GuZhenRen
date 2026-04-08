@@ -34,7 +34,7 @@ public class HuoMaoSanZhangGu extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (!p.hasPower(HuoMaoSanZhangPower.POWER_ID)) {
-            this.addToBot(new ApplyPowerAction(p, p, new HuoMaoSanZhangPower(p)));
+            this.addToBot(new ApplyPowerAction(p, p, new HuoMaoSanZhangPower(p,-1)));
         }
     }
 

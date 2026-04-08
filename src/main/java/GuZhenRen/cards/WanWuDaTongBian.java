@@ -32,6 +32,6 @@ public class WanWuDaTongBian extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        this.addToBot(new ApplyPowerAction(p, p, new WanWuDaTongBianPower(p)));
+        this.addToBot(new ApplyPowerAction(p, p, new WanWuDaTongBianPower(p,-1)));
     }
 }

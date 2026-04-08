@@ -48,14 +48,14 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
         }
 
         // 给“星火燎原”
-        this.addToBot(new ApplyPowerAction(m, p, new XingHuoLiaoYuanPower(m)));
+        this.addToBot(new ApplyPowerAction(m, p, new XingHuoLiaoYuanPower(m,-1)));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADED_TIMES - 1); // 次数 1 -> 3
+            this.upgradeMagicNumber(UPGRADED_TIMES - 1);
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.upgradeRank(1);
             this.initializeDescription();

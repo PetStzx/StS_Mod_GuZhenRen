@@ -16,11 +16,12 @@ public class NianTouShouZuPower extends AbstractPower implements OnReceivePowerP
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public NianTouShouZuPower(AbstractCreature owner) {
+    public NianTouShouZuPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = -1;
+
         this.type = PowerType.DEBUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/NianTouShouZuPower_p.png");

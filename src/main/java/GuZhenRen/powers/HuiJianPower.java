@@ -17,11 +17,11 @@ public class HuiJianPower extends AbstractPower implements OnReceivePowerPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public HuiJianPower(AbstractCreature owner) {
+    public HuiJianPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = -1; // -1 表示这是一个不可叠加层数的状态类能力
+        this.amount = -1;
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/HuiJianPower_p.png");

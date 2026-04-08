@@ -35,12 +35,11 @@ public class ZhiZhang extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 失去所有的念
         if (p.hasPower(NianPower.POWER_ID)) {
             this.addToBot(new RemoveSpecificPowerAction(p, p, NianPower.POWER_ID));
         }
 
-        this.addToBot(new ApplyPowerAction(p, p, new ZhiZhangPower(p)));
+        this.addToBot(new ApplyPowerAction(p, p, new ZhiZhangPower(p,-1)));
     }
 
     @Override

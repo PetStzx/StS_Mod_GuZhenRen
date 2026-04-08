@@ -34,7 +34,7 @@ public class QuanLiYiFuGu extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (!p.hasPower(QuanLiYiFuPower.POWER_ID)) {
-            this.addToBot(new ApplyPowerAction(p, p, new QuanLiYiFuPower(p)));
+            this.addToBot(new ApplyPowerAction(p, p, new QuanLiYiFuPower(p,-1)));
         }
     }
 
