@@ -89,4 +89,9 @@ public class Recipe_SongYouFeng extends AbstractRecipeRelic {
     public AbstractCard getRewardCard() {
         return new SongYouFeng();
     }
+
+    @Override
+    protected String[] getTipKeywords(){
+        return new String[]{"好友"};
+    }
 }

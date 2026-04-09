@@ -90,4 +90,9 @@ public class Recipe_ZhuiMingHuo extends AbstractRecipeRelic {
     public AbstractCard getRewardCard() {
         return new ZhuiMingHuo();
     }
+
+    @Override
+    protected String[] getTipKeywords(){
+        return new String[]{"追命火"};
+    }
 }
