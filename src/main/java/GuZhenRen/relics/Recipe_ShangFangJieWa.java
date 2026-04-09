@@ -92,4 +92,9 @@ public class Recipe_ShangFangJieWa extends AbstractRecipeRelic {
         // 返回合成好的杀招牌：上房揭瓦
         return new ShangFangJieWa();
     }
+
+    @Override
+    protected String[] getTipKeywords(){
+        return new String[]{"防御类状态"};
+    }
 }
