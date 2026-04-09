@@ -1,0 +1,48 @@
+name: Tag on Version Update
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'src/main/resources/ModTheSpire.json'
+
+permissions:
+  contents: write
+
+jobs:
+  check-version-and-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Get current version
+        id: current
+        run: |
+          VERSION=$(jq -r '.version' src/main/resources/ModTheSpire.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get previous version
+        id: previous
+        run: |
+          PREV_VERSION=$(git show HEAD~1:src/main/resources/ModTheSpire.json | jq -r '.version')
+          echo "version=$PREV_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Compare versions and create tag
+        if: steps.current.outputs.version != steps.previous.outputs.version
+        run: |
+          NEW_VERSION="${{ steps.current.outputs.version }}"
+          TAG_NAME="v${NEW_VERSION}"
+          echo "Version changed from ${{ steps.previous.outputs.version }} to ${NEW_VERSION}"
+          echo "Creating tag ${TAG_NAME}..."
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${TAG_NAME}" -m "Release version ${NEW_VERSION}"
+          git push origin "${TAG_NAME}"
