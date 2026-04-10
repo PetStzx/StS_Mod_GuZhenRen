@@ -44,17 +44,14 @@ public class ZhuanYiPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // =========================================================================
-    //  核心逻辑：给自己加格挡
-    // =========================================================================
+    //  加格挡
     public void triggerConversionBlock() {
         this.flash();
         this.addToBot(new GainBlockAction(this.owner, this.owner, this.amount));
     }
 
-    // =========================================================================
-    //  专用信号接收器 (作为一个 Action，方便在任何地方被排入队列)
-    // =========================================================================
+
+    //  信号接收器
     public static class TriggerAction extends AbstractGameAction {
         public TriggerAction() {
             this.actionType = ActionType.SPECIAL;
@@ -63,7 +60,6 @@ public class ZhuanYiPower extends AbstractPower {
         @Override
         public void update() {
             if (AbstractDungeon.player != null && AbstractDungeon.player.hasPower(ZhuanYiPower.POWER_ID)) {
-                // 如果玩家有转意蛊能力，调用它的核心逻辑叠甲
                 ((ZhuanYiPower) AbstractDungeon.player.getPower(ZhuanYiPower.POWER_ID)).triggerConversionBlock();
             }
             this.isDone = true;

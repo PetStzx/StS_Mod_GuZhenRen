@@ -110,7 +110,7 @@
   },
   "GuZhenRen:ChengGongGu": {
     "NAME": "Success Gu",
-    "DESCRIPTION": "Choose: Gain 300 Gold, NL Gain 16 Max HP, NL Remove 2 cards from your deck. NL Exhaust.",
+    "DESCRIPTION": "Choose: Gain 300 Gold, NL Gain 16 Max HP, NL Remove 2 cards from your deck. NL Remove from combat.",
     "EXTENDED_DESCRIPTION": [
       "Choose 2 cards to remove"
     ]
@@ -395,7 +395,7 @@
   },
   "GuZhenRen:WoLiXuYing": {
     "NAME": "Self Strength Phantom",
-    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Randomly play 1 Attack card from your draw pile."
+    "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Randomly play 1 non-Exhaust Attack card from your deck."
   },
   "GuZhenRen:FeiLiGu": {
     "NAME": "Strenuous Gu",

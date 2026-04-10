@@ -40,7 +40,7 @@ public class ZhiZhangPower extends AbstractPower implements OnReceivePowerPower 
 
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
-        // 判定：如果即将获得的是“念”
+        // 如果即将获得的是“念”
         if (power instanceof NianPower) {
             this.flash();
 
@@ -52,7 +52,7 @@ public class ZhiZhangPower extends AbstractPower implements OnReceivePowerPower 
             return false;
         }
 
-        // 对于其他状态，返回 true (允许通过)
+        // 对于其他状态，返回 true
         return true;
     }
 }

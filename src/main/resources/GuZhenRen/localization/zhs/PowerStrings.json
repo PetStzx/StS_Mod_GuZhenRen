@@ -104,7 +104,7 @@
   "GuZhenRen:ZhiZhangPower": {
     "NAME": "智障",
     "DESCRIPTIONS": [
-      "所有获得 guzhenren:念 的效果转为获得 临时生命 。"
+      "所有获得 #y念 的效果转为获得 临时生命 。"
     ]
   },
   "GuZhenRen:ZhiHuiPower": {

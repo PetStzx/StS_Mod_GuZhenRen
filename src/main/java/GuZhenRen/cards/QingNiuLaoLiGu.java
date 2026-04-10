@@ -27,7 +27,7 @@ public class QingNiuLaoLiGu extends AbstractGuZhenRenCard {
 
     public QingNiuLaoLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, // 攻击牌
+                CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.COMMON,
                 CardTarget.ENEMY);
@@ -35,7 +35,6 @@ public class QingNiuLaoLiGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.LI_DAO);
         this.setRank(INITIAL_RANK);
 
-        // 修改为基础伤害
         this.baseDamage = DAMAGE;
         this.exhaust = true;
 
@@ -56,7 +55,7 @@ public class QingNiuLaoLiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 伤害 7 -> 10
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
             this.upgradeRank(1); // 2转 -> 3转
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;

@@ -37,7 +37,7 @@ public class XingNianGu extends AbstractGuZhenRenCard {
         // magicNumber 控制预见数量
         this.baseMagicNumber = this.magicNumber = SCRY_AMT;
 
-        // 【核心修改】启用专属念变量，替代 secondMagicNumber
+        // 使用专属念变量
         this.baseNian = this.nian = NIAN_GAIN;
 
         this.setRank(INITIAL_RANK);
@@ -60,11 +60,11 @@ public class XingNianGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    //  包装动作 (核心逻辑保留，变量名稍微清理)
+    //  包装动作
     // =========================================================================
     public static class XingNianWrapperAction extends AbstractGameAction {
         private final int scryAmount;
-        private final int nianPerCard; // 此时这里已经是加成后的值了
+        private final int nianPerCard;
 
         public XingNianWrapperAction(int scryAmount, int nianPerCard) {
             this.scryAmount = scryAmount;
@@ -75,7 +75,7 @@ public class XingNianGu extends AbstractGuZhenRenCard {
         public void update() {
             int startingDiscardSize = AbstractDungeon.player.discardPile.size();
 
-            // 结算逻辑 (放队首，将在预见之后执行)
+            // 结算逻辑
             AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
                 @Override
                 public void update() {
@@ -99,7 +99,7 @@ public class XingNianGu extends AbstractGuZhenRenCard {
                 }
             });
 
-            // 原版预见逻辑 (再放队首，将其插在结算前面)
+            // 原版预见逻辑
             AbstractDungeon.actionManager.addToTop(new ScryAction(this.scryAmount));
 
             this.isDone = true;

@@ -30,14 +30,14 @@ public class RenRuGu extends AbstractGuZhenRenCard {
     // 状态开关：控制是否显示括号
     private boolean showDynamicText = false;
 
-    // 用于跨回合记录血量的“时间轴”
+    // 用于跨回合记录血量的时间轴
     public static ArrayList<Integer> hpHistory = new ArrayList<>();
 
     public RenRuGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.SELF);
 
         this.setDao(Dao.ZHOU_DAO);
@@ -71,13 +71,8 @@ public class RenRuGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 播放时间吞噬者的专属音效
         this.addToBot(new SFXAction("POWER_TIME_WARP"));
-
-        // 2. 播放屏幕边缘白色光晕闪烁特效（完全还原BOSS强制过回合视觉）
         this.addToBot(new VFXAction(new BorderFlashEffect(Color.ORANGE.cpy(), true)));
-
-        // 3. 播放时间吞噬者的巨大表盘视觉特效
         this.addToBot(new VFXAction(new TimeWarpTurnEndEffect(), 0.5F));
 
         this.addToBot(new AbstractGameAction() {
@@ -87,15 +82,15 @@ public class RenRuGu extends AbstractGuZhenRenCard {
                 int currentHp = p.currentHealth;
 
                 if (targetHp != currentHp) {
-                    // 强行修改底层真实血量，无视一切遗物（魔法花/源生印记）和临时生命机制
+                    // 修改底层真实血量
                     p.currentHealth = targetHp;
 
-                    // 兜底：防止回溯血量溢出（例如本回合最大生命值减少了）
+                    // 防止回溯血量溢出（例如本回合最大生命值减少了）
                     if (p.currentHealth > p.maxHealth) {
                         p.currentHealth = p.maxHealth;
                     }
 
-                    // 强制刷新血条 UI
+                    // 刷新血条 UI
                     p.healthBarUpdatedEvent();
                 }
 
@@ -107,8 +102,6 @@ public class RenRuGu extends AbstractGuZhenRenCard {
     @Override
     protected String constructRawDescription() {
         String s = super.constructRawDescription();
-
-        // 动态替换字符串：采用 [0] 作为锚点，[1] 作为带变量的新文本，彻底消灭硬编码
         if (this.showDynamicText && cardStrings.EXTENDED_DESCRIPTION != null) {
             s += cardStrings.EXTENDED_DESCRIPTION[0];
         }
@@ -156,7 +149,7 @@ public class RenRuGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.selfRetain = true; // 升级获得保留
+            this.selfRetain = true; // 升级保留
             this.upgradeRank(1);    // 6转 -> 7转
 
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;

@@ -32,7 +32,7 @@ public class XueYueGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
+                CardRarity.COMMON,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.XUE_DAO);
@@ -45,10 +45,7 @@ public class XueYueGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-
-        // 2. 挂上血流不止
         this.addToBot(new ApplyPowerAction(m, p, new XueLiuBuZhiPower(m, this.magicNumber), this.magicNumber));
     }
 

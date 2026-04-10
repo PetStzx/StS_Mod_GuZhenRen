@@ -30,9 +30,7 @@ public class GuiLiXuYing extends AbstractXuYingCard {
         this.initializeDescription();
     }
 
-    // =========================================================================
-    // 重写格挡计算，将力量塞进基础值参与原版敏捷计算
-    // =========================================================================
+    // 将力量塞进基础值参与计算
     @Override
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
@@ -54,7 +52,6 @@ public class GuiLiXuYing extends AbstractXuYingCard {
             // 计算完之后，把真实的 baseBlock 换回来
             this.baseBlock = realBaseBlock;
 
-            // 如果最终结果不等于基础值，说明被Buff强化或削弱了，变色
             this.isBlockModified = (this.block != this.baseBlock);
         } else {
             super.applyPowers();

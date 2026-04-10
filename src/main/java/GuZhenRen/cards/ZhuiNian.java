@@ -114,7 +114,7 @@ public class ZhuiNian extends AbstractGuZhenRenCard {
                     int nianGain = Math.max(0, cardCost) * 2;
 
                     c.freeToPlayOnce = true;
-                    c.exhaust = true;
+                    c.exhaustOnUseOnce = true;
                     c.applyPowers();
 
                     AbstractDungeon.actionManager.addToTop(new UnlimboAction(c));

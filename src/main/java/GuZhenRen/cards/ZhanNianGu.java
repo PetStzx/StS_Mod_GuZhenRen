@@ -35,7 +35,7 @@ public class ZhanNianGu extends AbstractGuZhenRenCard {
 
     public ZhanNianGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.ATTACK, // 造成伤害必须是攻击牌
+                CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.COMMON,
                 CardTarget.ENEMY);
@@ -50,7 +50,7 @@ public class ZhanNianGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 无条件造成伤害
+        // 1. 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 
         // 2. 如果打出的上一张是攻击牌，获得念
@@ -85,8 +85,8 @@ public class ZhanNianGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 8 -> 10
-            this.upgradeNian(UPGRADE_PLUS_NIAN);     // 3 -> 4
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
+            this.upgradeNian(UPGRADE_PLUS_NIAN);
             this.upgradeRank(1);
             this.initializeDescription();
         }

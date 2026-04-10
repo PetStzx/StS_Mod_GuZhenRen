@@ -40,7 +40,6 @@ public class MaLiXuYing extends AbstractXuYingCard {
     @Override
     public void triggerPhantomEffect(AbstractMonster m) {
         // 触发效果：抽1丢1
-        // addToTop 确保效果在动作序列中立即发生
         this.addToTop(new DiscardAction(AbstractDungeon.player, AbstractDungeon.player, 1, false));
         this.addToTop(new DrawCardAction(AbstractDungeon.player, 1));
     }

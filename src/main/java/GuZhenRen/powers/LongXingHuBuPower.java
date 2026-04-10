@@ -27,7 +27,7 @@ public class LongXingHuBuPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.type = PowerType.BUFF;
-        this.isTurnBased = true; // 这是一个只在当回合生效的状态
+        this.isTurnBased = true;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/LongXingHuBuPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/LongXingHuBuPower.png");
@@ -38,28 +38,23 @@ public class LongXingHuBuPower extends AbstractPower {
             this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
             this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
         } else {
-            // 没有图片时使用原版“活动肌肉”的备用图标
             this.loadRegion("flex");
         }
 
         updateDescription();
     }
 
-    // =========================================================================
-    //  核心逻辑：打出牌时，获得力量和失去力量
-    // =========================================================================
+    //  打出牌时，获得力量和失去力量
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         this.flash();
         // 1. 获得力量
         this.addToBot(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, this.amount), this.amount));
-        // 2. 获得“失去力量”（即回合结束时扣除这部分力量，形成临时力量的效果）
+        // 2. 获得“失去力量”
         this.addToBot(new ApplyPowerAction(this.owner, this.owner, new LoseStrengthPower(this.owner, this.amount), this.amount));
     }
 
-    // =========================================================================
-    //  清理逻辑：回合结束时移除自身
-    // =========================================================================
+
     @Override
     public void atEndOfTurn(boolean isPlayer) {
         if (isPlayer) {

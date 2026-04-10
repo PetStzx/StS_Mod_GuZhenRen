@@ -45,15 +45,15 @@ public class WoLiXuYing extends AbstractXuYingCard {
     }
 
     // =========================================================================
-    // 从玩家真实的牌组 (Master Deck) 中随机抽取一张攻击牌
+    // 从玩家真实的牌组中随机抽取一张非消耗攻击牌
     // =========================================================================
     private void rollRandomAttack() {
         if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck != null) {
             ArrayList<AbstractCard> attacks = new ArrayList<>();
             // 遍历玩家的初始牌库
             for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                // 筛选攻击牌，同时排除虚影牌自己（防止无限套娃）
-                if (c.type == CardType.ATTACK && !(c instanceof AbstractXuYingCard)) {
+                // 筛选攻击牌，排除虚影牌自己，排除消耗牌
+                if (c.type == CardType.ATTACK && !(c instanceof AbstractXuYingCard) && !c.exhaust) {
                     attacks.add(c);
                 }
             }
@@ -79,10 +79,15 @@ public class WoLiXuYing extends AbstractXuYingCard {
             rollRandomAttack();
         }
 
-        // 核心细节：让悬停展示的那张牌也应用一下力量等属性加成
-        // 这样玩家就能直观地看到它打出去到底能造成多少伤害
+        // 让悬停展示的牌也应用力量等属性加成
         if (this.randomAttackCard != null && AbstractDungeon.player != null) {
             this.randomAttackCard.applyPowers();
+
+            // 抵消预览卡牌的钢笔尖虚高伤害
+            if (AbstractDungeon.player.hasPower("Pen Nib")) {
+                this.randomAttackCard.damage /= 2;
+                this.randomAttackCard.isDamageModified = (this.randomAttackCard.damage != this.randomAttackCard.baseDamage);
+            }
         }
     }
 
@@ -100,14 +105,25 @@ public class WoLiXuYing extends AbstractXuYingCard {
             final AbstractCard phantom = this.animatedPhantomCard;
             final AbstractMonster finalTarget = m;
 
+            // 让替身计算伤害
             if (finalTarget != null && !finalTarget.isDeadOrEscaped()) {
                 tmp.calculateCardDamage(finalTarget);
+            } else {
+                tmp.applyPowers();
+            }
+
+            // 在计算完伤害、放入动作队列前，抵消替身的钢笔尖翻倍
+            if (AbstractDungeon.player.hasPower("Pen Nib")) {
+                tmp.damage /= 2;
+                tmp.isDamageModified = (tmp.damage != tmp.baseDamage);
             }
 
             tmp.tags.add(GuZhenRenTags.XU_YING_COPY);
             tmp.purgeOnUse = true;
-            // X 费卡牌会读取当前剩余能量
+
+            // 让 X 费牌不消耗真实能量
             tmp.energyOnUse = EnergyPanel.totalCount;
+            tmp.freeToPlayOnce = true;
 
             AbstractDungeon.player.limbo.addToTop(tmp);
             tmp.current_x = Settings.WIDTH / 2.0F;
@@ -130,7 +146,7 @@ public class WoLiXuYing extends AbstractXuYingCard {
                 }
             });
 
-            // 4.攻击动作执行后，等待一会儿，让玩家看清特效和跳出的伤害数字
+            // 4.攻击动作执行后，等待一会
             this.addToTop(new com.megacrit.cardcrawl.actions.utility.WaitAction(Settings.FAST_MODE ? 0.2F : 0.3F));
 
             // 3.引发攻击动作
@@ -157,7 +173,7 @@ public class WoLiXuYing extends AbstractXuYingCard {
                 }
             });
 
-            // 2.变身完成后，定格一会儿
+            // 2.变身完成后，定格一会
             this.addToTop(new com.megacrit.cardcrawl.actions.utility.WaitAction(Settings.FAST_MODE ? 0.15F : 0.25F));
 
             // 1.最先执行的变身动画

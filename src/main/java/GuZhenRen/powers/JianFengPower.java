@@ -21,7 +21,7 @@ public class JianFengPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    // 内部追踪器：判断当前正在结算的牌是否为“剑道牌”
+    // 内部追踪器：判断当前正在结算的牌是否为“剑道”
     private boolean isJianDaoActive = false;
 
     public JianFengPower(AbstractCreature owner, int amount) {
@@ -51,9 +51,7 @@ public class JianFengPower extends AbstractPower {
         this.updateDescription();
     }
 
-    // =========================================================================
-    // 【核心修复1】: 在卡牌刚打出时，将“开启标记”作为一个动作排入队列
-    // =========================================================================
+    // 在卡牌刚打出时，将“开启标记”作为一个动作排入队列
     @Override
     public void onPlayCard(AbstractCard card, AbstractMonster m) {
         final boolean isJianDao = card.hasTag(GuZhenRenTags.JIAN_DAO);
@@ -67,9 +65,7 @@ public class JianFengPower extends AbstractPower {
         });
     }
 
-    // =========================================================================
-    // 【核心修复2】: 在卡牌动作添加完毕后，将“关闭标记”作为一个动作排入队列
-    // =========================================================================
+    // 在卡牌动作添加完毕后，将“关闭标记”作为一个动作排入队列
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         this.addToBot(new AbstractGameAction() {
@@ -89,9 +85,6 @@ public class JianFengPower extends AbstractPower {
         // 当前是在剑道队列中，且属于普通攻击伤害，且打中的不是自己
         if (this.isJianDaoActive && info.type == DamageInfo.DamageType.NORMAL && target != this.owner) {
             this.flash();
-
-            // addToBot 会把上剑痕的动作排在动作队列的最末尾
-            // 完美实现：所有的伤害都结算完毕后，才触发 +1 +1 +1 的连续剑痕动画
             this.addToBot(new ApplyPowerAction(target, this.owner, new JianHenPower(target, this.amount), this.amount));
         }
     }

@@ -24,11 +24,11 @@ public class TouXiGu extends AbstractGuZhenRenCard {
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TouXiGu.png");
 
-    private static final int COST = 0; // 0 费
+    private static final int COST = 0;
     private static final int DAMAGE = 3; // 基础伤害 3
     private static final int MAGIC = 1;
 
-    private static final int INITIAL_RANK = 2; // 初始 2 转
+    private static final int INITIAL_RANK = 2;
 
     public TouXiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -49,7 +49,7 @@ public class TouXiGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 根据是否升级决定攻击次数 (升级后打 2 次)
+        // 升级后打 2 次
         int times = this.upgraded ? 2 : 1;
 
         for (int i = 0; i < times; i++) {
@@ -78,7 +78,7 @@ public class TouXiGu extends AbstractGuZhenRenCard {
     public static class IgnoreBlockModifier extends AbstractDamageModifier {
         @Override
         public boolean ignoresBlock(AbstractCreature target) {
-            return true; // 强制无视格挡
+            return true; // 无视格挡
         }
 
         @Override

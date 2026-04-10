@@ -39,7 +39,7 @@ public class JinGangNian extends AbstractGuZhenRenCard {
 
         this.baseDamage = BASE_DMG;
         this.baseSecondMagicNumber = this.secondMagicNumber = MULTIPLIER;
-        this.baseMagicNumber = this.magicNumber = 0;
+        this.baseMagicNumber = this.magicNumber = 0; // baseMagicNumber 初始为 0
 
         this.setRank(INITIAL_RANK);
     }
@@ -66,6 +66,18 @@ public class JinGangNian extends AbstractGuZhenRenCard {
     }
 
     @Override
+    public void update() {
+        super.update();
+        if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player != null) {
+            int hits = calculateHits();
+            if (this.magicNumber != hits) {
+                this.magicNumber = hits;
+                this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
+            }
+        }
+    }
+
+    @Override
     public void applyPowers() {
         int realBaseDamage = this.baseDamage;
         this.baseDamage += NianPower.getNianGainedThisTurn() * this.secondMagicNumber;
@@ -73,14 +85,18 @@ public class JinGangNian extends AbstractGuZhenRenCard {
         int hits = calculateHits();
         if (this.magicNumber != hits) {
             this.magicNumber = hits;
-            this.isMagicNumberModified = true;
+            this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
         }
-        this.showDynamicText = true;
 
         super.applyPowers();
 
         this.baseDamage = realBaseDamage;
         this.isDamageModified = this.damage != this.baseDamage;
+
+        if (!this.showDynamicText) {
+            this.showDynamicText = true;
+            this.initializeDescription();
+        }
     }
 
     @Override
@@ -91,14 +107,18 @@ public class JinGangNian extends AbstractGuZhenRenCard {
         int hits = calculateHits();
         if (this.magicNumber != hits) {
             this.magicNumber = hits;
-            this.isMagicNumberModified = true;
+            this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
         }
-        this.showDynamicText = true;
 
         super.calculateCardDamage(mo);
 
         this.baseDamage = realBaseDamage;
         this.isDamageModified = this.damage != this.baseDamage;
+
+        if (!this.showDynamicText) {
+            this.showDynamicText = true;
+            this.initializeDescription();
+        }
     }
 
     @Override

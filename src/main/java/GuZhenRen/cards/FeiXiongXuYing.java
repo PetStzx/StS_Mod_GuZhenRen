@@ -26,26 +26,24 @@ public class FeiXiongXuYing extends AbstractXuYingCard {
                 CardColorEnum.GUZHENREN_GREY,
                 CardTarget.ALL_ENEMY);
 
-        this.baseChanceFloat = 0.25f; // 固定25%触发率
+        this.baseChanceFloat = 0.25f; // 25%触发率
 
         this.baseDamage = this.damage = BASE_DAMAGE;
-        this.isMultiDamage = true; // 开启群体伤害
+        this.isMultiDamage = true;
 
-        // 魔法值用来代表“力量倍数”，基础2倍
+        // 力量倍数，基础2倍
         this.baseMagicNumber = this.magicNumber = 2;
 
         this.initializeDescription();
     }
 
 
-    // 重刃机制
     @Override
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
         if (p != null) {
             int extraStr = 0;
             if (p.hasPower(StrengthPower.POWER_ID)) {
-                // 计算额外的倍数收益
                 extraStr = p.getPower(StrengthPower.POWER_ID).amount * (this.magicNumber - 1);
             }
 

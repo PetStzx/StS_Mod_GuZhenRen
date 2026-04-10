@@ -102,7 +102,7 @@ public class HengChongZhiZhuangGu extends AbstractGuZhenRenCard {
         @Override
         public void update() {
             if (this.duration == 0.1F && this.target != null) {
-                // 在伤害结算前，检测敌人的格挡是否 >= 预计造成的伤害（即完全格挡），并且伤害值本身大于 0
+                // 在伤害结算前，检测敌人的格挡是否 >= 预计造成的伤害，并且伤害值本身大于 0
                 boolean completelyBlocked = (this.info.output > 0) && (this.target.currentBlock >= this.info.output);
 
                 // 2. 播放特效并造成伤害

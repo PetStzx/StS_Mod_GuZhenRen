@@ -20,13 +20,13 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
     private static final int COST = 2;
     private static final int FEN_SHAO_AMT = 1;
     private static final int UPGRADED_TIMES = 3; // 升级后给 3 次
-    private static final int INITIAL_RANK = 5; // 5转起步
+    private static final int INITIAL_RANK = 5;
 
     public XingHuoLiaoYuanGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.YAN_DAO);
@@ -42,12 +42,9 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
 
-        // 给焚烧
         for (int i = 0; i < this.magicNumber; i++) {
             this.addToBot(new ApplyPowerAction(m, p, new FenShaoPower(m, this.fenShao), this.fenShao));
         }
-
-        // 给“星火燎原”
         this.addToBot(new ApplyPowerAction(m, p, new XingHuoLiaoYuanPower(m,-1)));
     }
 

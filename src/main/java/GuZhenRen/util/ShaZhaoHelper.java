@@ -17,7 +17,7 @@ public class ShaZhaoHelper {
         for (AbstractRelic r : playerRelics) {
             if (r instanceof AbstractRecipeRelic) {
                 AbstractRecipeRelic recipe = (AbstractRecipeRelic) r;
-                if (canCraft(recipe)) {
+                if (!recipe.usedUp && canCraft(recipe)) {
                     craftableList.add(recipe);
                 }
             }

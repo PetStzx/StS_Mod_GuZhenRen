@@ -19,7 +19,7 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    // 【极其核心的安全锁】：防止 A传给B，B传给A 的无限死循环
+    // 安全锁：防止 A传给B，B传给A 的死循环
     public static boolean isSpreading = false;
 
     public XingHuoLiaoYuanPower(AbstractCreature owner, int amount) {
@@ -48,13 +48,11 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
         this.addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                // 1. 上锁：我正在传染，其他人不要再触发了
+                // 1. 上锁
                 isSpreading = true;
 
-                // 【修复核心】：使用 addToTop 确保传染动作的原子性！
-                // 注意：由于 addToTop 是后进先出(插队)，所以我们要把顺序反过来写。
 
-                // 3. 先把“解锁”动作压入栈，它会被垫在最下面，最后执行
+                // 3. 把“解锁”动作压入栈
                 AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
                     @Override
                     public void update() {
@@ -63,7 +61,7 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
                     }
                 });
 
-                // 2. 再把“上状态”动作压入栈，它们会盖在解锁动作上面，优先执行
+                // 2. 把“上状态”动作压入栈
                 for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                     if (!mo.isDeadOrEscaped() && mo != owner) {
                         AbstractDungeon.actionManager.addToTop(

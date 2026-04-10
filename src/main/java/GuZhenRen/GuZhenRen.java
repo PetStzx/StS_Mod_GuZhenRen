@@ -370,7 +370,7 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostEnergyRecharge() {
-        // 玩家每回合开始（能量恢复完成）时，记录当下的生命值
+        // 每回合开始时，记录当下生命值
         while (RenRuGu.hpHistory.size() < com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.turn) {
             RenRuGu.hpHistory.add(com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.currentHealth);
         }
@@ -378,19 +378,19 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostBattle(AbstractRoom room) {
-        //1. 静态变量清理区 (防止下一场战斗数据残留)
+        // 1. 静态变量清理区 (防止下一场战斗数据残留)
         SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
         TouDaoDaoHenPower.totalGoldStolenThisCombat = 0;
 
-        // 清空时间轴，防止内存泄漏或数据污染下一场战斗
+        // 清空时间轴
         RenRuGu.hpHistory.clear();
 
-        //2. 杀招合成遗物掉落逻辑
+        // 2. 杀招合成遗物掉落逻辑
         if (AbstractDungeon.player instanceof FangYuan) {
             // 默认普通战斗掉落率为 15%
             float dropRate = 0.15f;
 
-            // 判断房间类型，动态修改掉落率
+            // 判断房间类型，修改掉落率
             if (room instanceof MonsterRoomBoss) {
                 dropRate = 1.00f; // Boss战 100%
             } else if (room instanceof MonsterRoomElite) {
@@ -399,16 +399,20 @@ public class GuZhenRen implements
 
             // 根据当前的掉落率进行随机判定
             if (AbstractDungeon.relicRng.randomBoolean(dropRate)) {
-                if (!recipeRelicIDs.isEmpty()) {
-                    // 随机抽取一个杀招配方
-                    String randomID = recipeRelicIDs.get(AbstractDungeon.relicRng.random(recipeRelicIDs.size() - 1));
-                    boolean hasRelic = AbstractDungeon.player.hasRelic(randomID);
 
-                    // 如果玩家身上还没有这个配方，则作为奖励掉落
-                    if (!hasRelic) {
-                        AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
-                        room.rewards.add(new RewardItem(relic));
+                // 构建“玩家未拥有”的配方可用池
+                ArrayList<String> availableRecipes = new ArrayList<>();
+                for (String id : recipeRelicIDs) {
+                    if (!AbstractDungeon.player.hasRelic(id)) {
+                        availableRecipes.add(id);
                     }
+                }
+
+                // 从可用池中随机抽取掉落
+                if (!availableRecipes.isEmpty()) {
+                    String randomID = availableRecipes.get(AbstractDungeon.relicRng.random(availableRecipes.size() - 1));
+                    AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
+                    room.rewards.add(new RewardItem(relic));
                 }
             }
         }

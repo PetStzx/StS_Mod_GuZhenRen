@@ -32,7 +32,7 @@ public class XueZouGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
+                CardRarity.COMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.XUE_DAO);
@@ -61,7 +61,6 @@ public class XueZouGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-
             this.myBaseDescription = UPGRADE_DESCRIPTION;
             this.upgradeRank(1); // 1转 -> 2转
             this.initializeDescription();

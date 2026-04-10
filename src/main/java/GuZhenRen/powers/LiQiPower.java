@@ -51,7 +51,7 @@ public class LiQiPower extends AbstractPower {
     }
 
     // =========================================================================
-    // 触发动作 (内部类)
+    // 触发动作
     // =========================================================================
     private class TriggerRoundAction extends AbstractGameAction {
         private int roundsLeft;
@@ -64,7 +64,7 @@ public class LiQiPower extends AbstractPower {
         public void update() {
             if (AbstractDungeon.player != null && this.roundsLeft > 0) {
 
-                // 1. 将【本轮】所有的虚影动画和效果排入底层队列
+                // 1. 将本轮所有的虚影动画和效果排入底层队列
                 for (AbstractCard c : AbstractDungeon.player.hand.group) {
                     if (c instanceof AbstractXuYingCard) {
                         AbstractXuYingCard phantomCard = (AbstractXuYingCard) c;
@@ -76,7 +76,7 @@ public class LiQiPower extends AbstractPower {
                     }
                 }
 
-                // 2. 如果还有剩余轮数，将【下一轮】的触发动作排在队列最末尾
+                // 2. 如果还有剩余轮数，将下一轮的触发动作排在队列最末尾
                 if (this.roundsLeft > 1) {
                     this.addToBot(new TriggerRoundAction(this.roundsLeft - 1));
                 }

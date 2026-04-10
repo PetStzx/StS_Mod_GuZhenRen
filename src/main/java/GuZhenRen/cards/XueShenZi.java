@@ -73,7 +73,7 @@ public class XueShenZi extends AbstractGuZhenRenCard {
 
     @Override
     protected void onRankLoaded() {
-        // 游戏读取存档后，会触发此方法更新数值
+        // 游戏读取存档后，触发此方法更新数值
         calculateBaseDamage();
     }
 

@@ -23,7 +23,7 @@ public class JianQiaoGuAction extends AbstractGameAction {
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
-            // 遍历手牌，把非攻击牌，或者已经带有剑鞘Buff的牌挑出来
+            // 遍历手牌
             for (AbstractCard c : this.p.hand.group) {
                 if (c.type != AbstractCard.CardType.ATTACK || CardModifierManager.hasModifier(c, JianQiaoGu.JianQiaoModifier.MODIFIER_ID)) {
                     this.cannotBuff.add(c);
@@ -39,11 +39,11 @@ public class JianQiaoGuAction extends AbstractGameAction {
             // 临时移出不可选的牌
             this.p.hand.group.removeAll(this.cannotBuff);
 
-            // 如果手牌里刚好只剩 1 张合法的攻击牌，自动选它
+            // 如果手牌里只剩 1 张合法的攻击牌，自动选择
             if (this.p.hand.group.size() == 1) {
                 AbstractCard c = this.p.hand.getTopCard();
                 CardModifierManager.addModifier(c, new JianQiaoGu.JianQiaoModifier());
-                // 将它塞回抽牌堆顶部
+                // 塞入抽牌堆顶
                 this.p.hand.moveToDeck(c, false);
 
                 this.returnCards();
@@ -61,7 +61,7 @@ public class JianQiaoGuAction extends AbstractGameAction {
         // 选完牌后的处理
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
-                // 赋予居合附魔
+                // 赋予附魔
                 CardModifierManager.addModifier(c, new JianQiaoGu.JianQiaoModifier());
                 c.superFlash();
                 // 必须先加回手牌，才能通过 moveToDeck 塞入抽牌堆

@@ -24,7 +24,7 @@ public class XueLiuBuZhiPower extends AbstractPower implements HealthBarRenderPo
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
-        this.type = PowerType.DEBUFF; // 负面效果
+        this.type = PowerType.DEBUFF;
         this.isTurnBased = false;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/XueLiuBuZhiPower_p.png");
@@ -43,27 +43,20 @@ public class XueLiuBuZhiPower extends AbstractPower implements HealthBarRenderPo
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // =========================================================================
-    // 触发条件：回合开始时失去生命
-    // =========================================================================
+    // 回合开始时失去生命
     @Override
     public void atStartOfTurn() {
         this.flash();
         this.addToBot(new LoseHPAction(this.owner, this.owner, this.amount));
     }
 
-    // =========================================================================
-    // StSLib 血条渲染接口方法
-    // =========================================================================
 
-    // 决定要在血条上渲染出多少掉血量
+    // StSLib 血条渲染接口方法
     @Override
     public int getHealthBarAmount() {
-        // 因为我们每回合扣除等同于层数的血量，所以直接返回 amount
         return this.amount;
     }
 
-    // 决定血条预测扣除部分的颜色
     @Override
     public Color getColor() {
         return DARK_RED;

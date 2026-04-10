@@ -28,8 +28,8 @@ public class ChiLi extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ChiLi.png");
 
     private static final int COST = 2;
-    private static final int DAMAGE = 9; // 修改为 9 点伤害
-    private static final int UPGRADE_PLUS_DMG = 3; // 升级加 3，即 12 点
+    private static final int DAMAGE = 9; // 9 点伤害
+    private static final int UPGRADE_PLUS_DMG = 3; // 升级加 3
     private static final int INITIAL_RANK = 6;
 
     // 状态开关：控制是否显示括号
@@ -47,9 +47,8 @@ public class ChiLi extends AbstractGuZhenRenCard {
         this.setDao(Dao.SHI_DAO);
         this.setRank(INITIAL_RANK);
 
-        // 使用 misc 变量来跨战斗追踪斩杀次数，初始需要斩杀 2 次
+        // 使用 misc 变量来追踪斩杀次数，初始需要斩杀 2 次
         this.misc = 2;
-        // 把 misc 的值映射到 magicNumber 上，方便在文本中用 !M! 调用
         this.baseMagicNumber = this.magicNumber = this.misc;
     }
 

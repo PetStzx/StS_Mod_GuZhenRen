@@ -40,7 +40,7 @@ public class XueMuTianHuaPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // 监听生命流失（无论是被怪打的，还是自残的，只要掉了血就记录）
+    // 监听生命流失
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
         if (damageAmount > 0) {
@@ -54,7 +54,7 @@ public class XueMuTianHuaPower extends AbstractPower {
         this.hpLostThisTurn = false;
     }
 
-    // 回合结束时，如果本回合掉过血，就给予缓冲
+    // 回合结束时，如果本回合掉过血，给予缓冲
     @Override
     public void atEndOfTurnPreEndTurnCards(boolean isPlayer) {
         if (this.hpLostThisTurn) {

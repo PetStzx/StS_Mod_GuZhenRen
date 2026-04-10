@@ -20,7 +20,7 @@ public class ChiMaJunLiGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int DRAW = 2;
-    private static final int UPGRADE_DRAW = 1; // 升级后+1，总共3
+    private static final int UPGRADE_DRAW = 1; // 升级后+1，共3
     private static final int INITIAL_RANK = 2;
 
     public ChiMaJunLiGu() {

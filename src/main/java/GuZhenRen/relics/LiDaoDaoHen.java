@@ -18,7 +18,6 @@ public class LiDaoDaoHen extends CustomRelic implements CustomSavable<Integer> {
     private static final String OUTLINE_PATH = "img/relics/outline/LiDaoDaoHen.png";
 
     public LiDaoDaoHen() {
-        // 参数顺序：ID, 主图, 轮廓图, 稀有度, 音效
         super(ID,
                 ImageMaster.loadImage(GuZhenRen.assetPath(IMG_PATH)),
                 ImageMaster.loadImage(GuZhenRen.assetPath(OUTLINE_PATH)),

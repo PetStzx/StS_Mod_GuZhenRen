@@ -23,8 +23,8 @@ public class JianHenPower extends AbstractPower {
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
-        this.type = PowerType.DEBUFF; // 负面效果
-        this.isTurnBased = true;      // 具有时效性
+        this.type = PowerType.DEBUFF;
+        this.isTurnBased = true;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/JianHenPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/JianHenPower.png");
@@ -40,10 +40,9 @@ public class JianHenPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // 修改目标受到的伤害
     @Override
     public float atDamageReceive(float damage, DamageInfo.DamageType type, AbstractCard card) {
-        // 判断：如果伤害来源是卡牌、且卡牌拥有“剑道”标签、且是正常攻击伤害
+        // 判断：伤害来源是卡牌、卡牌拥有“剑道”标签、正常攻击伤害
         if (card != null && card.hasTag(GuZhenRenTags.JIAN_DAO) && type == DamageInfo.DamageType.NORMAL) {
             return damage + this.amount; // 附加等同于剑痕层数的伤害
         }

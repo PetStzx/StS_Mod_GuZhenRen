@@ -17,7 +17,7 @@ public class XueJianLeng extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueJianLeng.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 4; // 持续 5 回合
+    private static final int MAGIC = 4;
 
     public XueJianLeng() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -32,7 +32,6 @@ public class XueJianLeng extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 遍历房间内所有存活的怪物，并依次挂上冷血
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (mo != null && !mo.isDeadOrEscaped()) {
                 this.addToBot(new ApplyPowerAction(mo, p, new LengXuePower(mo, this.magicNumber), this.magicNumber));

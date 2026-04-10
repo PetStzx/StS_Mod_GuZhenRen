@@ -30,14 +30,14 @@ public class Recipe_AnQiSha extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(FeiJian.ID); // 第一个固定位：飞剑
+        list.add(FeiJian.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(FeiJian.ID)) {
-            return true; // 必须升级过
+            return true;
         }
         return false;
     }
@@ -54,7 +54,7 @@ public class Recipe_AnQiSha extends AbstractRecipeRelic {
     public boolean isGenericIngredient(int index, AbstractCard c) {
         if (index == 1) {
             String id = c.cardID;
-            // 只要是这三张牌中的任意一张即可
+            // 三张牌中的任意一张即可
             return id.equals(JianYingGu.ID) ||
                     id.equals(DuoChongJianYingGu.ID) ||
                     id.equals(DieYingGu.ID);

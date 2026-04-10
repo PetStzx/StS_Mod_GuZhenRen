@@ -2,7 +2,9 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.powers.ShanYaoPower;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
@@ -12,6 +14,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 
 public class SanShiSanTianGuang extends AbstractShaZhaoCard {
     public static final String ID = GuZhenRen.makeID("SanShiSanTianGuang");
@@ -44,7 +47,7 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
     }
 
     // ==========================================================
-    // 内部动作：队列魔术，绝不干涉伤害计算
+    // 内部动作
     // ==========================================================
     public static class SanShiSanTianGuangAction extends AbstractGameAction {
         private final AbstractCard card;
@@ -64,6 +67,7 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
             }
 
             this.addToTop(new DamageAllEnemiesAction(p, this.card.multiDamage, this.card.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HEAVY));
+            this.addToTop(new VFXAction(new BorderFlashEffect(Color.YELLOW, true)));
 
             if (this.amountToGain > 0) {
                 AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
@@ -87,9 +91,7 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
         return s;
     }
 
-    // ==========================================================
-    // 纯净的数值计算：只刷新动态括号，伤害全权交由引擎处理
-    // ==========================================================
+
     @Override
     public void applyPowers() {
         int amount = totalShanYaoGainedThisCombat;
@@ -99,7 +101,7 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
         }
         this.showDynamicText = true;
 
-        super.applyPowers(); // 在手牌中时，只计算玩家自身的 Buff
+        super.applyPowers();
     }
 
     @Override
@@ -111,7 +113,7 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
         }
         this.showDynamicText = true;
 
-        super.calculateCardDamage(mo); // 拖出时，原版引擎会自动把太古荣耀之光算进 multiDamage 里并更新 UI
+        super.calculateCardDamage(mo);
     }
 
     @Override

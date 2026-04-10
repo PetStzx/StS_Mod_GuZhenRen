@@ -63,7 +63,6 @@ public class BaiXiangYuanLiGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
-            // 移除了 upgradeMagicNumber
             this.upgradeRank(1);
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;

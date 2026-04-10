@@ -41,9 +41,8 @@ public class ShiBaiGu extends AbstractGuZhenRenCard implements IProbabilityCard 
         this.cardsToPreview = new ChengGongGu();
     }
 
-    // =========================================================================
+
     // IProbabilityCard 接口实现
-    // =========================================================================
     @Override
     public void increaseBaseChance(float amount) {
         this.baseChance += amount;
@@ -68,24 +67,23 @@ public class ShiBaiGu extends AbstractGuZhenRenCard implements IProbabilityCard 
     // =========================================================================
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 每次使用必定失去生命
+        // 1. 每次使用失去生命
         this.addToBot(new LoseHPAction(p, p, this.magicNumber));
 
         // 2. 判定概率是否触发
         if (ProbabilityHelper.rollProbability(this, this.baseChance)) {
-            // 【触发成功】：给予成功蛊
+            // 触发成功：给予成功蛊
             this.addToBot(new MakeTempCardInHandAction(new ChengGongGu(), 1));
 
-            // 局内：直接移出游戏（不会进入弃牌堆，也不会进入消耗堆）
+            // 局内：直接移出游戏
             this.purgeOnUse = true;
 
-            // 局外：通过动作从玩家的真实牌库中找到这盘打出的这张牌并永久移除
+            // 局外：从玩家牌库中找到这张牌并永久移除
             this.addToBot(new AbstractGameAction() {
                 @Override
                 public void update() {
                     AbstractCard cardToRemove = null;
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                        // 必须通过 uuid 比对，确保删掉的是你局外带进来的本体，而不是复制品
                         if (c.uuid.equals(ShiBaiGu.this.uuid)) {
                             cardToRemove = c;
                             break;
@@ -98,14 +96,14 @@ public class ShiBaiGu extends AbstractGuZhenRenCard implements IProbabilityCard 
                 }
             });
         }
-        // 若未触发，什么都不加，卡牌按常规逻辑进入弃牌堆
+        // 若未触发，卡牌按常规逻辑进入弃牌堆
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_HP_LOSS); // 扣 4 血 -> 扣 2 血
+            this.upgradeMagicNumber(UPGRADE_HP_LOSS);
             this.upgradeRank(1);
             this.initializeDescription();
         }

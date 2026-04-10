@@ -39,7 +39,7 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.RARE,
-                CardTarget.ALL_ENEMY); // 目标改为所有敌人
+                CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.FENG_DAO);
         this.setRank(INITIAL_RANK);
@@ -47,7 +47,6 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
         this.baseDamage = this.damage = DAMAGE;
         this.baseMagicNumber = this.magicNumber = MAGIC;
 
-        // 【极其重要】：声明此牌为群体伤害，否则 multiDamage 数组不会初始化
         this.isMultiDamage = true;
     }
 
@@ -61,9 +60,6 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
                 int drawAmt = magicNumber - p.hand.size();
 
                 if (drawAmt > 0) {
-                    // 注意这里的 addToTop，后加的先执行：
-                    // 所以先排入“结算流派并造成群伤”的后置动作，再排入“抽牌”动作
-                    // 实际执行顺序就是：先抽牌 -> 然后判定刚刚抽到了什么牌 -> 打伤害
                     AbstractDungeon.actionManager.addToTop(new BaMianWeiFengFollowUpAction(p, multiDamage, damageTypeForTurn));
                     AbstractDungeon.actionManager.addToTop(new DrawCardAction(p, drawAmt));
                 }
@@ -91,7 +87,7 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 内部动作类：精准判定实际抽到的流派种类，彻底杜绝多打、少打的 Bug
+    // 内部动作类：判定实际抽到的流派种类
     // =========================================================================
     public static class BaMianWeiFengFollowUpAction extends AbstractGameAction {
         private AbstractPlayer p;
@@ -106,10 +102,9 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
 
         @Override
         public void update() {
-            // 使用 Set 集合，自动去重（抽到两张血道牌，Set 里也只会记录一个血道）
+            // 使用 Set 集合自动去重
             Set<String> uniqueDaos = new HashSet<>();
 
-            // DrawCardAction.drawnCards 记录的是上一瞬间实打实被抽到手里的牌
             for (AbstractCard c : DrawCardAction.drawnCards) {
                 // 遍历这张牌的所有 Tag
                 for (AbstractCard.CardTags tag : c.tags) {
@@ -125,7 +120,6 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
 
             if (times > 0) {
                 for (int i = 0; i < times; i++) {
-                    // 倒序加入队列，保证最终在游戏里的播放顺序是：特效 -> 音效 -> 伤害 -> 特效 -> 音效 -> 伤害
                     this.addToTop(new DamageAllEnemiesAction(p, multiDamage, damageType, AttackEffect.SLASH_HORIZONTAL));
                     this.addToTop(new SFXAction("ATTACK_WHIRLWIND"));
                     this.addToTop(new VFXAction(new WhirlwindEffect(new Color(0.9F, 0.9F, 0.9F, 1.0F), true), 0.0F));

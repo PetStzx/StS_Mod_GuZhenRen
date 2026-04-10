@@ -44,7 +44,7 @@ public class QuanLiYiFuPower extends AbstractPower implements IProbabilityModifi
     }
 
     // =========================================================================
-    // 实现接口方法，绝对覆盖全局概率（加入安全检查）
+    // 绝对覆盖全局概率
     // =========================================================================
     @Override
     public float getAbsoluteProbabilityOverride(AbstractCard card) {
@@ -59,7 +59,6 @@ public class QuanLiYiFuPower extends AbstractPower implements IProbabilityModifi
         }
 
         // 3. 位置安检：这张虚影必须存在于战斗堆中
-        // 绝不影响母卡悬停时生成的百科预览图，也不影响 Loadout 里的字典图。
         boolean inCombatGroup = AbstractDungeon.player.hand.contains(card) ||
                 AbstractDungeon.player.drawPile.contains(card) ||
                 AbstractDungeon.player.discardPile.contains(card) ||

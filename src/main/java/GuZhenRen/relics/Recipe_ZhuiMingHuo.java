@@ -78,9 +78,8 @@ public class Recipe_ZhuiMingHuo extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

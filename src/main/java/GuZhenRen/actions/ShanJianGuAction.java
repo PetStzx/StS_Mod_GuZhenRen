@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 public class ShanJianGuAction extends AbstractGameAction {
 
     public ShanJianGuAction() {
-        // 不需要设置太长的持续时间，瞬间结算即可
         this.duration = 0.0F;
     }
 

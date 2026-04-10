@@ -41,8 +41,8 @@ public class FeiJian extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG); // 6 -> 8
-            this.upgradeRank(1); // 6转 -> 7转
+            this.upgradeDamage(UPGRADE_PLUS_DMG);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

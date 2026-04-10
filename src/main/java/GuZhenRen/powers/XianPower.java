@@ -55,7 +55,6 @@ public class XianPower extends AbstractPower {
         this.updateDescription();
     }
 
-    // 回合结束时移除
     @Override
     public void atEndOfRound() {
         this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));

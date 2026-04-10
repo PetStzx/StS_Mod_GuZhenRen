@@ -23,7 +23,7 @@ public class DieYingGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int DAMAGE = 8;
-    private static final int JIAN_HEN = 1; // 新增：基础剑痕层数
+    private static final int JIAN_HEN = 1; // 基础剑痕层数
     private static final int INITIAL_RANK = 4;
 
     public DieYingGu() {
@@ -36,13 +36,10 @@ public class DieYingGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.JIAN_DAO);
         this.setRank(INITIAL_RANK);
 
-        // 基础伤害
         this.baseDamage = DAMAGE;
 
-        // baseMagicNumber 用来代表基础剑痕层数
         this.baseMagicNumber = this.magicNumber = JIAN_HEN;
 
-        // baseSecondMagicNumber 用来代表每张剑影提供的全数值增益
         this.baseSecondMagicNumber = this.secondMagicNumber = 2;
 
         this.cardsToPreview = new JianYing();
@@ -61,13 +58,13 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     }
 
     // ==========================================================
-    // 动态更新逻辑：同时修改伤害和剑痕层数
+    // 动态更新逻辑：修改伤害和剑痕层数
     // ==========================================================
     @Override
     public void applyPowers() {
         int count = countJianYingInExhaust();
 
-        // 1. 动态更新代表剑痕层数的 magicNumber
+        // 1. 动态更新剑痕层数
         this.magicNumber = this.baseMagicNumber + (count * this.secondMagicNumber);
         this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
 
@@ -83,7 +80,7 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     public void calculateCardDamage(AbstractMonster mo) {
         int count = countJianYingInExhaust();
 
-        // 1. 动态更新代表剑痕层数的 magicNumber
+        // 1. 动态更新剑痕层数
         this.magicNumber = this.baseMagicNumber + (count * this.secondMagicNumber);
         this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
 

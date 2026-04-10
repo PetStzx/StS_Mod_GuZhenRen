@@ -24,7 +24,7 @@ public class ShanJianGu extends AbstractGuZhenRenCard {
     private static final int UPGRADE_PLUS_DMG = 1; // 升级伤害 8 -> 9
     private static final int MAGIC = 5; // 抽5张
     private static final int UPGRADE_PLUS_MAGIC = 2; // 升级额外抽2张 (抽7张)
-    private static final int INITIAL_RANK = 3;   // 3转起步
+    private static final int INITIAL_RANK = 3;
 
     public ShanJianGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -50,8 +50,8 @@ public class ShanJianGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG); // 8 -> 9
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 5 -> 7
+            this.upgradeDamage(UPGRADE_PLUS_DMG);
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
             this.upgradeRank(1); // 3转 -> 4转
             this.initializeDescription();
         }

@@ -41,12 +41,10 @@ public class ZhuanYunPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // 由 ProbabilityHelper 在判定失败时调用
     public void onProbabilityRollFailed(AbstractCard card) {
         if (card instanceof IProbabilityCard) {
             this.flash();
 
-            // 将层数转化为小数百分比 (例如 3 层 = 0.03f)
             float increaseAmount = this.amount / 100.0f;
             ((IProbabilityCard) card).increaseBaseChance(increaseAmount);
 

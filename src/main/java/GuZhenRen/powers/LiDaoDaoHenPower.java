@@ -25,7 +25,6 @@ public class LiDaoDaoHenPower extends AbstractDaoHenPower {
 
     // 发放力量，同时开启/关闭免检标记
     private void applyCompanionStrength(int amt) {
-        // addToTop 是后进先出，所以队列排布顺序是：关闭 -> 发放 -> 开启
         this.addToTop(new AbstractGameAction() {
             @Override
             public void update() {
@@ -59,7 +58,7 @@ public class LiDaoDaoHenPower extends AbstractDaoHenPower {
         applyCompanionStrength(stackAmount);
     }
 
-    // 减少层数时同步扣减力量（防止原版 reducePower 导致双重扣减的严密逻辑）
+    // 减少层数时同步扣减力量
     @Override
     public void reducePower(int reduceAmount) {
         int actualReduce = Math.min(reduceAmount, this.amount);

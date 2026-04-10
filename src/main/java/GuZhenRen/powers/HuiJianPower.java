@@ -39,7 +39,7 @@ public class HuiJianPower extends AbstractPower implements OnReceivePowerPower {
     }
 
     // =========================================================================
-    //  功能 1: 获得《慧剑》时，斩断现有的《情》
+    //  获得“慧剑”时，斩断现有的“情”
     // =========================================================================
     @Override
     public void onInitialApplication() {
@@ -58,7 +58,7 @@ public class HuiJianPower extends AbstractPower implements OnReceivePowerPower {
     }
 
     // =========================================================================
-    //  功能 2: 拦截未来获得的《情》
+    //  拦截未来获得的“情”
     // =========================================================================
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
@@ -68,12 +68,11 @@ public class HuiJianPower extends AbstractPower implements OnReceivePowerPower {
 
             int convertAmt = power.amount;
             if (convertAmt > 0) {
-                // 将“情”的层数转化为等量的“剑锋” (使用 addToTop 确保立即转化生效)
+                // 将“情”的层数转化为等量的“剑锋”
                 this.addToTop(new ApplyPowerAction(target, target, new JianFengPower(target, convertAmt), convertAmt));
                 this.addToBot(new ZhuanYiPower.TriggerAction());
             }
 
-            // 返回 false，表示拦截原始状态，不再获得“情”
             return false;
         }
 

@@ -31,18 +31,16 @@ public class ShengJiYe extends CustomPotion {
     private static Texture TRANSPARENT_IMG = null;
 
     public ShengJiYe() {
-        // PotionSize.T (管状), PotionColor.GREEN (绿色)
         super(NAME, POTION_ID, PotionRarity.PLACEHOLDER, PotionSize.T, PotionColor.GREEN);
 
         this.isThrown = false;
 
-        // 设置在图鉴(Lab)中鼠标悬停时的背景高光颜色为绿色
         this.labOutlineColor = Color.GREEN.cpy();
 
-        // 动态生成一张 1x1 的全透明图片，用于顶替默认的液体贴图，避开图鉴渲染报错
+        // 生成一张 1x1 的全透明图片，用于顶替默认的液体贴图，避开图鉴渲染报错
         if (TRANSPARENT_IMG == null) {
             Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-            pixmap.setColor(0, 0, 0, 0); // 全透明
+            pixmap.setColor(0, 0, 0, 0);
             pixmap.fill();
             TRANSPARENT_IMG = new Texture(pixmap);
             pixmap.dispose();
@@ -77,7 +75,6 @@ public class ShengJiYe extends CustomPotion {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             this.addToBot(new HealAction(p, p, this.potency));
         } else {
-            // 战斗外直接调用 heal
             p.heal(this.potency);
         }
     }

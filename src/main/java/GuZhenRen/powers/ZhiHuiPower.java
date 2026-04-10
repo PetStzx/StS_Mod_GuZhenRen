@@ -34,7 +34,6 @@ public class ZhiHuiPower extends AbstractPower {
     @Override
     public void atStartOfTurnPostDraw() {
         this.flash();
-        // 获得念 (注意：由于这是能力被动触发，不享受“情”的加成)
         this.addToBot(new ApplyPowerAction(owner, owner,
                 new NianPower(owner, this.amount), this.amount));
     }

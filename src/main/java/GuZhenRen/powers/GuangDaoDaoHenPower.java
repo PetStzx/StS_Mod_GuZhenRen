@@ -25,7 +25,7 @@ public class GuangDaoDaoHenPower extends AbstractDaoHenPower {
     }
 
     // =========================================================================
-    // 【核心逻辑】 增加光道牌的伤害
+    // 增加光道牌的伤害
     // =========================================================================
     @Override
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {

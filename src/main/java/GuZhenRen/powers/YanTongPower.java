@@ -50,11 +50,6 @@ public class YanTongPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        // DESCRIPTIONS[0]: "本回合你每打出1张指向敌人的牌，给予其 #b"
-        // DESCRIPTIONS[1]: " 层 #y焚烧 。"
-        // DESCRIPTIONS[2]: " 触发 #b"
-        // DESCRIPTIONS[3]: " 次后，每次触发将 #y灼伤 加入手牌。"
-
         StringBuilder sb = new StringBuilder();
         sb.append(DESCRIPTIONS[0]).append(this.amount).append(DESCRIPTIONS[1]);
 
@@ -75,9 +70,6 @@ public class YanTongPower extends AbstractPower {
                 this.flash();
                 this.triggerCount++;
 
-                // 【核心修改】
-                // 不再循环，而是直接给予 this.amount 层焚烧
-                // 升级前 this.amount = 1，升级后 this.amount = 2
                 this.addToBot(new ApplyPowerAction(target, this.owner,
                         new FenShaoPower(target, this.amount), this.amount, true));
 

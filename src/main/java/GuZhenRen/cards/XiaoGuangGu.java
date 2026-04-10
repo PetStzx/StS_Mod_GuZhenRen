@@ -31,7 +31,6 @@ public class XiaoGuangGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.GUANG_DAO);
         this.setRank(INITIAL_RANK);
 
-        // baseMagicNumber 用来存储显示的百分比 (50%)
         this.baseMagicNumber = this.magicNumber = 50;
     }
 

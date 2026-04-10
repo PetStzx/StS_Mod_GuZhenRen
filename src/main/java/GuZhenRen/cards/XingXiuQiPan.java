@@ -42,7 +42,6 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
 
         for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn) {
             if (c.cardID.equals(ID)) {
-                // 使用 EXTENDED_DESCRIPTION 调用 JSON 中的文本
                 this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
                 return false;
             }

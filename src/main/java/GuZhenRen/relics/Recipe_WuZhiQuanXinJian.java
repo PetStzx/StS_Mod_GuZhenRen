@@ -29,13 +29,13 @@ public class Recipe_WuZhiQuanXinJian extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(HuiJian.ID); // 【修改】第一个固定位：慧剑
+        list.add(HuiJian.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
-        if (cardID.equals(HuiJian.ID)) { // 【修改】判定慧剑升级
+        if (cardID.equals(HuiJian.ID)) {
             return true;
         }
         return false;

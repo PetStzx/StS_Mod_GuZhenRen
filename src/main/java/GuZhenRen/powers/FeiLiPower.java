@@ -24,7 +24,7 @@ public class FeiLiPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.type = PowerType.DEBUFF;
-        this.isTurnBased = true; // 声明这是一个按回合衰减的状态
+        this.isTurnBased = true;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/FeiLiPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/FeiLiPower.png");
@@ -41,14 +41,19 @@ public class FeiLiPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // 在每一轮结束时触发（怪物行动完毕后）
+    // =========================================================================
+    // 替换原有的 atEndOfRound()
+    // 在该怪物自身的行动轮次中立即触发，不等其他怪物
+    // =========================================================================
     @Override
-    public void atEndOfRound() {
+    public void duringTurn() {
         this.flash();
         // 1. 失去 1 点力量
         this.addToBot(new ApplyPowerAction(this.owner, this.owner, new StrengthPower(this.owner, -1), -1));
 
         // 2. 费力层数减 1
         this.addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+
+        this.updateDescription();
     }
 }

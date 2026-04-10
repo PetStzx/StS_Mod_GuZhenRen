@@ -49,8 +49,7 @@ public class JianYingGu extends AbstractGuZhenRenCard {
         // 2. 给予剑痕
         this.addToBot(new ApplyPowerAction(m, p, new JianHenPower(m, this.magicNumber), this.magicNumber));
 
-        // 3. 将 1 张《剑影》加入手牌
-        // 第二个参数 true 表示牌加入手牌时会有发光特效
+        // 3. 将 1 张剑影加入手牌
         this.addToBot(new MakeTempCardInHandAction(new JianYing(), 1, true));
     }
 
@@ -58,12 +57,8 @@ public class JianYingGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 剑痕 3 -> 5
-            this.upgradeRank(1); // 2转 -> 3转
-
-            // 如果衍生牌《剑影》也有升级版本，可以在这里让预览的牌也升级
-            // this.cardsToPreview.upgrade();
-
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

@@ -85,7 +85,6 @@ public class ShaGu extends AbstractBenMingGuCard {
         private final UUID targetUUID;
 
         private static final int INCREASE_AMOUNT = 2;
-        // 回血变量改为失去生命变量
         private static final int FATAL_HP_LOSS = 2;
 
         public ShaGuFatalAction(AbstractMonster target, DamageInfo info, UUID targetUUID) {
@@ -107,7 +106,7 @@ public class ShaGu extends AbstractBenMingGuCard {
                     // 触发失去生命效果
                     AbstractDungeon.actionManager.addToTop(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, FATAL_HP_LOSS));
 
-                    // --- 1. 修复大师牌组 (Master Deck) 的逻辑 ---
+                    // 1. 大师牌组的逻辑
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                         if (c.uuid.equals(this.targetUUID)) {
                             c.misc += INCREASE_AMOUNT;
@@ -122,7 +121,7 @@ public class ShaGu extends AbstractBenMingGuCard {
                         }
                     }
 
-                    // --- 2. 修复战斗内卡牌 (Hand, Discard, Draw Pile) 的逻辑 ---
+                    // 2. 战斗内卡牌的逻辑
                     for (AbstractCard c : GetAllInBattleInstances.get(this.targetUUID)) {
                         c.misc += INCREASE_AMOUNT;
 

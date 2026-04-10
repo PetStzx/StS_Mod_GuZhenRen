@@ -44,7 +44,6 @@ public class HeiMangXuYing extends AbstractXuYingCard {
             AbstractPlayer p = AbstractDungeon.player;
 
             this.addToTop(new SFXAction("MONSTER_ENCOUNTER_SPECIAL"));
-            // 直接应用 magicNumber 层数的缠绕
             this.addToTop(new ApplyPowerAction(m, p, new ConstrictedPower(m, p, this.magicNumber), this.magicNumber));
         }
     }

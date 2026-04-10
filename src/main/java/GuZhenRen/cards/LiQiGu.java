@@ -45,7 +45,7 @@ public class LiQiGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(1); // 升级后触发 2 次
-            this.upgradeRank(1); // 3转 -> 4转
+            this.upgradeRank(1);
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }

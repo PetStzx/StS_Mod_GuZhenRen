@@ -31,7 +31,7 @@ public class GuangYinFeiRen extends AbstractShaZhaoCard {
 
         this.setDao(Dao.ZHOU_DAO);
 
-        // 跨战斗追踪使用次数，初始为 3
+        // 追踪使用次数，初始为 3
         this.misc = 3;
         this.baseMagicNumber = this.magicNumber = this.misc;
     }

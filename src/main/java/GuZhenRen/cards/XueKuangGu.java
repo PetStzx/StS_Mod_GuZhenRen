@@ -44,7 +44,7 @@ public class XueKuangGu extends AbstractGuZhenRenCard {
     @Override
     public void update() {
         super.update();
-        // 每帧实时获取当前在手牌中的左右邻居，确保打出瞬间能精准抓取
+        // 每帧实时获取当前在手牌中的左右邻居
         if (AbstractDungeon.player != null && AbstractDungeon.player.hand.contains(this)) {
             int index = AbstractDungeon.player.hand.group.indexOf(this);
             this.leftCard = (index > 0) ? AbstractDungeon.player.hand.group.get(index - 1) : null;
@@ -62,7 +62,7 @@ public class XueKuangGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBaseCost(0); // 【修改点】：升级后减为 0 费
+            this.upgradeBaseCost(0);
             this.initializeDescription();
         }
     }

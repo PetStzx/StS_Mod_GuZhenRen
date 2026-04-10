@@ -39,17 +39,16 @@ public class ShaYiGu extends AbstractGuZhenRenCard {
 
         this.baseDamage = DAMAGE;
         this.baseMagicNumber = this.magicNumber = YI_AMT;
-        this.isMultiDamage = true; // 必须开启，否则AOE伤害计算会出错
+        this.isMultiDamage = true;
 
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 先统计当前活着的敌人数量
+        // 1. 统计当前活着的敌人数量
         int enemyCount = 0;
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            // 只要没死且没逃跑，就算一个目标
             if (!mo.isDeadOrEscaped()) {
                 enemyCount++;
             }
@@ -60,8 +59,7 @@ public class ShaYiGu extends AbstractGuZhenRenCard {
         this.addToBot(new VFXAction(p, new CleaveEffect(), 0.1F));
         this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.NONE));
 
-        // 3. 根据刚才统计的数量给予意
-        // 即使 AOE 把怪打死了，因为我们是在打出瞬间统计的，所以依然能获得对应层数
+        // 3. 给予意
         if (enemyCount > 0) {
             int totalYi = enemyCount * this.magicNumber;
             this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, totalYi), totalYi));
@@ -72,7 +70,7 @@ public class ShaYiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_DAMAGE_AMT); // 7 -> 10
+            this.upgradeDamage(UPGRADE_DAMAGE_AMT);
             this.upgradeRank(1); // 3 -> 4
             this.initializeDescription();
         }

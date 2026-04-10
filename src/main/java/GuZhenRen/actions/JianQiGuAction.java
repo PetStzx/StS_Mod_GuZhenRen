@@ -27,7 +27,7 @@ public class JianQiGuAction extends AbstractGameAction {
             stacks = this.target.getPower(JianHenPower.POWER_ID).amount;
         }
 
-        // 2. 先把群体伤害排入队列 (后进先出，所以它会被压在单体伤害后面执行)
+        // 2. 先把群体伤害排入队列
         if (stacks > 0) {
             int aoeDamage = stacks * this.multiplier;
 
@@ -46,7 +46,7 @@ public class JianQiGuAction extends AbstractGameAction {
             ));
         }
 
-        // 3. 将第一段单体伤害排入顶部 (最先执行)
+        // 3. 将第一段单体伤害排入顶部
         this.addToTop(new DamageAction(
                 this.target,
                 this.info,

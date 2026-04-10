@@ -25,18 +25,17 @@ public class Recipe_TianPuGuangHe extends AbstractRecipeRelic {
     }
 
     // =========================================================================
-    //  步骤 1：固定材料 (太光蛊)
+    //  步骤 1：固定材料 (太光蛊+)
     // =========================================================================
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(TaiGuangGu.ID); // 第一个固定位：太光蛊
+        list.add(TaiGuangGu.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
-        // 太光蛊必须是升级过的（太光蛊+）
         if (cardID.equals(TaiGuangGu.ID)) {
             return true;
         }
@@ -48,17 +47,16 @@ public class Recipe_TianPuGuangHe extends AbstractRecipeRelic {
     // =========================================================================
     @Override
     public int getIngredientCount() {
-        return 2; // 总共需要 2 个材料
+        return 2;
     }
 
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
-        if (index == 1) { // 第二个材料槽
+        if (index == 1) {
             // 判定 1: 必须有【光道】标签
             if (!c.hasTag(GuZhenRenTags.GUANG_DAO)) {
                 return false;
             }
-
 
             // 判定 2: 必须是蛊虫
             if (c instanceof AbstractGuZhenRenCard) {
@@ -79,9 +77,8 @@ public class Recipe_TianPuGuangHe extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

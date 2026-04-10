@@ -17,7 +17,7 @@ public class LengXue extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/LengXue.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 3; // 升级前持续 3 回合
+    private static final int MAGIC = 3; // 升级前 3 回合
     private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后增加 1 回合 (变为 4)
     private static final int INITIAL_RANK = 6; // 5转
 
@@ -25,20 +25,19 @@ public class LengXue extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.XUE_DAO);
 
         this.baseMagicNumber = this.magicNumber = MAGIC;
-        this.exhaust = true; // 消耗
+        this.exhaust = true;
 
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 给目标挂上对应层数的冷血
         this.addToBot(new ApplyPowerAction(m, p, new LengXuePower(m, this.magicNumber), this.magicNumber));
     }
 
@@ -47,7 +46,7 @@ public class LengXue extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
-            this.upgradeRank(1); // 5转 -> 6转
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

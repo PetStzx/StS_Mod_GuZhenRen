@@ -19,15 +19,15 @@ public class WanLan extends AbstractGuZhenRenCard {
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION; // 【新增】：提取升级文本
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WanLan.png");
 
     private static final int COST = 1;
     private static final int BASE_DAMAGE = 2;
     private static final int MAGIC = 1;       // 基础恢复 1 点能量
     private static final int UPGRADE_PLUS_MAGIC = 1; // 升级额外恢复 1 点能量 (共 2 点)
-    private static final int HITS = 4;        // 固定攻击 4 次
-    private static final int INITIAL_RANK = 6; // 6转仙蛊
+    private static final int HITS = 4;        // 攻击 4 次
+    private static final int INITIAL_RANK = 6;
 
     public WanLan() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

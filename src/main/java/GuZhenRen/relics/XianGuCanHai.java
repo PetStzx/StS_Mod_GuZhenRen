@@ -20,34 +20,30 @@ public class XianGuCanHai extends CustomRelic {
         this.counter = -1; // 初始状态
     }
 
-    // =========================================================================
-    // 此方法专供图鉴、控制台和初始化时调用，永远展示标准的 1 层效果
-    // =========================================================================
+    // 此方法专供图鉴、控制台和初始化时调用，展示标准的 1 层效果
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0] + 1 + DESCRIPTIONS[1];
     }
 
-    // =========================================================================
-    // 我们自己封装一个方法，用于在游戏流程中动态刷新当前状态的文本
-    // =========================================================================
+
+    // 封装方法，用于动态刷新当前状态的文本
     private void updateDescriptionAndTips() {
         if (this.counter == -2 || this.counter == 0) {
-            this.description = DESCRIPTIONS[2]; // "残骸中的道痕已耗尽。"
+            this.description = DESCRIPTIONS[2];
         } else {
             int displayCount = this.counter > 0 ? this.counter : 1;
             this.description = DESCRIPTIONS[0] + displayCount + DESCRIPTIONS[1];
         }
 
-        // 清空旧提示，强行把新文本塞进去
+        // 清空旧提示，塞入新文本
         this.tips.clear();
         this.tips.add(new com.megacrit.cardcrawl.helpers.PowerTip(this.name, this.description));
         this.initializeTips();
     }
 
-    // =========================================================================
+
     // 层数与状态管理
-    // =========================================================================
     public void addCharge() {
         if (this.counter < 0) {
             this.counter = 0; // 如果之前是隐藏状态，先拉回 0
@@ -70,7 +66,7 @@ public class XianGuCanHai extends CustomRelic {
                 this.grayscale = true;
             }
 
-            updateDescriptionAndTips(); // 动态刷新面板
+            updateDescriptionAndTips(); // 刷新面板
         }
     }
 
@@ -82,7 +78,7 @@ public class XianGuCanHai extends CustomRelic {
         // 如果是刚生成的遗物（层数为 -1），则初始化为 1 层
         if (this.counter == -1) {
             this.counter = 1;
-            updateDescriptionAndTips(); // 刷新面板显示出数字 "1"
+            updateDescriptionAndTips();
         }
     }
 
@@ -100,6 +96,6 @@ public class XianGuCanHai extends CustomRelic {
             this.grayscale = false;
         }
 
-        updateDescriptionAndTips(); // 读档后也必须手动刷新一次
+        updateDescriptionAndTips();
     }
 }

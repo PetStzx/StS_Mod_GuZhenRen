@@ -100,7 +100,7 @@ public class CampfireShaZhaoEffect extends AbstractGameEffect {
         }
 
         // =====================================================================
-        // 阶段 2：选择材料 (支持泛型判断)
+        // 阶段 2：选择材料
         // =====================================================================
         else if (currentPhase == Phase.CHOOSE_INGREDIENTS) {
 
@@ -200,7 +200,12 @@ public class CampfireShaZhaoEffect extends AbstractGameEffect {
 
         AbstractBenMingGuCard.isSynthesizing = false;
 
-        AbstractDungeon.player.loseRelic(selectedRecipe.relicId);
+        AbstractRecipeRelic relicToExhaust = (AbstractRecipeRelic) AbstractDungeon.player.getRelic(selectedRecipe.relicId);
+        if (relicToExhaust != null) {
+            relicToExhaust.usedUp();
+            relicToExhaust.grayscale = true;
+        }
+
         AbstractCard reward = selectedRecipe.getRewardCard();
         reward.initializeDescription();
 

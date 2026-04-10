@@ -21,10 +21,10 @@ public class BigCardVisualPatch {
 
     @SpirePrefixPatch
     public static void Prefix(SingleCardViewPopup __instance, SpriteBatch sb) {
-        // 1. 通过反射获取当前正在查看的卡牌对象
+        // 1. 获取当前正在查看的卡牌对象
         AbstractCard card = ReflectionHacks.getPrivate(__instance, SingleCardViewPopup.class, "card");
 
-        // 2. 判断是否是我们的目标卡牌 (杀招 或 成功蛊)
+        // 2. 判断是否是目标卡牌 (杀招 或 成功蛊)
         if (card instanceof AbstractShaZhaoCard || card instanceof ChengGongGu) {
             // 3. 记录真实稀有度 (SPECIAL)
             originalRarity = card.rarity;

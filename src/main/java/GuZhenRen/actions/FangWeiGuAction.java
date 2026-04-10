@@ -45,7 +45,7 @@ public class FangWeiGuAction extends AbstractGameAction {
                 }
 
                 for (AbstractCard c : validGuCache) {
-                    // 使用 makeCopy() 确保生成的是最基础、未升级的牌
+                    // 生成未升级的牌
                     tmp.addToTop(c.makeCopy());
                 }
             } else {
@@ -55,7 +55,6 @@ public class FangWeiGuAction extends AbstractGameAction {
                     // 如果符合条件，且这个 ID 还没有被添加过
                     if (isValidGu(c) && !seenIDs.contains(c.cardID)) {
                         seenIDs.add(c.cardID);
-                        // makeCopy() 同样确保生成的是未升级的牌，剥离牌组中的升级状态
                         tmp.addToTop(c.makeCopy());
                     }
                 }
@@ -99,7 +98,7 @@ public class FangWeiGuAction extends AbstractGameAction {
 
             // 1. 必须是 1-9 转的蛊虫
             // 2. 排除仿伪蛊自身
-            // 3. 排除本命蛊 (双重保险)
+            // 3. 排除本命蛊 (保险)
             // 4. 排除所有特殊稀有度的牌
             return rank >= 1 && rank <= 9 &&
                     !c.cardID.equals(FangWeiGu.ID) &&

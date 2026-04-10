@@ -25,8 +25,8 @@ public class FeiXiongZhiLiGu extends AbstractGuZhenRenCard {
     private static final int COST = 2;
     private static final int DAMAGE = 12;
     private static final int VULN = 2;
-    private static final int UPGRADE_PLUS_VULN = 2; // 升级+2，总共4层易伤
-    private static final int INITIAL_RANK = 6; // 金卡（仙蛊）起步6转
+    private static final int UPGRADE_PLUS_VULN = 2; // 升级+2，共4层易伤
+    private static final int INITIAL_RANK = 6;
 
     public FeiXiongZhiLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -39,7 +39,7 @@ public class FeiXiongZhiLiGu extends AbstractGuZhenRenCard {
         this.setRank(INITIAL_RANK);
 
         this.baseDamage = DAMAGE;
-        this.isMultiDamage = true; // 开启群体伤害
+        this.isMultiDamage = true;
 
         this.baseMagicNumber = this.magicNumber = VULN;
         this.exhaust = true;
@@ -72,8 +72,8 @@ public class FeiXiongZhiLiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_VULN); // 2 -> 4层易伤
-            this.upgradeRank(1); // 6转 -> 7转
+            this.upgradeMagicNumber(UPGRADE_PLUS_VULN);
+            this.upgradeRank(1);
             this.cardsToPreview.upgrade();
             this.myBaseDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();

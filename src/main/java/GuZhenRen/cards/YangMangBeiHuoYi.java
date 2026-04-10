@@ -41,10 +41,8 @@ public class YangMangBeiHuoYi extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得格挡
         this.addToBot(new GainBlockAction(p, p, this.block));
 
-        // 2. 给予状态
         this.addToBot(new ApplyPowerAction(p, p,
                 new YangMangBeiHuoYiPower(p, this.magicNumber, this.secondMagicNumber),
                 this.magicNumber));

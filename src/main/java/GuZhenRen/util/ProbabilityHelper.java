@@ -10,7 +10,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class ProbabilityHelper {
 
-    // 加入 AbstractCard 参数
     public static float getModifiedChance(AbstractCard card, float baseChance) {
         AbstractPlayer p = AbstractDungeon.player;
         if (p == null) return baseChance;
@@ -23,7 +22,6 @@ public class ProbabilityHelper {
         for (AbstractPower power : p.powers) {
             if (power instanceof IProbabilityModifier) {
                 IProbabilityModifier mod = (IProbabilityModifier) power;
-                // 将卡牌传给能力，让能力自己判断是否要修改
                 baseMultiplier *= mod.getBaseProbabilityMultiplier(card);
                 additiveMod += mod.getAdditiveProbability(card);
                 finalMultiplier *= mod.getFinalProbabilityMultiplier(card);
@@ -75,7 +73,6 @@ public class ProbabilityHelper {
         float realChance = getModifiedChance(card, baseChance);
         boolean success = AbstractDungeon.cardRandomRng.randomBoolean(realChance);
 
-        // 如果判定失败，寻找玩家身上的“转运”能力并触发
         if (!success && AbstractDungeon.player != null) {
             String zhuanYunId = GuZhenRen.makeID("ZhuanYunPower");
             if (AbstractDungeon.player.hasPower(zhuanYunId)) {

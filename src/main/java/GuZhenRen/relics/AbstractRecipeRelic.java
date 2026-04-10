@@ -67,6 +67,11 @@ public abstract class AbstractRecipeRelic extends CustomRelic {
     public void update() {
         super.update();
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(this.relicId)) {
+            if (this.usedUp) {
+                this.stopPulse();
+                return;
+            }
+
             if (AbstractDungeon.getCurrRoom() instanceof RestRoom) {
                 checkTimer -= Gdx.graphics.getDeltaTime();
                 if (checkTimer > 0.0f) return;

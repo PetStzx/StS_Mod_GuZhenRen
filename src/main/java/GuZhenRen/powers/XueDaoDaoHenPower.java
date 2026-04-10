@@ -28,7 +28,7 @@ public class XueDaoDaoHenPower extends AbstractDaoHenPower {
     }
 
     // =========================================================================
-    // 【核心逻辑】 造成攻击伤害时触发吸血
+    // 造成攻击伤害时触发吸血
     // =========================================================================
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
@@ -40,7 +40,6 @@ public class XueDaoDaoHenPower extends AbstractDaoHenPower {
 
             if (healAmount > 0) {
                 this.flash();
-                // 将治疗动作排入队列，在造成伤害后立刻回血
                 this.addToTop(new HealAction(this.owner, this.owner, healAmount));
             }
         }

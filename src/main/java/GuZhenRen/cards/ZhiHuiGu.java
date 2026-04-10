@@ -23,7 +23,7 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.SPECIAL, // 本命蛊
+                CardRarity.SPECIAL,
                 CardTarget.SELF);
 
         this.setDao(Dao.ZHI_DAO);

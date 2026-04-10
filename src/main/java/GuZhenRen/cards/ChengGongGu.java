@@ -43,12 +43,10 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.LU_DAO);
         this.setRank(INITIAL_RANK);
 
-        this.exhaust = true;
+        this.purgeOnUse = true;
     }
 
-    // =========================================================================
     // 渲染成金卡的视觉特效
-    // =========================================================================
     @Override
     public void render(SpriteBatch sb) {
         CardRarity originalRarity = this.rarity;
@@ -111,7 +109,7 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
             AbstractPlayer p = AbstractDungeon.player;
             p.gainGold(300); // 获得 300 金币
 
-            // 下金币雨与聚光灯特效 (完美对应观者的"财富")
+            // 下金币雨与聚光灯特效
             AbstractDungeon.actionManager.addToBottom(new VFXAction(new RainingGoldEffect(300 * 2, true)));
             AbstractDungeon.actionManager.addToBottom(new VFXAction(new SpotlightPlayerEffect()));
         }
@@ -144,7 +142,7 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 自由 (从牌组移除2张牌)
+    // 内部类 3：自由 (从牌组移除2张牌)
     // =========================================================================
     public static class OptionZiYou extends CustomCard {
         public static final String ID = GuZhenRen.makeID("OptionZiYou");
@@ -168,9 +166,8 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
         }
     }
 
-    // =========================================================================
+
     // 打开卡组移除 2 张牌
-    // =========================================================================
     public static class ZiYouRemoveAction extends AbstractGameAction {
         public ZiYouRemoveAction() {
             this.actionType = ActionType.CARD_MANIPULATION;

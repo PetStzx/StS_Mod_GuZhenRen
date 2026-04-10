@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Recipe_ShangFangJieWa extends AbstractRecipeRelic {
     public static final String ID = GuZhenRen.makeID("Recipe_ShangFangJieWa");
 
-    // 使用力道的通用配方背景贴图
     private static final String IMG = "Recipe_LiDao.png";
     private static final String OUTLINE = "Recipe_LiDao.png";
 
@@ -31,20 +30,20 @@ public class Recipe_ShangFangJieWa extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(HengChongZhiZhuangGu.ID); // 核心材料：横冲直撞蛊
+        list.add(HengChongZhiZhuangGu.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(HengChongZhiZhuangGu.ID)) {
-            return true; // 要求必须升级
+            return true;
         }
         return false;
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (任意力道仙蛊，6-9转)
+    //  步骤 2：泛型材料 (任意力道仙蛊)
     // =========================================================================
     @Override
     public int getIngredientCount() {
@@ -79,9 +78,8 @@ public class Recipe_ShangFangJieWa extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

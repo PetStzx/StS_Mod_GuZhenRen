@@ -39,10 +39,7 @@ public class LeShanLeShuiGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得意
         this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, this.magicNumber), this.magicNumber));
-
-        // 2. 施加负面状态：念头受阻
         this.addToBot(new ApplyPowerAction(p, p, new NianTouShouZuPower(p,-1)));
     }
 

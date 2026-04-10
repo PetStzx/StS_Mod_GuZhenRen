@@ -20,7 +20,6 @@ public class Recipe_WanXingFeiYing extends AbstractRecipeRelic {
 
     @Override
     public String getUpdatedDescription() {
-        // "需要： 星念蛊+ 、任意 6 转及以上的 智道仙蛊 。"
         return DESCRIPTIONS[0];
     }
 
@@ -41,16 +40,14 @@ public class Recipe_WanXingFeiYing extends AbstractRecipeRelic {
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (6转以上智道蛊虫)
+    //  步骤 2：泛型材料 (任意智道仙蛊)
     // =========================================================================
 
-    // 1. 总步骤数：2
     @Override
     public int getIngredientCount() {
         return 2;
     }
 
-    // 2. 泛型判定逻辑 (index=1)
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
         if (index == 1) {
@@ -70,7 +67,6 @@ public class Recipe_WanXingFeiYing extends AbstractRecipeRelic {
         return false;
     }
 
-    // 3. UI提示文本
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
@@ -79,9 +75,6 @@ public class Recipe_WanXingFeiYing extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
-    //  基础配置
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

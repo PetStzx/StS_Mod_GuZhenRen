@@ -25,13 +25,13 @@ public class LongXingHuBuGu extends AbstractGuZhenRenCard {
     private static final int COST = 0;
     private static final int BLOCK = 4;
     private static final int UPGRADE_PLUS_BLOCK = 3; // 升级加 3 点，变为 7
-    private static final int INITIAL_RANK = 4;       // 4转
+    private static final int INITIAL_RANK = 4;
 
     public LongXingHuBuGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.LI_DAO);
@@ -56,22 +56,22 @@ public class LongXingHuBuGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 终极解决方案：精准拦截力量的获得
+    // 拦截力量的获得
     // =========================================================================
 
-    // 补丁 1：监听已有力量时的层数叠加 (【核心修复】：精准定位到 StrengthPower 类)
+    // 补丁 1：监听已有力量时的层数叠加
     @SpirePatch(clz = StrengthPower.class, method = "stackPower")
     public static class StackPowerReturnPatch {
         @SpirePostfixPatch
         public static void Postfix(StrengthPower __instance, int stackAmount) {
-            // 判断：状态属于玩家，且增加量 > 0 (排除被上虚弱掉力量的情况)
+            // 判断：状态属于玩家，且增加量 > 0
             if (__instance.owner != null && __instance.owner.isPlayer && stackAmount > 0) {
                 checkAndReturnFromDiscard();
             }
         }
     }
 
-    // 补丁 2：监听本场战斗第一次获得力量 (StrengthPower 没有重写此方法，所以继续监听 AbstractPower)
+    // 补丁 2：监听本场战斗第一次获得力量
     @SpirePatch(clz = AbstractPower.class, method = "onInitialApplication")
     public static class InitialPowerReturnPatch {
         @SpirePostfixPatch

@@ -34,7 +34,7 @@ public class TaiDuGu extends AbstractGuZhenRenCard {
                 CardRarity.UNCOMMON,
                 CardTarget.ENEMY);
 
-        this.setDao(Dao.BIAN_HUA_DAO); // 变化道
+        this.setDao(Dao.BIAN_HUA_DAO);
         this.setRank(INITIAL_RANK);
 
         this.baseDamage = this.damage = VAL;

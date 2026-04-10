@@ -104,7 +104,7 @@
   "GuZhenRen:ZhiZhangPower": {
     "NAME": "Wisdom Block",
     "DESCRIPTIONS": [
-      "All effects that grant guzhenren:Thought instead grant Temporary HP."
+      "All effects that grant #yThought instead grant Temporary HP."
     ]
   },
   "GuZhenRen:ZhiHuiPower": {

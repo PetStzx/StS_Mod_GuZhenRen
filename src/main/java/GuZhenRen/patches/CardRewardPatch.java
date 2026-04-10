@@ -48,7 +48,7 @@ public class CardRewardPatch {
                 if (guCard.isXianGu() && playerXianGuIDs.contains(guCard.cardID)) {
                     GuZhenRen.logger.info("过滤掉落 [" + guCard.name + "] 原因: 已有同名仙蛊");
 
-                    // 传入索引 i 作为固定种子的参数，确保每次 SL 替换结果绝对一致
+                    // 传入索引 i 作为固定种子的参数
                     AbstractCard replacement = getReplacementCard(
                             c.rarity,
                             c.upgraded,

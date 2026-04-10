@@ -29,14 +29,14 @@ public class Recipe_WuJinXuanGuangQi extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(Xian.ID); // 第一个固定位：限
+        list.add(Xian.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(Xian.ID)) {
-            return true; // 必须升级过
+            return true;
         }
         return false;
     }
@@ -76,9 +76,8 @@ public class Recipe_WuJinXuanGuangQi extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

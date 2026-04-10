@@ -79,7 +79,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         if (!this.effectUsedThisCombat && this.rank > 1) {
             if (card instanceof AbstractGuZhenRenCard) {
                 int cardRank = ((AbstractGuZhenRenCard) card).rank;
-                // 判定：转数大于等于1，且严格低于当前空窍转数
+                // 判定：转数大于等于1，且低于当前空窍转数
                 if (cardRank >= 1 && cardRank < this.rank) {
                     this.effectUsedThisCombat = true; // 标记本场战斗已使用
                     this.flash();
@@ -170,7 +170,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     }
 
     private void evolve(int overflowXP) {
-        GuZhenRen.logger.info("空窍升级。目标: " + this.nextRelicID);
+        GuZhenRen.logger.info("空窍突破。目标: " + this.nextRelicID);
 
         int relicIndex = AbstractDungeon.player.relics.indexOf(this);
         AbstractRelic newRelic = RelicLibrary.getRelic(this.nextRelicID).makeCopy();

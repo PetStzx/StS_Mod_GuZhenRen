@@ -12,7 +12,7 @@ public class TouDaoDaoHenPower extends AbstractDaoHenPower {
     public static final String POWER_ID = GuZhenRen.makeID("TouDaoDaoHenPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    // 【核心】全局静态变量：记录本场战斗偷取的总金币
+    // 全局静态变量：记录本场战斗偷取的总金币
     public static int totalGoldStolenThisCombat = 0;
     private static final int MAX_GOLD_PER_COMBAT = 30;
 
@@ -26,7 +26,6 @@ public class TouDaoDaoHenPower extends AbstractDaoHenPower {
         int remainingGold = MAX_GOLD_PER_COMBAT - totalGoldStolenThisCombat;
         if (remainingGold < 0) remainingGold = 0;
 
-        // 动态拼接：x(层数) 和 y(剩余额度)
         this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1] + remainingGold + powerStrings.DESCRIPTIONS[2];
     }
 
@@ -43,13 +42,13 @@ public class TouDaoDaoHenPower extends AbstractDaoHenPower {
             if (remainingGold > 0) {
                 this.flash();
 
-                // 计算本次实际能偷到的金币（确保不会超过 30 的上限）
+                // 计算本次实际能偷到的金币（不超过 30 上限）
                 int goldToSteal = Math.min(this.amount, remainingGold);
 
                 // 给玩家加钱
                 AbstractDungeon.player.gainGold(goldToSteal);
 
-                // 播放金币飞向玩家的视觉特效 (限制一下特效数量，防止多段高层数卡顿)
+                // 播放特效
                 int effectCount = Math.min(goldToSteal, 5);
                 for (int i = 0; i < effectCount; i++) {
                     AbstractDungeon.effectList.add(new GainPennyEffect(target.hb.cX, target.hb.cY));

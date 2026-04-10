@@ -29,14 +29,14 @@ public class Recipe_XueJianLeng extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(LengXue.ID); // 第一个固定位：冷血
+        list.add(LengXue.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(LengXue.ID)) {
-            return true; // 判定冷血必须升级
+            return true;
         }
         return false;
     }
@@ -77,9 +77,7 @@ public class Recipe_XueJianLeng extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

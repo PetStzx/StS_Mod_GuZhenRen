@@ -40,7 +40,7 @@ public class HaoYouPower extends AbstractPower {
         this.description = this.owner.name + DESCRIPTIONS[0];
     }
 
-    // 判定 1：玩家对敌人造成伤害时，移除状态
+    // 玩家对敌人造成伤害时，移除状态
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
         if (info.type != DamageInfo.DamageType.THORNS && info.type != DamageInfo.DamageType.HP_LOSS && info.owner != null && info.owner != this.owner) {
@@ -52,7 +52,7 @@ public class HaoYouPower extends AbstractPower {
         return damageAmount;
     }
 
-    // 判定 2：敌人对玩家造成伤害时，移除状态
+    // 敌人对玩家造成伤害时，移除状态
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         if (info.type != DamageInfo.DamageType.THORNS && info.type != DamageInfo.DamageType.HP_LOSS && target != this.owner) {

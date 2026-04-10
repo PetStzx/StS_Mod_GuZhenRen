@@ -36,7 +36,7 @@ public class Recipe_WanWoDaShouYin extends AbstractRecipeRelic {
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(BaShan.ID)) {
-            return true; // 必须升级
+            return true;
         }
         return false;
     }
@@ -58,7 +58,7 @@ public class Recipe_WanWoDaShouYin extends AbstractRecipeRelic {
             }
 
 
-            // 条件B: 必须是仙蛊 (6转及以上)
+            // 条件B: 必须是仙蛊
             if (c instanceof AbstractGuZhenRenCard) {
                 return ((AbstractGuZhenRenCard) c).rank >= 6;
             }
@@ -76,9 +76,8 @@ public class Recipe_WanWoDaShouYin extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

@@ -40,7 +40,7 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
     }
 
     // =========================================================================
-    // 功能 1: 获得时智能清洗全场（高拓展性版）
+    // 功能 1: 获得时清洗全场
     // =========================================================================
     @Override
     public void onInitialApplication() {

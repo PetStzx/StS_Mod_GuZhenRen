@@ -37,7 +37,7 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
                 CardTarget.ENEMY);
 
         this.baseDamage = DAMAGE;
-        // magicNumber 代表“攻击次数”
+        // magicNumber 代表攻击次数
         this.baseMagicNumber = this.magicNumber = HITS;
 
         this.setDao(Dao.JIN_DAO);
@@ -48,15 +48,14 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 循环造成伤害 (次数取决于当前的 magicNumber)
+        // 1. 循环造成伤害
         for (int i = 0; i < this.magicNumber; i++) {
             this.addToBot(new DamageAction(m,
                     new DamageInfo(p, this.damage, this.damageTypeForTurn),
                     AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         }
 
-        // 2. 将“减少次数”的动作加入队列
-        // 只有当次数大于0时才减少
+        // 2. 减少次数，只有当次数大于0时才减少
         if (this.baseMagicNumber > 0) {
             this.addToBot(new DecreaseMagicAction(this.uuid, 1));
         }
@@ -69,18 +68,14 @@ public class JuChiJinWu extends AbstractGuZhenRenCard {
             this.upgraded = true;
             this.name = cardStrings.EXTENDED_DESCRIPTION[0];
             this.initializeTitle();
-
-            // 升级：6次 -> 7次
             this.upgradeMagicNumber(UPGRADE_PLUS_HITS);
-
             this.upgradeRank(1);
             this.initializeDescription();
         }
     }
 
-    // =========================================================================
-    //  通过 UUID 查找当前战斗中的“这一张牌”及其循环使用的副本
-    // =========================================================================
+
+    //  查找当前战斗中的“这一张牌”及其循环使用的副本
     public static class DecreaseMagicAction extends AbstractGameAction {
         private final UUID uuid;
         private final int decreaseAmount;

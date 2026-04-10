@@ -23,13 +23,12 @@ public class BenMingGuSavePatch {
             return;
         }
 
-        // 2. 【核心修复】 检查角色是否为“古月方源”
-        // 如果不是我们的角色，直接返回，不执行后续逻辑
+        // 2. 检查角色是否为“古月方源”
         if (!(AbstractDungeon.player instanceof FangYuan)) {
             return;
         }
 
-        // 3. 检查玩家是否【已经拥有】本命蛊
+        // 3. 检查玩家是否已经拥有本命蛊
         boolean hasBenMingGu = false;
         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
             if (c.hasTag(GuZhenRenTags.BEN_MING_GU)) {
@@ -42,7 +41,7 @@ public class BenMingGuSavePatch {
             return;
         }
 
-        // 4. 检查特效队列 (防止重复添加)
+        // 4. 检查特效队列，防止重复添加
         // 检查普通队列
         for (AbstractGameEffect e : AbstractDungeon.effectList) {
             if (e instanceof BenMingGuOpeningEffect) {

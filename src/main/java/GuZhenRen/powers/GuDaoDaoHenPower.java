@@ -24,7 +24,7 @@ public class GuDaoDaoHenPower extends AbstractDaoHenPower {
     }
 
     // =========================================================================
-    // 【架构接口】 宣告保护额度
+    //  宣告保护额度
     // =========================================================================
     @Override
     public int getDerivedPowerAmount(String powerID) {
@@ -35,10 +35,9 @@ public class GuDaoDaoHenPower extends AbstractDaoHenPower {
     }
 
     // =========================================================================
-    // 安全发放伴生荆棘，前后夹击开启/关闭免检标记
+    // 发放伴生荆棘，开启/关闭免检标记
     // =========================================================================
     private void applyCompanionThorns(int amt) {
-        // addToTop 是后进先出，排布顺序：关闭 -> 发放 -> 开启
         this.addToTop(new AbstractGameAction() {
             @Override
             public void update() {
@@ -60,14 +59,12 @@ public class GuDaoDaoHenPower extends AbstractDaoHenPower {
         });
     }
 
-    // 获得时发放
     @Override
     public void onInitialApplication() {
         super.onInitialApplication();
         applyCompanionThorns(this.amount);
     }
 
-    // 叠加时发放
     @Override
     public void stackPower(int stackAmount) {
         super.stackPower(stackAmount);

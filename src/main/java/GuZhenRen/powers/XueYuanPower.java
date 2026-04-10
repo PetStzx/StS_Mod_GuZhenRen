@@ -46,8 +46,6 @@ public class XueYuanPower extends AbstractPower {
 
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        // 移除了 !AbstractDungeon.actionManager.turnHasEnded 的判定
-        // 现在只要实际失去生命（damageAmount > 0），无论谁的回合都会触发
         if (damageAmount > 0) {
             this.flash();
             this.addToBot(new VFXAction(new OfferingEffect(), 0.1F));

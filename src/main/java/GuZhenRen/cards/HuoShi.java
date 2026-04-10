@@ -19,7 +19,7 @@ public class HuoShi extends AbstractGuZhenRenCard { // 继承蛊虫父类，完�
 
     private static final int COST = 0;
     private static final int FEN_SHAO_BASE = 2; // 初始给予 2 层
-    private static final int UPGRADE_FEN_SHAO = 1; // 升级后变 3 层
+    private static final int UPGRADE_FEN_SHAO = 1; // 升级后 3 层
 
     public HuoShi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -34,8 +34,8 @@ public class HuoShi extends AbstractGuZhenRenCard { // 继承蛊虫父类，完�
         this.baseFenShao = this.fenShao = FEN_SHAO_BASE;
         // 设为0转防止父类某些逻辑报空
         this.setRank(0);
-        this.selfRetain = true; // 保留
-        this.exhaust = true;    // 消耗
+        this.selfRetain = true;
+        this.exhaust = true;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class HuoShi extends AbstractGuZhenRenCard { // 继承蛊虫父类，完�
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeFenShao(UPGRADE_FEN_SHAO); // 调用父类的专属升级方法
+            this.upgradeFenShao(UPGRADE_FEN_SHAO);
             this.initializeDescription();
         }
     }

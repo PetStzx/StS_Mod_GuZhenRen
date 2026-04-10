@@ -20,13 +20,13 @@ public class WoLi extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WoLi.png");
 
     private static final int COST = 2;
-    private static final int INITIAL_RANK = 6; // 仙蛊，起步6转
+    private static final int INITIAL_RANK = 6;
 
     public WoLi() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.SELF);
 
         this.setDao(Dao.LI_DAO);
@@ -38,7 +38,7 @@ public class WoLi extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得 1 层“双发”效果 (DoubleTapPower 层数为1表示下1张牌触发)
+        // 1. 获得 1 层“双发”
         this.addToBot(new ApplyPowerAction(p, p, new DoubleTapPower(p, 1), 1));
 
         // 2. 生成我力虚影

@@ -53,7 +53,6 @@ public abstract class AbstractBenMingGuCard extends AbstractGuZhenRenCard {
             this.upgradeRank(1);
             performUpgradeEffect();
 
-            //
             boolean inCombat = CardCrawlGame.isInARun() &&
                     AbstractDungeon.currMapNode != null &&
                     AbstractDungeon.getCurrRoom() != null &&

@@ -29,14 +29,14 @@ public class Recipe_ZhuMoBang extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(XueYuan.ID); // 第一个固定位：血缘 (注意这里ID是血缘，不是血缘蛊)
+        list.add(XueYuan.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(XueYuan.ID)) {
-            return true; // 判定血缘必须升级
+            return true;
         }
         return false;
     }
@@ -77,9 +77,7 @@ public class Recipe_ZhuMoBang extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();
@@ -87,6 +85,6 @@ public class Recipe_ZhuMoBang extends AbstractRecipeRelic {
 
     @Override
     public AbstractCard getRewardCard() {
-        return new ZhuMoBang(); // 返回杀招：诛魔榜
+        return new ZhuMoBang();
     }
 }

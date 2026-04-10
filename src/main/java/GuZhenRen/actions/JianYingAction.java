@@ -3,6 +3,7 @@ package GuZhenRen.actions;
 import GuZhenRen.powers.JianHenPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -11,7 +12,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import java.util.ArrayList;
 
 public class JianYingAction extends AbstractGameAction {
-    private AbstractCard card; // 直接接收卡牌对象
+    private AbstractCard card;
 
     public JianYingAction(AbstractCard card) {
         this.card = card;
@@ -45,9 +46,12 @@ public class JianYingAction extends AbstractGameAction {
 
             this.card.calculateCardDamage(target);
 
-            // 使用计算后的最终伤害 this.card.damage
             DamageInfo info = new DamageInfo(AbstractDungeon.player, this.card.damage, DamageInfo.DamageType.NORMAL);
 
+            //“活力”判定
+            if (AbstractDungeon.player.hasPower("Vigor")) {
+                this.addToTop(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, "Vigor"));
+            }
             this.addToTop(new DamageAction(target, info, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         }
 

@@ -29,21 +29,19 @@ public class MuJiaGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
+                CardRarity.COMMON,
                 CardTarget.SELF);
 
-        this.setDao(Dao.MU_DAO); // 木道
+        this.setDao(Dao.MU_DAO);
         this.setRank(INITIAL_RANK);
 
         this.baseBlock = this.block = BLOCK_AMT;
 
-        // 使用专属变量统管焚烧层数
         this.baseFenShao = this.fenShao = FEN_SHAO_AMT;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 打出时，只获得格挡
         this.addToBot(new GainBlockAction(p, p, this.block));
     }
 
@@ -63,8 +61,8 @@ public class MuJiaGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(UPGRADE_PLUS_BLOCK); // 8 -> 11
-            this.upgradeFenShao(UPGRADE_PLUS_FEN_SHAO); // 5 -> 8
+            this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+            this.upgradeFenShao(UPGRADE_PLUS_FEN_SHAO);
             this.upgradeRank(1); // 2转 -> 3转
             this.initializeDescription();
         }

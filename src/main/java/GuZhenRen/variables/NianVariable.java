@@ -8,7 +8,6 @@ public class NianVariable extends DynamicVariable {
 
     @Override
     public String key() {
-        // 【标准规范】首字母大写
         return "GuZhenRen:Nian";
     }
 

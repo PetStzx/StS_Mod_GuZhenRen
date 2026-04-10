@@ -27,19 +27,17 @@ public class YanZhouGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
+                CardRarity.COMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.YAN_DAO);
 
         this.baseBlock = this.block = BLOCK_AMT;
 
-        // 使用 magicNumber 记录灼伤数量，方便在描述中显示
         this.baseMagicNumber = this.magicNumber = BURN_AMT;
 
         this.setRank(INITIAL_RANK);
 
-        // 设置卡牌预览：灼伤
         this.cardsToPreview = new Burn();
     }
 

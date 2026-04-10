@@ -23,8 +23,7 @@ public class BaShan extends AbstractGuZhenRenCard {
     private static final int BASE_DAMAGE = 15;
     private static final int UPGRADE_PLUS_DAMAGE = 3; // 升级加 3，变成 18
 
-    // 力量发挥的倍数
-    private static final int MAGIC = 3;
+    private static final int MAGIC = 3; // 力量发挥的倍数
     private static final int UPGRADE_PLUS_MAGIC = 2; // 升级加 2，变成 5 倍
 
     private static final int INITIAL_RANK = 6; // 6转仙蛊
@@ -33,7 +32,7 @@ public class BaShan extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.ALL_ENEMY);
 
         this.baseDamage = BASE_DAMAGE;
@@ -45,7 +44,7 @@ public class BaShan extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 动态力量倍数加成处理 (AOE逻辑)
+    // 动态力量倍数加成处理
     // =========================================================================
     @Override
     public void applyPowers() {
@@ -53,14 +52,12 @@ public class BaShan extends AbstractGuZhenRenCard {
         int realBaseDamage = this.baseDamage;
 
         if (p != null && p.hasPower(StrengthPower.POWER_ID)) {
-            // 底层本身会加 1 倍力量，所以我们额外补充 (magicNumber - 1) 倍
             int strAmt = p.getPower(StrengthPower.POWER_ID).amount;
             this.baseDamage += strAmt * (this.magicNumber - 1);
         }
 
         super.applyPowers();
 
-        // 恢复真实的面板数值，并告诉引擎数值已被修改（变色）
         this.baseDamage = realBaseDamage;
         this.isDamageModified = (this.damage != this.baseDamage);
     }
@@ -88,7 +85,7 @@ public class BaShan extends AbstractGuZhenRenCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new DamageAllEnemiesAction(
                 p,
-                this.multiDamage, // 使用父类生成的 AOE 伤害数组
+                this.multiDamage,
                 this.damageTypeForTurn,
                 AbstractGameAction.AttackEffect.BLUNT_HEAVY
         ));

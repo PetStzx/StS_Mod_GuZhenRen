@@ -37,15 +37,12 @@ public class DuoChongJianYingGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 实例化一张新的剑影
         AbstractCard jianYing = new JianYing();
 
-        // 2. 如果多重剑影蛊已经升级，就把生成的剑影也升级
         if (this.upgraded) {
             jianYing.upgrade();
         }
 
-        // 3. 排入动作：将指定数量的剑影加入手牌
         this.addToBot(new MakeTempCardInHandAction(jianYing, this.magicNumber));
     }
 
@@ -53,9 +50,8 @@ public class DuoChongJianYingGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeRank(1); // 4转 -> 5转
+            this.upgradeRank(1);
 
-            // 将鼠标悬停预览的牌替换为升级后的版本
             AbstractCard upgradedPreview = new JianYing();
             upgradedPreview.upgrade();
             this.cardsToPreview = upgradedPreview;

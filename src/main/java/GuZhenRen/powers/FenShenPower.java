@@ -43,10 +43,7 @@ public class FenShenPower extends AbstractPower {
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.flash();
 
-            // 1. 获得能量
             this.addToBot(new GainEnergyAction(this.amount));
-
-            // 2. 塞入灼伤
             this.addToBot(new MakeTempCardInHandAction(new Burn(), this.amount));
         }
     }

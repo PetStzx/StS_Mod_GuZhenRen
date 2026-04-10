@@ -29,14 +29,14 @@ public class Recipe_JianLangSanDie extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(LangJian.ID); // 核心材料：浪剑
+        list.add(LangJian.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(LangJian.ID)) {
-            return true; // 必须升级过
+            return true;
         }
         return false;
     }
@@ -76,9 +76,7 @@ public class Recipe_JianLangSanDie extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();
@@ -86,7 +84,6 @@ public class Recipe_JianLangSanDie extends AbstractRecipeRelic {
 
     @Override
     public AbstractCard getRewardCard() {
-        // 返回合成好的杀招牌：剑浪三叠
         return new JianLangSanDie();
     }
 }

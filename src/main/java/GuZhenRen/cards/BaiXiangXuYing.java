@@ -24,7 +24,7 @@ public class BaiXiangXuYing extends AbstractXuYingCard {
 
     public BaiXiangXuYing() {
         super(ID, NAME, IMG_PATH, -2, DESCRIPTION,
-                CardType.ATTACK, // 改为攻击牌
+                CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
                 CardTarget.ENEMY);
 

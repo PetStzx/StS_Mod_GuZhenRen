@@ -38,7 +38,7 @@ public class NianTouShouZuPower extends AbstractPower implements OnReceivePowerP
         this.description = DESCRIPTIONS[0];
     }
 
-    // 【新增】首次获得该能力时触发：清空身上的“念”
+    // 首次获得该能力时触发：清空身上的“念”
     @Override
     public void onInitialApplication() {
         if (this.owner.hasPower(NianPower.POWER_ID)) {
@@ -67,7 +67,7 @@ public class NianTouShouZuPower extends AbstractPower implements OnReceivePowerP
             }
 
             // 如果没有智障，则执行阻断逻辑
-            this.flash(); // 仅闪烁图标
+            this.flash(); // 闪烁图标
             return false; // 拦截，不获得念
         }
         return true;

@@ -29,14 +29,14 @@ public class Recipe_WanWuDaTongBian extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(BianTong.ID); // 第一个固定位：变通
+        list.add(BianTong.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(BianTong.ID)) {
-            return true; // 必须升级过
+            return true;
         }
         return false;
     }

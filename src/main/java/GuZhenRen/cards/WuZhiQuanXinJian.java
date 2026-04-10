@@ -26,13 +26,11 @@ public class WuZhiQuanXinJian extends AbstractShaZhaoCard {
                 CardType.ATTACK,
                 CardTarget.ENEMY);
 
-        // 设置流派为 剑道
         this.setDao(Dao.JIAN_DAO);
 
         this.baseDamage = DAMAGE;
 
-        // 设置消耗性 5
-        // 这会让卡牌在打出 5 次后自动消耗
+        // 设置消耗性 5，这会让卡牌在打出 5 次后自动消耗
         ExhaustiveField.ExhaustiveFields.exhaustive.set(this, EXHAUSTIVE_AMT);
 
         this.initializeDescription();
@@ -43,8 +41,7 @@ public class WuZhiQuanXinJian extends AbstractShaZhaoCard {
         // 1. 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
-        // 2. 伤害翻倍逻辑
-        // 直接修改 baseDamage，这样在弃牌堆/抽牌堆中也会保留翻倍后的数值
+        // 2. 伤害翻倍
         this.baseDamage *= 2;
 
     }

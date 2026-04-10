@@ -18,24 +18,23 @@ public class XueChou extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueChou.png");
 
     private static final int COST = 0;
-    private static final int INITIAL_RANK = 6; // 6转仙蛊
+    private static final int INITIAL_RANK = 6;
 
     public XueChou() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.XUE_DAO);
 
-        this.exhaust = true; // 消耗
+        this.exhaust = true;
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 仅给目标敌人施加“血仇”状态
         this.addToBot(new ApplyPowerAction(m, p, new XueChouPower(m,-1)));
     }
 
@@ -47,7 +46,7 @@ public class XueChou extends AbstractGuZhenRenCard {
             // 升级获得保留词条
             this.selfRetain = true;
 
-            this.upgradeRank(1); // 6转变7转
+            this.upgradeRank(1);
             this.myBaseDescription = UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }

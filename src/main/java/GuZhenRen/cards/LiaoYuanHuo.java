@@ -25,11 +25,11 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int INITIAL_RANK = 5;
 
-    // 次数（魔法值）设定：基础 2 次，升级加 1 次
+    // 次数：基础 2 次，升级加 1 次
     private static final int TIMES = 2;
     private static final int UPGRADE_PLUS_TIMES = 1;
 
-    // 焚烧层数设定：基础 3 层，升级减 1 层
+    // 焚烧：基础 3 层，升级减 1 层
     private static final int FEN_SHAO_BASE = 3;
     private static final int UPGRADE_PLUS_FEN_SHAO = -1;
 
@@ -46,8 +46,6 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
         this.baseFenShao = this.fenShao = FEN_SHAO_BASE;
 
         this.setRank(INITIAL_RANK);
-
-        // 统一预览普通的灼伤
         this.cardsToPreview = new Burn();
     }
 
@@ -56,7 +54,7 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
         // 特效：全屏火焰
         this.addToBot(new VFXAction(p, new ScreenOnFireEffect(), 1.0F));
 
-        // 进行 magicNumber 次全体焚烧施加
+        // 全体焚烧施加
         for (int i = 0; i < this.magicNumber; i++) {
             if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
                 for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
@@ -78,8 +76,8 @@ public class LiaoYuanHuo extends AbstractGuZhenRenCard {
             this.upgradeName();
             this.upgradeRank(1);
 
-            this.upgradeMagicNumber(UPGRADE_PLUS_TIMES); // 次数：2 -> 3
-            this.upgradeFenShao(UPGRADE_PLUS_FEN_SHAO);  // 层数：3 -> 2
+            this.upgradeMagicNumber(UPGRADE_PLUS_TIMES);
+            this.upgradeFenShao(UPGRADE_PLUS_FEN_SHAO);
 
             this.initializeDescription();
         }

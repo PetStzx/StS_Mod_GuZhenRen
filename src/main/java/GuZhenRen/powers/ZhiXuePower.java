@@ -23,7 +23,7 @@ public class ZhiXuePower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.type = PowerType.BUFF;
-        this.isTurnBased = true; // 基于回合的状态
+        this.isTurnBased = true;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/ZhiXuePower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/ZhiXuePower.png");
@@ -40,7 +40,6 @@ public class ZhiXuePower extends AbstractPower {
 
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        // 只要实际掉血量大于 0，就触发等同于层数的回复
         if (damageAmount > 0) {
             this.flash();
             this.addToTop(new HealAction(this.owner, this.owner, this.amount));

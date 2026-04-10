@@ -62,7 +62,6 @@ public class KuLiGu extends AbstractGuZhenRenCard {
         String s = super.constructRawDescription();
 
         if (this.showDynamicText) {
-            // 读取 JSON 中的扩展描述第一项
             s += cardStrings.EXTENDED_DESCRIPTION[0];
         }
 
@@ -89,7 +88,6 @@ public class KuLiGu extends AbstractGuZhenRenCard {
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        // 同理
         int amount = calculateStrengthAmount();
         if (this.secondMagicNumber != amount) {
             this.secondMagicNumber = amount;
@@ -106,11 +104,10 @@ public class KuLiGu extends AbstractGuZhenRenCard {
         this.showDynamicText = false;
 
         // 2. 强制刷新
-        // 此时 constructRawDescription 会因为开关关闭而只返回基础描述
         this.initializeDescription();
     }
 
-    // 可选：为了防止被消耗时在消耗堆显示，也加上这个
+    // 防止被消耗时在消耗堆显示
     @Override
     public void triggerOnExhaust() {
         this.showDynamicText = false;

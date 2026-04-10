@@ -45,23 +45,23 @@ public class HuoMaoSanZhangPower extends AbstractPower {
 
     @Override
     public void onApplyPower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
-        // 1. 确保施加者是玩家自己
+        // 1. 施加者是玩家自己
         if (source == this.owner) {
-            // 2. 确保施加的是“焚烧”能力
+            // 2. 施加的是“焚烧”
             if (power instanceof FenShaoPower) {
 
                 AbstractGameAction curAction = AbstractDungeon.actionManager.currentAction;
-                // 确保当前正在执行的是 ApplyPowerAction
+                // 当前正在执行的是 ApplyPowerAction
                 if (curAction instanceof ApplyPowerAction) {
 
                     int currentAmt = curAction.amount;
                     // 3. 如果原本要施加的层数大于0（排除清理buff的情况），且小于3
                     if (currentAmt > 0 && currentAmt < 3) {
 
-                        // 步骤 A: 修改 Power 对象的数值（针对初次施加，目标身上还没有该能力时生效）
+                        // 修改 Power 对象的数值（针对初次施加，目标身上还没有该能力时生效）
                         power.amount = 3;
 
-                        // 步骤 B: 修改 Action 对象的数值（针对层数叠加，这才是生效的核心）
+                        // 修改 Action 对象的数值（针对层数叠加）
                         ReflectionHacks.setPrivate(curAction, AbstractGameAction.class, "amount", 3);
 
                         this.flash();

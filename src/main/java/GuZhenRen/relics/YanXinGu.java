@@ -24,10 +24,9 @@ public class YanXinGu extends CustomRelic {
         return DESCRIPTIONS[0];
     }
 
-    // 核心钩子：回合开始时触发
     @Override
     public void atTurnStart() {
-        this.flash(); // 遗物闪烁
+        this.flash();
         this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
 
         this.addToBot(new MakeTempCardInHandAction(new HuoShi(), 1));

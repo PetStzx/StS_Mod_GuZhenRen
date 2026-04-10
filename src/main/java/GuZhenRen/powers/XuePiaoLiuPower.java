@@ -23,7 +23,7 @@ public class XuePiaoLiuPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.type = PowerType.BUFF;
-        this.isTurnBased = false; // 杀招能力，整场战斗持续生效
+        this.isTurnBased = false;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/XuePiaoLiuPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/XuePiaoLiuPower.png");
@@ -39,13 +39,11 @@ public class XuePiaoLiuPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // =========================================================================
-    // 判定：仅在玩家回合内失去生命时触发抽牌
-    // =========================================================================
+
+    // 仅在玩家回合内失去生命时触发抽牌
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        // 条件 1: 实际掉血量 > 0
-        // 条件 2: 玩家回合尚未结束 (即处于玩家的行动阶段)
+        // 实际掉血量 > 0 且 玩家回合尚未结束
         if (damageAmount > 0 && !AbstractDungeon.actionManager.turnHasEnded) {
             this.flash();
             this.addToBot(new DrawCardAction(this.owner, this.amount));

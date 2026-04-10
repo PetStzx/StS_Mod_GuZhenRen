@@ -77,13 +77,13 @@ public class HuiGu extends AbstractGuZhenRenCard {
                     return;
                 }
 
-                // 快速分支：消耗堆牌数小于等于捞取数量，直接全部捞回
+                // 消耗堆牌数小于等于捞取数量，直接全部捞回
                 if (AbstractDungeon.player.exhaustPile.size() <= this.amount) {
                     ArrayList<AbstractCard> cardsToRetrieve = new ArrayList<>(AbstractDungeon.player.exhaustPile.group);
                     for (AbstractCard c : cardsToRetrieve) {
-                        retrieveCard(c); // 这里依然会调用检测逻辑！
+                        retrieveCard(c);
                     }
-                    // 修复：补上手牌排版刷新，防止卡牌视觉重叠
+                    // 补上手牌排版刷新，防止卡牌视觉重叠
                     AbstractDungeon.player.hand.refreshHandLayout();
                     this.isDone = true;
                     return;
@@ -107,7 +107,7 @@ public class HuiGu extends AbstractGuZhenRenCard {
             // 处理选牌界面的返回结果
             if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                    retrieveCard(c); // 这里也会调用检测逻辑！
+                    retrieveCard(c);
                 }
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 AbstractDungeon.player.hand.refreshHandLayout();
@@ -124,7 +124,7 @@ public class HuiGu extends AbstractGuZhenRenCard {
             if (AbstractDungeon.player.exhaustPile.contains(c)) {
                 AbstractDungeon.player.exhaustPile.removeCard(c);
 
-                // 1. 先塞悔恨（瞬间结算），动态获取 BaseMod.MAX_HAND_SIZE
+                // 1. 先塞悔恨
                 if (c.cardID.equals(HuiGu.ID)) {
                     AbstractCard regret = new Regret();
                     if (AbstractDungeon.player.hand.size() < BaseMod.MAX_HAND_SIZE) {

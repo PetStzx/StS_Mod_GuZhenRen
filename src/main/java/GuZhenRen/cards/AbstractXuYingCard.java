@@ -6,6 +6,7 @@ import GuZhenRen.patches.GuZhenRenTags;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction; // 【新增导包】用于移除活力
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -23,6 +24,26 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
         super(id, name, img, cost, rawDescription, type, color, CardRarity.SPECIAL, target);
         this.selfRetain = true;
         this.setDao(Dao.LI_DAO);
+    }
+
+
+    // 所有攻击型虚影全局抵消钢笔尖
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+        if (this.type == CardType.ATTACK && AbstractDungeon.player.hasPower("Pen Nib")) {
+            this.damage /= 2;
+            this.isDamageModified = (this.damage != this.baseDamage);
+        }
+    }
+
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        super.calculateCardDamage(mo);
+        if (this.type == CardType.ATTACK && AbstractDungeon.player.hasPower("Pen Nib")) {
+            this.damage /= 2;
+            this.isDamageModified = (this.damage != this.baseDamage);
+        }
     }
 
     @Override
@@ -154,7 +175,14 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
                 if (validTarget == null || validTarget.isDeadOrEscaped() || validTarget.currentHealth <= 0) {
                     validTarget = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
                 }
+
+                // 让攻击型虚影能够消耗活力
+                if (AbstractXuYingCard.this.type == CardType.ATTACK && AbstractDungeon.player.hasPower("Vigor")) {
+                    this.addToTop(new RemoveSpecificPowerAction(AbstractDungeon.player, AbstractDungeon.player, "Vigor"));
+                }
+
                 triggerPhantomEffect(validTarget);
+
                 this.isDone = true;
             }
         });

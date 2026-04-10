@@ -67,9 +67,12 @@ public class FenShaoPower extends AbstractPower {
         this.updateDescription();
     }
 
-    // 4. 每个实体的独立回合结束时的衰减逻辑
+    // =========================================================================
+    // 替换原有的 atEndOfTurn(boolean isPlayer)
+    // 在该怪物自身的行动轮次中立即衰减，不等其他怪物
+    // =========================================================================
     @Override
-    public void atEndOfTurn(boolean isPlayer) {
+    public void duringTurn() {
         // 计算减半后的层数 (向下取整)
         int targetAmount = this.amount / 2;
         // 计算需要削减掉的层数

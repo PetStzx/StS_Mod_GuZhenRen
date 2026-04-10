@@ -25,10 +25,10 @@ public class HuoYuanGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
+                CardRarity.COMMON,
                 CardTarget.NONE);
 
-        this.setDao(Dao.YAN_DAO); // 炎道
+        this.setDao(Dao.YAN_DAO);
         this.setRank(INITIAL_RANK);
 
         this.baseMagicNumber = this.magicNumber = AMT;
@@ -53,7 +53,7 @@ public class HuoYuanGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeRank(1); // 2转 -> 3转
+            this.upgradeRank(1);
 
             this.cardsToPreview.upgrade();
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;

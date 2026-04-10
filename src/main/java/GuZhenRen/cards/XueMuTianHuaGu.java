@@ -17,15 +17,15 @@ public class XueMuTianHuaGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XueMuTianHuaGu.png");
 
     private static final int COST = 2;
-    private static final int UPGRADE_COST = 1; // 升级后变 1 费
-    private static final int MAGIC = 1; // 固定 1 层缓冲
+    private static final int UPGRADE_COST = 1; // 升级后 1 费
+    private static final int MAGIC = 1; //  1 层缓冲
     private static final int INITIAL_RANK = 5;
 
     public XueMuTianHuaGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.SELF);
 
         this.setDao(Dao.XUE_DAO);

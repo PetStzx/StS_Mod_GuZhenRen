@@ -25,7 +25,6 @@ public class JianMei extends CustomRelic {
         return DESCRIPTIONS[0];
     }
 
-    // 在每场战斗开始时触发
     @Override
     public void atBattleStart() {
         this.flash();
@@ -33,7 +32,7 @@ public class JianMei extends CustomRelic {
 
         AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(p, this));
 
-        // 给予玩家 1 层剑锋
+        // 给予 1 层剑锋
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new JianFengPower(p, 1), 1));
     }
 

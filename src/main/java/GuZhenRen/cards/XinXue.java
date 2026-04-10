@@ -24,7 +24,7 @@ public class XinXue extends AbstractBenMingGuCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.SPECIAL, // 本命蛊
+                CardRarity.SPECIAL,
                 CardTarget.SELF);
 
         this.setDao(Dao.XUE_DAO);

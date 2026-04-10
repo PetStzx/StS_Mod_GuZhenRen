@@ -180,13 +180,9 @@ public class FangYuan extends CustomPlayer {
         super.applyStartOfCombatPreDrawLogic();
     }
 
-    // =========================================================================
-    //  文本与动画防崩溃专区：规范化读取 UIStrings，复用原版图像
-    // =========================================================================
-
     @Override
     public String getSpireHeartText() {
-        // 读取 JSON 中的占位文本，用于攻击心脏
+        // 攻击心脏的文本
         return eventStrings.TEXT[0];
     }
 

@@ -65,7 +65,7 @@ public class XianGuPatch {
             allCombatCards.addAll(AbstractDungeon.player.limbo.group);
 
             for (AbstractCard c : allCombatCards) {
-                // 【关键修复】同上，扫描战场时直接忽略虚影牌
+                // 同上，扫描时忽略虚影牌
                 if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !c.hasTag(GuZhenRenTags.XU_YING_COPY)) {
                     isDuplicate = true;
                     break;

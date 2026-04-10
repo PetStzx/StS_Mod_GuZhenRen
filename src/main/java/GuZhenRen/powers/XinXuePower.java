@@ -25,7 +25,7 @@ public class XinXuePower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = amount; // 记录当前的倍率
+        this.amount = amount; // 当前倍率
         this.type = PowerType.BUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/XinXuePower_p.png");
@@ -48,21 +48,16 @@ public class XinXuePower extends AbstractPower {
         }
     }
 
-    // =========================================================================
-    //  核心逻辑：监听生命流失并触发反伤与特效
-    // =========================================================================
+
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        // 加入判定 !AbstractDungeon.actionManager.turnHasEnded
-        // 确保只有在玩家回合内（未点击结束回合）失去生命时，才会触发群体反伤
+        // 玩家回合内失去生命时，触发群体反伤
         if (damageAmount > 0 && !AbstractDungeon.actionManager.turnHasEnded) {
             this.flash();
-            // 1. 播放“祭品”特效
             this.addToBot(new VFXAction(new OfferingEffect(), 0.1F));
 
             int totalDamage = damageAmount * this.amount;
 
-            // 2. 遍历全场敌人，施加扣血
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (!mo.isDeadOrEscaped()) {
                     this.addToBot(new LoseHPAction(mo, this.owner, totalDamage));

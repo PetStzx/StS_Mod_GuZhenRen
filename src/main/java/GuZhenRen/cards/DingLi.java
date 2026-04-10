@@ -21,8 +21,7 @@ public class DingLi extends AbstractGuZhenRenCard {
     private static final int COST = 2;
     private static final int BASE_BLOCK = 10;
 
-    // 力量的倍数乘区
-    private static final int STRENGTH_MULTIPLIER = 3;
+    private static final int STRENGTH_MULTIPLIER = 3; // 力量的倍数乘区
     private static final int UPGRADE_PLUS_MAGIC = 2; // 3 -> 5
 
     private static final int INITIAL_RANK = 6; // 6转

@@ -45,13 +45,10 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
         this.baseDamage = BASE_DAMAGE;
         this.baseMagicNumber = this.magicNumber = MULTIPLIER;
 
-        // 杀招流派设定
         this.setDao(Dao.LI_DAO);
     }
 
-    // =========================================================================
-    // 单体 3 倍力量加成机制
-    // =========================================================================
+
     @Override
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
@@ -94,9 +91,7 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
         }
     }
 
-    // =========================================================================
-    // 效果执行逻辑
-    // =========================================================================
+
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (m != null) {
@@ -110,7 +105,7 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
                 }
             }
 
-            // 用延迟动作重新计算伤害
+            // 用延迟动作重新计算伤害，防止无实体等状态影响
             this.addToBot(new AbstractGameAction() {
                 @Override
                 public void update() {

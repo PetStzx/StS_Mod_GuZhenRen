@@ -30,7 +30,6 @@ public class XuePiaoLiu extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 赋予能力
         this.addToBot(new ApplyPowerAction(p, p, new XuePiaoLiuPower(p, this.magicNumber), this.magicNumber));
     }
 }

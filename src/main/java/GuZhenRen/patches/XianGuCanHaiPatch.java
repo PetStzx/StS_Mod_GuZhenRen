@@ -14,13 +14,12 @@ public class XianGuCanHaiPatch {
     // 标记1：判断是否是本地玩家点击的（防联机错乱）
     public static boolean isLocalAction = false;
 
-    // 【新增标记2】：判断玩家是否真的选中了卡牌
+    // 标记2：判断玩家是否真的选中了卡牌
     public static boolean cardWasSelected = false;
 
     @SpirePrefixPatch
     public static void Prefix(CampfireSmithEffect __instance) {
         // 在原版 update 逻辑执行之前，检查选牌列表是否非空
-        // 如果非空，说明玩家刚刚在界面里选中了一张牌并点了确认
         if (AbstractDungeon.gridSelectScreen != null && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             cardWasSelected = true;
         }
@@ -29,7 +28,7 @@ public class XianGuCanHaiPatch {
     @SpirePostfixPatch
     public static void Postfix(CampfireSmithEffect __instance) {
         if (__instance.isDone) {
-            // 【核心修复】：必须同时满足 本地点击 且 真的选了牌，才消耗遗物层数
+            // 同时满足 本地点击 且 真的选了牌，才消耗遗物层数
             if (isLocalAction && cardWasSelected && AbstractDungeon.player.hasRelic(XianGuCanHai.ID)) {
                 XianGuCanHai relic = (XianGuCanHai) AbstractDungeon.player.getRelic(XianGuCanHai.ID);
 
@@ -42,7 +41,7 @@ public class XianGuCanHaiPatch {
                 }
             }
 
-            // 动作彻底结束后，无论刚才发生了什么，都把两把锁重新关上，保证下次状态干净
+            // 动作结束后，关锁
             isLocalAction = false;
             cardWasSelected = false;
         }

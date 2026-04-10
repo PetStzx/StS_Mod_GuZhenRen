@@ -32,7 +32,7 @@ public class JinDaoDaoHenPower extends AbstractDaoHenPower {
         return 0;
     }
 
-    // 发放伴生的金属化
+    // 发放伴生金属化
     private void applyCompanionMetallicize(int amt) {
         this.addToTop(new AbstractGameAction() {
             @Override

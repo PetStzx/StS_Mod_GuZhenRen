@@ -26,27 +26,25 @@ public class XueQiGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.XUE_DAO);
 
-        // 使用 magicNumber 来动态记录和展示最终的总回复量
+        // magicNumber 用于动态记录和展示最终的总回复量
         this.baseMagicNumber = this.magicNumber = BASE_HEAL;
 
-        this.exhaust = true; // 消耗
+        this.exhaust = true;
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 直接根据当前的 magicNumber 恢复生命
+        // 根据当前的 magicNumber 恢复生命
         this.addToBot(new HealAction(p, p, this.magicNumber));
     }
 
-    // =========================================================================
-    // 核心机制：只要在手牌、抽牌堆、弃牌堆中，玩家掉血/受击必定触发！
-    // =========================================================================
+
     @Override
     public void tookDamage() {
         // 每次失去生命，总回复量 +1
@@ -54,7 +52,7 @@ public class XueQiGu extends AbstractGuZhenRenCard {
         this.magicNumber = this.baseMagicNumber;
         this.isMagicNumberModified = true;
 
-        // 视觉反馈：如果这张牌在手里，闪烁特效
+        // 如果这张牌在手里，闪烁特效
         if (AbstractDungeon.player != null && AbstractDungeon.player.hand.contains(this)) {
             this.superFlash(Color.LIME.cpy());
         }

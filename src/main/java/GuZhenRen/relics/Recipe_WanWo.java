@@ -30,7 +30,7 @@ public class Recipe_WanWo extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(WoLi.ID); // 核心蛊虫：我力
+        list.add(WoLi.ID);
         return list;
     }
 
@@ -79,9 +79,8 @@ public class Recipe_WanWo extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

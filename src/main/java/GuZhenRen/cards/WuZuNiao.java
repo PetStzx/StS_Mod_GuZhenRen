@@ -20,7 +20,7 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int BLOCK = 7;
     private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 7 -> 10
-    private static final int MAGIC = 1; // 修改为 1 层残影
+    private static final int MAGIC = 1; //  1 层残影
     private static final int INITIAL_RANK = 3;
 
     public WuZuNiao() {
@@ -36,7 +36,7 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
         this.baseBlock = this.block = BLOCK;
         this.baseMagicNumber = this.magicNumber = MAGIC;
 
-        this.isEthereal = true; // 虚无
+        this.isEthereal = true;
     }
 
     @Override

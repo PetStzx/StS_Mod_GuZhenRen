@@ -20,14 +20,14 @@ public class ShiGuiFuLiGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 2;
     private static final int BLOCK = 11;
-    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后+3，总共14
+    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后+3，共14
     private static final int INITIAL_RANK = 3;
 
     public ShiGuiFuLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.LI_DAO);

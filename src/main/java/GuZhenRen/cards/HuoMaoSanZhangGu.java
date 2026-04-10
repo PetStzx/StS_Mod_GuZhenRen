@@ -43,7 +43,7 @@ public class HuoMaoSanZhangGu extends AbstractGuZhenRenCard {
         if (!this.upgraded) {
             this.upgradeName();
             this.upgradeBaseCost(UPGRADED_COST);
-            this.upgradeRank(1); // 4转 -> 5转
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

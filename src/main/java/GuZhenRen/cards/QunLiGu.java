@@ -28,13 +28,13 @@ public class QunLiGu extends AbstractGuZhenRenCard {
     private static final int BASE_MAGIC = 8;
     private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后额外伤害 8 -> 10
 
-    private static final int INITIAL_RANK = 5; // 5转蛊虫
+    private static final int INITIAL_RANK = 5; // 5转
 
     public QunLiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.ENEMY);
 
         this.baseDamage = BASE_DAMAGE;
@@ -51,7 +51,7 @@ public class QunLiGu extends AbstractGuZhenRenCard {
         int count = 0;
         if (AbstractDungeon.player != null) {
             for (AbstractCard c : AbstractDungeon.player.hand.group) {
-                // 只要是继承了虚影父类的牌，就统统算数
+                // 只要是继承了虚影父类的牌，就算数
                 if (c instanceof AbstractXuYingCard) {
                     count++;
                 }
@@ -61,7 +61,7 @@ public class QunLiGu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 动态伤害计算逻辑 (类似原版的完美打击)
+    // 动态伤害计算逻辑
     // =========================================================================
     @Override
     public void applyPowers() {
@@ -71,13 +71,8 @@ public class QunLiGu extends AbstractGuZhenRenCard {
         int extraDamage = countPhantomsInHand() * this.magicNumber;
         this.baseDamage += extraDamage;
 
-        // 让原版引擎去计算力量、虚弱、易伤等倍率加成
         super.applyPowers();
-
-        // 算完后把真实基础值换回来
         this.baseDamage = realBaseDamage;
-
-        // 如果最终伤害与基础伤害不同，面板上的数字会变成绿色/红色
         this.isDamageModified = (this.damage != this.baseDamage);
     }
 
@@ -99,7 +94,6 @@ public class QunLiGu extends AbstractGuZhenRenCard {
     // =========================================================================
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 使用沉闷的重击音效和钝器特效
         this.addToBot(new DamageAction(
                 m,
                 new DamageInfo(p, this.damage, this.damageTypeForTurn),
@@ -111,8 +105,8 @@ public class QunLiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG); // 8 -> 11
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 5 -> 7
+            this.upgradeDamage(UPGRADE_PLUS_DMG);
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
             this.upgradeRank(1); // 5转 -> 6转
             this.initializeDescription();
         }

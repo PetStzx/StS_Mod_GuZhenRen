@@ -47,14 +47,13 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 核心判定：计算总命中次数 (玩家拥有的所有刀翅血蝠数量)
+    // 计算总命中次数
     // =========================================================================
     private int calculateHits() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return 1;
 
         int batCount = 0;
 
-        // 将所有需要检查的牌组整合到一个数组中遍历，代码更整洁
         CardGroup[] groupsToCheck = {
                 AbstractDungeon.player.hand,
                 AbstractDungeon.player.drawPile,
@@ -71,13 +70,11 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
             }
         }
 
-        // 保底命中 1 次（防止玩家牌库里没有这张牌，但通过随机衍生打出时变成打 0 下）
+        // 保底命中 1 次
         return Math.max(1, batCount);
     }
 
-    // =========================================================================
     // 动态文本显示逻辑
-    // =========================================================================
     @Override
     protected String constructRawDescription() {
         String s = super.constructRawDescription();

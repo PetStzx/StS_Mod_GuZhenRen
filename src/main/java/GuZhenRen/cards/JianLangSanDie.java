@@ -40,7 +40,7 @@ public class JianLangSanDie extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // “三叠”：排入 3 次专属的波浪动作
+        // “三叠”：排入 3 次波浪动作
         // 每次动作执行时，都会重新计算全场伤害
         for (int i = 0; i < 3; i++) {
             this.addToBot(new JianLangWaveAction(this, p, this.magicNumber));
@@ -67,21 +67,16 @@ public class JianLangSanDie extends AbstractShaZhaoCard {
         @Override
         public void update() {
             // 1. 在这一浪拍下去的瞬间，让卡牌重新扫描全场敌人
-            // 此时它会读取怪物身上最新的“剑痕”层数，并计算出每个怪物分别该受多少伤害
             this.card.calculateCardDamage(null);
 
-            // 2. 将动作排入顶部（addToTop 是后进先出 LIFO）
-            // 先打出伤害，然后再挂剑痕，所以需要倒序排入：
-            // 先排入挂剑痕（后执行），再排入打伤害（先执行）。
-
-            // (A) 排入群体挂剑痕动作
+            // 2. 排入群体挂剑痕动作
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (!mo.isDeadOrEscaped()) {
                     this.addToTop(new ApplyPowerAction(mo, p, new JianHenPower(mo, this.magic), this.magic));
                 }
             }
 
-            // (B) 排入群攻伤害动作
+            // 3. 排入群攻伤害动作
             this.addToTop(new DamageAllEnemiesAction(p, this.card.multiDamage, this.card.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
             this.isDone = true;

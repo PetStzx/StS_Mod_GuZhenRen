@@ -26,7 +26,7 @@ public class XueRenGu extends AbstractGuZhenRenCard {
     private static final int UPGRADE_PLUS_DAMAGE = 2; // 升级单次伤害 7 -> 9
 
     private static final int HITS = 3;
-    private static final int HP_LOSS = 1; // 固定每次失去 1 点生命
+    private static final int HP_LOSS = 1; // 每次失去 1 点生命
 
     private static final int INITIAL_RANK = 3;
 
@@ -48,16 +48,13 @@ public class XueRenGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 播放一次“御血术”特效
         if (m != null) {
             this.addToBot(new VFXAction(new HemokinesisEffect(p.hb.cX, p.hb.cY, m.hb.cX, m.hb.cY), 0.5F));
         }
 
         // 2. 循环 3 次：交替失去生命并造成伤害
         for (int i = 0; i < this.magicNumber; i++) {
-            // 失去生命
             this.addToBot(new LoseHPAction(p, p, this.secondMagicNumber));
-            // 造成伤害
             this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
         }
     }

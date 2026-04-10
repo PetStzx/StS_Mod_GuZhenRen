@@ -12,9 +12,33 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiFunction;
+
 public class BianHuaDaoDaoHenPower extends AbstractDaoHenPower {
     public static final String POWER_ID = GuZhenRen.makeID("BianHuaDaoDaoHenPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    private static final Map<AbstractCard.CardTags, BiFunction<AbstractCreature, Integer, AbstractPower>> DAO_MAP = new HashMap<>();
+
+    static {
+        DAO_MAP.put(GuZhenRenTags.LI_DAO, LiDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.YAN_DAO, YanDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.ZHI_DAO, ZhiDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.JIAN_DAO, JianDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.MU_DAO, MuDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.GU_DAO, GuDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.GUANG_DAO, GuangDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.SHA_DAO, ShaDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.XUE_DAO, XueDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.JIN_DAO, JinDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.TOU_DAO, TouDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.LU_DAO, LuDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.FENG_DAO, FengDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.SHI_DAO, ShiDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.YUN_DAO, YunDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.ZHOU_DAO, ZhouDaoDaoHenPower::new);
+    }
 
     public BianHuaDaoDaoHenPower(AbstractCreature owner, int amount) {
         super(POWER_ID, powerStrings.NAME, owner, amount);
@@ -30,45 +54,17 @@ public class BianHuaDaoDaoHenPower extends AbstractDaoHenPower {
     public void onUseCard(AbstractCard card, UseCardAction action) {
         AbstractPower newPowerPrototype = null;
 
-        if (card.hasTag(GuZhenRenTags.LI_DAO)) {
-            newPowerPrototype = new LiDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.YAN_DAO)) {
-            newPowerPrototype = new YanDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.ZHI_DAO)) {
-            newPowerPrototype = new ZhiDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.JIAN_DAO)) {
-            newPowerPrototype = new JianDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.MU_DAO)) {
-            newPowerPrototype = new MuDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.GU_DAO)) {
-            newPowerPrototype = new GuDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.GUANG_DAO)) {
-            newPowerPrototype = new GuangDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.SHA_DAO)) {
-            newPowerPrototype = new ShaDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.XUE_DAO)) {
-            newPowerPrototype = new XueDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.JIN_DAO)) {
-            newPowerPrototype = new JinDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.TOU_DAO)) {
-            newPowerPrototype = new TouDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.LU_DAO)) {
-            newPowerPrototype = new LuDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.FENG_DAO)) {
-            newPowerPrototype = new FengDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.SHI_DAO)) {
-            newPowerPrototype = new ShiDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.YUN_DAO)) {
-            newPowerPrototype = new YunDaoDaoHenPower(this.owner, this.amount);
-        } else if (card.hasTag(GuZhenRenTags.ZHOU_DAO)) {
-            newPowerPrototype = new ZhouDaoDaoHenPower(this.owner, this.amount);
+        for (AbstractCard.CardTags tag : card.tags) {
+            BiFunction<AbstractCreature, Integer, AbstractPower> newFunc = DAO_MAP.get(tag);
+            if (newFunc != null) {
+                newPowerPrototype = newFunc.apply(this.owner, this.amount);
+                break;
+            }
         }
-
 
         if (newPowerPrototype == null) {
             return;
         }
-
         final AbstractPower finalPowerToApply = newPowerPrototype;
 
         this.addToBot(new AbstractGameAction() {

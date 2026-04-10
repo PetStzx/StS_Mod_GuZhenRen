@@ -32,7 +32,7 @@ public class FeiJianAction extends AbstractGameAction {
 
             this.addToTop(new DamageAction(this.target,
                     new DamageInfo(AbstractDungeon.player, this.dmg, DamageInfo.DamageType.NORMAL),
-                    AbstractGameAction.AttackEffect.SLASH_HORIZONTAL)); // 飞剑横斩特效
+                    AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         }
 
         this.isDone = true;

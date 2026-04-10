@@ -27,14 +27,14 @@ public class HuiJian extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int DAMAGE = 9;
     private static final int UPGRADE_PLUS_DAMAGE = 3; // 升级变 12 伤
-    private static final int MAGIC = 6; // 给 6 层念
+    private static final int MAGIC = 6; // 6 层念
     private static final int INITIAL_RANK = 7;
 
     public HuiJian() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.JIAN_DAO);
@@ -49,10 +49,10 @@ public class HuiJian extends AbstractGuZhenRenCard {
         // 1. 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
-        // 2. 获得 6 层念 (推动智道引擎)
+        // 2. 获得 6 层念
         this.addToBot(new ApplyPowerAction(p, p, new NianPower(p, this.magicNumber), this.magicNumber));
 
-        // 3. 跨流派转化：将 1 层情转化为 1 层剑锋
+        // 3. 将 1 层情转化为 1 层剑锋
         if (p.hasPower(QingPower.POWER_ID)) {
             AbstractPower qing = p.getPower(QingPower.POWER_ID);
             if (qing.amount > 0) {
@@ -70,8 +70,8 @@ public class HuiJian extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 7 -> 10
-            this.upgradeRank(1); // 7转 -> 8转
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

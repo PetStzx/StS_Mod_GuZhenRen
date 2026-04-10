@@ -58,7 +58,6 @@ public class YiPower extends AbstractPower implements CloneablePowerInterface {
             this.amount -= 3;
             triggerEffect();
         }
-        // 如果转化后层数归零，立即将自己从状态栏移除
         if (this.amount <= 0) {
             this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this));
         }

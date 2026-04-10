@@ -38,13 +38,11 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
 
     //  步骤 2：泛型材料
 
-    // 1. 总步骤数：2
     @Override
     public int getIngredientCount() {
         return 2;
     }
 
-    // 2. 泛型判定逻辑 (index=1)
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
         if (index == 1) {
@@ -64,7 +62,6 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
         return false;
     }
 
-    // 3. UI提示文本
     @Override
     public String getIngredientDescription(int index) {
         if (index == 1) {
@@ -73,9 +70,7 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
-    //  奖励配置
-    // =========================================================================
+    //  奖励发放
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();
@@ -83,7 +78,6 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
 
     @Override
     public AbstractCard getRewardCard() {
-        // 返回 星宿棋盘
         return new XingXiuQiPan();
     }
 }

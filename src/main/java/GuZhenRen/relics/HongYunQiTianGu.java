@@ -24,9 +24,12 @@ public class HongYunQiTianGu extends CustomRelic implements IProbabilityModifier
 
     @Override
     public float getFinalProbabilityMultiplier(AbstractCard card) {
-        // 每次翻倍概率时闪烁遗物，提供视觉反馈
-        this.flash();
         return 2.0f;
+    }
+
+    @Override
+    public void atBattleStart() {
+        this.flash();
     }
 
     @Override

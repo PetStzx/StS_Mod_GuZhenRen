@@ -23,9 +23,7 @@ import java.util.ArrayList;
 
 public abstract class AbstractGuZhenRenCard extends CustomCard implements CustomSavable<int[]>, SpawnModificationCard {
 
-    // =========================================================================
     //  本地化资源加载
-    // =========================================================================
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("CardGlobalText"));
     public static final String[] TEXT = uiStrings.TEXT;
 
@@ -74,7 +72,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     public boolean isSecondMagicNumberModified = false;
 
     // =========================================================================
-    // 模组专属底层属性：焚烧 (FenShao)
+    // 模组底层属性：焚烧 (FenShao)
     // =========================================================================
     public int baseFenShao = -1;
     public int fenShao = -1;
@@ -82,7 +80,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     public boolean upgradedFenShao = false;
 
     // =========================================================================
-    // 模组专属底层属性：念 (Nian)
+    // 模组底层属性：念 (Nian)
     // =========================================================================
     public int baseNian = -1;
     public int nian = -1;
@@ -95,7 +93,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    //  【核心方法】设置流派
+    //  设置流派
     // =========================================================================
     protected void setDao(Dao dao) {
         switch (dao) {
@@ -149,7 +147,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    // 动态计算是否享受空窍免耗能福利
+    // 动态计算是否享受空窍免耗能
     // =========================================================================
     private void applyKongQiaoCost() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return;
@@ -170,7 +168,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    // 终极防线：在扣费的最后一刻拦截
+    // 在扣费的最后一刻拦截
     // =========================================================================
     @Override
     public boolean freeToPlay() {
@@ -233,7 +231,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    //  描述构建逻辑 (支持本地化)
+    //  描述构建逻辑
     // =========================================================================
     protected String constructRawDescription() {
         if (this.myBaseDescription == null) {
@@ -372,7 +370,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         c.myBaseDescription = this.myBaseDescription;
         c.guPathString = this.guPathString;
 
-        // 同步专属的底层变量状态
+        // 同步底层变量状态
         c.baseFenShao = this.baseFenShao;
         c.fenShao = this.fenShao;
         c.isFenShaoModified = this.isFenShaoModified;

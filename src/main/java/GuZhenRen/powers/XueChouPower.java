@@ -40,7 +40,7 @@ public class XueChouPower extends AbstractPower {
     }
 
     // =========================================================================
-    // 核心判定 1：增加该敌人受到的伤害（你打他翻倍）
+    // 判定 1：增加该敌人受到的伤害
     // =========================================================================
     @Override
     public float atDamageReceive(float damage, DamageType damageType) {
@@ -52,7 +52,7 @@ public class XueChouPower extends AbstractPower {
     }
 
     // =========================================================================
-    // 核心判定 2：增加该敌人造成的伤害（他打你翻倍）
+    // 判定 2：增加该敌人造成的伤害
     // =========================================================================
     @Override
     public float atDamageGive(float damage, DamageType type) {

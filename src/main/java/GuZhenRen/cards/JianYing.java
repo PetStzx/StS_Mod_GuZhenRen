@@ -7,6 +7,7 @@ import GuZhenRen.patches.GuZhenRenTags;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -19,9 +20,8 @@ public class JianYing extends CustomCard {
 
     private static final int COST = -2;
 
-    // 用于被消耗时造成的伤害
     private static final int DAMAGE = 4;
-    private static final int UPGRADE_PLUS_DMG = 1; // 升级后变 5
+    private static final int UPGRADE_PLUS_DMG = 1;
 
     public JianYing() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -33,8 +33,7 @@ public class JianYing extends CustomCard {
         this.tags.add(GuZhenRenTags.JIAN_DAO);
 
         this.baseDamage = this.damage = DAMAGE;
-
-        this.isEthereal = true; // 虚无
+        this.isEthereal = true;
     }
 
     @Override
@@ -49,6 +48,27 @@ public class JianYing extends CustomCard {
     @Override
     public void triggerOnExhaust() {
         this.addToBot(new JianYingAction(this));
+    }
+
+    // 抵消钢笔尖 Power 在手牌中的伤害显示翻倍
+    @Override
+    public void applyPowers() {
+        super.applyPowers();
+        if (AbstractDungeon.player.hasPower("Pen Nib")) {
+            this.damage /= 2;
+            this.isDamageModified = (this.damage != this.baseDamage);
+        }
+    }
+
+
+    // 抵消钢笔尖 Power 打出时的伤害翻倍
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        super.calculateCardDamage(mo);
+        if (AbstractDungeon.player.hasPower("Pen Nib")) {
+            this.damage /= 2;
+            this.isDamageModified = (this.damage != this.baseDamage);
+        }
     }
 
     @Override

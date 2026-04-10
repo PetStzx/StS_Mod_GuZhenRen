@@ -33,7 +33,7 @@ public class XueHeMang extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.UNCOMMON, // 蓝卡
+                CardRarity.UNCOMMON,
                 CardTarget.ENEMY);
 
         this.setDao(Dao.XUE_DAO);
@@ -47,11 +47,9 @@ public class XueHeMang extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (m != null) {
-            // 播放特效
             this.addToBot(new VFXAction(new BiteEffect(m.hb.cX, m.hb.cY - 40.0F * Settings.scale, Color.SCARLET.cpy()), 0.3F));
         }
 
-        // 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.NONE));
     }
 
@@ -60,7 +58,7 @@ public class XueHeMang extends AbstractGuZhenRenCard {
         // 增加基础伤害
         this.baseDamage += this.magicNumber;
 
-        // 手牌中发红光提示玩家伤害已增加
+        // 手牌中发红光提示伤害已增加
         if (AbstractDungeon.player != null && AbstractDungeon.player.hand.contains(this)) {
             this.superFlash(Color.SCARLET.cpy());
         }

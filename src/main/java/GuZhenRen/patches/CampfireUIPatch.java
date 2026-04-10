@@ -19,7 +19,7 @@ public class CampfireUIPatch {
             // 检查是否有可合成的配方
             boolean canCraft = !ShaZhaoHelper.getCraftableRecipes().isEmpty();
 
-            // 只有当角色是方源时，才添加“组并杀招”按钮
+            // 角色是方源时，添加“组并杀招”按钮
             ___buttons.add(new AssembleShaZhaoOption(canCraft));
         }
     }

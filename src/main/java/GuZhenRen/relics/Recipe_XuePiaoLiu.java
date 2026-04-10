@@ -29,20 +29,20 @@ public class Recipe_XuePiaoLiu extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(XueZouGu.ID); // 第一个固定位：血走蛊
+        list.add(XueZouGu.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(XueZouGu.ID)) {
-            return true; // 判定血走蛊必须升级
+            return true;
         }
         return false;
     }
 
     // =========================================================================
-    //  步骤 2：泛型材料 (任意血道仙蛊，>=6转)
+    //  步骤 2：泛型材料 (任意血道仙蛊)
     // =========================================================================
     @Override
     public int getIngredientCount() {
@@ -58,7 +58,7 @@ public class Recipe_XuePiaoLiu extends AbstractRecipeRelic {
             }
 
 
-            // 判定 2: 必须是仙蛊，转数 >= 6
+            // 判定 2: 必须是仙蛊
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
                 return rank >= 6;
@@ -77,9 +77,7 @@ public class Recipe_XuePiaoLiu extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();
@@ -87,6 +85,6 @@ public class Recipe_XuePiaoLiu extends AbstractRecipeRelic {
 
     @Override
     public AbstractCard getRewardCard() {
-        return new XuePiaoLiu(); // 返回杀招：血漂流
+        return new XuePiaoLiu();
     }
 }

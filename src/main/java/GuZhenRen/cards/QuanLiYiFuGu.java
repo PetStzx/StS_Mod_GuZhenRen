@@ -24,7 +24,7 @@ public class QuanLiYiFuGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.SELF);
 
         this.setDao(Dao.LI_DAO);

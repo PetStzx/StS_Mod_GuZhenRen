@@ -29,14 +29,14 @@ public class Recipe_JianHenSuoMing extends AbstractRecipeRelic {
     @Override
     public ArrayList<String> getRequiredCardIDs() {
         ArrayList<String> list = new ArrayList<>();
-        list.add(FeiJian.ID); // 第一个固定位：飞剑
+        list.add(FeiJian.ID);
         return list;
     }
 
     @Override
     public boolean requiresUpgrade(String cardID) {
         if (cardID.equals(FeiJian.ID)) {
-            return true; // 必须升级过
+            return true;
         }
         return false;
     }
@@ -76,9 +76,8 @@ public class Recipe_JianHenSuoMing extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-    // =========================================================================
+
     //  奖励发放
-    // =========================================================================
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

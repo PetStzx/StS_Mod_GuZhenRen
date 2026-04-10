@@ -26,7 +26,6 @@ public class JianHenSuoMing extends AbstractShaZhaoCard {
                 CardType.ATTACK,
                 CardTarget.ENEMY);
 
-        // 设置流派为剑道
         this.setDao(Dao.JIAN_DAO);
 
         this.baseDamage = DAMAGE;

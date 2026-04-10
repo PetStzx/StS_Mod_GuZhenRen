@@ -110,7 +110,7 @@
   },
   "GuZhenRen:ChengGongGu": {
     "NAME": "成功蛊",
-    "DESCRIPTION": "选择： 获得 300 金币、 NL 获得 16 点 最大生命、 NL 从牌组中移除 2 张牌。 NL 消耗 。",
+    "DESCRIPTION": "选择： 获得 300 金币、 NL 获得 16 点 最大生命、 NL 从牌组中移除 2 张牌。 NL 从本场战斗中移除 。",
     "EXTENDED_DESCRIPTION": [
       "选择 2 张牌移除"
     ]
@@ -395,7 +395,7 @@
   },
   "GuZhenRen:WoLiXuYing": {
     "NAME": "我力虚影",
-    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 随机打出1张你牌组中的攻击牌。"
+    "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 随机打出1张你牌组中非 消耗 的攻击牌。"
   },
   "GuZhenRen:FeiLiGu": {
     "NAME": "费力蛊",

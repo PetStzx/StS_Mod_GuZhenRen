@@ -26,10 +26,10 @@ public class TieGuGu extends AbstractGuZhenRenCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.COMMON, // 白卡
+                CardRarity.COMMON,
                 CardTarget.SELF);
 
-        this.setDao(Dao.GU_DAO); // 骨道
+        this.setDao(Dao.GU_DAO);
         this.setRank(INITIAL_RANK);
 
         this.baseBlock = this.block = BLOCK_AMT;
@@ -47,7 +47,7 @@ public class TieGuGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(UPGRADE_PLUS_BLOCK); // 12 -> 16
+            this.upgradeBlock(UPGRADE_PLUS_BLOCK);
             this.upgradeRank(1); // 2转 -> 3转
             this.initializeDescription();
         }

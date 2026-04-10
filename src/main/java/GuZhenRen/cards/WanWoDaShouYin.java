@@ -31,7 +31,6 @@ public class WanWoDaShouYin extends AbstractShaZhaoCard {
         this.baseMagicNumber = this.magicNumber = MAGIC;
         this.isMultiDamage = true;
 
-        // 杀招流派设定
         this.setDao(Dao.LI_DAO);
     }
 

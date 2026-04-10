@@ -16,16 +16,16 @@ public class TouSheng extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TouSheng.png");
 
     private static final int COST = 3;
-    private static final int MAGIC = 1; // 默认偷 1 点
+    private static final int MAGIC = 1; // 偷 1 点
     private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后偷 2 点
 
-    private static final int INITIAL_RANK = 8; // 8转仙蛊
+    private static final int INITIAL_RANK = 8;
 
     public TouSheng() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
                 CardColorEnum.GUZHENREN_GREY,
-                CardRarity.RARE, // 金卡
+                CardRarity.RARE,
                 CardTarget.ALL_ENEMY);
 
         this.setDao(Dao.TOU_DAO);

@@ -18,7 +18,7 @@ public class JiuYeShengJiCao extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/JiuYeShengJiCao.png");
 
     private static final int COST = 1;
-    private static final int INITIAL_RANK = 2; // 初始2转
+    private static final int INITIAL_RANK = 2; // 2转
 
     public JiuYeShengJiCao() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -27,21 +27,14 @@ public class JiuYeShengJiCao extends AbstractGuZhenRenCard {
                 CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
-        // 消耗
         this.exhaust = true;
-
-        // 设置流派：木道
         this.setDao(Dao.MU_DAO);
-
-
-        // 设置转数
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         // 获得一份"生机叶"药水
-        // ObtainPotionAction 会自动处理"如果药水栏满了则无事发生"的逻辑
         this.addToBot(new ObtainPotionAction(new ShengJiYe()));
     }
 
@@ -53,9 +46,7 @@ public class JiuYeShengJiCao extends AbstractGuZhenRenCard {
             // 升级效果：1费 -> 0费
             this.upgradeBaseCost(0);
 
-            // 升级转数：2转 -> 3转
             this.upgradeRank(1);
-
             this.initializeDescription();
         }
     }

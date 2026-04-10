@@ -43,7 +43,7 @@ public class NiuLiXuYing extends AbstractXuYingCard {
     public void triggerPhantomEffect(AbstractMonster m) {
         if (m != null && !m.isDeadOrEscaped()) {
 
-            // 这行代码是实时计算的，如果你手牌左边的虚影刚刚给怪物上了易伤，这里就能吃到加成
+            // 这行代码是实时计算的，如果手牌左边的虚影刚刚给怪物上了易伤，这里就能吃到加成
             this.calculateCardDamage(m);
 
             // 确保在父类的“移除卡牌”动作之前立刻打出伤害
