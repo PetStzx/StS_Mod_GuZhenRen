@@ -204,6 +204,7 @@ public class CampfireShaZhaoEffect extends AbstractGameEffect {
         if (relicToExhaust != null) {
             relicToExhaust.usedUp();
             relicToExhaust.grayscale = true;
+            relicToExhaust.counter = -2;
         }
 
         AbstractCard reward = selectedRecipe.getRewardCard();

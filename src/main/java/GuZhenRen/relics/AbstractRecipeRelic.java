@@ -53,6 +53,15 @@ public abstract class AbstractRecipeRelic extends CustomRelic {
         return TEXT[0];
     }
 
+    @Override
+    public void setCounter(int setCounter) {
+        this.counter = setCounter;
+        if (setCounter == -2) {
+            this.usedUp();
+            this.grayscale = true;
+        }
+    }
+
     public AbstractCard getPreviewCard() {
         if (previewCard == null) {
             previewCard = getRewardCard();
