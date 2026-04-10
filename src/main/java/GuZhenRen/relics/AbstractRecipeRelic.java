@@ -1,7 +1,9 @@
 package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.util.ShaZhaoHelper;
 import basemod.abstracts.CustomRelic;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -11,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.rooms.RestRoom;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,7 @@ public abstract class AbstractRecipeRelic extends CustomRelic {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("RecipeUI"));
     public static final String[] TEXT = uiStrings.TEXT;
     protected AbstractCard previewCard;
+    private float checkTimer = 0.5f;
 
     public AbstractRecipeRelic(String id, String imgName, String outlineName, RelicTier tier, LandingSound sfx) {
         super(id,
@@ -57,6 +61,26 @@ public abstract class AbstractRecipeRelic extends CustomRelic {
             previewCard.targetDrawScale = 0.98f;
         }
         return previewCard;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(this.relicId)) {
+            if (AbstractDungeon.getCurrRoom() instanceof RestRoom) {
+                checkTimer -= Gdx.graphics.getDeltaTime();
+                if (checkTimer > 0.0f) return;
+                checkTimer = 0.5f;
+
+                if (ShaZhaoHelper.canCraft(this)) {
+                    this.beginLongPulse();
+                } else {
+                    this.stopPulse();
+                }
+            } else {
+                this.stopPulse();
+            }
+        }
     }
 
     @Override
