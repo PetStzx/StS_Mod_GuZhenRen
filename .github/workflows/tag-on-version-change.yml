@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
@@ -31,8 +31,20 @@ jobs:
       - name: Get previous version
         id: previous
         run: |
-          PREV_VERSION=$(git show HEAD~1:src/main/resources/ModTheSpire.json | jq -r '.version')
-          echo "version=$PREV_VERSION" >> $GITHUB_OUTPUT
+          BEFORE_SHA="${{ github.event.before }}"
+          echo "Before SHA: $BEFORE_SHA"
+          
+          if [[ "$BEFORE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+            echo "version=" >> $GITHUB_OUTPUT
+          else
+            PREV_VERSION=$(git show ${BEFORE_SHA}:src/main/resources/ModTheSpire.json | jq -r '.version')
+            echo "version=$PREV_VERSION" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Debug versions
+        run: |
+          echo "Current version: ${{ steps.current.outputs.version }}"
+          echo "Previous version: ${{ steps.previous.outputs.version }}"
 
       - name: Compare versions and create tag
         if: steps.current.outputs.version != steps.previous.outputs.version
