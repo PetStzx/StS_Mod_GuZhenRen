@@ -2,7 +2,6 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.patches.GuZhenRenTags;
 import GuZhenRen.powers.ZhuanYunPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

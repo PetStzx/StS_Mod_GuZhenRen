@@ -273,5 +273,12 @@
       "Requires: #yEight-faced #yPrestige #yWind #yGu , any #yWind #yPath or #yRule #yPath Gu.",
       "Any Wind Path or Rule Path Gu worm"
     ]
+  },
+  "GuZhenRen:ChunQiuChan": {
+    "NAME": "Spring and Autumn Cicada",
+    "FLAVOR": "The cold wind blows in the valley of the fallen, the spring and autumn cicada sings the return of the youth ......",
+    "DESCRIPTIONS": [
+      "Rewind time to the current floor at death, can only be used once per floor, and increases battle experience by 1 point."
+    ]
   }
 }

@@ -1,8 +1,5 @@
 package GuZhenRen.patches;
-
-import GuZhenRen.GuZhenRen;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;

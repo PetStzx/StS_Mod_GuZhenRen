@@ -3,7 +3,6 @@ package GuZhenRen.relics;
 import GuZhenRen.GuZhenRen;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
-import com.badlogic.gdx.graphics.Texture; // 【新增】
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;

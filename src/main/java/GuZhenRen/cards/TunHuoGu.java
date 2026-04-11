@@ -5,7 +5,6 @@ import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.TunHuoPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.cards.AbstractCard; // 修复：补充了核心卡牌类的导入
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;

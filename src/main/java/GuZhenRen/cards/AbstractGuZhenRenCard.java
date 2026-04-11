@@ -2,21 +2,15 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.relics.AbstractKongQiao;
-import GuZhenRen.relics.YanXinGu;
-import GuZhenRen.powers.YanDaoDaoHenPower;
-import GuZhenRen.powers.QingPower;
 import GuZhenRen.patches.GuZhenRenTags;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

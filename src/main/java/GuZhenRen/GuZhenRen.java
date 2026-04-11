@@ -2,11 +2,14 @@ package GuZhenRen;
 
 import GuZhenRen.effects.BenMingGuOpeningEffect;
 import basemod.BaseMod;
+import basemod.helpers.ScreenPostProcessorManager;
 import basemod.interfaces.*;
 import GuZhenRen.character.FangYuan;
 import GuZhenRen.potions.*;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,12 +20,13 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import GuZhenRen.cards.*;
 import GuZhenRen.relics.*;
+import GuZhenRen.util.RestartRunHelper;
 import GuZhenRen.patches.*;
 import GuZhenRen.powers.*;
 import GuZhenRen.variables.SecondMagicNumber;
 import GuZhenRen.variables.FenShaoVariable;
 import GuZhenRen.variables.NianVariable;
-import com.megacrit.cardcrawl.localization.Keyword;
+
 import com.google.gson.Gson;
 import com.badlogic.gdx.Gdx;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +34,7 @@ import java.nio.charset.StandardCharsets;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import java.util.ArrayList;
+import java.util.*;
 
 @SpireInitializer
 public class GuZhenRen implements
@@ -43,10 +47,15 @@ public class GuZhenRen implements
         PostDungeonInitializeSubscriber,
         OnStartBattleSubscriber,
         PostEnergyRechargeSubscriber,
-        PostBattleSubscriber
+        PostBattleSubscriber,
+        PostUpdateSubscriber,
+        PostRenderSubscriber
 {
+    public static float time;
     public static final Logger logger = LogManager.getLogger(GuZhenRen.class.getName());
     public static final String MOD_ID = "GuZhenRen";
+    public static ArrayList<AbstractGameAction> myActions = new ArrayList<>();
+    private static final List<ScreenPostProcessor> postProcessors = new ArrayList<>();
 
     // 用于存储所有配方遗物ID的列表
     public static ArrayList<String> recipeRelicIDs = new ArrayList<>();
@@ -377,6 +386,17 @@ public class GuZhenRen implements
     }
 
     @Override
+     public void receivePostUpdate() {
+         if (!myActions.isEmpty()) {
+             ((AbstractGameAction)myActions.get(0)).update();
+             if (((AbstractGameAction)myActions.get(0)).isDone) myActions.remove(0);
+         }
+         if (CardCrawlGame.mode != CardCrawlGame.GameMode.GAMEPLAY && !postProcessors.isEmpty()) {
+             clearPostProcessors();
+         }
+     }
+
+    @Override
     public void receivePostBattle(AbstractRoom room) {
         // 1. 静态变量清理区 (防止下一场战斗数据残留)
         SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
@@ -417,4 +437,22 @@ public class GuZhenRen implements
             }
         }
     }
+
+    @Override
+     public void receivePostRender(SpriteBatch spriteBatch) {
+         if (RestartRunHelper.queuedScoreRestart) {
+             RestartRunHelper.scoreAndRestart();
+         } else if (RestartRunHelper.queuedRestart) {
+             RestartRunHelper.restartRun();
+         } else if (RestartRunHelper.queuedRoomRestart) {
+             RestartRunHelper.restartRoom();
+         }
+     }
+
+    private void clearPostProcessors() {
+         for (ScreenPostProcessor postProcessor : postProcessors) {
+             ScreenPostProcessorManager.removePostProcessor(postProcessor);
+         }
+         postProcessors.clear();
+     }
 }
