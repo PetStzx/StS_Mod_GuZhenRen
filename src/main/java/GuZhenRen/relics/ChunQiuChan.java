@@ -1,14 +1,15 @@
 package GuZhenRen.relics;
 import GuZhenRen.GuZhenRen;
+import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
+import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import GuZhenRen.util.ClickableRelic;
 import GuZhenRen.util.RestartRunHelper;
-//春秋蝉,点击后重置当前层，且本层无法再次使用
-public class ChunQiuChan extends ClickableRelic implements CustomSavable<Integer> {
+//春秋蝉，目前可以无限sl
+public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSavable<Integer> {
     public static final String ID = GuZhenRen.makeID("ChunQiuChan");
     private static final String IMG = GuZhenRen.assetPath("img/relics/ChunQiuChan.png");
     private static final String IMG_OTL = GuZhenRen.assetPath("img/relics/outline/ChunQiuChan.png");
