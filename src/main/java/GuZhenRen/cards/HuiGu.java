@@ -113,13 +113,17 @@ public class HuiGu extends AbstractGuZhenRenCard {
                 AbstractDungeon.player.hand.refreshHandLayout();
             }
 
-            this.isDone = true;
+            this.tickDuration();
         }
 
         // 统一的捞牌与判定处理逻辑
         private void retrieveCard(AbstractCard c) {
             c.unhover();
             c.fadingOut = false;
+
+            c.unfadeOut();
+            c.lighten(true);
+            c.setAngle(0.0F);
 
             if (AbstractDungeon.player.exhaustPile.contains(c)) {
                 AbstractDungeon.player.exhaustPile.removeCard(c);
@@ -140,6 +144,9 @@ public class HuiGu extends AbstractGuZhenRenCard {
                 if (AbstractDungeon.player.hand.size() < BaseMod.MAX_HAND_SIZE) {
                     AbstractDungeon.player.hand.addToHand(c);
                     c.setCostForTurn(0);
+
+                    c.freeToPlayOnce = true;
+
                     c.flash();
                 } else {
                     AbstractDungeon.player.createHandIsFullDialog();
