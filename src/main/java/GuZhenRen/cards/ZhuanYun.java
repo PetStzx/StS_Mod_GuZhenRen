@@ -44,8 +44,8 @@ public class ZhuanYun extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 3 -> 5
-            this.upgradeRank(1);                         // 6转 -> 7转
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }
