@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.patches.GuZhenRenTags;
 import GuZhenRen.powers.ZhuanYunPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -43,8 +44,8 @@ public class ZhuanYun extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
-            this.upgradeRank(1);
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 3 -> 5
+            this.upgradeRank(1);                         // 6转 -> 7转
             this.initializeDescription();
         }
     }

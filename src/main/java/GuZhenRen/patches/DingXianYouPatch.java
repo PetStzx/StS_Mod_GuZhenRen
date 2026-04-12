@@ -1,5 +1,8 @@
 package GuZhenRen.patches;
+
+import GuZhenRen.GuZhenRen;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapRoomNode;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
@@ -14,6 +17,7 @@ public class DingXianYouPatch {
         return new ExprEditor() {
             @Override
             public void edit(MethodCall m) throws CannotCompileException {
+                // 拦截 isConnectedTo 方法
                 if (m.getMethodName().equals("isConnectedTo")) {
 
                     String relicID = "GuZhenRen:DingXianYou";

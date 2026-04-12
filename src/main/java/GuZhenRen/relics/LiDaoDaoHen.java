@@ -3,6 +3,7 @@ package GuZhenRen.relics;
 import GuZhenRen.GuZhenRen;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
+import com.badlogic.gdx.graphics.Texture; // 【新增】
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,6 +18,7 @@ public class LiDaoDaoHen extends CustomRelic implements CustomSavable<Integer> {
     private static final String OUTLINE_PATH = "img/relics/outline/LiDaoDaoHen.png";
 
     public LiDaoDaoHen() {
+        // 参数顺序：ID, 主图, 轮廓图, 稀有度, 音效
         super(ID,
                 ImageMaster.loadImage(GuZhenRen.assetPath(IMG_PATH)),
                 ImageMaster.loadImage(GuZhenRen.assetPath(OUTLINE_PATH)),

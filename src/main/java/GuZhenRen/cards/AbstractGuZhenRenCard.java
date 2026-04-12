@@ -2,22 +2,30 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.relics.AbstractKongQiao;
+import GuZhenRen.relics.YanXinGu;
+import GuZhenRen.powers.YanDaoDaoHenPower;
+import GuZhenRen.powers.QingPower;
 import GuZhenRen.patches.GuZhenRenTags;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public abstract class AbstractGuZhenRenCard extends CustomCard implements CustomSavable<int[]>, SpawnModificationCard {
 
+    // =========================================================================
     //  本地化资源加载
+    // =========================================================================
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("CardGlobalText"));
     public static final String[] TEXT = uiStrings.TEXT;
 
@@ -66,7 +74,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     public boolean isSecondMagicNumberModified = false;
 
     // =========================================================================
-    // 模组底层属性：焚烧 (FenShao)
+    // 模组专属底层属性：焚烧 (FenShao)
     // =========================================================================
     public int baseFenShao = -1;
     public int fenShao = -1;
@@ -74,7 +82,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     public boolean upgradedFenShao = false;
 
     // =========================================================================
-    // 模组底层属性：念 (Nian)
+    // 模组专属底层属性：念 (Nian)
     // =========================================================================
     public int baseNian = -1;
     public int nian = -1;
@@ -87,7 +95,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    //  设置流派
+    //  【核心方法】设置流派
     // =========================================================================
     protected void setDao(Dao dao) {
         switch (dao) {
@@ -141,7 +149,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    // 动态计算是否享受空窍免耗能
+    // 动态计算是否享受空窍免耗能福利
     // =========================================================================
     private void applyKongQiaoCost() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return;
@@ -162,7 +170,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    // 在扣费的最后一刻拦截
+    // 终极防线：在扣费的最后一刻拦截
     // =========================================================================
     @Override
     public boolean freeToPlay() {
@@ -225,7 +233,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    //  描述构建逻辑
+    //  描述构建逻辑 (支持本地化)
     // =========================================================================
     protected String constructRawDescription() {
         if (this.myBaseDescription == null) {
@@ -364,7 +372,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         c.myBaseDescription = this.myBaseDescription;
         c.guPathString = this.guPathString;
 
-        // 同步底层变量状态
+        // 同步专属的底层变量状态
         c.baseFenShao = this.baseFenShao;
         c.fenShao = this.fenShao;
         c.isFenShaoModified = this.isFenShaoModified;
