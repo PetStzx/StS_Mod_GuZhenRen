@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer; // 【新增导包】
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -24,9 +25,9 @@ public class XianGuPatch {
     /**
      * 辅助方法：检查并移除重复的仙蛊
      * @param group 当前操作的牌组
-     * @param addedCard 刚刚加入的卡牌
+     * @param addedCard 刚刚加入或升级的卡牌
      */
-    private static void checkAndRemoveDuplicate(CardGroup group, AbstractCard addedCard) {
+    public static void checkAndRemoveDuplicate(CardGroup group, AbstractCard addedCard) {
         // 1. 基础资格检查：如果刚加入的牌是虚影，直接放行
         if (!addedCard.hasTag(GuZhenRenTags.XIAN_GU)) return;
         if (addedCard.hasTag(GuZhenRenTags.BEN_MING_GU)) return;
@@ -93,9 +94,12 @@ public class XianGuPatch {
             AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(addedCard));
             group.removeCard(addedCard);
 
-            // =====================================================================
+            //刷新手牌显示
+            if (group == AbstractDungeon.player.hand) {
+                AbstractDungeon.player.hand.refreshHandLayout();
+            }
+
             // 给予残蛊补偿
-            // =====================================================================
             if (group == AbstractDungeon.player.masterDeck) {
                 if (!AbstractDungeon.player.hasRelic(XianGuCanHai.ID)) {
                     XianGuCanHai relic = new XianGuCanHai();
@@ -107,7 +111,63 @@ public class XianGuPatch {
         }
     }
 
-    // --- Postfix 拦截 ---
+    // 位置查找，用于应对升级的卡牌
+    public static void checkCardAnywhere(AbstractCard c) {
+        if (AbstractDungeon.player == null) return;
+
+        // 优先检查是否在全局牌组
+        if (AbstractDungeon.player.masterDeck.contains(c)) {
+            checkAndRemoveDuplicate(AbstractDungeon.player.masterDeck, c);
+            return;
+        }
+        // 战斗内各牌堆检查
+        if (AbstractDungeon.player.hand.contains(c)) {
+            checkAndRemoveDuplicate(AbstractDungeon.player.hand, c);
+        } else if (AbstractDungeon.player.drawPile.contains(c)) {
+            checkAndRemoveDuplicate(AbstractDungeon.player.drawPile, c);
+        } else if (AbstractDungeon.player.discardPile.contains(c)) {
+            checkAndRemoveDuplicate(AbstractDungeon.player.discardPile, c);
+        } else if (AbstractDungeon.player.exhaustPile.contains(c)) {
+            checkAndRemoveDuplicate(AbstractDungeon.player.exhaustPile, c);
+        } else if (AbstractDungeon.player.limbo.contains(c)) {
+            checkAndRemoveDuplicate(AbstractDungeon.player.limbo, c);
+        }
+    }
+
+
+
+    // 拦截全局永久升级
+    @SpirePatch(clz = AbstractPlayer.class, method = "bottledCardUpgradeCheck")
+    public static class UpgradeGlobalPatch {
+        @SpirePostfixPatch
+        public static void Postfix(AbstractPlayer __instance, AbstractCard c) {
+            checkCardAnywhere(c);
+        }
+    }
+
+    // 拦截战斗内的临时升级
+    @SpirePatch(clz = AbstractCard.class, method = "upgradeName")
+    public static class InCombatUpgradePatch {
+        @SpirePostfixPatch
+        public static void Postfix(AbstractCard __instance) {
+            if (CardCrawlGame.isInARun() &&
+                    AbstractDungeon.currMapNode != null &&
+                    AbstractDungeon.getCurrRoom() != null &&
+                    AbstractDungeon.getCurrRoom().phase == com.megacrit.cardcrawl.rooms.AbstractRoom.RoomPhase.COMBAT) {
+
+                AbstractDungeon.actionManager.addToBottom(new com.megacrit.cardcrawl.actions.AbstractGameAction() {
+                    @Override
+                    public void update() {
+                        checkCardAnywhere(__instance);
+                        this.isDone = true;
+                    }
+                });
+            }
+        }
+    }
+
+
+    // --- Postfix 位置移动拦截 ---
 
     @SpirePatch(clz = CardGroup.class, method = "addToHand")
     public static class AddToHandPatch {
