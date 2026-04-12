@@ -90,7 +90,8 @@
     "DESCRIPTION": "获得 !M! 点 力量 。 NL 回合结束时失去 !GuZhenRen:SecondMagic! 点 力量 。 消耗 。",
     "EXTENDED_DESCRIPTION": [
       "获得 !M! 点 力量 。 NL 回合结束时失去 !GuZhenRen:SecondMagic! 点 力量 。 消耗 。",
-      "获得 !M! 点 力量 。 消耗 。"
+      "获得 !M! 点 力量 。  NL 消耗 。",
+      "固有 。 NL 获得 !M! 点 力量 。  NL 消耗 。"
     ],
     "FLAVOR": "只会臣服于比自己更加强大的存在。需要付出寿命才能炼化。可达九转。"
   },

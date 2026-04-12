@@ -90,7 +90,8 @@
     "DESCRIPTION": "Gain !M! Strength. NL At the end of your turn, lose !GuZhenRen:SecondMagic! Strength. Exhaust.",
     "EXTENDED_DESCRIPTION": [
       "Gain !M! Strength. NL At the end of your turn, lose !GuZhenRen:SecondMagic! Strength. Exhaust.",
-      "Gain !M! Strength. Exhaust."
+      "Gain !M! Strength. NL Exhaust.",
+      "Innate. NL Gain !M! Strength. NL Exhaust."
     ],
     "FLAVOR": "It will only submit to existences more powerful than itself. Requires lifespan to refine. Can reach rank nine."
   },

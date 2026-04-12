@@ -36,19 +36,24 @@ public class LiLiangGu extends AbstractBenMingGuCard {
     }
 
     private void calculateStats() {
-        int[] gains = {0, 2, 2, 3, 3, 4, 4, 5, 6, 7};
-        int[] loses = {0, 1, 0, 1, 0, 1, 0, 0, 0, 0};
+        int[] gains = {0, 2, 2, 3, 3, 4, 5, 6, 7, 8};
+        int[] loses = {0, 1, 0, 1, 0, 0, 0, 0, 0, 0};
 
         int rankIndex = Math.min(Math.max(this.rank, 1), 9);
 
         this.baseMagicNumber = this.magicNumber = gains[rankIndex];
         this.baseSecondMagicNumber = this.secondMagicNumber = loses[rankIndex];
 
+        this.isInnate = (rankIndex >= 6);
+
         if (this.secondMagicNumber > 0) {
             this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[0];
+        } else if (this.isInnate) {
+            this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[2];
         } else {
             this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[1];
         }
+
         this.initializeDescription();
     }
 
