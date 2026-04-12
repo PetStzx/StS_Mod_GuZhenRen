@@ -96,7 +96,7 @@
   {
     "PROPER_NAME": "Blood Path",
     "NAMES": ["blood path", "blood_path"],
-    "DESCRIPTION": "Blood Path."
+    "DESCRIPTION": "The blood path is not alone, the legacy will continue for all eternity."
   },
   {
     "PROPER_NAME": "Luck Path",
@@ -106,7 +106,7 @@
   {
     "PROPER_NAME": "Wind Path",
     "NAMES": ["wind path", "wind_path"],
-    "DESCRIPTION": "Wind Path."
+    "DESCRIPTION": "Wind path has never had a Venerable..."
   },
   {
     "PROPER_NAME": "Time Path",
@@ -160,7 +160,7 @@
   {
     "PROPER_NAME": "Transformation Path",
     "NAMES": ["transformation path", "transformation_path"],
-    "DESCRIPTION": "Transformation Path."
+    "DESCRIPTION": "Using one path to project countless paths."
   },
   {
     "PROPER_NAME": "Transformation Path Dao Marks",
