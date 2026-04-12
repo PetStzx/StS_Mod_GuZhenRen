@@ -254,7 +254,7 @@
   },
   "GuZhenRen:WuZhiQuanXinJian": {
     "NAME": "Five Finger Fist Heart Sword",
-    "DESCRIPTION": "Deal !D! damage. NL Each time this card is played, double its base damage for this combat. NL stslib:Exhaustive !stslib:ex! ."
+    "DESCRIPTION": "Deal !D! damage. NL Each time this card is played, triple its base damage for this combat. NL stslib:Exhaustive !stslib:ex! ."
   },
   "GuZhenRen:JianYing": {
     "NAME": "Sword Phantom",

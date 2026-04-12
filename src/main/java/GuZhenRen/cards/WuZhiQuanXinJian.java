@@ -18,7 +18,7 @@ public class WuZhiQuanXinJian extends AbstractShaZhaoCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WuZhiQuanXinJian.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 16;
+    private static final int DAMAGE = 9;
     private static final int EXHAUSTIVE_AMT = 5; // 消耗性次数
 
     public WuZhiQuanXinJian() {
@@ -30,7 +30,7 @@ public class WuZhiQuanXinJian extends AbstractShaZhaoCard {
 
         this.baseDamage = DAMAGE;
 
-        // 设置消耗性 5，这会让卡牌在打出 5 次后自动消耗
+        // 打出 5 次后消耗
         ExhaustiveField.ExhaustiveFields.exhaustive.set(this, EXHAUSTIVE_AMT);
 
         this.initializeDescription();
@@ -41,8 +41,7 @@ public class WuZhiQuanXinJian extends AbstractShaZhaoCard {
         // 1. 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
-        // 2. 伤害翻倍
-        this.baseDamage *= 2;
-
+        // 2. 伤害翻三倍
+        this.baseDamage *= 3;
     }
 }

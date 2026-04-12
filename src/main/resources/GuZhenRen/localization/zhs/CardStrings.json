@@ -254,7 +254,7 @@
   },
   "GuZhenRen:WuZhiQuanXinJian": {
     "NAME": "五指拳心剑",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 每次打出，在本场战斗中基础伤害翻倍。 NL stslib:消耗性 !stslib:ex! 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 每次打出，在本场战斗中基础伤害翻三倍。 NL stslib:消耗性 !stslib:ex! 。"
   },
   "GuZhenRen:JianYing": {
     "NAME": "剑影",
