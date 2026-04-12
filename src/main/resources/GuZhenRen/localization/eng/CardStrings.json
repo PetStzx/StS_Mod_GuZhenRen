@@ -56,7 +56,10 @@
     "DESCRIPTION": "Exhaust up to !M! cards from your hand. NL For each card Exhausted, apply !GuZhenRen:FenShao! guzhenren:Burning 1 time. NL Ethereal.",
     "FLAVOR": "One of the least picky Gu worms in the world, capable of devouring myriad things to strengthen itself. Can reach rank nine.",
     "EXTENDED_DESCRIPTION": [
-      "Exhaust: Up to %d card(s)"
+      "Exhaust: Up to %d card(s)",
+      "Exhaust up to !M! cards from your hand. NL For each card Exhausted, apply !GuZhenRen:FenShao! guzhenren:Burning 1 time. NL Ethereal.",
+      "Exhaust up to !M! cards from your hand. NL For each card Exhausted, apply !GuZhenRen:FenShao! guzhenren:Burning 1 time.",
+      "Exhaust up to !M! cards from your hand. NL For each card Exhausted, apply !GuZhenRen:FenShao! guzhenren:Burning 1 time. NL Retain."
     ]
   },
   "GuZhenRen:HuoMaoSanZhangGu": {

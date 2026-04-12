@@ -31,7 +31,6 @@ public class HuoGu extends AbstractBenMingGuCard {
                 CardTarget.ENEMY);
 
         this.setDao(Dao.YAN_DAO);
-        this.isEthereal = true;
         this.maxRank = 9;
 
         this.baseFenShao = this.fenShao = 1;
@@ -41,8 +40,22 @@ public class HuoGu extends AbstractBenMingGuCard {
     }
 
     private void calculateStats() {
-        this.baseMagicNumber = this.magicNumber = this.rank;
-        this.myBaseDescription = cardStrings.DESCRIPTION;
+        int[] consumes = {0, 3, 3, 4, 5, 6, 6, 7, 8, 9};
+
+        int rankIndex = Math.min(Math.max(this.rank, 1), 9);
+        this.baseMagicNumber = this.magicNumber = consumes[rankIndex];
+
+        this.isEthereal = (rankIndex == 1);
+        this.selfRetain = (rankIndex >= 6);
+
+        if (this.isEthereal) {
+            this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+        } else if (this.selfRetain) {
+            this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[3];
+        } else {
+            this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[2];
+        }
+
         this.initializeDescription();
     }
 
@@ -90,6 +103,7 @@ public class HuoGu extends AbstractBenMingGuCard {
                     return;
                 }
 
+                // 这里调用的是 EXTENDED_DESCRIPTION[0]，所以保留给界面的文字提示不变
                 String msg = String.format(HuoGu.cardStrings.EXTENDED_DESCRIPTION[0], maxAmount);
                 AbstractDungeon.handCardSelectScreen.open(msg, maxAmount, true, true);
                 this.tickDuration();

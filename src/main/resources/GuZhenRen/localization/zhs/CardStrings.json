@@ -56,7 +56,10 @@
     "DESCRIPTION": " 消耗 至多 !M! 张手牌。 NL 每 消耗 1 张牌，给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 1 次。 NL 虚无 。",
     "FLAVOR": "天底下最不挑食的蛊虫之一，能够吞噬万物壮大自身。可达九转。",
     "EXTENDED_DESCRIPTION": [
-      "消耗：至多 %d 张手牌"
+      "消耗：至多 %d 张手牌",
+      " 消耗 至多 !M! 张手牌。 NL 每 消耗 1 张牌，给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 1 次。 NL 虚无 。",
+      " 消耗 至多 !M! 张手牌。 NL 每 消耗 1 张牌，给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 1 次。",
+      " 消耗 至多 !M! 张手牌。 NL 每 消耗 1 张牌，给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 1 次。 NL 保留 。"
     ]
   },
   "GuZhenRen:HuoMaoSanZhangGu": {
