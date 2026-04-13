@@ -137,7 +137,7 @@
   },
   "GuZhenRen:KuLiGu": {
     "NAME": "Bitter Strength Gu",
-    "DESCRIPTION": "For every !M! HP you lose, gain 1 Strength.",
+    "DESCRIPTION": "For every !M! missing HP, gain 1 Strength this turn.",
     "EXTENDED_DESCRIPTION": [
       " NL (Gain !GuZhenRen:SecondMagic! Strength)"
     ]

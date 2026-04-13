@@ -137,7 +137,7 @@
   },
   "GuZhenRen:KuLiGu": {
     "NAME": "苦力蛊",
-    "DESCRIPTION": "你每失去 !M! 点生命，获得 1 点 力量 。",
+    "DESCRIPTION": "你每有 !M! 点已损失的生命，在本回合获得 1 点 力量 。",
     "EXTENDED_DESCRIPTION": [
       " NL （获得 !GuZhenRen:SecondMagic! 点力量）"
     ]
