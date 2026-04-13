@@ -114,7 +114,7 @@
   },
   "GuZhenRen:ChengGongGu": {
     "NAME": "Success Gu",
-    "DESCRIPTION": "Choose: Gain 300 Gold, NL Gain 16 Max HP, NL Remove 2 cards from your deck. NL Remove from combat.",
+    "DESCRIPTION": "Choose one: Gain 300 Gold, 16 Max HP, or Remove 2 cards from your deck. NL Remove from combat.",
     "EXTENDED_DESCRIPTION": [
       "Choose 2 cards to remove"
     ]
