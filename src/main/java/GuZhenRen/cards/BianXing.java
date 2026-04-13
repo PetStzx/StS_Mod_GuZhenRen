@@ -27,7 +27,7 @@ public class BianXing extends AbstractBenMingGuCard {
                 CardTarget.SELF);
 
         this.setDao(Dao.BIAN_HUA_DAO);
-        this.maxRank = 9;
+        this.maxRank = 8;
 
         this.setRank(INITIAL_RANK);
         calculateStats();
