@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.actions.AnQiShaAction;
+import com.badlogic.gdx.graphics.Color; // 【新增导包】用于调用紫色
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -39,17 +40,41 @@ public class AnQiSha extends AbstractShaZhaoCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        boolean isFirstCard = AbstractDungeon.actionManager.cardsPlayedThisTurn.size() <= 1;
+        // 统计本回合打出的攻击牌总数
+        int attackCount = 0;
+        for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn) {
+            if (c.type == CardType.ATTACK) {
+                attackCount++;
+            }
+        }
+
         boolean notAttacking = !isAttacking(m);
-        boolean trigger = isFirstCard && notAttacking;
+
+        boolean trigger = (attackCount == 1) && notAttacking;
 
         this.addToBot(new AnQiShaAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), trigger));
     }
 
     @Override
     public void triggerOnGlowCheck() {
-        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.isEmpty()) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        boolean hasPlayedAttack = false;
+        for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn) {
+            if (c.type == CardType.ATTACK) {
+                hasPlayedAttack = true;
+                break;
+            }
+        }
+
+        boolean hasNonAttackingEnemy = false;
+        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (!mo.isDeadOrEscaped() && !isAttacking(mo)) {
+                hasNonAttackingEnemy = true;
+                break;
+            }
+        }
+
+        if (!hasPlayedAttack && hasNonAttackingEnemy) {
+            this.glowColor = Color.PURPLE.cpy();
         } else {
             this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
         }

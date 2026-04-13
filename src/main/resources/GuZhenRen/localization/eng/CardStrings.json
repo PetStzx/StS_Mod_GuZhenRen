@@ -319,7 +319,7 @@
   },
   "GuZhenRen:AnQiSha": {
     "NAME": "Dark Assassination",
-    "DESCRIPTION": "Deal !D! damage. NL If this is the first card you play this turn and the target does not intend to attack, deal 10 times the damage."
+    "DESCRIPTION": "Deal !D! damage. NL If you have not played an Attack this turn and the target does not intend to attack, deal 10 times the damage."
   },
   "GuZhenRen:RenGu": {
     "NAME": "Blade Gu",

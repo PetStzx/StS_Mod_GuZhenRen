@@ -319,7 +319,7 @@
   },
   "GuZhenRen:AnQiSha": {
     "NAME": "暗歧杀",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 若此牌是你本回合打出的第一张牌，且目标意图不为攻击，则造成十倍伤害 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 若你本回合未打出过攻击牌，且目标意图不为攻击，则造成十倍伤害 。"
   },
   "GuZhenRen:RenGu": {
     "NAME": "刃蛊",
