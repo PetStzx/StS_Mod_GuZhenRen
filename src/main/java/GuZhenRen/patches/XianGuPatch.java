@@ -7,7 +7,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.characters.AbstractPlayer; // 【新增导包】
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -24,14 +24,13 @@ public class XianGuPatch {
 
     /**
      * 辅助方法：检查并移除重复的仙蛊
-     * @param group 当前操作的牌组
-     * @param addedCard 刚刚加入或升级的卡牌
      */
     public static void checkAndRemoveDuplicate(CardGroup group, AbstractCard addedCard) {
-        // 1. 基础资格检查：如果刚加入的牌是虚影，直接放行
+        // 1. 基础资格检查
         if (!addedCard.hasTag(GuZhenRenTags.XIAN_GU)) return;
         if (addedCard.hasTag(GuZhenRenTags.BEN_MING_GU)) return;
         if (addedCard.hasTag(GuZhenRenTags.XU_YING_COPY)) return;
+        if (addedCard.purgeOnUse || addedCard.isInAutoplay) return;
         if (AbstractDungeon.player == null) return;
 
         // 2. 环境检查
@@ -39,8 +38,7 @@ public class XianGuPatch {
                 (group == AbstractDungeon.player.hand) ||
                 (group == AbstractDungeon.player.drawPile) ||
                 (group == AbstractDungeon.player.discardPile) ||
-                (group == AbstractDungeon.player.exhaustPile) ||
-                (group == AbstractDungeon.player.limbo);
+                (group == AbstractDungeon.player.exhaustPile);
 
         if (!isRelevantGroup) return;
 
@@ -50,8 +48,8 @@ public class XianGuPatch {
         if (group == AbstractDungeon.player.masterDeck) {
             // 永久获得检查
             for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                // 查重时，无视带有虚影标签的牌
-                if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !c.hasTag(GuZhenRenTags.XU_YING_COPY)) {
+                boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
+                if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !isFakeCard) {
                     isDuplicate = true;
                     break;
                 }
@@ -66,8 +64,9 @@ public class XianGuPatch {
             allCombatCards.addAll(AbstractDungeon.player.limbo.group);
 
             for (AbstractCard c : allCombatCards) {
-                // 同上，扫描时忽略虚影牌
-                if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !c.hasTag(GuZhenRenTags.XU_YING_COPY)) {
+                // 扫描时，忽略 purgeOnUse 克隆体
+                boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
+                if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !isFakeCard) {
                     isDuplicate = true;
                     break;
                 }
