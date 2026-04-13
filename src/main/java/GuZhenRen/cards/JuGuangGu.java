@@ -20,7 +20,7 @@ public class JuGuangGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/JuGuangGu.png");
 
     private static final int COST = 1;
-    private static final int MAGIC = 2;
+    private static final int MAGIC = 1;
     private static final int UPGRADE_PLUS_MAGIC = 1;
     private static final int INITIAL_RANK = 3;
 

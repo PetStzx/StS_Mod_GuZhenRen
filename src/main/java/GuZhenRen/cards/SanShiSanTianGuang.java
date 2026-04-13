@@ -23,7 +23,7 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/SanShiSanTianGuang.png");
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     private static final int DAMAGE = 4;
 
     public static int totalShanYaoGainedThisCombat = 0;
