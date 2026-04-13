@@ -245,5 +245,13 @@
   {
     "NAMES": ["fading"],
     "DESCRIPTION": "Dies in #bX turns."
+  },
+  {
+    "NAMES": ["immortal gu house", "immortal_gu_house"],
+    "DESCRIPTION": "The pinnacle product of Formation path, integrating multiple functions with few shortcomings."
+  },
+  {
+    "NAMES": ["immortal star mark", "immortal_star_mark"],
+    "DESCRIPTION": "At the start of its turn, you gain #bX #yNian . Then, this status increases by #b1 ."
   }
 ]

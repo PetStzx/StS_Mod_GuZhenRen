@@ -418,5 +418,19 @@
       "The next #b",
       " time(s) you play a #yLight #yPath Attack card, it will not consume #yRadiance stacks."
     ]
+  },
+  "GuZhenRen:XingLuoQiBuPower": {
+    "NAME": "Scattered Stars",
+    "DESCRIPTIONS": [
+      "Until the start of your next turn, whenever you gain 1 #yNian , gain #b",
+      " #yBlock ."
+    ]
+  },
+  "GuZhenRen:BuMieXingBiaoPower": {
+    "NAME": "Immortal Star Mark",
+    "DESCRIPTIONS": [
+      "At the start of its turn, you gain #b",
+      " #yNian . Then, this power's amount increases by #b1 ."
+    ]
   }
 }

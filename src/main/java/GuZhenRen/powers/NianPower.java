@@ -74,6 +74,10 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         // 记录获取的层数
         recordNianGain(stackAmount);
 
+        if (stackAmount > 0 && this.owner.hasPower(XingLuoQiBuPower.POWER_ID)) {
+            ((XingLuoQiBuPower) this.owner.getPower(XingLuoQiBuPower.POWER_ID)).onGainNian(stackAmount);
+        }
+
         checkThreshold();
         updateDescription();
     }
@@ -82,6 +86,10 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
     public void onInitialApplication() {
         // 记录初始获取的层数
         recordNianGain(this.amount);
+
+        if (this.amount > 0 && this.owner.hasPower(XingLuoQiBuPower.POWER_ID)) {
+            ((XingLuoQiBuPower) this.owner.getPower(XingLuoQiBuPower.POWER_ID)).onGainNian(this.amount);
+        }
 
         checkThreshold();
         updateDescription();

@@ -64,7 +64,13 @@ public abstract class AbstractShaZhaoCard extends AbstractGuZhenRenCard {
             sb.append(guPathString).append(separator);
         }
 
-        sb.append("guzhenren:").append(TAG_TEXT[2].replace(" ", "_")).append(separator);
+        sb.append("guzhenren:").append(TAG_TEXT[2].replace(" ", "_"));
+
+        if (this.tags.contains(GuZhenRenTags.XIAN_GU_WU)) {
+            sb.append(separator).append("guzhenren:").append(TAG_TEXT[4].replace(" ", "_"));
+        }
+
+        sb.append(separator);
         sb.append(" NL ").append(this.myBaseDescription);
 
         return sb.toString();

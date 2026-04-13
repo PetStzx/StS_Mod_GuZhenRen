@@ -239,10 +239,27 @@
   },
   "GuZhenRen:XingXiuQiPan": {
     "NAME": "星宿棋盘",
-    "DESCRIPTION": "每回合限一次。 NL 将消耗堆以外的所有 guzhenren:智道 牌返回手牌， guzhenren:智道 牌本回合首次打出时耗能为 0 。",
+    "DESCRIPTION": "选择一项： NL 防护、侦查、 NL 推算、腾挪。",
     "EXTENDED_DESCRIPTION": [
-      "这回合已经使用过星宿棋盘。"
+      "guzhenren:念",
+      "guzhenren:不灭星标"
     ]
+  },
+  "GuZhenRen:OptionFangHu_XingXiuQiPan": {
+    "NAME": "防护",
+    "DESCRIPTION": "下回合开始前，你每获得1层 guzhenren:念 ，就获得4点 格挡 。"
+  },
+  "GuZhenRen:OptionZhenCha_XingXiuQiPan": {
+    "NAME": "侦查",
+    "DESCRIPTION": "给予目标 1 层 guzhenren:不灭星标 。"
+  },
+  "GuZhenRen:OptionTuiSuan_XingXiuQiPan": {
+    "NAME": "推算",
+    "DESCRIPTION": "获得 8 层 guzhenren:念 。"
+  },
+  "GuZhenRen:OptionTengNuo_XingXiuQiPan": {
+    "NAME": "腾挪",
+    "DESCRIPTION": "每场战斗限一次： NL 在本回合结束后，额外获得一回合。 NL 结束你的回合。"
   },
   "GuZhenRen:SheXinGu": {
     "NAME": "摄心蛊",

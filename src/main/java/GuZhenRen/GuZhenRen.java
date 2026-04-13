@@ -359,11 +359,14 @@ public class GuZhenRen implements
         }
     }
 
-    // =================================================================================
-    // “人如故” 回溯血量机制 - 账本管理
-    // =================================================================================
+
+    // 变量与账本重置区
     @Override
     public void receiveOnBattleStart(AbstractRoom room) {
+        SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
+        TouDaoDaoHenPower.totalGoldStolenThisCombat = 0;
+        XingXiuQiPan.usedTengNuoThisCombat = false;
+
         RenRuGu.hpHistory.clear();
         RenRuGu.hpHistory.add(com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.currentHealth);
     }
@@ -378,9 +381,10 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostBattle(AbstractRoom room) {
-        // 1. 静态变量清理区 (防止下一场战斗数据残留)
+        // 1. 静态变量清理区
         SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
         TouDaoDaoHenPower.totalGoldStolenThisCombat = 0;
+        XingXiuQiPan.usedTengNuoThisCombat = false;
 
         // 清空时间轴
         RenRuGu.hpHistory.clear();

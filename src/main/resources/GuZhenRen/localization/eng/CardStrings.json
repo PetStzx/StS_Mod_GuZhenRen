@@ -239,10 +239,27 @@
   },
   "GuZhenRen:XingXiuQiPan": {
     "NAME": "Star Constellation Chessboard",
-    "DESCRIPTION": "Limit one per turn. NL Return all guzhenren:Wisdom_Path cards not in your Exhaust pile to your hand. Their first time played this turn, they cost 0.",
+    "DESCRIPTION": "Choose one: NL Defense, Scout, NL Calculate, Maneuver.",
     "EXTENDED_DESCRIPTION": [
-      "You have already used Star Constellation Chessboard this turn."
+      "guzhenren:nian",
+      "guzhenren:immortal_star_mark"
     ]
+  },
+  "GuZhenRen:OptionFangHu_XingXiuQiPan": {
+    "NAME": "Defense",
+    "DESCRIPTION": "Until the start of your next turn, whenever you gain 1 guzhenren:Nian , gain 4 Block ."
+  },
+  "GuZhenRen:OptionZhenCha_XingXiuQiPan": {
+    "NAME": "Scout",
+    "DESCRIPTION": "Apply 1 guzhenren:Immortal_Star_Mark to the target."
+  },
+  "GuZhenRen:OptionTuiSuan_XingXiuQiPan": {
+    "NAME": "Calculate",
+    "DESCRIPTION": "Gain 8 guzhenren:Nian ."
+  },
+  "GuZhenRen:OptionTengNuo_XingXiuQiPan": {
+    "NAME": "Maneuver",
+    "DESCRIPTION": "Once per combat: NL Take an extra turn after this one. NL End your turn."
   },
   "GuZhenRen:SheXinGu": {
     "NAME": "Capture Heart Gu",
