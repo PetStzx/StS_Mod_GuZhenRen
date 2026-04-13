@@ -315,7 +315,7 @@
   },
   "GuZhenRen:JianLangSanDie": {
     "NAME": "剑浪三叠",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害，给予 !M! 层 guzhenren:剑痕 。 NL 命中 3 次。"
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害，给予 !M! 层 guzhenren:剑痕 。 NL 重复此效果共 3 次。"
   },
   "GuZhenRen:AnQiSha": {
     "NAME": "暗歧杀",
@@ -477,7 +477,7 @@
   },
   "GuZhenRen:DaoChiXueFu": {
     "NAME": "刀翅血蝠",
-    "DESCRIPTION": "随机对敌人造成 !D! 点伤害。 NL 你每有 1 张 *刀翅血蝠 ，命中 1 次。",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 你每有 1 张 *刀翅血蝠 ，命中 1 次。",
     "EXTENDED_DESCRIPTION": [
       " NL （命中 !M! 次）"
     ]

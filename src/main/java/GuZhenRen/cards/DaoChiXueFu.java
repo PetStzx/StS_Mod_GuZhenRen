@@ -37,7 +37,7 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.COMMON,
-                CardTarget.ALL_ENEMY);
+                CardTarget.ENEMY);
 
         this.setDao(Dao.XUE_DAO);
         this.baseDamage = DAMAGE;
@@ -131,16 +131,14 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
             this.addToBot(new AbstractGameAction() {
                 @Override
                 public void update() {
-                    AbstractMonster randomTarget = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-
-                    if (randomTarget != null) {
-                        DaoChiXueFu.this.calculateCardDamage(randomTarget);
+                    if (m != null && !m.isDeadOrEscaped() && m.currentHealth > 0) {
+                        DaoChiXueFu.this.calculateCardDamage(m);
 
                         float offsetX = (float) (Math.random() * 60 - 30) * Settings.scale;
                         float offsetY = (float) (Math.random() * 60 - 30) * Settings.scale;
 
-                        this.addToTop(new DamageAction(randomTarget, new DamageInfo(p, DaoChiXueFu.this.damage, damageTypeForTurn), AttackEffect.NONE));
-                        this.addToTop(new VFXAction(new BiteEffect(randomTarget.hb.cX + offsetX, randomTarget.hb.cY - 40.0F * Settings.scale + offsetY, Color.SCARLET.cpy()), 0.15F));
+                        this.addToTop(new DamageAction(m, new DamageInfo(p, DaoChiXueFu.this.damage, damageTypeForTurn), AttackEffect.NONE));
+                        this.addToTop(new VFXAction(new BiteEffect(m.hb.cX + offsetX, m.hb.cY - 40.0F * Settings.scale + offsetY, Color.SCARLET.cpy()), 0.15F));
                     }
                     this.isDone = true;
                 }
@@ -152,7 +150,7 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 8 -> 10
+            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 8 -> 11
             this.upgradeRank(1);
             this.initializeDescription();
         }

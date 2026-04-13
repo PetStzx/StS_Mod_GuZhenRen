@@ -315,7 +315,7 @@
   },
   "GuZhenRen:JianLangSanDie": {
     "NAME": "Triple Layered Sword Wave",
-    "DESCRIPTION": "Deal !D! damage to all enemies and apply !M! guzhenren:Sword_Mark . NL Hits 3 times."
+    "DESCRIPTION": "Deal !D! damage to ALL enemies and apply !M! guzhenren:Sword_Mark . NL Repeat this effect a total of 3 times."
   },
   "GuZhenRen:AnQiSha": {
     "NAME": "Dark Assassination",
@@ -477,7 +477,7 @@
   },
   "GuZhenRen:DaoChiXueFu": {
     "NAME": "Bladed Wing Blood Bat",
-    "DESCRIPTION": "Deal !D! damage to a random enemy. NL Hits 1 time for each *Bladed *Wing *Blood *Bat in your deck.",
+    "DESCRIPTION": "Deal !D! damage. NL Hits 1 time for each *Bladed *Wing *Blood *Bat you have.",
     "EXTENDED_DESCRIPTION": [
       " NL (Hits !M! times)"
     ]
