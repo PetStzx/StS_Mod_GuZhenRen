@@ -205,7 +205,7 @@
   "GuZhenRen:GuangDaoDaoHenPower": {
     "NAME": "Light Path Dao Mark",
     "DESCRIPTIONS": [
-      "Each stack of Light Path Dao Mark increases the damage of #yLight #yPath cards by 20%. (Increases Light Path card damage by #b",
+      "Each stack of Light Path Dao Mark increases the damage of #yLight #yPath cards by 25%. (Increases Light Path card damage by #b",
       "% )"
     ]
   },

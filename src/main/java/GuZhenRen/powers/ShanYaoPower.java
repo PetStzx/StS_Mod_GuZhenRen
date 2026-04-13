@@ -46,6 +46,12 @@ public class ShanYaoPower extends AbstractPower {
     public float atDamageGive(float damage, DamageInfo.DamageType type, AbstractCard card) {
         if (card.hasTag(GuZhenRenTags.GUANG_DAO)) {
             float multiplier = 1.0F + (this.amount * MULTIPLIER_PER_STACK);
+
+            AbstractPower daoHen = this.owner.getPower(GuangDaoDaoHenPower.POWER_ID);
+            if (daoHen != null) {
+                multiplier += (daoHen.amount * GuangDaoDaoHenPower.MULTIPLIER_PER_STACK);
+            }
+
             return damage * multiplier;
         }
         return damage;
