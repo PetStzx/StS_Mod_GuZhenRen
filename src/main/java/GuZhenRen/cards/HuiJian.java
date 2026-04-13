@@ -27,7 +27,7 @@ public class HuiJian extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int DAMAGE = 9;
     private static final int UPGRADE_PLUS_DAMAGE = 3; // 升级变 12 伤
-    private static final int MAGIC = 6; // 6 层念
+    private static final int MAGIC = 5; // 5 层念
     private static final int INITIAL_RANK = 7;
 
     public HuiJian() {
@@ -49,7 +49,7 @@ public class HuiJian extends AbstractGuZhenRenCard {
         // 1. 造成伤害
         this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
-        // 2. 获得 6 层念
+        // 2. 获得 5 层念
         this.addToBot(new ApplyPowerAction(p, p, new NianPower(p, this.magicNumber), this.magicNumber));
 
         // 3. 将 1 层情转化为 1 层剑锋
