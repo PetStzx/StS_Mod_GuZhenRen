@@ -208,7 +208,7 @@
   "GuZhenRen:TunHuoGu": {
     "NAME": "吞火蛊",
     "DESCRIPTION": " *灼伤 不再对你造成伤害。 NL 消耗 *灼伤 时，将1张 *火势 加入手牌。",
-    "UPGRADE_DESCRIPTION": "将1张 *火势 加入手牌。 NL  *灼伤 不再对你造成伤害。 NL 消耗 *灼伤 时，将1张 *火势 加入手牌。"
+    "UPGRADE_DESCRIPTION": "将2张 *火势 加入手牌。 NL  *灼伤 不再对你造成伤害。 NL 消耗 *灼伤 时，将1张 *火势 加入手牌。"
   },
   "GuZhenRen:HuoShi": {
     "NAME": "火势",

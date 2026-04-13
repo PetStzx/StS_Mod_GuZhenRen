@@ -40,7 +40,7 @@ public class TunHuoGu extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (this.upgraded) {
-            this.addToBot(new MakeTempCardInHandAction(new HuoShi(), 1));
+            this.addToBot(new MakeTempCardInHandAction(new HuoShi(), 2));
         }
         this.addToBot(new ApplyPowerAction(p, p, new TunHuoPower(p, this.magicNumber), this.magicNumber));
     }

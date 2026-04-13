@@ -208,7 +208,7 @@
   "GuZhenRen:TunHuoGu": {
     "NAME": "Swallow Fire Gu",
     "DESCRIPTION": " *Burns no longer deal damage to you. NL When you Exhaust a *Burn , add 1 *Blaze into your hand.",
-    "UPGRADE_DESCRIPTION": "Add 1 *Blaze into your hand. NL  *Burns no longer deal damage to you. NL When you Exhaust a *Burn , add 1 *Blaze into your hand."
+    "UPGRADE_DESCRIPTION": "Add 2 *Blazes into your hand. NL  *Burns no longer deal damage to you. NL When you Exhaust a *Burn , add 1 *Blaze into your hand."
   },
   "GuZhenRen:HuoShi": {
     "NAME": "Blaze",
