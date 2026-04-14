@@ -9,7 +9,7 @@
   },
   "GuZhenRen:XiaoGuangGu": {
     "NAME": "Little Light Gu",
-    "DESCRIPTION": "The damage of the next guzhenren:Light_Path card you play is increased by !M!% . NL Apply 1 Weak."
+    "DESCRIPTION": "Gain !M! guzhenren:Radiance . NL Apply 1 Weak."
   },
   "GuZhenRen:JuChiJinWu": {
     "NAME": "Chainsaw Golden Centipede",
