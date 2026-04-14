@@ -80,4 +80,9 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
     public AbstractCard getRewardCard() {
         return new XingXiuQiPan();
     }
+
+    @Override
+    protected String[] getTipKeywords(){
+        return new String[]{"不灭星标"};
+    }
 }

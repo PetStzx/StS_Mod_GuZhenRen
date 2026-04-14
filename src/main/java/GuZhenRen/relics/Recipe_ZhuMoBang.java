@@ -87,4 +87,9 @@ public class Recipe_ZhuMoBang extends AbstractRecipeRelic {
     public AbstractCard getRewardCard() {
         return new ZhuMoBang();
     }
+
+    @Override
+    protected String[] getTipKeywords(){
+        return new String[]{"血缘"};
+    }
 }

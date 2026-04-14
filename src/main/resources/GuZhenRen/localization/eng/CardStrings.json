@@ -570,8 +570,27 @@
     "DESCRIPTION": "During your turn, whenever you lose HP, draw !M! card(s)."
   },
   "GuZhenRen:ZhuMoBang": {
-    "NAME": "Demon Judgment Board",
-    "DESCRIPTION": "Deal !D! damage to all enemies. Gain !B! Block . NL Fatal to enemies with HP below 30% of their Max HP."
+    "NAME": "Demon Execution Board",
+    "DESCRIPTION": "Choose one: NL Scout, Defense, NL Attack, Recover.",
+    "EXTENDED_DESCRIPTION": [
+      "guzhenren:bloodline"
+    ]
+  },
+  "GuZhenRen:OptionZhenCha_ZhuMoBang": {
+    "NAME": "Scout",
+    "DESCRIPTION": "Apply 1 guzhenren:Bloodline to ALL enemies."
+  },
+  "GuZhenRen:OptionFangHu_ZhuMoBang": {
+    "NAME": "Defense",
+    "DESCRIPTION": "Gain 8 Block . NL This turn, attack damage taken from enemies marked with guzhenren:Bloodline is halved."
+  },
+  "GuZhenRen:OptionGongFa_ZhuMoBang": {
+    "NAME": "Attack",
+    "DESCRIPTION": "ALL enemies take !M! damage 1 time for each layer of guzhenren:Bloodline they have."
+  },
+  "GuZhenRen:OptionHuiFu_ZhuMoBang": {
+    "NAME": "Recover",
+    "DESCRIPTION": "Once per combat: NL Siphon 5 HP from ALL enemies marked with guzhenren:Bloodline ."
   },
   "GuZhenRen:TaiGuangGu": {
     "NAME": "Extreme Light Gu",

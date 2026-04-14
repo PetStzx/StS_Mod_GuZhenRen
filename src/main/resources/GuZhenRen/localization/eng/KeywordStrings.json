@@ -253,5 +253,9 @@
   {
     "NAMES": ["immortal star mark", "immortal_star_mark"],
     "DESCRIPTION": "At the start of its turn, you gain #bX #yNian . Then, this status increases by #b1 ."
+  },
+  {
+    "NAMES": ["bloodline", "Bloodline"],
+    "DESCRIPTION": "When you lose HP, all enemies marked with #yBloodline lose an equal amount of HP."
   }
 ]

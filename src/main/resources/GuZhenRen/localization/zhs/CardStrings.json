@@ -571,7 +571,26 @@
   },
   "GuZhenRen:ZhuMoBang": {
     "NAME": "诛魔榜",
-    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。获得 !B! 点 格挡 。 NL 斩杀生命值低于其最大生命 30% 的敌人。"
+    "DESCRIPTION": "选择一项： NL 侦查、防御、 NL 攻伐、恢复。",
+    "EXTENDED_DESCRIPTION": [
+      "guzhenren:血缘"
+    ]
+  },
+  "GuZhenRen:OptionZhenCha_ZhuMoBang": {
+    "NAME": "侦查",
+    "DESCRIPTION": "给予所有敌人 1 层 guzhenren:血缘 。"
+  },
+  "GuZhenRen:OptionFangHu_ZhuMoBang": {
+    "NAME": "防御",
+    "DESCRIPTION": "获得 8 点 格挡 。 NL 在本回合，被 guzhenren:血缘 标记的敌人对你造成的伤害减半。"
+  },
+  "GuZhenRen:OptionGongFa_ZhuMoBang": {
+    "NAME": "攻伐",
+    "DESCRIPTION": "所有敌人每有 1 层 guzhenren:血缘 ，受到 !M! 点伤害 1 次。"
+  },
+  "GuZhenRen:OptionHuiFu_ZhuMoBang": {
+    "NAME": "恢复",
+    "DESCRIPTION": "每场战斗限一次： NL 汲取所有被 guzhenren:血缘 标记的敌人 5 点生命。"
   },
   "GuZhenRen:TaiGuangGu": {
     "NAME": "太光蛊",
