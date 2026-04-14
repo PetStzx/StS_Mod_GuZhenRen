@@ -1,9 +1,7 @@
 package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
-import GuZhenRen.cards.interfaces.ICarouselCard;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.patches.GuZhenRenTags;
 import GuZhenRen.powers.BuMieXingBiaoPower;
 import GuZhenRen.powers.NianPower;
 import GuZhenRen.powers.XingLuoQiBuPower;
@@ -21,9 +19,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
+public class XingXiuQiPan extends AbstractXianGuWuCard {
     public static final String ID = GuZhenRen.makeID("XingXiuQiPan");
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XingXiuQiPan.png");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -33,7 +30,6 @@ public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
 
     public static boolean usedTengNuoThisCombat = false;
 
-    private final ArrayList<AbstractCard> previewCards = new ArrayList<>();
 
     static {
         BattleStateManager.onBattleStart(() -> XingXiuQiPan.usedTengNuoThisCombat = false);
@@ -43,32 +39,24 @@ public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
     public XingXiuQiPan() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
-                CardTarget.ENEMY);
+                CardTarget.NONE);
 
         this.setDao(Dao.ZHI_DAO);
-        this.tags.add(GuZhenRenTags.XIAN_GU_WU);
 
-        // 将4张预览卡加入到轮播列表
         this.previewCards.add(new OptionFangHu_XingXiuQiPan());
-        this.previewCards.add(new OptionZhenCha_XingXiuQiPan(null));
+        this.previewCards.add(new OptionZhenCha_XingXiuQiPan());
         this.previewCards.add(new OptionTuiSuan_XingXiuQiPan());
         this.previewCards.add(new OptionTengNuo_XingXiuQiPan());
 
         this.initializeDescription();
     }
 
-    // 每帧更新逻辑，用于实现预览卡轮播效果
-    @Override
-    public void update() {
-        super.update();
-        this.updateCarousel();
-    }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         ArrayList<AbstractCard> choices = new ArrayList<>();
         choices.add(new OptionFangHu_XingXiuQiPan());
-        choices.add(new OptionZhenCha_XingXiuQiPan(m));
+        choices.add(new OptionZhenCha_XingXiuQiPan());
         choices.add(new OptionTuiSuan_XingXiuQiPan());
 
         if (!usedTengNuoThisCombat) {
@@ -86,11 +74,6 @@ public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
             this.keywords.add(cardStrings.EXTENDED_DESCRIPTION[0]);
             this.keywords.add(cardStrings.EXTENDED_DESCRIPTION[1]);
         }
-    }
-
-    @Override
-    public List<AbstractCard> getCarouselCards() {
-        return this.previewCards;
     }
 
     @Override
@@ -126,11 +109,9 @@ public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
     public static class OptionZhenCha_XingXiuQiPan extends CustomCard {
         public static final String ID = GuZhenRen.makeID("OptionZhenCha_XingXiuQiPan");
         private static final CardStrings strings = CardCrawlGame.languagePack.getCardStrings(ID);
-        private final AbstractMonster targetMonster;
 
-        public OptionZhenCha_XingXiuQiPan(AbstractMonster m) {
+        public OptionZhenCha_XingXiuQiPan() {
             super(ID, strings.NAME, IMG_PATH, -2, strings.DESCRIPTION, CardType.SKILL, CardColorEnum.GUZHENREN_GREY, CardRarity.SPECIAL, CardTarget.NONE);
-            this.targetMonster = m;
         }
 
         @Override
@@ -143,9 +124,11 @@ public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
 
         @Override
         public void onChoseThisOption() {
-            if (this.targetMonster != null && !this.targetMonster.isDeadOrEscaped()) {
-                AbstractPlayer p = AbstractDungeon.player;
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this.targetMonster, p, new BuMieXingBiaoPower(this.targetMonster, 1), 1));
+            AbstractPlayer p = AbstractDungeon.player;
+            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                if (!mo.isDeadOrEscaped()) {
+                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new BuMieXingBiaoPower(mo, 1), 1));
+                }
             }
         }
     }

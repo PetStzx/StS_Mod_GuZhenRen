@@ -239,7 +239,7 @@
   },
   "GuZhenRen:XingXiuQiPan": {
     "NAME": "Star Constellation Chessboard",
-    "DESCRIPTION": "Choose one: NL Defense, Scout, NL Calculate, Maneuver.",
+    "DESCRIPTION": "Choose one: NL Defense, Scout, NL Calculate, Maneuver. NL At the start of your turn, if this card is not Exhausted, return it to your hand.",
     "EXTENDED_DESCRIPTION": [
       "guzhenren:nian",
       "guzhenren:immortal_star_mark"
@@ -251,7 +251,7 @@
   },
   "GuZhenRen:OptionZhenCha_XingXiuQiPan": {
     "NAME": "Scout",
-    "DESCRIPTION": "Apply 1 guzhenren:Immortal_Star_Mark to the target."
+    "DESCRIPTION": "Apply 1 guzhenren:Immortal_Star_Mark to ALL enemies."
   },
   "GuZhenRen:OptionTuiSuan_XingXiuQiPan": {
     "NAME": "Calculate",
