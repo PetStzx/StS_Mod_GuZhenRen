@@ -315,7 +315,7 @@
   },
   "GuZhenRen:LangJian": {
     "NAME": "Wave Sword",
-    "DESCRIPTION": "Deal !D! damage. NL When you play a guzhenren:Sword_Path card, return this card from your discard pile to your hand."
+    "DESCRIPTION": "Deal !D! damage. NL When you play a guzhenren:Sword_Path Attack, return this card from your discard pile to your hand."
   },
   "GuZhenRen:JianYingGu": {
     "NAME": "Sword Phantom Gu",

@@ -315,7 +315,7 @@
   },
   "GuZhenRen:LangJian": {
     "NAME": "浪剑",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 打出 guzhenren:剑道 牌时，将此牌从弃牌堆中返回手牌。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 打出 guzhenren:剑道 攻击牌时，将此牌从弃牌堆中返回手牌。"
   },
   "GuZhenRen:JianYingGu": {
     "NAME": "剑影蛊",

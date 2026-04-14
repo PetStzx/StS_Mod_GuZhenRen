@@ -59,7 +59,7 @@ public class LangJian extends AbstractGuZhenRenCard {
     public static class LangJianReturnPatch {
         @SpirePostfixPatch
         public static void Postfix(AbstractPlayer __instance, AbstractCard c, AbstractMonster monster, int energyOnUse) {
-            if (c.hasTag(GuZhenRenTags.JIAN_DAO) && !c.cardID.equals(LangJian.ID)) {
+            if (c.hasTag(GuZhenRenTags.JIAN_DAO) && c.type == AbstractCard.CardType.ATTACK && !c.cardID.equals(LangJian.ID)) {
                 for (AbstractCard card : __instance.discardPile.group) {
                     if (card.cardID.equals(LangJian.ID)) {
                         AbstractDungeon.actionManager.addToBottom(new DiscardToHandAction(card));
