@@ -280,7 +280,7 @@
   },
   "GuZhenRen:ShanJianGu": {
     "NAME": "闪剑蛊",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 抽 !M! 张牌。 NL 丢弃抽到的非 guzhenren:剑道 牌。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 抽 !M! 张牌。 NL 丢弃抽到的非 攻击牌 。"
   },
   "GuZhenRen:HuiJian": {
     "NAME": "慧剑",

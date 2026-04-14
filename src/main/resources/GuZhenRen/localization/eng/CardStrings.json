@@ -280,7 +280,7 @@
   },
   "GuZhenRen:ShanJianGu": {
     "NAME": "Flash Sword Gu",
-    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Discard any drawn non- guzhenren:Sword_Path cards."
+    "DESCRIPTION": "Deal !D! damage. NL Draw !M! cards. NL Discard any drawn non-Attack cards."
   },
   "GuZhenRen:HuiJian": {
     "NAME": "Wisdom Sword",

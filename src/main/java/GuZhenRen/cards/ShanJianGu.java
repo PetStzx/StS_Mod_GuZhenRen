@@ -22,8 +22,10 @@ public class ShanJianGu extends AbstractGuZhenRenCard {
     private static final int COST = 1;
     private static final int DAMAGE = 8;
     private static final int UPGRADE_PLUS_DMG = 1; // 升级伤害 8 -> 9
-    private static final int MAGIC = 5; // 抽5张
-    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级额外抽2张 (抽7张)
+
+    private static final int MAGIC = 3;  //抽3
+    private static final int UPGRADE_PLUS_MAGIC = 2;  //敲后抽5
+
     private static final int INITIAL_RANK = 3;
 
     public ShanJianGu() {
