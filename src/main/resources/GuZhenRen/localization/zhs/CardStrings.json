@@ -328,7 +328,7 @@
   },
   "GuZhenRen:RuiYiGu": {
     "NAME": "锐意蛊",
-    "DESCRIPTION": "获得 !M! 层 guzhenren:剑锋 。 NL 本场战斗中所有流派的牌均视为 #y剑道 。"
+    "DESCRIPTION": "获得 !M! 层 guzhenren:剑锋 。 NL 本场战斗中所有流派的牌均视为 guzhenren:剑道 。"
   },
   "GuZhenRen:JianLangSanDie": {
     "NAME": "剑浪三叠",

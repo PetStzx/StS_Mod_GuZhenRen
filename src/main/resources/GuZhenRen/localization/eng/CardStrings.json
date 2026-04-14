@@ -328,7 +328,7 @@
   },
   "GuZhenRen:RuiYiGu": {
     "NAME": "Sharp Intent Gu",
-    "DESCRIPTION": "Gain !M! guzhenren:Sword_Edge . NL For the rest of this combat, all Path cards are considered #ySword #yPath ."
+    "DESCRIPTION": "Gain !M! guzhenren:Sword_Edge . NL For the rest of this combat, all Path cards are considered guzhenren:Sword_Path ."
   },
   "GuZhenRen:JianLangSanDie": {
     "NAME": "Triple Layered Sword Wave",
