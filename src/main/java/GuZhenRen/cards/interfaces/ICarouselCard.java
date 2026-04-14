@@ -13,7 +13,7 @@ public interface ICarouselCard {
 
     // 单位 秒
     default float getCarouselInterval() {
-        return 2.0f;
+        return 2.5f;
     }
 
     default boolean shouldShow(AbstractCard card) {
