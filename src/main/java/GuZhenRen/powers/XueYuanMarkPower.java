@@ -4,6 +4,7 @@ import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -39,6 +40,14 @@ public class XueYuanMarkPower extends AbstractPower {
     public void updateDescription() {
         String playerName = AbstractDungeon.player != null ? AbstractDungeon.player.title : "";
         this.description = playerName + DESCRIPTIONS[0] + this.owner.name + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2];
+    }
+
+    @Override
+    public float atDamageGive(float damage, DamageInfo.DamageType type) {
+        if (type == DamageInfo.DamageType.NORMAL && AbstractDungeon.player.hasPower(XueDianXingBanPower.POWER_ID)) {
+            return damage * 0.5F;
+        }
+        return damage;
     }
 
     @Override

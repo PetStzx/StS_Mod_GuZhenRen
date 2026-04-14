@@ -432,5 +432,11 @@
       "At the start of its turn, you gain #b",
       " #yNian . Then, this power's amount increases by #b1 ."
     ]
+  },
+  "GuZhenRen:XueDianXingBanPower": {
+    "NAME": "Blood Star Spots",
+    "DESCRIPTIONS": [
+      "This turn, attack damage taken from enemies marked with #yBloodline is halved."
+    ]
   }
 }
