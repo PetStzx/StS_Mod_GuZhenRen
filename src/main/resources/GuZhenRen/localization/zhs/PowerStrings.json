@@ -438,5 +438,11 @@
     "DESCRIPTIONS": [
       "在本回合，被 #y血缘 标记的敌人对你造成的攻击伤害减半。"
     ]
+  },
+  "GuZhenRen:RuiYiPower": {
+    "NAME": "锐意",
+    "DESCRIPTIONS": [
+      "本场战斗中所有流派的牌均视为 #y剑道 。"
+    ]
   }
 }

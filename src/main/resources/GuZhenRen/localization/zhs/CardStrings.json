@@ -328,7 +328,7 @@
   },
   "GuZhenRen:RuiYiGu": {
     "NAME": "锐意蛊",
-    "DESCRIPTION": "给予所有敌人 !M! 层 guzhenren:剑痕 。 NL 对意图为攻击的敌人，给予 2 次。"
+    "DESCRIPTION": "获得 !M! 层 guzhenren:剑锋 。 NL 本场战斗中所有流派的牌均视为 #y剑道 。"
   },
   "GuZhenRen:JianLangSanDie": {
     "NAME": "剑浪三叠",

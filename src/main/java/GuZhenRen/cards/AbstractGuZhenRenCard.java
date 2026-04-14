@@ -2,21 +2,16 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.relics.AbstractKongQiao;
-import GuZhenRen.relics.YanXinGu;
-import GuZhenRen.powers.YanDaoDaoHenPower;
-import GuZhenRen.powers.QingPower;
+import GuZhenRen.powers.RuiYiPower;
 import GuZhenRen.patches.GuZhenRenTags;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -127,6 +122,30 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
 
         initializeDescription();
     }
+
+    public static boolean isDaoTag(CardTags tag) {
+        return tag == GuZhenRenTags.GUANG_DAO || tag == GuZhenRenTags.YAN_DAO ||
+                tag == GuZhenRenTags.LI_DAO || tag == GuZhenRenTags.JIN_DAO ||
+                tag == GuZhenRenTags.TOU_DAO || tag == GuZhenRenTags.MU_DAO ||
+                tag == GuZhenRenTags.SHI_DAO || tag == GuZhenRenTags.SHA_DAO ||
+                tag == GuZhenRenTags.GU_DAO || tag == GuZhenRenTags.LU_DAO ||
+                tag == GuZhenRenTags.ZHI_DAO || tag == GuZhenRenTags.BIAN_HUA_DAO ||
+                tag == GuZhenRenTags.YIN_YANG_DAO || tag == GuZhenRenTags.JIAN_DAO ||
+                tag == GuZhenRenTags.XUE_DAO || tag == GuZhenRenTags.YUN_DAO ||
+                tag == GuZhenRenTags.FENG_DAO || tag == GuZhenRenTags.ZHOU_DAO;
+    }
+
+
+    @Override
+    public boolean hasTag(CardTags tag) {
+        if (RuiYiPower.isActive) {
+            if (isDaoTag(tag)) {
+                return tag == GuZhenRenTags.JIAN_DAO;
+            }
+        }
+        return super.hasTag(tag);
+    }
+
 
     // =========================================================================
     //  底层运算逻辑

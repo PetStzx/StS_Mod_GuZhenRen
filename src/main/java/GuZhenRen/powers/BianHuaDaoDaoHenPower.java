@@ -54,11 +54,13 @@ public class BianHuaDaoDaoHenPower extends AbstractDaoHenPower {
     public void onUseCard(AbstractCard card, UseCardAction action) {
         AbstractPower newPowerPrototype = null;
 
-        for (AbstractCard.CardTags tag : card.tags) {
-            BiFunction<AbstractCreature, Integer, AbstractPower> newFunc = DAO_MAP.get(tag);
-            if (newFunc != null) {
-                newPowerPrototype = newFunc.apply(this.owner, this.amount);
-                break;
+        for (AbstractCard.CardTags daoTag : DAO_MAP.keySet()) {
+            if (card.hasTag(daoTag)) {
+                BiFunction<AbstractCreature, Integer, AbstractPower> newFunc = DAO_MAP.get(daoTag);
+                if (newFunc != null) {
+                    newPowerPrototype = newFunc.apply(this.owner, this.amount);
+                    break;
+                }
             }
         }
 

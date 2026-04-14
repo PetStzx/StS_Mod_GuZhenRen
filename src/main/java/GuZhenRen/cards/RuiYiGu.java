@@ -2,11 +2,11 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.powers.JianHenPower;
+import GuZhenRen.powers.JianFengPower;
+import GuZhenRen.powers.RuiYiPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -17,19 +17,18 @@ public class RuiYiGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/RuiYiGu.png");
 
-    private static final int COST = 1;
+    private static final int COST = 2;
+    private static final int UPGRADE_COST = 1; // 升级后变 1 费
 
-    private static final int MAGIC = 5;
-    private static final int UPGRADE_PLUS_MAGIC = 2;
-
+    private static final int MAGIC = 1; // 1 层剑锋
     private static final int INITIAL_RANK = 3;
 
     public RuiYiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL,
+                CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.UNCOMMON,
-                CardTarget.ALL_ENEMY);
+                CardTarget.SELF);
 
         this.setDao(Dao.ZHI_DAO);
         this.setRank(INITIAL_RANK);
@@ -37,31 +36,17 @@ public class RuiYiGu extends AbstractGuZhenRenCard {
         this.baseMagicNumber = this.magicNumber = MAGIC;
     }
 
-    private boolean isAttacking(AbstractMonster m) {
-        return m.intent == AbstractMonster.Intent.ATTACK ||
-                m.intent == AbstractMonster.Intent.ATTACK_BUFF ||
-                m.intent == AbstractMonster.Intent.ATTACK_DEBUFF ||
-                m.intent == AbstractMonster.Intent.ATTACK_DEFEND;
-    }
-
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-            if (!mo.isDeadOrEscaped()) {
-                this.addToBot(new ApplyPowerAction(mo, p, new JianHenPower(mo, this.magicNumber), this.magicNumber));
-
-                if (isAttacking(mo)) {
-                    this.addToBot(new ApplyPowerAction(mo, p, new JianHenPower(mo, this.magicNumber), this.magicNumber));
-                }
-            }
-        }
+        this.addToBot(new ApplyPowerAction(p, p, new JianFengPower(p, this.magicNumber), this.magicNumber));
+        this.addToBot(new ApplyPowerAction(p, p, new RuiYiPower(p, 1), 1));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeBaseCost(UPGRADE_COST);
             this.upgradeRank(1);
             this.initializeDescription();
         }

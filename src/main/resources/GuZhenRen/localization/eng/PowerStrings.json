@@ -438,5 +438,11 @@
     "DESCRIPTIONS": [
       "This turn, attack damage taken from enemies marked with #yBloodline is halved."
     ]
+  },
+  "GuZhenRen:RuiYiPower": {
+    "NAME": "Resolve",
+    "DESCRIPTIONS": [
+      "For the rest of this combat, all Path cards are considered #ySword #yPath ."
+    ]
   }
 }

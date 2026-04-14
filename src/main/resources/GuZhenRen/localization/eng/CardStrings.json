@@ -328,7 +328,7 @@
   },
   "GuZhenRen:RuiYiGu": {
     "NAME": "Sharp Intent Gu",
-    "DESCRIPTION": "Apply !M! guzhenren:Sword_Mark to all enemies. NL Apply 2 times to enemies intending to attack."
+    "DESCRIPTION": "Gain !M! guzhenren:Sword_Edge . NL For the rest of this combat, all Path cards are considered #ySword #yPath ."
   },
   "GuZhenRen:JianLangSanDie": {
     "NAME": "Triple Layered Sword Wave",
