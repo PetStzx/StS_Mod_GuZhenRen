@@ -153,6 +153,9 @@ public class ZhuMoBang extends AbstractXianGuWuCard {
         @Override
         public void onChoseThisOption() {
             AbstractPlayer p = AbstractDungeon.player;
+
+            this.applyPowers();
+
             AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new XueDianXingBanPower(p), 1));
         }
