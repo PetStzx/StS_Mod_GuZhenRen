@@ -19,7 +19,7 @@ public class KuLiGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/KuLiGu.png");
 
     private static final int COST = 0;
-    private static final int THRESHOLD = 5;
+    private static final int THRESHOLD = 6;
     private static final int UPGRADE_THRESHOLD = -2;
     private static final int INITIAL_RANK = 4;
 
