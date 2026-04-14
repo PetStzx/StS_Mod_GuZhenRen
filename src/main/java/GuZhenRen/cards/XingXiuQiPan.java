@@ -1,13 +1,13 @@
 package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.cards.interfaces.ICarouselCard;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.patches.GuZhenRenTags;
 import GuZhenRen.powers.BuMieXingBiaoPower;
 import GuZhenRen.powers.NianPower;
 import GuZhenRen.powers.XingLuoQiBuPower;
 import basemod.abstracts.CustomCard;
-import com.badlogic.gdx.Gdx;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.actions.watcher.PressEndTurnButtonAction;
@@ -20,21 +20,19 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class XingXiuQiPan extends AbstractShaZhaoCard {
+public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
     public static final String ID = GuZhenRen.makeID("XingXiuQiPan");
+    public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XingXiuQiPan.png");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/XingXiuQiPan.png");
-
     private static final int COST = 1;
 
     public static boolean usedTengNuoThisCombat = false;
 
-    private float rotationTimer = 0.0F;
-    private int previewIndex = 0;
-    private ArrayList<AbstractCard> previewCards = new ArrayList<>();
+    private final ArrayList<AbstractCard> previewCards = new ArrayList<>();
 
     public XingXiuQiPan() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -50,9 +48,6 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         this.previewCards.add(new OptionTuiSuan_XingXiuQiPan());
         this.previewCards.add(new OptionTengNuo_XingXiuQiPan());
 
-        // 默认显示第一张
-        this.cardsToPreview = this.previewCards.get(0);
-
         this.initializeDescription();
     }
 
@@ -60,34 +55,7 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
     @Override
     public void update() {
         super.update();
-
-        // 当鼠标悬停在卡牌上时进行轮播计时
-        if (this.hb.hovered) {
-            this.rotationTimer += Gdx.graphics.getDeltaTime();
-            if (this.rotationTimer >= 3.0F) { // 每隔 3.0 秒切换一次
-                this.rotationTimer = 0.0F;
-                this.previewIndex++;
-
-                if (this.previewIndex >= this.previewCards.size()) {
-                    this.previewIndex = 0;
-                }
-
-                // 如果“腾挪”已经使用过，预览时直接跳过它
-                if (usedTengNuoThisCombat && this.previewCards.get(this.previewIndex) instanceof OptionTengNuo_XingXiuQiPan) {
-                    this.previewIndex++;
-                    if (this.previewIndex >= this.previewCards.size()) {
-                        this.previewIndex = 0;
-                    }
-                }
-
-                this.cardsToPreview = this.previewCards.get(this.previewIndex);
-            }
-        } else {
-            // 鼠标移开时，重置为第一张
-            this.rotationTimer = 0.0F;
-            this.previewIndex = 0;
-            this.cardsToPreview = this.previewCards.get(0);
-        }
+        this.updateCarousel();
     }
 
     @Override
@@ -114,6 +82,16 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         }
     }
 
+    @Override
+    public List<AbstractCard> getCarouselCards() {
+        return this.previewCards;
+    }
+
+    @Override
+    public boolean shouldShow(AbstractCard card) {
+        return !usedTengNuoThisCombat || !(card instanceof OptionTengNuo_XingXiuQiPan);
+    }
+
     // 内部类 1：防护
     public static class OptionFangHu_XingXiuQiPan extends CustomCard {
         public static final String ID = GuZhenRen.makeID("OptionFangHu_XingXiuQiPan");
@@ -124,9 +102,12 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         }
 
         @Override
-        public void use(AbstractPlayer p, AbstractMonster m) {}
+        public void use(AbstractPlayer p, AbstractMonster m) {
+        }
+
         @Override
-        public void upgrade() {}
+        public void upgrade() {
+        }
 
         @Override
         public void onChoseThisOption() {
@@ -139,7 +120,7 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
     public static class OptionZhenCha_XingXiuQiPan extends CustomCard {
         public static final String ID = GuZhenRen.makeID("OptionZhenCha_XingXiuQiPan");
         private static final CardStrings strings = CardCrawlGame.languagePack.getCardStrings(ID);
-        private AbstractMonster targetMonster;
+        private final AbstractMonster targetMonster;
 
         public OptionZhenCha_XingXiuQiPan(AbstractMonster m) {
             super(ID, strings.NAME, IMG_PATH, -2, strings.DESCRIPTION, CardType.SKILL, CardColorEnum.GUZHENREN_GREY, CardRarity.SPECIAL, CardTarget.NONE);
@@ -147,9 +128,12 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         }
 
         @Override
-        public void use(AbstractPlayer p, AbstractMonster m) {}
+        public void use(AbstractPlayer p, AbstractMonster m) {
+        }
+
         @Override
-        public void upgrade() {}
+        public void upgrade() {
+        }
 
         @Override
         public void onChoseThisOption() {
@@ -170,9 +154,12 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         }
 
         @Override
-        public void use(AbstractPlayer p, AbstractMonster m) {}
+        public void use(AbstractPlayer p, AbstractMonster m) {
+        }
+
         @Override
-        public void upgrade() {}
+        public void upgrade() {
+        }
 
         @Override
         public void onChoseThisOption() {
@@ -191,9 +178,12 @@ public class XingXiuQiPan extends AbstractShaZhaoCard {
         }
 
         @Override
-        public void use(AbstractPlayer p, AbstractMonster m) {}
+        public void use(AbstractPlayer p, AbstractMonster m) {
+        }
+
         @Override
-        public void upgrade() {}
+        public void upgrade() {
+        }
 
         @Override
         public void onChoseThisOption() {
