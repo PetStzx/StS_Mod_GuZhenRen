@@ -27,7 +27,7 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/BaMianWeiFengGu.png");
 
-    private static final int COST = 1;
+    private static final int COST = 2;
     private static final int DAMAGE = 7;
     private static final int UPGRADE_PLUS_DAMAGE = 1; // 升级伤害 7 -> 8
     private static final int MAGIC = 7; // 目标手牌数 7
