@@ -83,6 +83,6 @@ public class Recipe_XingXiuQiPan extends AbstractRecipeRelic {
 
     @Override
     protected String[] getTipKeywords(){
-        return new String[]{"不灭星标"};
+        return new String[]{"不灭星标","仙蛊屋"};
     }
 }

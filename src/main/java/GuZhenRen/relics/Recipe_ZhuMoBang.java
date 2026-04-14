@@ -90,6 +90,6 @@ public class Recipe_ZhuMoBang extends AbstractRecipeRelic {
 
     @Override
     protected String[] getTipKeywords(){
-        return new String[]{"血缘"};
+        return new String[]{"血缘","仙蛊屋"};
     }
 }
