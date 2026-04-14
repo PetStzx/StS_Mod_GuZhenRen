@@ -1,6 +1,7 @@
 package GuZhenRen;
 
 import GuZhenRen.effects.BenMingGuOpeningEffect;
+import GuZhenRen.util.BattleStateManager;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import GuZhenRen.character.FangYuan;
@@ -359,16 +360,9 @@ public class GuZhenRen implements
         }
     }
 
-
-    // 变量与账本重置区
     @Override
     public void receiveOnBattleStart(AbstractRoom room) {
-        SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
-        TouDaoDaoHenPower.totalGoldStolenThisCombat = 0;
-        XingXiuQiPan.usedTengNuoThisCombat = false;
-
-        RenRuGu.hpHistory.clear();
-        RenRuGu.hpHistory.add(com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.currentHealth);
+        BattleStateManager.publishBattleStart();
     }
 
     @Override
@@ -381,15 +375,9 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostBattle(AbstractRoom room) {
-        // 1. 静态变量清理区
-        SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0;
-        TouDaoDaoHenPower.totalGoldStolenThisCombat = 0;
-        XingXiuQiPan.usedTengNuoThisCombat = false;
+        BattleStateManager.publishPostBattle();
 
-        // 清空时间轴
-        RenRuGu.hpHistory.clear();
-
-        // 2. 杀招合成遗物掉落逻辑
+        // 杀招合成遗物掉落逻辑
         if (AbstractDungeon.player instanceof FangYuan) {
             // 默认普通战斗掉落率为 15%
             float dropRate = 0.15f;

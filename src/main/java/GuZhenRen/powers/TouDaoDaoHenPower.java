@@ -1,6 +1,7 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.util.BattleStateManager;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,6 +16,11 @@ public class TouDaoDaoHenPower extends AbstractDaoHenPower {
     // 全局静态变量：记录本场战斗偷取的总金币
     public static int totalGoldStolenThisCombat = 0;
     private static final int MAX_GOLD_PER_COMBAT = 30;
+
+    static {
+        BattleStateManager.onBattleStart(() -> TouDaoDaoHenPower.totalGoldStolenThisCombat = 0);
+        BattleStateManager.onPostBattle(() -> TouDaoDaoHenPower.totalGoldStolenThisCombat = 0);
+    }
 
     public TouDaoDaoHenPower(AbstractCreature owner, int amount) {
         super(POWER_ID, powerStrings.NAME, owner, amount);

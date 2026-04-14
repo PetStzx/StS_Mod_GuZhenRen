@@ -7,6 +7,7 @@ import GuZhenRen.patches.GuZhenRenTags;
 import GuZhenRen.powers.BuMieXingBiaoPower;
 import GuZhenRen.powers.NianPower;
 import GuZhenRen.powers.XingLuoQiBuPower;
+import GuZhenRen.util.BattleStateManager;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
@@ -33,6 +34,11 @@ public class XingXiuQiPan extends AbstractShaZhaoCard implements ICarouselCard {
     public static boolean usedTengNuoThisCombat = false;
 
     private final ArrayList<AbstractCard> previewCards = new ArrayList<>();
+
+    static {
+        BattleStateManager.onBattleStart(() -> XingXiuQiPan.usedTengNuoThisCombat = false);
+        BattleStateManager.onPostBattle(() -> XingXiuQiPan.usedTengNuoThisCombat = false);
+    }
 
     public XingXiuQiPan() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

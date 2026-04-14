@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.util.BattleStateManager;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -32,6 +33,14 @@ public class RenRuGu extends AbstractGuZhenRenCard {
 
     // 用于跨回合记录血量的时间轴
     public static ArrayList<Integer> hpHistory = new ArrayList<>();
+
+    static {
+        BattleStateManager.onBattleStart(() -> {
+            RenRuGu.hpHistory.clear();
+            RenRuGu.hpHistory.add(AbstractDungeon.player.currentHealth);
+        });
+        BattleStateManager.onPostBattle(() -> RenRuGu.hpHistory.clear());
+    }
 
     public RenRuGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

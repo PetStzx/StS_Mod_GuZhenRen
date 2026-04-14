@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.powers.ShanYaoPower;
+import GuZhenRen.util.BattleStateManager;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -28,6 +29,11 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
 
     public static int totalShanYaoGainedThisCombat = 0;
     private boolean showDynamicText = false;
+
+    static {
+        BattleStateManager.onBattleStart(() -> SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0);
+        BattleStateManager.onPostBattle(() -> SanShiSanTianGuang.totalShanYaoGainedThisCombat = 0);
+    }
 
     public SanShiSanTianGuang() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
