@@ -239,7 +239,7 @@
   },
   "GuZhenRen:XingXiuQiPan": {
     "NAME": "星宿棋盘",
-    "DESCRIPTION": "选择一项： NL 防护、侦查、 NL 推算、腾挪。 NL 每回合开始时，若此牌不在消耗堆，返回你的手牌。",
+    "DESCRIPTION": "选择一项： NL 防护、侦查、 NL 推算、腾挪。",
     "EXTENDED_DESCRIPTION": [
       "guzhenren:念",
       "guzhenren:不灭星标"
@@ -247,7 +247,7 @@
   },
   "GuZhenRen:OptionFangHu_XingXiuQiPan": {
     "NAME": "防护",
-    "DESCRIPTION": "下回合开始前，你每获得1层 guzhenren:念 ，就获得4点 格挡 。"
+    "DESCRIPTION": "下回合开始前，你每获得1层 guzhenren:念 ，就获得3点 格挡 。"
   },
   "GuZhenRen:OptionZhenCha_XingXiuQiPan": {
     "NAME": "侦查",

@@ -363,6 +363,7 @@ public class GuZhenRen implements
     @Override
     public void receiveOnBattleStart(AbstractRoom room) {
         BattleStateManager.publishBattleStart();
+        AbstractXianGuWuCard.returnAllToHand();
     }
 
     @Override
@@ -371,6 +372,9 @@ public class GuZhenRen implements
         while (RenRuGu.hpHistory.size() < com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.turn) {
             RenRuGu.hpHistory.add(com.megacrit.cardcrawl.dungeons.AbstractDungeon.player.currentHealth);
         }
+
+        // 仙蛊屋的全图域返回手牌
+        AbstractXianGuWuCard.returnAllToHand();
     }
 
     @Override

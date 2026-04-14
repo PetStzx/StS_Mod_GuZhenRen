@@ -239,7 +239,7 @@
   },
   "GuZhenRen:XingXiuQiPan": {
     "NAME": "Star Constellation Chessboard",
-    "DESCRIPTION": "Choose one: NL Defense, Scout, NL Calculate, Maneuver. NL At the start of your turn, if this card is not Exhausted, return it to your hand.",
+    "DESCRIPTION": "Choose one: NL Defense, Scout, NL Calculate, Maneuver.",
     "EXTENDED_DESCRIPTION": [
       "guzhenren:nian",
       "guzhenren:immortal_star_mark"
@@ -247,7 +247,7 @@
   },
   "GuZhenRen:OptionFangHu_XingXiuQiPan": {
     "NAME": "Defense",
-    "DESCRIPTION": "Until the start of your next turn, whenever you gain 1 guzhenren:Nian , gain 4 Block ."
+    "DESCRIPTION": "Until the start of your next turn, whenever you gain 1 guzhenren:Nian , gain 3 Block ."
   },
   "GuZhenRen:OptionZhenCha_XingXiuQiPan": {
     "NAME": "Scout",

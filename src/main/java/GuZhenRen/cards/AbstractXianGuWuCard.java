@@ -3,14 +3,13 @@ package GuZhenRen.cards;
 import GuZhenRen.cards.interfaces.ICarouselCard;
 import GuZhenRen.patches.GuZhenRenTags;
 import basemod.BaseMod;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public abstract class AbstractXianGuWuCard extends AbstractShaZhaoCard implements ICarouselCard {
 
@@ -18,46 +17,50 @@ public abstract class AbstractXianGuWuCard extends AbstractShaZhaoCard implement
 
     public AbstractXianGuWuCard(String id, String name, String img, int cost, String rawDescription, CardType type, CardTarget target) {
         super(id, name, img, cost, rawDescription, type, target);
-
         this.tags.add(GuZhenRenTags.XIAN_GU_WU);
     }
 
-    @Override
-    public void atTurnStart() {
+    public static void returnAllToHand() {
         AbstractPlayer p = AbstractDungeon.player;
+        if (p == null) return;
 
-        if (p.hand.contains(this)) {
-            return;
+        moveCardsToHand(p.drawPile, p);
+        moveCardsToHand(p.discardPile, p);
+        moveCardsToHand(p.exhaustPile, p);
+    }
+
+    private static void moveCardsToHand(CardGroup group, AbstractPlayer p) {
+        ArrayList<AbstractCard> cardsToMove = new ArrayList<>();
+
+        for (AbstractCard c : group.group) {
+            if (c instanceof AbstractXianGuWuCard) {
+                cardsToMove.add(c);
+            }
         }
 
-        this.addToBot(new AbstractGameAction() {
-            @Override
-            public void update() {
-                if (p.hand.size() < BaseMod.MAX_HAND_SIZE) {
-                    if (p.drawPile.contains(AbstractXianGuWuCard.this)) {
-                        p.drawPile.removeCard(AbstractXianGuWuCard.this);
-                        moveToHand();
-                    } else if (p.discardPile.contains(AbstractXianGuWuCard.this)) {
-                        p.discardPile.removeCard(AbstractXianGuWuCard.this);
-                        moveToHand();
-                    }
-                } else {
-                    p.createHandIsFullDialog();
-                }
-                this.isDone = true;
-            }
+        for (AbstractCard c : cardsToMove) {
+            if (p.hand.size() < BaseMod.MAX_HAND_SIZE) {
+                group.removeCard(c);
+                p.hand.addToHand(c);
 
-            private void moveToHand() {
-                p.hand.addToHand(AbstractXianGuWuCard.this);
-                AbstractXianGuWuCard.this.unhover();
-                AbstractXianGuWuCard.this.setAngle(0.0F);
-                AbstractXianGuWuCard.this.lighten(false);
-                AbstractXianGuWuCard.this.drawScale = 0.12F;
-                AbstractXianGuWuCard.this.targetDrawScale = 0.75F;
-                AbstractXianGuWuCard.this.applyPowers();
-                p.hand.refreshHandLayout();
+                if (group == p.exhaustPile) {
+                    c.unfadeOut();
+                }
+
+                c.unhover();
+                c.setAngle(0.0F);
+                c.lighten(false);
+                c.drawScale = 0.12F;
+                c.targetDrawScale = 0.75F;
+                c.applyPowers();
+            } else {
+                p.createHandIsFullDialog();
             }
-        });
+        }
+
+        if (!cardsToMove.isEmpty()) {
+            p.hand.refreshHandLayout();
+        }
     }
 
     @Override

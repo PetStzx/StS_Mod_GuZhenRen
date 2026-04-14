@@ -74,6 +74,16 @@ public class XingXiuQiPan extends AbstractXianGuWuCard {
             this.keywords.add(cardStrings.EXTENDED_DESCRIPTION[0]);
             this.keywords.add(cardStrings.EXTENDED_DESCRIPTION[1]);
         }
+
+        java.util.ArrayList<String> uniqueKeywords = new java.util.ArrayList<>();
+        for (String kw : this.keywords) {
+            if (!uniqueKeywords.contains(kw)) {
+                uniqueKeywords.add(kw);
+            }
+        }
+
+        this.keywords.clear();
+        this.keywords.addAll(uniqueKeywords);
     }
 
     @Override
@@ -101,7 +111,7 @@ public class XingXiuQiPan extends AbstractXianGuWuCard {
         @Override
         public void onChoseThisOption() {
             AbstractPlayer p = AbstractDungeon.player;
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new XingLuoQiBuPower(p, 4), 4));
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new XingLuoQiBuPower(p, 3), 3));
         }
     }
 
