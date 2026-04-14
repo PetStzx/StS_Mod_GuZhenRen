@@ -216,8 +216,8 @@
     "DESCRIPTION": "At the start of your turn, lose #bX HP."
   },
   {
-    "NAMES": ["radiance"],
-    "DESCRIPTION": "Each stack of Radiance increases the damage of the next #yLight #yPath card played by #b50% ."
+    "NAMES": ["radiance", "Radiance"],
+    "DESCRIPTION": "Increases the damage of the next #yLight #yPath Attack played by #b50% ."
   },
   {
     "NAMES": ["friend"],
