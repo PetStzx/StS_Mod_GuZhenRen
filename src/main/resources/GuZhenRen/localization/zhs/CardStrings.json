@@ -300,7 +300,7 @@
   },
   "GuZhenRen:JianQiaoGu": {
     "NAME": "剑鞘蛊",
-    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 将手牌中的 1 张 攻击牌 放到抽牌堆顶部。 NL 其下次打出时伤害翻倍且耗能变为 0。",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 将手牌中的 1 张 攻击牌 放到抽牌堆顶部。 NL 其下次打出免费且基础伤害翻倍。",
     "EXTENDED_DESCRIPTION": [
       "选择 1 张攻击牌放到抽牌堆顶部。"
     ]

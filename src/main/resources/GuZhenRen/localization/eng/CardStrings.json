@@ -300,7 +300,7 @@
   },
   "GuZhenRen:JianQiaoGu": {
     "NAME": "Sword Sheath Gu",
-    "DESCRIPTION": "Gain !B! Block . NL Put 1 Attack from your hand on top of your draw pile. NL The next time it is played, its damage is doubled and it costs 0.",
+    "DESCRIPTION": "Gain !B! Block . NL Put 1 Attack from your hand on top of your draw pile. NL The next time it is played, it is free and its base damage is doubled.",
     "EXTENDED_DESCRIPTION": [
       "Choose 1 Attack to put on top of your draw pile."
     ]

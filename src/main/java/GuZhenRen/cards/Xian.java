@@ -26,7 +26,7 @@ public class Xian extends AbstractGuZhenRenCard {
 
     private static final int COST = 2;
     private static final int DAMAGE = 7;
-    private static final int UPGRADE_PLUS_DMG = 3; // 升级加 3 点伤害，变为 10
+    private static final int UPGRADE_PLUS_DMG = 3;
     private static final int INITIAL_RANK = 7;
 
     public Xian() {
@@ -52,12 +52,11 @@ public class Xian extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DMG); // 7 -> 10
+            this.upgradeDamage(UPGRADE_PLUS_DMG);
             this.upgradeRank(1);
             this.initializeDescription();
         }
     }
-
 
     public static class XianAction extends AbstractGameAction {
         private DamageInfo info;
@@ -79,8 +78,10 @@ public class Xian extends AbstractGuZhenRenCard {
                 if (this.target.lastDamageTaken > 0) {
                     int reduceAmt = this.target.lastDamageTaken;
 
+                    if (!this.target.hasPower("Artifact")) {
+                        this.addToTop(new ApplyPowerAction(this.target, this.info.owner, new GainStrengthPower(this.target, reduceAmt), reduceAmt));
+                    }
 
-                    this.addToTop(new ApplyPowerAction(this.target, this.info.owner, new GainStrengthPower(this.target, reduceAmt), reduceAmt));
                     this.addToTop(new ApplyPowerAction(this.target, this.info.owner, new StrengthPower(this.target, -reduceAmt), -reduceAmt));
                 }
 

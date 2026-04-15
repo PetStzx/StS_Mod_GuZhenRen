@@ -366,8 +366,8 @@
   "GuZhenRen:XianPower": {
     "NAME": "Limit",
     "DESCRIPTIONS": [
-      "Unblocked attack damage dealt this turn cannot exceed #b",
-      " per hit."
+      "Attack damage is reduced by #b",
+      " this turn."
     ]
   },
   "GuZhenRen:FengDaoDaoHenPower": {

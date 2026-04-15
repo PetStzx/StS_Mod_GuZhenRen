@@ -5,11 +5,9 @@ import GuZhenRen.actions.JianQiaoGuAction;
 import GuZhenRen.patches.CardColorEnum;
 import basemod.abstracts.AbstractCardModifier;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -23,8 +21,8 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int BLOCK = 6;
-    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级加3点格挡，变为9
-    private static final int INITIAL_RANK = 4; // 4转
+    private static final int UPGRADE_PLUS_BLOCK = 3;
+    private static final int INITIAL_RANK = 4;
 
     public JianQiaoGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -36,7 +34,6 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.JIAN_DAO);
         this.setRank(INITIAL_RANK);
 
-        // 设置基础格挡值
         this.baseBlock = this.block = BLOCK;
     }
 
@@ -50,7 +47,7 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(UPGRADE_PLUS_BLOCK); // 6点 -> 9点格挡
+            this.upgradeBlock(UPGRADE_PLUS_BLOCK);
             this.upgradeRank(1);
             this.initializeDescription();
         }
@@ -61,8 +58,7 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
         public static final String MODIFIER_ID = GuZhenRen.makeID("JianQiaoModifier");
 
         @Override
-        public float modifyDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
-            // 直接计算双倍伤害，不再需要 isActive 判定
+        public float modifyBaseDamage(float damage, DamageInfo.DamageType type, AbstractCard card, AbstractMonster target) {
             if (damage > 0) {
                 return damage * 2;
             }
@@ -70,11 +66,16 @@ public class JianQiaoGu extends AbstractGuZhenRenCard {
         }
 
         @Override
-        public void onUpdate(AbstractCard card) {
-            if (card.costForTurn > 0) {
-                card.setCostForTurn(0);
-            }
+        public void onInitialApplication(AbstractCard card) {
+            card.freeToPlayOnce = true;
             card.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
+        }
+
+        @Override
+        public void onUpdate(AbstractCard card) {
+            if (!card.freeToPlayOnce) {
+                card.freeToPlayOnce = true;
+            }
         }
 
         @Override

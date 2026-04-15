@@ -366,7 +366,7 @@
   "GuZhenRen:XianPower": {
     "NAME": "限",
     "DESCRIPTIONS": [
-      "本回合造成的单次攻击伤害无法超过 #b",
+      "本回合造成的攻击伤害减少 #b",
       " 点。"
     ]
   },

@@ -25,7 +25,6 @@ public class XianPower extends AbstractPower {
         this.type = PowerType.DEBUFF;
         this.isTurnBased = true;
 
-
         String pathLarge = GuZhenRen.assetPath("img/powers/XianPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/XianPower.png");
 
@@ -41,9 +40,7 @@ public class XianPower extends AbstractPower {
     @Override
     public float atDamageGive(float damage, DamageInfo.DamageType type) {
         if (type == DamageInfo.DamageType.NORMAL) {
-            if (damage > this.amount) {
-                return this.amount;
-            }
+            return damage - this.amount;
         }
         return damage;
     }
