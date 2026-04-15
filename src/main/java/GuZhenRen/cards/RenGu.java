@@ -85,14 +85,14 @@ public class RenGu extends AbstractBenMingGuCard {
         public void update() {
             if (this.duration == Settings.ACTION_DUR_FAST) {
                 int choices = 1;
-                if (rank >= 2 && rank <= 6) choices = 2;
-                if (rank >= 7) choices = 3;
+                if (rank >= 2 && rank <= 7) choices = 2;
+                if (rank >= 8) choices = 3;
 
                 int poolType = 1;
                 if (rank == 3) poolType = 2;
                 if (rank >= 4) poolType = 3;
 
-                boolean doUpgrade = (rank >= 5);
+                boolean doUpgrade = (rank >= 6);
 
                 Set<String> playerXianGuIDs = new HashSet<>();
                 if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck != null) {
@@ -181,8 +181,8 @@ public class RenGu extends AbstractBenMingGuCard {
             AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(c, 1));
 
             int jianFeng = 0;
-            if (rank == 6 || rank == 7) jianFeng = 1;
-            else if (rank == 8) jianFeng = 2;
+            if (rank == 5 || rank == 6) jianFeng = 1;
+            else if (rank == 7 || rank == 8) jianFeng = 2;
             else if (rank == 9) jianFeng = 3;
 
             if (jianFeng > 0) {
