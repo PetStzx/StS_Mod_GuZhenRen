@@ -1,6 +1,7 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.util.BattleStateManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,6 +16,11 @@ public class RuiYiPower extends AbstractPower {
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     public static boolean isActive = false;
+
+    static {
+        BattleStateManager.onBattleStart(() -> RuiYiPower.isActive = false);
+        BattleStateManager.onPostBattle(() -> RuiYiPower.isActive = false);
+    }
 
     public RuiYiPower(AbstractCreature owner, int amount) {
         this.name = NAME;
