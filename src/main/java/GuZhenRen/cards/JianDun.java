@@ -20,11 +20,11 @@ public class JianDun extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/JianDun.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 6;
-    private static final int UPGRADE_PLUS_DMG = 2;
+    private static final int DAMAGE = 7; // 基础伤害 7
+    private static final int UPGRADE_PLUS_DMG = 1; // 升级后 8
 
-    private static final int MAGIC = 3;
-    private static final int UPGRADE_PLUS_MAGIC = 1;
+    private static final int MAGIC = 4; // 基础格挡 4
+    private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后格挡 6
 
     private static final int INITIAL_RANK = 6;
 

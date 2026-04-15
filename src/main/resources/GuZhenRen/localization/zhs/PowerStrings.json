@@ -178,7 +178,7 @@
   "GuZhenRen:JianDunPower": {
     "NAME": "剑遁",
     "DESCRIPTIONS": [
-      "本回合每次对拥有 #y剑痕 的敌人造成攻击伤害，获得 #b",
+      "本回合每次打出 #y剑道 牌，获得 #b",
       " 点格挡。"
     ]
   },

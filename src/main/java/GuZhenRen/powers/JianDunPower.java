@@ -1,11 +1,12 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.patches.GuZhenRenTags;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -24,6 +25,7 @@ public class JianDunPower extends AbstractPower {
         this.owner = owner;
         this.amount = amount;
         this.type = PowerType.BUFF;
+        this.isTurnBased = true;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/JianDunPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/JianDunPower.png");
@@ -42,8 +44,8 @@ public class JianDunPower extends AbstractPower {
     }
 
     @Override
-    public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-        if (info.type == DamageInfo.DamageType.NORMAL && target != null && target != this.owner && target.hasPower(JianHenPower.POWER_ID)) {
+    public void onUseCard(AbstractCard card, com.megacrit.cardcrawl.actions.utility.UseCardAction action) {
+        if (card.hasTag(GuZhenRenTags.JIAN_DAO)) {
             this.flash();
             this.addToBot(new GainBlockAction(this.owner, this.owner, this.amount));
         }

@@ -292,7 +292,7 @@
   },
   "GuZhenRen:JianDun": {
     "NAME": "Sword Escape",
-    "DESCRIPTION": "Deal !D! damage. NL Whenever you deal attack damage to an enemy with guzhenren:Sword_Mark this turn, gain !M! Block ."
+    "DESCRIPTION": "Deal !D! damage. NL Whenever you play a guzhenren:Sword_Path card this turn, gain !M! Block ."
   },
   "GuZhenRen:JianQiGu": {
     "NAME": "Sword Qi Gu",

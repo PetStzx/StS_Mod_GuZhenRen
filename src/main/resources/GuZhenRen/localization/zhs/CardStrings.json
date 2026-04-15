@@ -292,7 +292,7 @@
   },
   "GuZhenRen:JianDun": {
     "NAME": "剑遁",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 本回合每次对拥有 guzhenren:剑痕 的敌人造成攻击伤害，获得 !M! 点 格挡 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 本回合每次打出 guzhenren:剑道 牌，获得 !M! 点 格挡 。"
   },
   "GuZhenRen:JianQiGu": {
     "NAME": "剑气蛊",

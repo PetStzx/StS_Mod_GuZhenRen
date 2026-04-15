@@ -178,7 +178,7 @@
   "GuZhenRen:JianDunPower": {
     "NAME": "Sword Escape",
     "DESCRIPTIONS": [
-      "Whenever you deal attack damage to an enemy with #ySword #yMark this turn, gain #b",
+      "Whenever you play a #ySword #yPath card this turn, gain #b",
       " Block."
     ]
   },
