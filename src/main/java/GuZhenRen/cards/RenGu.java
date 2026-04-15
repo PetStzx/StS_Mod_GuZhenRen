@@ -84,6 +84,18 @@ public class RenGu extends AbstractBenMingGuCard {
         @Override
         public void update() {
             if (this.duration == Settings.ACTION_DUR_FAST) {
+
+                // 【修复1：独立计算并立刻给予剑锋】
+                // 把获得剑锋的逻辑提到了最前面，这样无论后面玩家是否跳过选牌，都能稳稳吃到增益
+                int jianFeng = 0;
+                if (rank == 5 || rank == 6) jianFeng = 1;
+                else if (rank == 7 || rank == 8) jianFeng = 2;
+                else if (rank == 9) jianFeng = 3;
+
+                if (jianFeng > 0) {
+                    AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new JianFengPower(AbstractDungeon.player, jianFeng), jianFeng));
+                }
+
                 int choices = 1;
                 if (rank >= 2 && rank <= 7) choices = 2;
                 if (rank >= 8) choices = 3;
@@ -108,7 +120,9 @@ public class RenGu extends AbstractBenMingGuCard {
                     if (c instanceof AbstractGuZhenRenCard) {
                         AbstractGuZhenRenCard guCard = (AbstractGuZhenRenCard) c;
 
-                        if (guCard.hasTag(GuZhenRenTags.JIAN_DAO) &&
+                        // 【修复2：使用 tags.contains 绕过拦截器】
+                        // 不使用 hasTag()，直接读取底层 tags 数组，确保选出来的永远是“原生剑道牌”
+                        if (guCard.tags.contains(GuZhenRenTags.JIAN_DAO) &&
                                 !guCard.cardID.equals(RenGu.ID) &&
                                 guCard.rank >= 1 && guCard.rank <= 9) {
 
@@ -150,44 +164,32 @@ public class RenGu extends AbstractBenMingGuCard {
                 if (choices == 1 || group.size() == 1) {
                     AbstractCard c = group.getTopCard();
                     c.setCostForTurn(0);
-                    processSelectedCard(c);
+                    // 只有一张卡时，直接加入手牌（剑锋已经在前面给过了）
+                    AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(c, 1));
                     this.isDone = true;
                     return;
                 }
 
                 String msg = RenGu.cardStrings.EXTENDED_DESCRIPTION[9];
+                // 打开选卡界面 (第三个参数 true 允许玩家点击跳过)
                 AbstractDungeon.cardRewardScreen.customCombatOpen(group.group, msg, true);
                 this.tickDuration();
                 return;
             }
 
             if (!this.retrieveCard) {
+                // 判断 discoveryCard 是否为空（即玩家是否点了跳过）
                 if (AbstractDungeon.cardRewardScreen.discoveryCard != null) {
-
                     AbstractCard c = AbstractDungeon.cardRewardScreen.discoveryCard.makeStatEquivalentCopy();
-
                     c.setCostForTurn(0);
-                    processSelectedCard(c);
-
+                    // 仅执行加入手牌的动作
+                    AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(c, 1));
                     AbstractDungeon.cardRewardScreen.discoveryCard = null;
-                    this.retrieveCard = true;
-                    this.isDone = true;
                 }
+                this.retrieveCard = true;
+                this.isDone = true;
             }
             this.tickDuration();
-        }
-
-        private void processSelectedCard(AbstractCard c) {
-            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(c, 1));
-
-            int jianFeng = 0;
-            if (rank == 5 || rank == 6) jianFeng = 1;
-            else if (rank == 7 || rank == 8) jianFeng = 2;
-            else if (rank == 9) jianFeng = 3;
-
-            if (jianFeng > 0) {
-                AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new JianFengPower(AbstractDungeon.player, jianFeng), jianFeng));
-            }
         }
     }
 
