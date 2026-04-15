@@ -4,7 +4,7 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.powers.XinXuePower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.HealAction; // 【新增导包】：回血动作
+import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -35,9 +35,6 @@ public class XinXue extends AbstractBenMingGuCard {
         calculateStats();
     }
 
-    // =========================================================================
-    //  核心数值与文本调度器
-    // =========================================================================
     private void calculateStats() {
         // 1-8转对应的回血量
         int[] healAmt = {2, 2, 3, 3, 4, 4, 5, 5};
@@ -47,6 +44,9 @@ public class XinXue extends AbstractBenMingGuCard {
 
         this.baseMagicNumber = this.magicNumber = healAmt[this.rank - 1];
         this.baseSecondMagicNumber = this.secondMagicNumber = mult[this.rank - 1];
+
+        // 6转及以上时，赋予固有
+        this.isInnate = (this.rank >= 6);
 
         if (cardStrings.EXTENDED_DESCRIPTION != null && cardStrings.EXTENDED_DESCRIPTION.length >= 8) {
             this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[this.rank - 1];
