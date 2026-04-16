@@ -2,10 +2,14 @@ package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.AbstractXuYingCard;
+import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,6 +23,11 @@ public class LiQiPower extends AbstractPower {
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
+    public static int globalPhantomBonus = 0;
+    private int currentPhantomBonus = 0;
+
+    private boolean isRemoved = false;
 
     public LiQiPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -44,15 +53,82 @@ public class LiQiPower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
+    private int countPhantomsInHand() {
+        int count = 0;
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hand != null) {
+            for (AbstractCard c : AbstractDungeon.player.hand.group) {
+                if (c instanceof AbstractXuYingCard) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public void update(int slot) {
+        super.update(slot);
+
+        if (this.isRemoved) {
+            return;
+        }
+
+        if (AbstractDungeon.player != null) {
+            int actualCount = countPhantomsInHand();
+
+            if (actualCount != this.currentPhantomBonus) {
+                int diff = actualCount - this.currentPhantomBonus;
+
+                BaseMod.MAX_HAND_SIZE += diff;
+                globalPhantomBonus += diff;
+                this.currentPhantomBonus = actualCount;
+            }
+        }
+    }
+
+    private void resetHandSizeLimit() {
+        this.isRemoved = true;
+
+        if (this.currentPhantomBonus > 0) {
+            BaseMod.MAX_HAND_SIZE -= this.currentPhantomBonus;
+            globalPhantomBonus -= this.currentPhantomBonus;
+            this.currentPhantomBonus = 0;
+        }
+    }
+
+    @Override
+    public void onRemove() {
+        resetHandSizeLimit();
+    }
+
+    @Override
+    public void onVictory() {
+        resetHandSizeLimit();
+    }
+
+    @Override
+    public void onDeath() {
+        resetHandSizeLimit();
+    }
+
+    // 战斗开始清除残留的上限
+    @SpirePatch(clz = AbstractPlayer.class, method = "preBattlePrep")
+    public static class CleanUpPhantomHandSizePatch {
+        @SpirePrefixPatch
+        public static void Prefix(AbstractPlayer __instance) {
+            if (LiQiPower.globalPhantomBonus != 0) {
+                BaseMod.MAX_HAND_SIZE -= LiQiPower.globalPhantomBonus;
+                LiQiPower.globalPhantomBonus = 0;
+            }
+        }
+    }
+
     @Override
     public void atStartOfTurnPostDraw() {
         this.flash();
         this.addToBot(new TriggerRoundAction(this.amount));
     }
 
-    // =========================================================================
-    // 触发动作
-    // =========================================================================
     private class TriggerRoundAction extends AbstractGameAction {
         private int roundsLeft;
 
@@ -63,20 +139,15 @@ public class LiQiPower extends AbstractPower {
         @Override
         public void update() {
             if (AbstractDungeon.player != null && this.roundsLeft > 0) {
-
-                // 1. 将本轮所有的虚影动画和效果排入底层队列
                 for (AbstractCard c : AbstractDungeon.player.hand.group) {
                     if (c instanceof AbstractXuYingCard) {
                         AbstractXuYingCard phantomCard = (AbstractXuYingCard) c;
-
                         AbstractMonster randomTarget = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
                         if (randomTarget != null) {
                             phantomCard.queuePhantomAnimationAndEffect(randomTarget);
                         }
                     }
                 }
-
-                // 2. 如果还有剩余轮数，将下一轮的触发动作排在队列最末尾
                 if (this.roundsLeft > 1) {
                     this.addToBot(new TriggerRoundAction(this.roundsLeft - 1));
                 }

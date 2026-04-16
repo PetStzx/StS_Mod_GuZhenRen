@@ -220,7 +220,7 @@
     "NAME": "力气",
     "DESCRIPTIONS": [
       "回合开始时，触发手牌中所有的 #y虚影 牌 #b",
-      " 次。"
+      " 次。 NL #y虚影 牌不再计入手牌上限。"
     ]
   },
   "GuZhenRen:LongXingHuBuPower": {

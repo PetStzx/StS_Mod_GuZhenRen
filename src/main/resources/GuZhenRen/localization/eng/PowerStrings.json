@@ -220,7 +220,7 @@
     "NAME": "Strength Qi",
     "DESCRIPTIONS": [
       "At the start of your turn, trigger all #yPhantom cards in your hand #b",
-      " time(s)."
+      " time(s). NL #yPhantom cards no longer count towards your hand size."
     ]
   },
   "GuZhenRen:LongXingHuBuPower": {

@@ -17,7 +17,8 @@ public class LiQiGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/LiQiGu.png");
 
-    private static final int COST = 1;
+    private static final int COST = 2;
+    private static final int UPGRADED_COST = 1;
     private static final int INITIAL_RANK = 3;
 
     public LiQiGu() {
@@ -29,7 +30,6 @@ public class LiQiGu extends AbstractGuZhenRenCard {
 
         this.setDao(Dao.LI_DAO);
 
-        // 基础触发 1 次
         this.baseMagicNumber = this.magicNumber = 1;
 
         this.setRank(INITIAL_RANK);
@@ -44,9 +44,8 @@ public class LiQiGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(1); // 升级后触发 2 次
+            this.upgradeBaseCost(UPGRADED_COST);
             this.upgradeRank(1);
-            this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.initializeDescription();
         }
     }

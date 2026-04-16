@@ -432,8 +432,7 @@
   },
   "GuZhenRen:LiQiGu": {
     "NAME": "力气蛊",
-    "DESCRIPTION": "回合开始时，触发手牌中所有 guzhenren:虚影 牌 !M! 次。",
-    "UPGRADE_DESCRIPTION": "回合开始时，触发手牌中所有 guzhenren:虚影 牌 !M! 次。"
+    "DESCRIPTION": "回合开始时，触发手牌中所有 guzhenren:虚影 牌 !M! 次。 NL guzhenren:虚影 牌不再计入手牌上限。"
   },
   "GuZhenRen:QunLiGu": {
     "NAME": "群力蛊",

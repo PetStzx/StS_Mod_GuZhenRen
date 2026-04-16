@@ -432,8 +432,7 @@
   },
   "GuZhenRen:LiQiGu": {
     "NAME": "Strength Qi Gu",
-    "DESCRIPTION": "At the start of your turn, trigger all guzhenren:Phantom cards in your hand !M! time(s).",
-    "UPGRADE_DESCRIPTION": "At the start of your turn, trigger all guzhenren:Phantom cards in your hand !M! time(s)."
+    "DESCRIPTION": "At the start of your turn, trigger all guzhenren:Phantom cards in your hand !M! time(s). NL guzhenren:Phantom cards no longer count towards your hand size."
   },
   "GuZhenRen:QunLiGu": {
     "NAME": "Group Strength Gu",
