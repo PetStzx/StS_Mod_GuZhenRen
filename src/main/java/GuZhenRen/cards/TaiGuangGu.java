@@ -18,8 +18,8 @@ public class TaiGuangGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TaiGuangGu.png");
 
     private static final int COST = 2;
+    private static final int UPGRADED_COST = 1;
     private static final int MAGIC = 1;
-    private static final int UPGRADE_PLUS_MAGIC = 1;
     private static final int INITIAL_RANK = 4;
 
     public TaiGuangGu() {
@@ -48,7 +48,7 @@ public class TaiGuangGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeBaseCost(UPGRADED_COST);
             this.upgradeRank(1);
             this.initializeDescription();
         }

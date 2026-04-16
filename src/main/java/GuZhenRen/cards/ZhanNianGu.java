@@ -25,11 +25,11 @@ public class ZhanNianGu extends AbstractGuZhenRenCard {
 
     // 伤害数值
     private static final int DAMAGE = 9;
-    private static final int UPGRADE_PLUS_DAMAGE = 1; // 升级后变 10
+    private static final int UPGRADE_PLUS_DAMAGE = 2; // 升级后变 11
 
     // 念层数数值
     private static final int NIAN_AMT = 4;
-    private static final int UPGRADE_PLUS_NIAN = 2; // 升级后变 6
+    private static final int UPGRADE_PLUS_NIAN = 1; // 升级后变 5
 
     private static final int INITIAL_RANK = 2; // 2转
 
