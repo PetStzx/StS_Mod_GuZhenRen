@@ -374,7 +374,7 @@
     "NAME": "Wind Path Dao Mark",
     "DESCRIPTIONS": [
       "Whenever you draw a card, deal #b",
-      " damage to a random enemy."
+      " damage to ALL enemies."
     ]
   },
   "GuZhenRen:ShiDaoDaoHenPower": {

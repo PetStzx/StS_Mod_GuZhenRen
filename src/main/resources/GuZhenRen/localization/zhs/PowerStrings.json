@@ -373,7 +373,7 @@
   "GuZhenRen:FengDaoDaoHenPower": {
     "NAME": "风道道痕",
     "DESCRIPTIONS": [
-      "你每抽 1 张牌，随机对敌人造成 #b",
+      "你每抽 1 张牌，对所有敌人造成 #b",
       " 点伤害。"
     ]
   },

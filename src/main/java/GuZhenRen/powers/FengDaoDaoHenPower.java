@@ -2,12 +2,15 @@ package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.actions.utility.SFXAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.vfx.combat.WhirlwindEffect;
 
 public class FengDaoDaoHenPower extends AbstractDaoHenPower {
     public static final String POWER_ID = GuZhenRen.makeID("FengDaoDaoHenPower");
@@ -24,13 +27,16 @@ public class FengDaoDaoHenPower extends AbstractDaoHenPower {
     }
 
 
-    //  抽牌事件
     @Override
     public void onCardDraw(AbstractCard card) {
         if (this.amount > 0) {
             this.flash();
-            this.addToBot(new DamageRandomEnemyAction(
-                    new DamageInfo(this.owner, this.amount, DamageInfo.DamageType.THORNS),
+            //this.addToBot(new SFXAction("ATTACK_WHIRLWIND"));
+            this.addToBot(new VFXAction(new WhirlwindEffect(), 0.0F));
+            this.addToBot(new DamageAllEnemiesAction(
+                    this.owner,
+                    DamageInfo.createDamageMatrix(this.amount, true),
+                    DamageInfo.DamageType.THORNS,
                     AbstractGameAction.AttackEffect.SLASH_HORIZONTAL
             ));
         }
