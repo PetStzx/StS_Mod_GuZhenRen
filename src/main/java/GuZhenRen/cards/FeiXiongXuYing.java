@@ -92,8 +92,7 @@ public class FeiXiongXuYing extends AbstractXuYingCard {
     @Override
     public void triggerPhantomEffect(AbstractMonster m) {
         if (AbstractDungeon.player != null) {
-            // 实时重算一次群体伤害数组
-            this.applyPowers();
+            this.calculateCardDamage(null);
 
             this.addToTop(new DamageAllEnemiesAction(
                     AbstractDungeon.player,
