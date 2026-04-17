@@ -18,6 +18,15 @@ public class BenMingGuSavePatch {
 
     @SpirePostfixPatch
     public static void Postfix(NeowEvent __instance, boolean isDone) {
+
+        if (AbstractDungeon.floorNum > 0) {
+            return;
+        }
+
+        if (isDone) {
+            return;
+        }
+
         // 1. 安全检查
         if (AbstractDungeon.player == null || AbstractDungeon.player.masterDeck == null) {
             return;
