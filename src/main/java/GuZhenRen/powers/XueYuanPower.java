@@ -22,6 +22,9 @@ public class XueYuanPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
+    // 防止帧循环中重复排入移除动作的开关
+    private boolean isRemoving = false;
+
     public XueYuanPower(AbstractCreature owner, int amount) {
         this.name = NAME;
         this.ID = POWER_ID;
@@ -46,7 +49,7 @@ public class XueYuanPower extends AbstractPower {
 
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        if (damageAmount > 0) {
+        if (damageAmount > 0 && !this.isRemoving) {
             this.flash();
             this.addToBot(new VFXAction(new OfferingEffect(), 0.1F));
 
@@ -55,6 +58,32 @@ public class XueYuanPower extends AbstractPower {
                     int multi = mo.getPower(XueYuanMarkPower.POWER_ID).amount;
                     this.addToBot(new LoseHPAction(mo, this.owner, damageAmount * multi));
                 }
+            }
+        }
+    }
+
+    @Override
+    public void update(int slot) {
+        super.update(slot);
+
+        if (this.isRemoving || AbstractDungeon.getCurrRoom() == null || AbstractDungeon.getCurrRoom().monsters == null) {
+            return;
+        }
+
+        if (AbstractDungeon.actionManager.actions.isEmpty() && AbstractDungeon.actionManager.currentAction == null) {
+
+            boolean hasMarkedEnemy = false;
+            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                // 只要怪物还活着且有标记
+                if (!mo.isDeadOrEscaped() && !mo.halfDead && mo.hasPower(XueYuanMarkPower.POWER_ID)) {
+                    hasMarkedEnemy = true;
+                    break;
+                }
+            }
+
+            if (!hasMarkedEnemy) {
+                this.isRemoving = true;
+                AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this));
             }
         }
     }
