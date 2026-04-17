@@ -317,8 +317,8 @@
   "GuZhenRen:XueDaoDaoHenPower": {
     "NAME": "血道道痕",
     "DESCRIPTIONS": [
-      "造成攻击伤害时，每层血道道痕提供 1% 生命汲取。（提供 #b",
-      "% 生命汲取）"
+      "造成未被格挡的攻击伤害时，提供 #b",
+      "% 生命汲取。"
     ]
   },
   "GuZhenRen:JinDaoDaoHenPower": {

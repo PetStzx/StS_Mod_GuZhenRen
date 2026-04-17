@@ -12,7 +12,6 @@ public class XueDaoDaoHenPower extends AbstractDaoHenPower {
     public static final String POWER_ID = GuZhenRen.makeID("XueDaoDaoHenPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 
-    // 每层 1% 的生命汲取
     private static final float LIFESTEAL_PER_STACK = 0.01F;
 
     public XueDaoDaoHenPower(AbstractCreature owner, int amount) {
@@ -22,25 +21,22 @@ public class XueDaoDaoHenPower extends AbstractDaoHenPower {
 
     @Override
     public void updateDescription() {
-        // 计算显示的百分比 (例如 2层 = 10%)
-        int percentage = (int)(this.amount * LIFESTEAL_PER_STACK * 100);
-        this.description = powerStrings.DESCRIPTIONS[0] + percentage + powerStrings.DESCRIPTIONS[1];
+        this.description = powerStrings.DESCRIPTIONS[0] + this.amount + powerStrings.DESCRIPTIONS[1];
     }
 
-    // =========================================================================
-    // 造成攻击伤害时触发吸血
-    // =========================================================================
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-        // 确保是普通攻击伤害，目标不是自己，且伤害值大于 0
         if (damageAmount > 0 && target != this.owner && info.type == DamageInfo.DamageType.NORMAL) {
 
-            // 向上取整计算
-            int healAmount = MathUtils.ceil(damageAmount * (this.amount * LIFESTEAL_PER_STACK));
+            int unblockedDamage = damageAmount - target.currentBlock;
 
-            if (healAmount > 0) {
-                this.flash();
-                this.addToTop(new HealAction(this.owner, this.owner, healAmount));
+            if (unblockedDamage > 0) {
+                int healAmount = MathUtils.ceil(unblockedDamage * (this.amount * LIFESTEAL_PER_STACK));
+
+                if (healAmount > 0) {
+                    this.flash();
+                    this.addToTop(new HealAction(this.owner, this.owner, healAmount));
+                }
             }
         }
     }

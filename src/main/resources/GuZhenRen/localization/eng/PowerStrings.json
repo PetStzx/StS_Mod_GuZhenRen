@@ -317,8 +317,8 @@
   "GuZhenRen:XueDaoDaoHenPower": {
     "NAME": "Blood Path Dao Mark",
     "DESCRIPTIONS": [
-      "When dealing attack damage, each stack of Blood Path Dao Mark provides 1% Lifesteal. (Provides #b",
-      "% Lifesteal)"
+      "When dealing unblocked attack damage, provides #b",
+      "% Lifesteal."
     ]
   },
   "GuZhenRen:JinDaoDaoHenPower": {
