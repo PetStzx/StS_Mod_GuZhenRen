@@ -23,12 +23,12 @@ public class ShaGu extends AbstractBenMingGuCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ShaGu.png");
 
     private static final int COST = 1;
-    private static final int DAMAGE = 6;
-    private static final int HP_LOSS = 1;
     private static final int INITIAL_RANK = 1;
 
-    // 每次升级带来的伤害加成
-    private static final int UPGRADE_PLUS_DMG = 1;
+    private static final int[] BASE_DMG =          {0, 8, 10, 10, 12, 12, 12, 14, 14, 14};
+    private static final int[] PLAY_HP_LOSS =      {0, 1,  1,  1,  1,  1,  1,  1,  1,  1};
+    private static final int[] FATAL_MAX_HP_LOSS = {0, 1,  1,  1,  1,  1,  1,  1,  0,  0};
+    private static final int[] FATAL_DMG_INC =     {0, 2,  2,  3,  3,  4,  5,  5,  5,  6};
 
     public ShaGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,61 +37,89 @@ public class ShaGu extends AbstractBenMingGuCard {
                 CardRarity.SPECIAL,
                 CardTarget.ENEMY);
 
-        this.baseDamage = DAMAGE;
-        this.magicNumber = this.baseMagicNumber = HP_LOSS;
-
         this.setDao(Dao.SHA_DAO);
-
         this.maxRank = 9;
         this.setRank(INITIAL_RANK);
 
-        calculateBaseDamage();
         this.exhaust = false;
+
+        calculateStats();
     }
 
-    private void calculateBaseDamage() {
-        int rankBonus = Math.max(0, (this.rank - 1) * UPGRADE_PLUS_DMG);
-        this.baseDamage = DAMAGE + rankBonus + this.misc;
+    public void calculateStats() {
+        int rankIndex = Math.min(Math.max(this.rank, 1), 9);
+
+        this.baseDamage = BASE_DMG[rankIndex] + this.misc;
+
+        // 绑定第一魔法值（打出掉血）
+        this.baseMagicNumber = this.magicNumber = PLAY_HP_LOSS[rankIndex];
+
+        // 绑定第二魔法值（斩杀增伤）
+        this.baseSecondMagicNumber = this.secondMagicNumber = FATAL_DMG_INC[rankIndex];
+
+        int fatalMaxHp = FATAL_MAX_HP_LOSS[rankIndex];
+
+        // 动态切换文本格式。因为增伤部分由 !GuZhenRen:SecondMagic! 接管，这里只需填入最大生命流失的 %d
+        if (fatalMaxHp > 0) {
+            this.myBaseDescription = String.format(cardStrings.EXTENDED_DESCRIPTION[0], fatalMaxHp);
+        } else {
+            // 8转及以上没有最大生命流失，也没有 %d，直接赋值
+            this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[1];
+        }
+
+        this.initializeDescription();
     }
 
     @Override
     public void applyPowers() {
-        calculateBaseDamage();
+        calculateStats();
         super.applyPowers();
-        this.initializeDescription();
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        calculateBaseDamage();
+        calculateStats();
         super.calculateCardDamage(mo);
-        this.initializeDescription();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        calculateStats();
+        int rankIndex = Math.min(Math.max(this.rank, 1), 9);
+
         this.addToBot(new LoseHPAction(p, p, this.magicNumber));
-        this.addToBot(new ShaGuFatalAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), this.uuid));
+        // Action 现在直接读取 secondMagicNumber 作为增伤参数
+        this.addToBot(new ShaGuFatalAction(m, new DamageInfo(p, this.damage, this.damageTypeForTurn), this.uuid, FATAL_MAX_HP_LOSS[rankIndex], this.secondMagicNumber));
     }
 
     @Override
     public void performUpgradeEffect() {
-        calculateBaseDamage();
+        calculateStats();
         this.upgradedDamage = true;
+        this.upgradedSecondMagicNumber = true; // 激活第二魔法值的升级特效
     }
 
+    @Override
+    protected void onRankLoaded() {
+        calculateStats();
+    }
+
+    // =========================================================================
+    // 斩杀动作类
+    // =========================================================================
     public static class ShaGuFatalAction extends AbstractGameAction {
         private final DamageInfo info;
         private final UUID targetUUID;
+        private final int fatalMaxHpLoss;
+        private final int fatalDmgInc;
 
-        private static final int INCREASE_AMOUNT = 2;
-        private static final int FATAL_HP_LOSS = 2;
-
-        public ShaGuFatalAction(AbstractMonster target, DamageInfo info, UUID targetUUID) {
+        public ShaGuFatalAction(AbstractMonster target, DamageInfo info, UUID targetUUID, int fatalMaxHpLoss, int fatalDmgInc) {
             this.info = info;
             this.setValues(target, info);
             this.actionType = ActionType.DAMAGE;
             this.targetUUID = targetUUID;
+            this.fatalMaxHpLoss = fatalMaxHpLoss;
+            this.fatalDmgInc = fatalDmgInc;
         }
 
         @Override
@@ -100,19 +128,19 @@ public class ShaGu extends AbstractBenMingGuCard {
                 AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.SLASH_DIAGONAL));
                 this.target.damage(this.info);
 
-                // 判定是否斩杀
                 if ((this.target.isDying || this.target.currentHealth <= 0) && !this.target.halfDead && !this.target.hasPower("Minion")) {
 
-                    // 触发失去生命效果
-                    AbstractDungeon.actionManager.addToTop(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, FATAL_HP_LOSS));
+                    if (this.fatalMaxHpLoss > 0) {
+                        AbstractDungeon.player.decreaseMaxHealth(this.fatalMaxHpLoss);
+                    }
 
                     // 1. 大师牌组的逻辑
                     for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                         if (c.uuid.equals(this.targetUUID)) {
-                            c.misc += INCREASE_AMOUNT;
+                            c.misc += this.fatalDmgInc;
 
                             if (c instanceof ShaGu) {
-                                ((ShaGu) c).calculateBaseDamage();
+                                ((ShaGu) c).calculateStats();
                             }
 
                             c.damage = c.baseDamage;
@@ -123,10 +151,10 @@ public class ShaGu extends AbstractBenMingGuCard {
 
                     // 2. 战斗内卡牌的逻辑
                     for (AbstractCard c : GetAllInBattleInstances.get(this.targetUUID)) {
-                        c.misc += INCREASE_AMOUNT;
+                        c.misc += this.fatalDmgInc;
 
                         if (c instanceof ShaGu) {
-                            ((ShaGu) c).calculateBaseDamage();
+                            ((ShaGu) c).calculateStats();
                         }
 
                         c.applyPowers();
@@ -139,10 +167,5 @@ public class ShaGu extends AbstractBenMingGuCard {
             }
             this.isDone = true;
         }
-    }
-
-    @Override
-    protected void onRankLoaded() {
-        calculateBaseDamage();
     }
 }

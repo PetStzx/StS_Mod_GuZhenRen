@@ -48,8 +48,12 @@
   },
   "GuZhenRen:ShaGu": {
     "NAME": "Kill Gu",
-    "DESCRIPTION": "Deal !D! damage. NL Lose !M! HP. NL Fatal: Lose 2 HP and permanently increase this card's damage by 2.",
-    "FLAVOR": "The core Gu worm of Killing Path. Can reach rank nine."
+    "DESCRIPTION": "Deal !D! damage. NL Lose !M! HP. NL Fatal: Lose 1 Max HP, permanently increase this card's damage by 2.",
+    "FLAVOR": "The core Gu worm of Killing Path. Can reach rank nine.",
+    "EXTENDED_DESCRIPTION": [
+      "Deal !D! damage. NL Lose !M! HP. NL Fatal: Lose %d Max HP, permanently increase this card's damage by !GuZhenRen:SecondMagic!.",
+      "Deal !D! damage. NL Lose !M! HP. NL Fatal: Permanently increase this card's damage by !GuZhenRen:SecondMagic!."
+    ]
   },
   "GuZhenRen:HuoGu": {
     "NAME": "Fire Gu",
