@@ -263,8 +263,8 @@
   },
   "GuZhenRen:SheXinGu": {
     "NAME": "摄心蛊",
-    "DESCRIPTION": "击晕一名敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。",
-    "UPGRADE_DESCRIPTION": "击晕所有敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。"
+    "DESCRIPTION": " guzhenren:击晕 一名敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": " guzhenren:击晕 所有敌人 1 回合。下回合少抽 1 张牌。 NL 消耗 。"
   },
   "GuZhenRen:WuJinXuanGuangQi": {
     "NAME": "五禁玄光气",

@@ -263,8 +263,8 @@
   },
   "GuZhenRen:SheXinGu": {
     "NAME": "Capture Heart Gu",
-    "DESCRIPTION": "Stun an enemy for 1 turn. Draw 1 less card next turn. NL Exhaust .",
-    "UPGRADE_DESCRIPTION": "Stun all enemies for 1 turn. Draw 1 less card next turn. NL Exhaust ."
+    "DESCRIPTION": "guzhenren:Stun an enemy for 1 turn. Draw 1 less card next turn. NL Exhaust .",
+    "UPGRADE_DESCRIPTION": "guzhenren:Stun all enemies for 1 turn. Draw 1 less card next turn. NL Exhaust ."
   },
   "GuZhenRen:WuJinXuanGuangQi": {
     "NAME": "Five Restrictions Profound Light Qi",

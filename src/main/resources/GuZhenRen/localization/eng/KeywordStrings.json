@@ -257,5 +257,9 @@
   {
     "NAMES": ["bloodline", "Bloodline"],
     "DESCRIPTION": "When you lose HP, all enemies marked with #yBloodline lose an equal amount of HP."
+  },
+  {
+    "NAMES": ["stun", "stunned", "Stun", "Stunned"],
+    "DESCRIPTION": "A #yStunned enemy skips its turn #b1 time and retains its intent from the stunned turn."
   }
 ]
