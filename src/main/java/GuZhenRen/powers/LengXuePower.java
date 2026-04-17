@@ -2,14 +2,20 @@ package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+
+import java.util.Map;
+import java.util.WeakHashMap;
 
 public class LengXuePower extends AbstractPower {
     public static final String POWER_ID = GuZhenRen.makeID("LengXuePower");
@@ -17,8 +23,7 @@ public class LengXuePower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    // 联机防多重触发锁
-    private boolean triggeredThisRound = false;
+    private static final Map<AbstractCreature, Integer> triggerTracker = new WeakHashMap<>();
 
     public LengXuePower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -42,37 +47,48 @@ public class LengXuePower extends AbstractPower {
         this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 
-    // 触发逻辑：回合开始时失去最大生命值的10%，随后层数减1
     @Override
     public void atStartOfTurn() {
-        // 检查本轮是否已经触发过，如果是，直接拦截并跳过
-        if (this.triggeredThisRound) {
+        if (AbstractDungeon.getCurrRoom().phase != AbstractRoom.RoomPhase.COMBAT) {
             return;
         }
 
-        // 标记本轮已触发
-        this.triggeredThisRound = true;
+        AbstractPower thisPower = this;
 
-        this.flash();
+        this.addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                int currentTurn = AbstractDungeon.actionManager.turn;
+                int lastTurn = triggerTracker.getOrDefault(owner, -1);
 
-        // 计算最大生命值的 10%，至少为 1
-        int damage = Math.max(1, this.owner.maxHealth / 10);
+                if (lastTurn != currentTurn) {
+                    triggerTracker.put(owner, currentTurn);
 
-        // 扣除生命
-        this.addToBot(new LoseHPAction(this.owner, this.owner, damage));
+                    thisPower.flash();
+                    int damage = Math.max(1, owner.maxHealth / 10);
 
-        // 层数减 1，到 0 则移除
-        if (this.amount <= 1) {
-            this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
-        } else {
-            this.addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
-        }
+
+                    if (thisPower.amount <= 1) {
+                        AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(owner, owner, thisPower.ID));
+                    } else {
+                        AbstractDungeon.actionManager.addToTop(new ReducePowerAction(owner, owner, thisPower.ID, 1));
+                    }
+
+                    AbstractDungeon.actionManager.addToTop(new LoseHPAction(owner, owner, damage));
+                }
+
+                this.isDone = true;
+            }
+        });
     }
 
-    // 轮次结束时，重置触发锁
     @Override
-    public void atEndOfRound() {
-        // 当所有玩家和怪物的行动彻底结束，把锁打开
-        this.triggeredThisRound = false;
+    public void onDeath() {
+        triggerTracker.remove(this.owner);
+    }
+
+    @Override
+    public void onRemove() {
+        triggerTracker.remove(this.owner);
     }
 }
