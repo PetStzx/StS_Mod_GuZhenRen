@@ -4,9 +4,8 @@
     "DESCRIPTION": "Immortal Gu are unique. Gu worms of Rank 6 and above are #yImmortal #yGu . You cannot obtain duplicate Immortal Gu. Immortal Gu you already own will not appear in combat rewards."
   },
   {
-    "PROPER_NAME": "Vital Gu",
     "NAMES": ["vital gu", "vital_gu"],
-    "DESCRIPTION": " #yVital #yGu will automatically be refined and upgraded as your #yAperture level increases. The destruction of your #yVital #yGu will lead to #rsevere #rconsequences ."
+    "DESCRIPTION": " #yVital #yGu will automatically be refined and upgraded as your #yAperture level increases. The destruction of your #yVital #yGu will lead to #rsevere #rconsequences . You can only possess one Vital Gu."
   },
   {
     "NAMES": ["cultivation"],

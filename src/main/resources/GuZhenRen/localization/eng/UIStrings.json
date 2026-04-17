@@ -52,7 +52,8 @@
   },
   "GuZhenRen:ActionUI": {
     "TEXT": [
-      "Immortal Gu are unique!"
+      "Immortal Gu are unique!",
+      "Vital Gu destroyed!"
     ]
   },
   "GuZhenRen:KongQiaoUI": {

@@ -1,6 +1,7 @@
 package GuZhenRen.patches;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.cards.AbstractGuZhenRenCard;
 import GuZhenRen.relics.XianGuCanHai;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -22,16 +23,22 @@ public class XianGuPatch {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("ActionUI"));
     public static final String[] TEXT = uiStrings.TEXT;
 
+    // 本命蛊上限
+    public static int maxBenMingGuAllowed = 1;
+
     /**
-     * 辅助方法：检查并移除重复的仙蛊
+     * 辅助方法：检查并移除重复的仙蛊 / 本命蛊
      */
     public static void checkAndRemoveDuplicate(CardGroup group, AbstractCard addedCard) {
         // 1. 基础资格检查
-        if (!addedCard.hasTag(GuZhenRenTags.XIAN_GU)) return;
-        if (addedCard.hasTag(GuZhenRenTags.BEN_MING_GU)) return;
-        if (addedCard.hasTag(GuZhenRenTags.XU_YING_COPY)) return;
         if (addedCard.purgeOnUse || addedCard.isInAutoplay) return;
         if (AbstractDungeon.player == null) return;
+        if (addedCard.hasTag(GuZhenRenTags.XU_YING_COPY)) return;
+
+        boolean isBenMing = addedCard.hasTag(GuZhenRenTags.BEN_MING_GU);
+        boolean isXian = addedCard.hasTag(GuZhenRenTags.XIAN_GU);
+
+        if (!isBenMing && !isXian) return;
 
         // 2. 环境检查
         boolean isRelevantGroup = (group == AbstractDungeon.player.masterDeck) ||
@@ -44,14 +51,28 @@ public class XianGuPatch {
 
         // 3. 查重逻辑
         boolean isDuplicate = false;
+        boolean isBenMingDestroy = false; // 用于标记是否触发了大师牌组的本命蛊毁灭
 
         if (group == AbstractDungeon.player.masterDeck) {
-            // 永久获得检查
-            for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-                boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
-                if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !isFakeCard) {
+            if (isBenMing) {
+                int benMingCount = 0;
+                for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                    if (c != addedCard && c.hasTag(GuZhenRenTags.BEN_MING_GU)) {
+                        benMingCount++;
+                    }
+                }
+                // 若本命蛊数量达到上限
+                if (benMingCount >= maxBenMingGuAllowed) {
                     isDuplicate = true;
-                    break;
+                    isBenMingDestroy = true;
+                }
+            } else if (isXian) {
+                for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                    boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
+                    if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !isFakeCard) {
+                        isDuplicate = true;
+                        break;
+                    }
                 }
             }
         } else {
@@ -63,26 +84,51 @@ public class XianGuPatch {
             allCombatCards.addAll(AbstractDungeon.player.exhaustPile.group);
             allCombatCards.addAll(AbstractDungeon.player.limbo.group);
 
-            for (AbstractCard c : allCombatCards) {
-                // 扫描时，忽略 purgeOnUse 克隆体
-                boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
-                if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !isFakeCard) {
-                    isDuplicate = true;
-                    break;
+            if (isBenMing) {
+                // 本命蛊战斗内判定：沿用仙蛊逻辑
+                int addedRank = 0;
+                if (addedCard instanceof AbstractGuZhenRenCard) {
+                    addedRank = ((AbstractGuZhenRenCard) addedCard).rank;
+                }
+
+                if (addedRank >= 6) {
+                    for (AbstractCard c : allCombatCards) {
+                        boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
+                        if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.BEN_MING_GU) && !isFakeCard) {
+                            int cRank = 0;
+                            if (c instanceof AbstractGuZhenRenCard) {
+                                cRank = ((AbstractGuZhenRenCard) c).rank;
+                            }
+                            if (cRank >= 6) {
+                                isDuplicate = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            } else if (isXian) {
+                for (AbstractCard c : allCombatCards) {
+                    boolean isFakeCard = c.hasTag(GuZhenRenTags.XU_YING_COPY) || c.purgeOnUse;
+                    if (c != addedCard && c.cardID.equals(addedCard.cardID) && c.hasTag(GuZhenRenTags.XIAN_GU) && !isFakeCard) {
+                        isDuplicate = true;
+                        break;
+                    }
                 }
             }
         }
 
         // 4. 执行移除与特效
         if (isDuplicate) {
-            GuZhenRen.logger.info("仙蛊重复: " + addedCard.name);
+            GuZhenRen.logger.info((isBenMingDestroy ? "本命蛊毁灭: " : "仙蛊重复: ") + addedCard.name);
 
-            AbstractDungeon.topLevelEffectsQueue.add(new TextAboveCreatureEffect(
-                    Settings.WIDTH / 2.0F,
-                    Settings.HEIGHT / 2.0F,
-                    TEXT[0],
-                    Color.RED.cpy()
-            ));
+            if (!isBenMingDestroy) {
+                AbstractDungeon.topLevelEffectsQueue.add(new TextAboveCreatureEffect(
+                        Settings.WIDTH / 2.0F,
+                        Settings.HEIGHT / 2.0F,
+                        TEXT[0],
+                        Color.RED.cpy()
+                ));
+            }
 
             addedCard.current_x = AbstractDungeon.player.hb.cX;
             addedCard.current_y = AbstractDungeon.player.hb.cY;
@@ -93,18 +139,36 @@ public class XianGuPatch {
             AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(addedCard));
             group.removeCard(addedCard);
 
-            //刷新手牌显示
             if (group == AbstractDungeon.player.hand) {
                 AbstractDungeon.player.hand.refreshHandLayout();
             }
 
             // 给予残蛊补偿
             if (group == AbstractDungeon.player.masterDeck) {
-                if (!AbstractDungeon.player.hasRelic(XianGuCanHai.ID)) {
-                    XianGuCanHai relic = new XianGuCanHai();
-                    relic.instantObtain();
+                boolean shouldCompensate = false;
+
+                if (isBenMingDestroy) {
+                    // 判断被销毁的本命蛊转数是否 >= 6
+                    int addedRank = 0;
+                    if (addedCard instanceof AbstractGuZhenRenCard) {
+                        addedRank = ((AbstractGuZhenRenCard) addedCard).rank;
+                    }
+                    if (addedRank >= 6) {
+                        shouldCompensate = true;
+                    }
                 } else {
-                    ((XianGuCanHai) AbstractDungeon.player.getRelic(XianGuCanHai.ID)).addCharge();
+                    // 仙蛊默认补偿
+                    shouldCompensate = true;
+                }
+
+                // 给予补偿
+                if (shouldCompensate) {
+                    if (!AbstractDungeon.player.hasRelic(XianGuCanHai.ID)) {
+                        XianGuCanHai relic = new XianGuCanHai();
+                        relic.instantObtain();
+                    } else {
+                        ((XianGuCanHai) AbstractDungeon.player.getRelic(XianGuCanHai.ID)).addCharge();
+                    }
                 }
             }
         }
@@ -132,8 +196,6 @@ public class XianGuPatch {
             checkAndRemoveDuplicate(AbstractDungeon.player.limbo, c);
         }
     }
-
-
 
     // 拦截全局永久升级
     @SpirePatch(clz = AbstractPlayer.class, method = "bottledCardUpgradeCheck")
@@ -165,9 +227,7 @@ public class XianGuPatch {
         }
     }
 
-
     // --- Postfix 位置移动拦截 ---
-
     @SpirePatch(clz = CardGroup.class, method = "addToHand")
     public static class AddToHandPatch {
         @SpirePostfixPatch
