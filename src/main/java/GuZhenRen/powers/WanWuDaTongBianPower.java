@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -39,23 +38,21 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
         this.description = powerStrings.DESCRIPTIONS[0];
     }
 
-    // =========================================================================
     // 功能 1: 获得时清洗全场
-    // =========================================================================
     @Override
     public void onInitialApplication() {
         if (owner == null) return;
 
         int totalConvertAmount = 0;
         ArrayList<AbstractPower> powersToRemove = new ArrayList<>();
-        ArrayList<AbstractGameAction> reduceActions = new ArrayList<>(); // 用于部分扣除
+        ArrayList<AbstractGameAction> adjustActions = new ArrayList<>();
 
         for (AbstractPower p : owner.powers) {
             // 1. 放行：万物大同变自己 和 所有道痕
             if (p.ID.equals(this.ID)) continue;
             if (p instanceof AbstractDaoHenPower) continue;
 
-            // 2. 向所有道痕询问：这个状态你们要保几层？
+            // 2. 统计所有道痕对该状态的保护层数
             int protectedAmt = 0;
             for (AbstractPower daoHen : owner.powers) {
                 if (daoHen instanceof AbstractDaoHenPower) {
@@ -63,19 +60,36 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
                 }
             }
 
-            // 3. 计算实际能转化的层数 (-1的特殊状态视为1层)
-            int currentAmt = (p.amount == -1) ? 1 : p.amount;
-            int toConvert = currentAmt - protectedAmt;
+            int currentAmt = p.amount;
 
-            if (toConvert > 0) {
-                totalConvertAmount += toConvert;
+            if (currentAmt == -1) {
+                // 纯机制状态
+                int toConvert = 1 - protectedAmt;
+                if (toConvert > 0) {
+                    totalConvertAmount += toConvert;
+                    if (protectedAmt <= 0) {
+                        powersToRemove.add(p);
+                    }
+                }
+            } else {
+                // 有具体数值的状态
+                if (currentAmt < protectedAmt) {
+                    totalConvertAmount += 1;
 
-                // 如果完全没有被保护，或者本身就是没有层数(-1)的特殊状态，彻底移除
-                if (protectedAmt == 0 || p.amount == -1) {
-                    powersToRemove.add(p);
-                } else {
-                    // 如果有保护，只能削减“超出保护范围”的层数
-                    reduceActions.add(new ReducePowerAction(owner, owner, p.ID, toConvert));
+                    if (protectedAmt == 0) {
+                        powersToRemove.add(p);
+                    } else {
+                        adjustActions.add(new SetPowerAmountAction(p, protectedAmt));
+                    }
+                } else if (currentAmt > protectedAmt) {
+                    int toConvert = currentAmt - protectedAmt;
+                    totalConvertAmount += toConvert;
+
+                    if (protectedAmt == 0) {
+                        powersToRemove.add(p);
+                    } else {
+                        adjustActions.add(new SetPowerAmountAction(p, protectedAmt));
+                    }
                 }
             }
         }
@@ -89,28 +103,43 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
             for (AbstractPower p : powersToRemove) {
                 this.addToTop(new RemoveSpecificPowerAction(owner, owner, p));
             }
-            for (AbstractGameAction action : reduceActions) {
+            for (AbstractGameAction action : adjustActions) {
                 this.addToTop(action);
             }
         }
     }
 
-    // =========================================================================
     // 功能 2: 拦截未来新状态
-    // =========================================================================
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
-        // 放行免检状态与所有道痕
         if (AbstractDaoHenPower.isDerivedPower) return true;
         if (power instanceof AbstractDaoHenPower) return true;
 
-        // 其余拦截并转化
-        int convertAmt = (power.amount == -1) ? 1 : power.amount;
-        if (convertAmt > 0) {
-            this.flash();
-            this.addToTop(new ApplyPowerAction(target, target,
-                    new BianHuaDaoDaoHenPower(target, convertAmt), convertAmt));
-        }
+        int convertAmt = (power.amount <= 0) ? 1 : power.amount;
+
+        this.flash();
+        this.addToTop(new ApplyPowerAction(target, target,
+                new BianHuaDaoDaoHenPower(target, convertAmt), convertAmt));
+
         return false;
+    }
+
+
+    private static class SetPowerAmountAction extends AbstractGameAction {
+        private final AbstractPower power;
+        private final int targetAmount;
+
+        public SetPowerAmountAction(AbstractPower power, int targetAmount) {
+            this.power = power;
+            this.targetAmount = targetAmount;
+            this.actionType = ActionType.REDUCE_POWER;
+        }
+
+        @Override
+        public void update() {
+            this.power.amount = this.targetAmount;
+            this.power.updateDescription();
+            this.isDone = true;
+        }
     }
 }

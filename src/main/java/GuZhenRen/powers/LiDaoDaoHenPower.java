@@ -3,7 +3,6 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -23,8 +22,8 @@ public class LiDaoDaoHenPower extends AbstractDaoHenPower {
         this.description = powerStrings.DESCRIPTIONS[0];
     }
 
-    // 发放力量，同时开启/关闭免检标记
-    private void applyCompanionStrength(int amt) {
+    private void changeCompanionStrength(int amt) {
+
         this.addToTop(new AbstractGameAction() {
             @Override
             public void update() {
@@ -44,33 +43,31 @@ public class LiDaoDaoHenPower extends AbstractDaoHenPower {
         });
     }
 
-    // 获得时发放力量
+    // 获得时增加力量
     @Override
     public void onInitialApplication() {
         super.onInitialApplication();
-        applyCompanionStrength(this.amount);
+        changeCompanionStrength(this.amount);
     }
 
-    // 叠加时发放力量
+    // 叠加时增加力量
     @Override
     public void stackPower(int stackAmount) {
         super.stackPower(stackAmount);
-        applyCompanionStrength(stackAmount);
+        changeCompanionStrength(stackAmount);
     }
 
-    // 减少层数时同步扣减力量
     @Override
     public void reducePower(int reduceAmount) {
         int actualReduce = Math.min(reduceAmount, this.amount);
-        this.addToTop(new ReducePowerAction(this.owner, this.owner, StrengthPower.POWER_ID, actualReduce));
+        changeCompanionStrength(-actualReduce);
         super.reducePower(reduceAmount);
     }
 
-    // 被彻底移除时扣除力量
     @Override
     public void onRemove() {
         if (this.amount > 0) {
-            this.addToTop(new ReducePowerAction(this.owner, this.owner, StrengthPower.POWER_ID, this.amount));
+            changeCompanionStrength(-this.amount);
         }
     }
 
