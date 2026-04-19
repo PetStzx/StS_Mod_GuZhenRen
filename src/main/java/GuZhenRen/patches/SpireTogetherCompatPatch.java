@@ -5,7 +5,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import spireTogether.SpireTogetherMod;
 
 public class SpireTogetherCompatPatch {
-    @SpirePatch(clz = SpireTogetherMod.class, method = "RegisterModdedChars", optional = true)
+    @SpirePatch(cls = "spireTogether.SpireTogetherMod", method = "RegisterModdedChars", optional = true)
     public static class FangYuanRegisterPatch {
         public static void Postfix() {
             if (SpireTogetherMod.allCharacterEntities != null) {
