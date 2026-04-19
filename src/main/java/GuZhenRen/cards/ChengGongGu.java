@@ -20,6 +20,7 @@ import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.SpotlightPlayerEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
+import com.megacrit.cardcrawl.vfx.combat.GrandFinalEffect; // 【新增】导入华丽收场特效
 
 import java.util.ArrayList;
 
@@ -63,17 +64,23 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
         this.rarity = originalRarity;
     }
 
-    // =========================================================================
-    // 打出结算：弹出 3 个选项
-    // =========================================================================
+    // 打出结算
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+
+        if (Settings.FAST_MODE) {
+            this.addToBot(new VFXAction(new GrandFinalEffect(), 0.7F));
+        } else {
+            this.addToBot(new VFXAction(new GrandFinalEffect(), 1.0F));
+        }
+
+        // 2. 准备选项
         ArrayList<AbstractCard> choices = new ArrayList<>();
         choices.add(new OptionCaiFu());
         choices.add(new OptionYongSheng());
         choices.add(new OptionZiYou());
 
-        // 呼出选择界面
+        // 3. 呼出选择界面
         this.addToBot(new ChooseOneAction(choices));
     }
 
