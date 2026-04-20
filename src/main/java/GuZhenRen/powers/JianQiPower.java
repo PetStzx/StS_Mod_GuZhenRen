@@ -3,13 +3,15 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 
 public class JianQiPower extends AbstractPower {
     public static final String POWER_ID = GuZhenRen.makeID("JianQiPower");
@@ -44,18 +46,61 @@ public class JianQiPower extends AbstractPower {
     @Override
     public void atEndOfRound() {
         this.flash();
-        this.addToBot(new com.megacrit.cardcrawl.actions.AbstractGameAction() {
+        this.addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(
-                        new ApplyPowerAction(owner, owner, new JianHenPower(owner, JianQiPower.this.amount), JianQiPower.this.amount)
-                );
-                com.megacrit.cardcrawl.dungeons.AbstractDungeon.actionManager.addToBottom(
-                        new RemoveSpecificPowerAction(owner, owner, JianQiPower.this)
-                );
-
+                AbstractDungeon.actionManager.addToBottom(new JianQiConvertAction(owner, JianQiPower.this));
                 this.isDone = true;
             }
         });
+    }
+
+
+    public static class JianQiConvertAction extends AbstractGameAction {
+        private final AbstractPower jianQi;
+
+        public JianQiConvertAction(AbstractCreature target, AbstractPower jianQi) {
+            this.target = target;
+            this.jianQi = jianQi;
+            this.actionType = ActionType.SPECIAL;
+            this.duration = Settings.ACTION_DUR_FAST;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == Settings.ACTION_DUR_FAST && this.target != null && !this.target.isDeadOrEscaped()) {
+                int convertAmount = this.jianQi.amount;
+
+                this.target.powers.remove(this.jianQi);
+
+                if (this.target.hasPower(ArtifactPower.POWER_ID)) {
+                    CardCrawlGame.sound.play("NULLIFY_SFX");
+
+                    AbstractDungeon.actionManager.addToTop(
+                            new com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction(
+                                    this.target,
+                                    com.megacrit.cardcrawl.actions.common.ApplyPowerAction.TEXT[0]
+                            )
+                    );
+
+                    this.target.getPower(ArtifactPower.POWER_ID).onSpecificTrigger();
+                } else {
+                    AbstractPower jianHen = this.target.getPower(JianHenPower.POWER_ID);
+                    if (jianHen != null) {
+                        jianHen.stackPower(convertAmount);
+                        jianHen.updateDescription();
+                        jianHen.flashWithoutSound();
+                    } else {
+                        AbstractPower newJianHen = new JianHenPower(this.target, convertAmount);
+                        this.target.powers.add(newJianHen);
+                        newJianHen.onInitialApplication();
+                        newJianHen.flashWithoutSound();
+                    }
+                }
+
+                AbstractDungeon.onModifyPower();
+            }
+            this.tickDuration();
+        }
     }
 }
