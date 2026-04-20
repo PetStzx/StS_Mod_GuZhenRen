@@ -52,9 +52,6 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
         this.addToBot(new SanShiSanTianGuangAction(this, p, totalShanYaoGainedThisCombat));
     }
 
-    // ==========================================================
-    // 内部动作
-    // ==========================================================
     public static class SanShiSanTianGuangAction extends AbstractGameAction {
         private final AbstractCard card;
         private final AbstractPlayer p;
@@ -68,10 +65,6 @@ public class SanShiSanTianGuang extends AbstractShaZhaoCard {
 
         @Override
         public void update() {
-            if (p.hasPower(ShanYaoPower.POWER_ID)) {
-                this.addToTop(new RemoveSpecificPowerAction(p, p, ShanYaoPower.POWER_ID));
-            }
-
             this.addToTop(new DamageAllEnemiesAction(p, this.card.multiDamage, this.card.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_HEAVY));
             this.addToTop(new VFXAction(new BorderFlashEffect(Color.YELLOW, true)));
 
