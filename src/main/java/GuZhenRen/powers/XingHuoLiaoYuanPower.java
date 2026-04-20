@@ -4,7 +4,6 @@ import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,6 +11,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 
 public class XingHuoLiaoYuanPower extends AbstractPower {
     public static final String POWER_ID = GuZhenRen.makeID("XingHuoLiaoYuanPower");
@@ -19,7 +19,6 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    // 安全锁：防止 A传给B，B传给A 的死循环
     public static boolean isSpreading = false;
 
     public XingHuoLiaoYuanPower(AbstractCreature owner, int amount) {
@@ -39,44 +38,66 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
         updateDescription();
     }
 
-    // 执行传染逻辑
     public void triggerSpread(int spreadAmount) {
         if (spreadAmount <= 0) return;
-
         this.flash();
-
-        this.addToBot(new AbstractGameAction() {
-            @Override
-            public void update() {
-                // 1. 上锁
-                isSpreading = true;
-
-
-                // 3. 把“解锁”动作压入栈
-                AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
-                    @Override
-                    public void update() {
-                        isSpreading = false;
-                        this.isDone = true;
-                    }
-                });
-
-                // 2. 把“上状态”动作压入栈
-                for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                    if (!mo.isDeadOrEscaped() && mo != owner) {
-                        AbstractDungeon.actionManager.addToTop(
-                                new ApplyPowerAction(mo, owner, new FenShaoPower(mo, spreadAmount), spreadAmount)
-                        );
-                    }
-                }
-
-                this.isDone = true;
-            }
-        });
+        this.addToBot(new XingHuoSpreadAction(this.owner, spreadAmount));
     }
 
     @Override
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
+    }
+
+
+    public static class XingHuoSpreadAction extends AbstractGameAction {
+        private final int spreadAmount;
+
+        public XingHuoSpreadAction(AbstractCreature source, int amount) {
+            this.source = source;
+            this.spreadAmount = amount;
+            this.actionType = ActionType.SPECIAL;
+            this.duration = 0.1F;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == 0.1F) {
+                isSpreading = true;
+
+                for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                    if (!mo.isDeadOrEscaped() && mo != this.source) {
+
+                        if (mo.hasPower(ArtifactPower.POWER_ID)) {
+                            CardCrawlGame.sound.play("NULLIFY_SFX");
+
+                            AbstractDungeon.actionManager.addToTop(
+                                    new com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction(
+                                            mo,
+                                            com.megacrit.cardcrawl.actions.common.ApplyPowerAction.TEXT[0]
+                                    )
+                            );
+
+                            mo.getPower(ArtifactPower.POWER_ID).onSpecificTrigger();
+                        } else {
+                            AbstractPower fenShao = mo.getPower(FenShaoPower.POWER_ID);
+                            if (fenShao != null) {
+                                fenShao.stackPower(this.spreadAmount);
+                                fenShao.updateDescription();
+                                fenShao.flashWithoutSound();
+                            } else {
+                                AbstractPower newFenShao = new FenShaoPower(mo, this.spreadAmount);
+                                mo.powers.add(newFenShao);
+                                newFenShao.onInitialApplication();
+                                newFenShao.flashWithoutSound();
+                            }
+                        }
+                    }
+                }
+
+                isSpreading = false;
+            }
+            this.tickDuration();
+        }
     }
 }
