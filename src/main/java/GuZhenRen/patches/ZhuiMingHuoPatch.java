@@ -3,7 +3,6 @@ package GuZhenRen.patches;
 import GuZhenRen.powers.ZhuiMingHuoPower;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.GameActionManager;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import javassist.CannotCompileException;
@@ -23,14 +22,11 @@ public class ZhuiMingHuoPatch {
                 @Override
                 public void edit(MethodCall m) throws CannotCompileException {
                     if (m.getClassName().equals(AbstractMonster.class.getName()) && m.getMethodName().equals("takeTurn")) {
-
-
                         m.replace("$_ = $proceed($$); GuZhenRen.patches.ZhuiMingHuoPatch.SpreadFirePatch.postfixLogic($0);");
                     }
                 }
             };
         }
-
 
         public static void postfixLogic(AbstractMonster __instance) {
             // 1. 判断该怪物是否执行了攻击意图
@@ -49,8 +45,8 @@ public class ZhuiMingHuoPatch {
                 // 3. 如果场上有追命火，且自己进行了攻击，则感染
                 if (sourceExists) {
                     AbstractDungeon.actionManager.addToBottom(
-                            new ApplyPowerAction(__instance, __instance,
-                                    new ZhuiMingHuoPower(__instance, 1), 1));
+                            new ZhuiMingHuoPower.ZhuiMingHuoSpreadAction(__instance, 1)
+                    );
                 }
             }
         }

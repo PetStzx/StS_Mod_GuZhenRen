@@ -3,12 +3,15 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 
 public class ZhuiMingHuoPower extends AbstractPower {
     public static final String POWER_ID = GuZhenRen.makeID("ZhuiMingHuoPower");
@@ -52,13 +55,94 @@ public class ZhuiMingHuoPower extends AbstractPower {
 
         int totalBurn = FEN_SHAO_BASE * this.amount;
 
-        this.addToBot(new ApplyPowerAction(this.owner, this.owner,
-                new FenShaoPower(this.owner, totalBurn), totalBurn));
+        this.addToBot(new ZhuiMingHuoApplyFenShaoAction(this.owner, totalBurn));
     }
 
     @Override
     public void updateDescription() {
         int displayAmount = FEN_SHAO_BASE * this.amount;
         this.description = DESCRIPTIONS[0] + displayAmount + DESCRIPTIONS[1];
+    }
+
+    public static class ZhuiMingHuoApplyFenShaoAction extends AbstractGameAction {
+        private final int burnAmount;
+
+        public ZhuiMingHuoApplyFenShaoAction(AbstractCreature target, int amount) {
+            this.target = target;
+            this.burnAmount = amount;
+            this.actionType = ActionType.SPECIAL;
+            this.duration = Settings.ACTION_DUR_FAST;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == Settings.ACTION_DUR_FAST && this.target != null && !this.target.isDeadOrEscaped()) {
+                if (this.target.hasPower(ArtifactPower.POWER_ID)) {
+                    CardCrawlGame.sound.play("NULLIFY_SFX");
+
+                    AbstractDungeon.actionManager.addToTop(
+                            new com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction(
+                                    this.target,
+                                    com.megacrit.cardcrawl.actions.common.ApplyPowerAction.TEXT[0]
+                            )
+                    );
+
+                    this.target.getPower(ArtifactPower.POWER_ID).onSpecificTrigger();
+                } else {
+                    AbstractPower fenShao = this.target.getPower(FenShaoPower.POWER_ID);
+                    if (fenShao != null) {
+                        fenShao.stackPower(this.burnAmount);
+                        fenShao.updateDescription();
+                        fenShao.flashWithoutSound();
+                    } else {
+                        AbstractPower newFenShao = new FenShaoPower(this.target, this.burnAmount);
+                        this.target.powers.add(newFenShao);
+                        newFenShao.onInitialApplication();
+                        newFenShao.flashWithoutSound();
+                    }
+                }
+            }
+            this.tickDuration();
+        }
+    }
+
+    public static class ZhuiMingHuoSpreadAction extends AbstractGameAction {
+        private final int spreadAmount;
+
+        public ZhuiMingHuoSpreadAction(AbstractCreature target, int amount) {
+            this.target = target;
+            this.spreadAmount = amount;
+            this.actionType = ActionType.SPECIAL;
+            this.duration = Settings.ACTION_DUR_FAST;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == Settings.ACTION_DUR_FAST && this.target != null && !this.target.isDeadOrEscaped()) {
+                if (this.target.hasPower(ArtifactPower.POWER_ID)) {
+                    CardCrawlGame.sound.play("NULLIFY_SFX");
+                    AbstractDungeon.actionManager.addToTop(
+                            new com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction(
+                                    this.target,
+                                    com.megacrit.cardcrawl.actions.common.ApplyPowerAction.TEXT[0]
+                            )
+                    );
+                    this.target.getPower(ArtifactPower.POWER_ID).onSpecificTrigger();
+                } else {
+                    AbstractPower zhuiMingHuo = this.target.getPower(ZhuiMingHuoPower.POWER_ID);
+                    if (zhuiMingHuo != null) {
+                        zhuiMingHuo.stackPower(this.spreadAmount);
+                        zhuiMingHuo.updateDescription();
+                        zhuiMingHuo.flashWithoutSound();
+                    } else {
+                        AbstractPower newZhuiMingHuo = new ZhuiMingHuoPower(this.target, this.spreadAmount);
+                        this.target.powers.add(newZhuiMingHuo);
+                        newZhuiMingHuo.onInitialApplication();
+                        newZhuiMingHuo.flashWithoutSound();
+                    }
+                }
+            }
+            this.tickDuration();
+        }
     }
 }
