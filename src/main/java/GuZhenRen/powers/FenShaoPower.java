@@ -2,15 +2,13 @@ package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
 public class FenShaoPower extends AbstractPower {
     public static final String POWER_ID = GuZhenRen.makeID("FenShaoPower");
@@ -22,90 +20,55 @@ public class FenShaoPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-
         this.amount = amount;
-
         this.type = PowerType.DEBUFF;
-        // 按回合衰减的状态
         this.isTurnBased = true;
         this.loadRegion("flameBarrier");
-
         this.updateDescription();
     }
 
-    // 1. 初次附着时
     @Override
     public void onInitialApplication() {
-        triggerBurningDamage();
+        triggerBurningDamage(this.amount);
         triggerXingHuo(this.amount);
     }
 
-    // 2. 层数增加时
     @Override
     public void stackPower(int stackAmount) {
         this.fontScale = 8.0F;
         this.amount += stackAmount;
 
-        triggerBurningDamage();
-
-        // 只有正向增加时，才触发星火燎原传染
+        triggerBurningDamage(this.amount);
         if (stackAmount > 0) {
             triggerXingHuo(stackAmount);
         }
         this.updateDescription();
     }
 
-    // 3. 层数减少时
     @Override
     public void reducePower(int reduceAmount) {
         super.reducePower(reduceAmount);
-
-        // 层数减少依然触发受伤
         if (this.amount > 0) {
-            triggerBurningDamage();
+            triggerBurningDamage(this.amount);
         }
         this.updateDescription();
     }
 
-    // =========================================================================
-    // 替换原有的 atEndOfTurn(boolean isPlayer)
-    // 在该怪物自身的行动轮次中立即衰减，不等其他怪物
-    // =========================================================================
     @Override
     public void duringTurn() {
-        // 计算减半后的层数 (向下取整)
-        int targetAmount = this.amount / 2;
-        // 计算需要削减掉的层数
-        int reduceAmount = this.amount - targetAmount;
-
-        if (reduceAmount > 0) {
-            if (targetAmount <= 0) {
-                // 减半归零，直接移除该状态
-                this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
-            } else {
-                // 使用原版的削减能力Action，这会自动触发 reducePower() 从而造成伤害
-                this.addToBot(new ReducePowerAction(this.owner, this.owner, this, reduceAmount));
-            }
-        }
+        this.addToBot(new FenShaoHalveAction(this.owner, this));
     }
 
-    // 造成伤害的底层方法
-    private void triggerBurningDamage() {
-        if (this.owner != null && !this.owner.isDeadOrEscaped() && this.amount > 0) {
+    private void triggerBurningDamage(int damageAmount) {
+        if (this.owner != null && !this.owner.isDeadOrEscaped() && damageAmount > 0) {
             this.flash();
-            this.addToBot(new DamageAction(
-                    this.owner,
-                    new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.THORNS),
-                    AbstractGameAction.AttackEffect.FIRE
-            ));
+            this.addToBot(new FenShaoDamageAction(this.owner, damageAmount));
         }
     }
 
-    // 触发传染的底层方法
     private void triggerXingHuo(int amountApplied) {
         if (this.owner != null && !this.owner.isDeadOrEscaped()) {
             if (this.owner.hasPower(XingHuoLiaoYuanPower.POWER_ID)) {
-                // 阻断锁：不在传染中才执行
                 if (!XingHuoLiaoYuanPower.isSpreading) {
                     ((XingHuoLiaoYuanPower)this.owner.getPower(XingHuoLiaoYuanPower.POWER_ID)).triggerSpread(amountApplied);
                 }
@@ -116,5 +79,57 @@ public class FenShaoPower extends AbstractPower {
     @Override
     public void updateDescription() {
         this.description = DESCRIPTIONS[0];
+    }
+
+    public static class FenShaoDamageAction extends AbstractGameAction {
+        public FenShaoDamageAction(AbstractCreature target, int damageAmount) {
+            this.target = target;
+            this.amount = damageAmount;
+            this.actionType = ActionType.DAMAGE;
+            this.duration = 0.1F;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped()) {
+                AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.FIRE));
+                this.target.damage(new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.THORNS));
+
+                if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
+                    AbstractDungeon.actionManager.clearPostCombatActions();
+                }
+            }
+            this.tickDuration();
+        }
+    }
+
+    public static class FenShaoHalveAction extends AbstractGameAction {
+        private final AbstractPower power;
+
+        public FenShaoHalveAction(AbstractCreature target, AbstractPower power) {
+            this.target = target;
+            this.power = power;
+            this.actionType = ActionType.REDUCE_POWER;
+            this.duration = 0.1F;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped()) {
+                int targetAmount = this.power.amount / 2;
+                int reduceAmount = this.power.amount - targetAmount;
+
+                if (reduceAmount > 0) {
+                    if (targetAmount <= 0) {
+                        this.target.powers.remove(this.power);
+                        AbstractDungeon.onModifyPower();
+                    } else {
+                        this.power.reducePower(reduceAmount);
+                        AbstractDungeon.onModifyPower();
+                    }
+                }
+            }
+            this.tickDuration();
+        }
     }
 }
