@@ -3,13 +3,15 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 
 public class BuMieXingBiaoPower extends AbstractPower {
     public static final String POWER_ID = GuZhenRen.makeID("BuMieXingBiaoPower");
@@ -43,21 +45,41 @@ public class BuMieXingBiaoPower extends AbstractPower {
     @Override
     public void atStartOfTurn() {
         this.flash();
+        this.addToBot(new BuMieXingBiaoAction(this.owner, this));
+    }
 
-        // 1. 给予玩家当前层数的“念”
-        this.addToBot(new ApplyPowerAction(
-                AbstractDungeon.player,
-                this.owner,
-                new NianPower(AbstractDungeon.player, this.amount),
-                this.amount
-        ));
+    public static class BuMieXingBiaoAction extends AbstractGameAction {
+        private final AbstractPower power;
 
-        // 2. 层数加1
-        this.addToBot(new ApplyPowerAction(
-                this.owner,
-                this.owner,
-                new BuMieXingBiaoPower(this.owner, 1),
-                1
-        ));
+        public BuMieXingBiaoAction(AbstractCreature target, AbstractPower power) {
+            this.target = target;
+            this.power = power;
+            this.actionType = ActionType.SPECIAL;
+            this.duration = Settings.ACTION_DUR_FAST;
+        }
+
+        @Override
+        public void update() {
+            if (this.duration == Settings.ACTION_DUR_FAST) {
+                AbstractPlayer p = AbstractDungeon.player;
+
+                AbstractPower nian = p.getPower(NianPower.POWER_ID);
+                if (nian != null) {
+                    nian.stackPower(this.power.amount);
+                    nian.updateDescription();
+                    nian.flashWithoutSound();
+                } else {
+                    AbstractPower newNian = new NianPower(p, this.power.amount);
+                    p.powers.add(newNian);
+                    newNian.onInitialApplication();
+                    newNian.flashWithoutSound();
+                }
+
+                this.power.stackPower(1);
+                this.power.updateDescription();
+            }
+
+            this.tickDuration();
+        }
     }
 }
