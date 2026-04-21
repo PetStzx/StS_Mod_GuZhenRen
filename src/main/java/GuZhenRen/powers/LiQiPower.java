@@ -5,11 +5,8 @@ import GuZhenRen.cards.AbstractXuYingCard;
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -24,9 +21,7 @@ public class LiQiPower extends AbstractPower {
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
-    public static int globalPhantomBonus = 0;
     private int currentPhantomBonus = 0;
-
     private boolean isRemoved = false;
 
     public LiQiPower(AbstractCreature owner, int amount) {
@@ -56,7 +51,9 @@ public class LiQiPower extends AbstractPower {
     private int countPhantomsInHand() {
         int count = 0;
         if (AbstractDungeon.player != null && AbstractDungeon.player.hand != null) {
-            for (AbstractCard c : AbstractDungeon.player.hand.group) {
+            int handSize = AbstractDungeon.player.hand.group.size();
+            for (int i = 0; i < handSize; i++) {
+                AbstractCard c = AbstractDungeon.player.hand.group.get(i);
                 if (c instanceof AbstractXuYingCard) {
                     count++;
                 }
@@ -78,20 +75,18 @@ public class LiQiPower extends AbstractPower {
 
             if (actualCount != this.currentPhantomBonus) {
                 int diff = actualCount - this.currentPhantomBonus;
-
                 BaseMod.MAX_HAND_SIZE += diff;
-                globalPhantomBonus += diff;
                 this.currentPhantomBonus = actualCount;
             }
         }
     }
 
     private void resetHandSizeLimit() {
+        if (this.isRemoved) return;
         this.isRemoved = true;
 
         if (this.currentPhantomBonus > 0) {
             BaseMod.MAX_HAND_SIZE -= this.currentPhantomBonus;
-            globalPhantomBonus -= this.currentPhantomBonus;
             this.currentPhantomBonus = 0;
         }
     }
@@ -111,17 +106,6 @@ public class LiQiPower extends AbstractPower {
         resetHandSizeLimit();
     }
 
-    // 战斗开始清除残留的上限
-    @SpirePatch(clz = AbstractPlayer.class, method = "preBattlePrep")
-    public static class CleanUpPhantomHandSizePatch {
-        @SpirePrefixPatch
-        public static void Prefix(AbstractPlayer __instance) {
-            if (LiQiPower.globalPhantomBonus != 0) {
-                BaseMod.MAX_HAND_SIZE -= LiQiPower.globalPhantomBonus;
-                LiQiPower.globalPhantomBonus = 0;
-            }
-        }
-    }
 
     @Override
     public void atStartOfTurnPostDraw() {
