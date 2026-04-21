@@ -48,12 +48,8 @@
   },
   "GuZhenRen:ShaGu": {
     "NAME": "杀蛊",
-    "DESCRIPTION": "造成 !D! 点伤害 。 NL 失去 !M! 点生命 。 NL 斩杀 时，失去 1 点最大生命，此牌伤害永久增加2 。",
-    "FLAVOR": "杀道的核心蛊虫。可达九转。",
-    "EXTENDED_DESCRIPTION": [
-      "造成 !D! 点伤害 。 NL 失去 !M! 点生命 。 NL 斩杀 时，失去 %d 点最大生命，此牌伤害永久增加 !GuZhenRen:SecondMagic!  。",
-      "造成 !D! 点伤害 。 NL 失去 !M! 点生命 。 NL 斩杀 时，此牌伤害永久增加 !GuZhenRen:SecondMagic!  。"
-    ]
+    "DESCRIPTION": "失去 !M! 点生命。 NL 造成 !D! 点伤害。 NL 你杀死任意非“ guzhenren:爪牙 ”的敌人时，此牌伤害永久增加 !GuZhenRen:SecondMagic! 。",
+    "FLAVOR": "杀道的核心蛊虫。可达九转。"
   },
   "GuZhenRen:HuoGu": {
     "NAME": "火蛊",

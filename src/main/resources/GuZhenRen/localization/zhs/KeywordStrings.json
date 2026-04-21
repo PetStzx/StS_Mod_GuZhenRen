@@ -76,8 +76,12 @@
     "DESCRIPTION": "食道流派。"
   },
   {
+    "NAMES": ["爪牙"],
+    "DESCRIPTION": "爪牙会在他们的领导者死亡时放弃战斗。"
+  },
+  {
     "NAMES": ["杀道"],
-    "DESCRIPTION": "杀道流派。"
+    "DESCRIPTION": "以杀止杀，我行即道。"
   },
   {
     "NAMES": ["炎道"],

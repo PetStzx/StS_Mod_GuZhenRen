@@ -83,9 +83,12 @@
     "DESCRIPTION": "Food Path."
   },
   {
-    "PROPER_NAME": "Killing Path",
+    "NAMES": ["minion", "minions"],
+    "DESCRIPTION": "Minions will flee from combat when their leader dies."
+  },
+  {
     "NAMES": ["killing path", "killing_path"],
-    "DESCRIPTION": "Killing Path."
+    "DESCRIPTION": "End killing with killing; my actions define the Dao."
   },
   {
     "PROPER_NAME": "Fire Path",
