@@ -70,7 +70,10 @@ public class BenMingGuOpeningEffect extends AbstractGameEffect {
             }
 
             AbstractCard realCard = CardLibrary.getCard(selected.cardID).makeCopy();
-            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(realCard, (float)Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
+            com.megacrit.cardcrawl.unlock.UnlockTracker.markCardAsSeen(realCard.cardID);
+            AbstractDungeon.player.masterDeck.addToTop(realCard);
+            CardCrawlGame.sound.play("CARD_OBTAIN");
+            AbstractDungeon.effectList.add(new com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect(realCard.makeStatEquivalentCopy()));
 
             AbstractDungeon.cardRewardScreen.discoveryCard = null;
             this.isDone = true;
