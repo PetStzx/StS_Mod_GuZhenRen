@@ -4,6 +4,7 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.*;
 import GuZhenRen.patches.AbstractPlayerEnum;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.relics.ChunQiuChan;
 import GuZhenRen.relics.KongQiao_1;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
@@ -92,6 +93,7 @@ public class FangYuan extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(KongQiao_1.ID);
+        retVal.add(ChunQiuChan.ID);
         return retVal;
     }
 
