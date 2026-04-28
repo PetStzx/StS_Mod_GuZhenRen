@@ -9,6 +9,7 @@ import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -115,7 +116,11 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         int index = DAO_TEXT_START_INDEX + dao.ordinal();
 
         if (index < TEXT.length) {
-            this.guPathString = "guzhenren:" + TEXT[index].replace(" ", "_");
+            if (Settings.language == Settings.GameLanguage.RUS) {
+                this.guPathString = "#y" + TEXT[index].replace(" ", " #y");
+            } else {
+                this.guPathString = "guzhenren:" + TEXT[index].replace(" ", "_");
+            }
         } else {
             this.guPathString = "";
         }
@@ -259,8 +264,14 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
 
         StringBuilder sb = new StringBuilder();
 
-        String rankKeyword = getRankKeywordText(this.rank).replace(" ", "_");
-        sb.append("guzhenren:").append(rankKeyword);
+        String rawRankText = getRankKeywordText(this.rank);
+
+        if (Settings.language == Settings.GameLanguage.RUS) {
+            sb.append("#y").append(rawRankText.replace(" ", " #y"));
+        } else {
+            String rankKeyword = rawRankText.replace(" ", "_");
+            sb.append("guzhenren:").append(rankKeyword);
+        }
 
         String separator = (TEXT.length > 9) ? TEXT[9] : " . ";
 
