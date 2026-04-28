@@ -331,6 +331,8 @@ public class GuZhenRen implements
         String language = "eng";
         if (Settings.language == Settings.GameLanguage.ZHS) {
             language = "zhs";
+        } else if (Settings.language == Settings.GameLanguage.RUS) {
+            language = "rus";
         }
 
         BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/" + language + "/CardStrings.json"));
@@ -347,6 +349,8 @@ public class GuZhenRen implements
         String language = "eng";
         if (Settings.language == Settings.GameLanguage.ZHS) {
             language = "zhs";
+        } else if (Settings.language == Settings.GameLanguage.RUS) {
+            language = "rus";
         }
 
         String json = Gdx.files.internal(assetPath("localization/" + language + "/KeywordStrings.json"))
