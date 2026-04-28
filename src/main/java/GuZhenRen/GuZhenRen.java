@@ -328,12 +328,7 @@ public class GuZhenRen implements
 
     @Override
     public void receiveEditStrings() {
-        String language = "eng";
-        if (Settings.language == Settings.GameLanguage.ZHS) {
-            language = "zhs";
-        } else if (Settings.language == Settings.GameLanguage.RUS) {
-            language = "rus";
-        }
+        String language = getLanguage();
 
         BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/" + language + "/CardStrings.json"));
         BaseMod.loadCustomStringsFile(CharacterStrings.class, assetPath("localization/" + language + "/CharacterStrings.json"));
@@ -346,14 +341,7 @@ public class GuZhenRen implements
     @Override
     public void receiveEditKeywords() {
         Gson gson = new Gson();
-        String language = "eng";
-        if (Settings.language == Settings.GameLanguage.ZHS) {
-            language = "zhs";
-        } else if (Settings.language == Settings.GameLanguage.RUS) {
-            language = "rus";
-        }
-
-        String json = Gdx.files.internal(assetPath("localization/" + language + "/KeywordStrings.json"))
+        String json = Gdx.files.internal(assetPath("localization/" + getLanguage() + "/KeywordStrings.json"))
                 .readString(String.valueOf(StandardCharsets.UTF_8));
 
         Keyword[] keywords = gson.fromJson(json, Keyword[].class);
@@ -416,5 +404,21 @@ public class GuZhenRen implements
                 }
             }
         }
+    }
+
+    private String getLanguage(){
+        String language = "eng";
+
+        switch (Settings.language){
+            case RUS:
+                language = "rus";
+                break;
+            case ZHT:
+            case ZHS:
+                language = "zhs";
+                break;
+        }
+
+        return language;
     }
 }
