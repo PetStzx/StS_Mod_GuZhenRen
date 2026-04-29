@@ -1,6 +1,8 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.HealthBarRenderPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -10,11 +12,13 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.combat.FlashAtkImgEffect;
 
-public class FenShaoPower extends AbstractPower {
+public class FenShaoPower extends AbstractPower implements HealthBarRenderPower {
     public static final String POWER_ID = GuZhenRen.makeID("FenShaoPower");
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
+    private static final Color FIRE_ORANGE = new Color(1.0F, 0.65F, 0.0F, 1.0F);
 
     public FenShaoPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -56,7 +60,26 @@ public class FenShaoPower extends AbstractPower {
 
     @Override
     public void duringTurn() {
-        this.addToBot(new FenShaoHalveAction(this.owner, this));
+        if (!this.owner.isPlayer) {
+            this.addToBot(new FenShaoHalveAction(this.owner, this));
+        }
+    }
+
+    @Override
+    public void atEndOfTurn(boolean isPlayer) {
+        if (isPlayer && this.owner.isPlayer) {
+            this.addToBot(new FenShaoHalveAction(this.owner, this));
+        }
+    }
+
+    @Override
+    public int getHealthBarAmount() {
+        return this.amount / 2;
+    }
+
+    @Override
+    public Color getColor() {
+        return FIRE_ORANGE;
     }
 
     private void triggerBurningDamage(int damageAmount) {
@@ -93,7 +116,10 @@ public class FenShaoPower extends AbstractPower {
         public void update() {
             if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped()) {
                 AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.FIRE));
-                this.target.damage(new DamageInfo(AbstractDungeon.player, this.amount, DamageInfo.DamageType.THORNS));
+
+                AbstractCreature damageSource = this.target.isPlayer ? null : AbstractDungeon.player;
+
+                this.target.damage(new DamageInfo(damageSource, this.amount, DamageInfo.DamageType.THORNS));
 
                 if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
                     AbstractDungeon.actionManager.clearPostCombatActions();
