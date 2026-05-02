@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.powers.RuiYiPower;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -52,11 +53,9 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 排入一个主控 Action 来动态计算需要的抽牌数
         this.addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                // 计算目标手牌数与当前手牌数的差值
                 int drawAmt = magicNumber - p.hand.size();
 
                 if (drawAmt > 0) {
@@ -86,9 +85,7 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
         }
     }
 
-    // =========================================================================
-    // 内部动作类：判定实际抽到的流派种类
-    // =========================================================================
+
     public static class BaMianWeiFengFollowUpAction extends AbstractGameAction {
         private AbstractPlayer p;
         private int[] multiDamage;
@@ -102,20 +99,19 @@ public class BaMianWeiFengGu extends AbstractGuZhenRenCard {
 
         @Override
         public void update() {
-            // 使用 Set 集合自动去重
             Set<String> uniqueDaos = new HashSet<>();
 
             for (AbstractCard c : DrawCardAction.drawnCards) {
-                // 遍历这张牌的所有 Tag
                 for (AbstractCard.CardTags tag : c.tags) {
-                    // 只要是以 "_DAO" 结尾的 Tag，就视为一个流派并加入集合
                     if (tag.name().endsWith("_DAO")) {
-                        uniqueDaos.add(tag.name());
+                        if (RuiYiPower.isActive) {
+                            uniqueDaos.add("JIAN_DAO");
+                        } else {
+                            uniqueDaos.add(tag.name());
+                        }
                     }
                 }
             }
-
-            // Set 的大小就是不重复的流派数量
             int times = uniqueDaos.size();
 
             if (times > 0) {
