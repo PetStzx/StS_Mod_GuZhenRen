@@ -3,6 +3,7 @@ package GuZhenRen.patches;
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.AbstractGuZhenRenCard;
 import GuZhenRen.relics.XianGuCanHai;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
@@ -137,11 +138,13 @@ public class XianGuPatch {
 
             CardCrawlGame.sound.play("CARD_EXHAUST", 0.2F);
             AbstractDungeon.topLevelEffectsQueue.add(new ExhaustCardEffect(addedCard));
-            group.removeCard(addedCard);
 
-            if (group == AbstractDungeon.player.hand) {
-                AbstractDungeon.player.hand.refreshHandLayout();
-            }
+            Gdx.app.postRunnable(() -> {
+                group.removeCard(addedCard);
+                if (group == AbstractDungeon.player.hand) {
+                    AbstractDungeon.player.hand.refreshHandLayout();
+                }
+            });
 
             // 给予残蛊补偿
             if (group == AbstractDungeon.player.masterDeck) {
