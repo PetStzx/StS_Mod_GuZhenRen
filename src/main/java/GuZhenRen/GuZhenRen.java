@@ -2,6 +2,7 @@ package GuZhenRen;
 
 import GuZhenRen.effects.BenMingGuOpeningEffect;
 import GuZhenRen.util.BattleStateManager;
+import GuZhenRen.util.TribulationManager;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import GuZhenRen.character.FangYuan;
@@ -19,7 +20,6 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import GuZhenRen.cards.*;
 import GuZhenRen.relics.*;
 import GuZhenRen.patches.*;
-import GuZhenRen.powers.*;
 import GuZhenRen.variables.SecondMagicNumber;
 import GuZhenRen.variables.FenShaoVariable;
 import GuZhenRen.variables.NianVariable;
@@ -247,6 +247,12 @@ public class GuZhenRen implements
         BaseMod.addCard(new BianXing());
         BaseMod.addCard(new JuGuangGu());
         BaseMod.addCard(new JiangHeRiXiaGu());
+        BaseMod.addCard(new QingTiXianYuan());
+        BaseMod.addCard(new HongZaoXianYuan());
+        BaseMod.addCard(new BaiLiXianYuan());
+        BaseMod.addCard(new HuangXingXianYuan());
+        BaseMod.addCard(new HeiHuo());
+        BaseMod.addCard(new HunDun());
     }
 
     @Override
@@ -262,6 +268,7 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new XianQiao_7(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianQiao_8(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianQiao_9(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianQiao_10(), CardColorEnum.GUZHENREN_GREY);
 
         BaseMod.addRelicToCustomPool(new LiDaoDaoHen(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianGuCanHai(), CardColorEnum.GUZHENREN_GREY);
@@ -324,6 +331,8 @@ public class GuZhenRen implements
                 ShengJiYe.POTION_ID,
                 AbstractPlayerEnum.FANG_YUAN
         );
+
+        TribulationManager.initialize();
     }
 
     @Override
@@ -371,22 +380,33 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostBattle(AbstractRoom room) {
+        int tIndex = TribulationManager.currentCombatTribulationIndex;
         BattleStateManager.publishPostBattle();
 
         // 杀招合成遗物掉落逻辑
         if (AbstractDungeon.player instanceof FangYuan) {
-            // 默认普通战斗掉落率为 15%
+            // 1. 普通房间掉落率15%
             float dropRate = 0.15f;
 
-            // 判断房间类型，修改掉落率
             if (room instanceof MonsterRoomBoss) {
                 dropRate = 1.00f; // Boss战 100%
             } else if (room instanceof MonsterRoomElite) {
                 dropRate = 0.50f; // 精英战 50%
             }
 
-            // 根据当前的掉落率进行随机判定
-            if (AbstractDungeon.relicRng.randomBoolean(dropRate)) {
+            // 2. 灾劫战斗掉率倍率
+            if (tIndex != -1) {
+                if (tIndex == 0) {
+                    dropRate *= 3.0f; // 地灾：3倍
+                } else if (tIndex == 1) {
+                    dropRate *= 5.0f; // 天劫：5倍
+                } else if (tIndex >= 2) {
+                    dropRate = 1.00f; // 浩劫及以上：100%
+                }
+            }
+
+            // 3. 根据最终掉率判定
+            if (dropRate >= 1.00f || AbstractDungeon.relicRng.randomBoolean(dropRate)) {
 
                 // 构建“玩家未拥有”的配方可用池
                 ArrayList<String> availableRecipes = new ArrayList<>();
