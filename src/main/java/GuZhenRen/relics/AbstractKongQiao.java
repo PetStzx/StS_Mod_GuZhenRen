@@ -12,6 +12,7 @@ import GuZhenRen.tribulations.interfaces.ITribulation;
 import GuZhenRen.util.TribulationManager;
 import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
+import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
@@ -32,6 +33,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
+import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
 import java.lang.reflect.Type;
@@ -126,7 +128,6 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
             return TRIBULATION_TEXT[4];
         }
         if (this.rank >= 9) {
-            // 九转仙窍：6场为一轮，3浩劫、2万劫、1混沌大难
             int step = this.xp % 6;
             if (step < 3) return TRIBULATION_TEXT[2];
             if (step < 5) return TRIBULATION_TEXT[3];
@@ -293,6 +294,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
                 if (this.rank == 8 && this.xp == 2) {
                     this.currentState = KongQiaoState.READY_TO_TRIBULATE;
                     CardCrawlGame.sound.play("TINGSHA");
+                    AbstractDungeon.topLevelEffectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy()));
                 }
                 updateDescription();
             }
@@ -311,6 +313,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
                 if (this.currentState == KongQiaoState.XP_GATHERING) {
                     this.currentState = KongQiaoState.READY_TO_TRIBULATE;
                     CardCrawlGame.sound.play("TINGSHA");
+                    AbstractDungeon.topLevelEffectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy()));
                 }
             } else {
                 int overflowXP = this.xp - this.neededXP;
