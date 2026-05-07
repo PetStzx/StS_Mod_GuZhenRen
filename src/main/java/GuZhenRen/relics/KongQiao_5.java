@@ -10,7 +10,6 @@ public class KongQiao_5 extends AbstractKongQiao {
         initStats(5, 5, GuZhenRen.makeID("XianQiao_6"));
     }
 
-
     @Override
     public CustomRelic makeCopy() {
         return new KongQiao_5();

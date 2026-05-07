@@ -7,9 +7,8 @@ public class XianQiao_9 extends AbstractKongQiao {
 
     public XianQiao_9() {
         super(ID, "XianQiao_9.png", RelicTier.SPECIAL, LandingSound.MAGICAL);
-        initStats(9, 999, null);
+        initStats(9, 18, GuZhenRen.makeID("XianQiao_10"));
     }
-
 
     @Override
     public CustomRelic makeCopy() {
