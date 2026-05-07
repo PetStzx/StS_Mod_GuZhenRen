@@ -28,7 +28,7 @@ public class HunDunXiaoNan_HeiHuo extends AbstractTribulation {
     public void atPreBattle(AbstractPower power) {
         power.flash();
         int deckSize = AbstractDungeon.player.masterDeck.size();
-        int amount = Math.max(1, deckSize / 5);
+        int amount = Math.max(1, deckSize / 4);
 
         AbstractDungeon.actionManager.addToTop(
                 new MakeTempCardInDrawPileAction(new HeiHuo(), amount, true, true)

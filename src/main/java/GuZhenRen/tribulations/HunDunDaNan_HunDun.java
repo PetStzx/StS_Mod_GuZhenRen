@@ -35,9 +35,9 @@ public class HunDunDaNan_HunDun extends AbstractTribulation {
             }
         }
 
-        if (count == 1) return 8;
-        if (count == 2) return 5;
-        return 2;
+        if (count == 1) return 6;
+        if (count == 2) return 3;
+        return 1;
     }
 
     @Override
