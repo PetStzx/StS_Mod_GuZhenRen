@@ -27,7 +27,7 @@ public class HeiHuo extends CustomCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/HeiHuo.png");
 
     public HeiHuo() {
-        super(ID, NAME, IMG_PATH, -2, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
+        super(ID, NAME, IMG_PATH, -2, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
     }
 
     @Override

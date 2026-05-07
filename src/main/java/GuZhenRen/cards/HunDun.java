@@ -21,7 +21,7 @@ public class HunDun extends CustomCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/HunDun.png");
 
     public HunDun() {
-        super(ID, NAME, IMG_PATH, -2, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
+        super(ID, NAME, IMG_PATH, -2, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
         this.cardsToPreview = new HeiHuo();
     }
 
