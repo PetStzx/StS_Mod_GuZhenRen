@@ -76,6 +76,7 @@ public class TribulationManager {
         register(new WanJie_TianWang());
         register(new WanJie_ChouHenGu());
         register(new WanJie_MingJia());
+        register(new WanJie_DouZhuan());
 
         // 5. 混沌小难
         register(new HunDunXiaoNan_HeiHuo());
