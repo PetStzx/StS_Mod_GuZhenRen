@@ -5,6 +5,7 @@ import GuZhenRen.util.BattleStateManager;
 import GuZhenRen.util.TribulationManager;
 import basemod.BaseMod;
 import basemod.interfaces.*;
+import basemod.interfaces.AddAudioSubscriber;
 import GuZhenRen.character.FangYuan;
 import GuZhenRen.potions.*;
 import com.badlogic.gdx.graphics.Color;
@@ -44,7 +45,8 @@ public class GuZhenRen implements
         PostDungeonInitializeSubscriber,
         OnStartBattleSubscriber,
         PostEnergyRechargeSubscriber,
-        PostBattleSubscriber
+        PostBattleSubscriber,
+        AddAudioSubscriber
 {
     public static final Logger logger = LogManager.getLogger(GuZhenRen.class.getName());
     public static final String MOD_ID = "GuZhenRen";
@@ -319,6 +321,12 @@ public class GuZhenRen implements
         recipeRelicIDs.add(Recipe_GuangYinFeiRen.ID);
         BaseMod.addRelicToCustomPool(new Recipe_SongYouFeng(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_SongYouFeng.ID);
+    }
+
+    @Override
+    public void receiveAddAudio() {
+        BaseMod.addAudio(GuZhenRen.makeID("LiuGuanYi"), assetPath("audio/sound/LiuGuanYi.ogg"));
+        BaseMod.addAudio(GuZhenRen.makeID("LianTianMoZun"), assetPath("audio/sound/LianTianMoZun.ogg"));
     }
 
     @Override

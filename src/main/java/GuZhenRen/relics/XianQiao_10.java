@@ -6,6 +6,7 @@ import com.evacipated.cardcrawl.mod.stslib.relics.OnPlayerDeathRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import basemod.abstracts.CustomRelic;
@@ -46,6 +47,8 @@ public class XianQiao_10 extends AbstractKongQiao implements OnPlayerDeathRelic 
     @Override
     public void onEquip() {
         super.onEquip();
+        CardCrawlGame.sound.play(GuZhenRen.makeID("LiuGuanYi"));
+
         if (AbstractDungeon.player != null) {
             this.lastMaxHp = AbstractDungeon.player.maxHealth;
             AbstractDungeon.player.heal(AbstractDungeon.player.maxHealth, true);
