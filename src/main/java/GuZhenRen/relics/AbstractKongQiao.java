@@ -24,7 +24,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.GameDictionary;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
@@ -237,15 +236,16 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
             return;
         }
 
-        if (this.currentState == KongQiaoState.READY_TO_TRIBULATE) {
-            this.currentState = KongQiaoState.TRIBULATION_PENDING;
-            CardCrawlGame.sound.playA("BELL", MathUtils.random(-0.4F, -0.2F));
-            updateDescription();
-        }
-
-        else if (this.currentState == KongQiaoState.TRIBULATION_PENDING && (this.rank == 5 || (this.rank == 8 && this.xp >= 2))) {
-            this.currentState = KongQiaoState.READY_TO_TRIBULATE;
-            updateDescription();
+        if (this.rank == 5 || (this.rank == 8 && this.xp >= 2)) {
+            if (this.currentState == KongQiaoState.TRIBULATION_PENDING) {
+                this.currentState = KongQiaoState.READY_TO_TRIBULATE;
+                CardCrawlGame.sound.play("UI_CLICK_1");
+                updateDescription();
+            } else if (this.currentState == KongQiaoState.READY_TO_TRIBULATE) {
+                this.currentState = KongQiaoState.TRIBULATION_PENDING;
+                CardCrawlGame.sound.playA("BELL", com.badlogic.gdx.math.MathUtils.random(-0.4F, -0.2F));
+                updateDescription();
+            }
         }
 
         updatePulseStatus();
@@ -271,7 +271,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
             this.battlesToNextTribulation--;
             if (this.battlesToNextTribulation <= 0) {
                 this.currentState = KongQiaoState.TRIBULATION_PENDING;
-                CardCrawlGame.sound.playA("BELL", MathUtils.random(-0.4F, -0.2F));
+                CardCrawlGame.sound.playA("BELL", com.badlogic.gdx.math.MathUtils.random(-0.4F, -0.2F));
                 this.flash();
             }
             updateDescription();
@@ -292,8 +292,8 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
                 this.battlesToNextTribulation = BATTLES_PER_TRIBULATION;
 
                 if (this.rank == 8 && this.xp == 2) {
-                    this.currentState = KongQiaoState.READY_TO_TRIBULATE;
-                    CardCrawlGame.sound.play("TINGSHA");
+                    this.currentState = KongQiaoState.TRIBULATION_PENDING;
+                    CardCrawlGame.sound.playA("BELL", com.badlogic.gdx.math.MathUtils.random(-0.4F, -0.2F));
                     AbstractDungeon.topLevelEffectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy()));
                 }
                 updateDescription();
@@ -311,8 +311,8 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
             if (this.rank == 5) {
                 this.xp = this.neededXP;
                 if (this.currentState == KongQiaoState.XP_GATHERING) {
-                    this.currentState = KongQiaoState.READY_TO_TRIBULATE;
-                    CardCrawlGame.sound.play("TINGSHA");
+                    this.currentState = KongQiaoState.TRIBULATION_PENDING;
+                    CardCrawlGame.sound.playA("BELL", com.badlogic.gdx.math.MathUtils.random(-0.4F, -0.2F));
                     AbstractDungeon.topLevelEffectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy()));
                 }
             } else {
@@ -362,17 +362,19 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         }
 
         if (this.currentState == KongQiaoState.READY_TO_TRIBULATE) {
-            if (this.rank == 5) {
-                extra.append(TEXT[3]);
-            } else if (this.rank == 8) {
-                extra.append(TEXT[6]);
-            }
+            extra.append(TEXT[11]);
         } else if (this.currentState == KongQiaoState.TRIBULATION_PENDING) {
             if (inCombat && !isTribulationDisabled()) {
                 extra.append(String.format(TEXT[7], getNextTribulationName()));
             } else {
                 extra.append(String.format(TEXT[4], getNextTribulationName()));
                 appendBreakthroughHint(extra);
+
+                if (this.rank == 5) {
+                    extra.append(TEXT[3]);
+                } else if (this.rank == 8 && this.xp == 2) {
+                    extra.append(TEXT[6]);
+                }
             }
         } else if (this.currentState == KongQiaoState.COUNTDOWN_MODE) {
             extra.append(String.format(TEXT[5], getNextTribulationName(), this.battlesToNextTribulation));
