@@ -56,6 +56,10 @@ public class ChouHenGuPower extends AbstractPower {
 
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return damageAmount;
+        }
+
         if (!this.triggeredThisRound && info.type == DamageInfo.DamageType.NORMAL && info.owner == AbstractDungeon.player && damageAmount > 0) {
             this.flash();
 

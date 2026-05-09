@@ -66,7 +66,7 @@ public class XingHuoLiaoYuanPower extends AbstractPower {
                 isSpreading = true;
 
                 for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                    if (!mo.isDeadOrEscaped() && mo != this.source) {
+                    if (!mo.isDeadOrEscaped() && !mo.halfDead && mo != this.source) {
 
                         if (mo.hasPower(ArtifactPower.POWER_ID)) {
                             CardCrawlGame.sound.play("NULLIFY_SFX");

@@ -79,6 +79,10 @@ public class MuMeiGuPower extends AbstractPower {
 
     @Override
     public void duringTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.amount = calculateHealAmount();
         if (this.amount > 0) {
             this.flash();

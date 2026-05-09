@@ -46,6 +46,10 @@ public class LengXuePower extends AbstractPower implements HealthBarRenderPower 
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             this.flashWithoutSound();
             this.addToBot(new LengXueAction(this.owner, this));

@@ -69,7 +69,7 @@ public class GuoDeQuPower extends AbstractPower {
 
         if (AbstractDungeon.getMonsters() != null) {
             for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-                if (!m.isDeadOrEscaped() && m.hasPower(POWER_ID)) {
+                if (!m.isDeadOrEscaped() && !m.halfDead && m.hasPower(POWER_ID)) {
                     return (GuoDeQuPower) m.getPower(POWER_ID);
                 }
             }

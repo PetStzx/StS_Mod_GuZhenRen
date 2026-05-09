@@ -50,6 +50,10 @@ public class ZhenPower extends AbstractPower {
 
     @Override
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.flashWithoutSound();
         this.amount++;
 

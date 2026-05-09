@@ -57,6 +57,10 @@ public class HongLeiGuPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (this.amount == 1) {
             this.flash();
 

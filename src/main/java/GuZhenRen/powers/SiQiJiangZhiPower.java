@@ -53,6 +53,10 @@ public class SiQiJiangZhiPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (this.amount == 1) {
             this.flash();
             this.addToBot(new LoseHPAction(AbstractDungeon.player, this.owner, 99999));

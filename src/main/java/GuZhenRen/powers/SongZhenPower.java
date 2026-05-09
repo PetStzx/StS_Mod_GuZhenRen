@@ -45,6 +45,10 @@ public class SongZhenPower extends AbstractPower {
 
     @Override
     public void duringTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.flash();
         this.addToBot(new ApplyPowerAction(this.owner, this.owner, new ThornsPower(this.owner, this.amount), this.amount));
     }

@@ -53,8 +53,11 @@ public class GuanPower extends AbstractPower {
 
     @Override
     public void wasHPLost(DamageInfo info, int damageAmount) {
-        if (!AbstractDungeon.actionManager.turnHasEnded && damageAmount > 0) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
 
+        if (!AbstractDungeon.actionManager.turnHasEnded && damageAmount > 0) {
             this.amount -= damageAmount;
 
             if (this.amount <= 0) {

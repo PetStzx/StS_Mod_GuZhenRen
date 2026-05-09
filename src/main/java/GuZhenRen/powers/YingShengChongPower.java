@@ -91,7 +91,7 @@ public class YingShengChongPower extends AbstractPower {
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (!this.targetCardName.isEmpty()) {
 
-            if (this.owner.isDeadOrEscaped() || this.owner.isDying) {
+            if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.isDying || this.owner.halfDead) {
                 return;
             }
 

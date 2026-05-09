@@ -60,6 +60,10 @@ public class XiaoJiaZiQiPower extends AbstractPower {
 
     @Override
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         Set<String> currentDaoTags = new HashSet<>();
 
         for (AbstractCard.CardTags tag : card.tags) {
@@ -94,6 +98,10 @@ public class XiaoJiaZiQiPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (this.amount > 0) {
             this.flash();
 

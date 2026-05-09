@@ -44,6 +44,10 @@ public class MingJiaPower extends AbstractPower {
 
     @Override
     public void atEndOfRound() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.flash();
 
         boolean fateSurvives = AbstractDungeon.cardRandomRng.randomBoolean();

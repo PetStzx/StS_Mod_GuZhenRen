@@ -55,7 +55,7 @@ public class GuiGuaYiPower extends AbstractPower {
                 AbstractDungeon.actionManager.addToBottom(new com.megacrit.cardcrawl.actions.AbstractGameAction() {
                     @Override
                     public void update() {
-                        if (!m.isDeadOrEscaped()) {
+                        if (!m.isDeadOrEscaped() && !m.halfDead) {
                             checkIntentAndApply(m);
                         }
                         this.isDone = true;
@@ -69,8 +69,10 @@ public class GuiGuaYiPower extends AbstractPower {
     public void onInitialApplication() {
         if (this.owner instanceof AbstractMonster) {
             AbstractMonster m = (AbstractMonster) this.owner;
-            this.lastIntent = m.intent;
-            checkIntentAndApply(m);
+            if (!m.isDeadOrEscaped() && !m.halfDead) {
+                this.lastIntent = m.intent;
+                checkIntentAndApply(m);
+            }
         }
     }
 

@@ -70,6 +70,10 @@ public class TianWangPower extends AbstractPower {
 
     @Override
     public void duringTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.flash();
         this.addToBot(new TianWangAction(this.owner, this));
     }

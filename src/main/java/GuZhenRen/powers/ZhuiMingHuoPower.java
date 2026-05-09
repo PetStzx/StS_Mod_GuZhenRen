@@ -51,6 +51,10 @@ public class ZhuiMingHuoPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.flash();
 
         int totalBurn = FEN_SHAO_BASE * this.amount;

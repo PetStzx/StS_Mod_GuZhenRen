@@ -44,7 +44,11 @@ public class ChiTongHuoYiPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
-        if (this.owner instanceof AbstractMonster && !this.owner.isDeadOrEscaped()) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
+        if (this.owner instanceof AbstractMonster) {
             this.flash();
             this.addToBot(new ApplyPowerAction(
                     AbstractDungeon.player,

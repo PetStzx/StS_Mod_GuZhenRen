@@ -93,6 +93,10 @@ public class DaJiaZhiQiPower extends AbstractPower {
 
     @Override
     public void onAfterUseCard(AbstractCard card, UseCardAction action) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         boolean isNewDaoPlayed = false;
 
         for (AbstractCard.CardTags tag : card.tags) {
@@ -119,6 +123,10 @@ public class DaJiaZhiQiPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (this.amount > 0) {
             this.flash();
 

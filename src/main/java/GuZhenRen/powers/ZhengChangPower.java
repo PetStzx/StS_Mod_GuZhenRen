@@ -56,6 +56,10 @@ public class ZhengChangPower extends AbstractPower {
 
     @Override
     public void atEndOfTurn(boolean isPlayer) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (!isPlayer) {
             if (this.amount == 1) {
                 this.addToBot(new AbstractGameAction() {

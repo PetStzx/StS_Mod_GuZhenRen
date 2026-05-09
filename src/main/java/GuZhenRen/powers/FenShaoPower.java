@@ -83,14 +83,14 @@ public class FenShaoPower extends AbstractPower implements HealthBarRenderPower 
     }
 
     private void triggerBurningDamage(int damageAmount) {
-        if (this.owner != null && !this.owner.isDeadOrEscaped() && damageAmount > 0) {
+        if (this.owner != null && !this.owner.isDeadOrEscaped() && !this.owner.halfDead && damageAmount > 0) {
             this.flash();
             this.addToBot(new FenShaoDamageAction(this.owner, damageAmount));
         }
     }
 
     private void triggerXingHuo(int amountApplied) {
-        if (this.owner != null && !this.owner.isDeadOrEscaped()) {
+        if (this.owner != null && !this.owner.isDeadOrEscaped() && !this.owner.halfDead) {
             if (this.owner.hasPower(XingHuoLiaoYuanPower.POWER_ID)) {
                 if (!XingHuoLiaoYuanPower.isSpreading) {
                     ((XingHuoLiaoYuanPower)this.owner.getPower(XingHuoLiaoYuanPower.POWER_ID)).triggerSpread(amountApplied);
@@ -114,7 +114,7 @@ public class FenShaoPower extends AbstractPower implements HealthBarRenderPower 
 
         @Override
         public void update() {
-            if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped()) {
+            if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped() && !this.target.halfDead) {
                 AbstractDungeon.effectList.add(new FlashAtkImgEffect(this.target.hb.cX, this.target.hb.cY, AttackEffect.FIRE));
 
                 AbstractCreature damageSource = this.target.isPlayer ? null : AbstractDungeon.player;
@@ -141,7 +141,7 @@ public class FenShaoPower extends AbstractPower implements HealthBarRenderPower 
 
         @Override
         public void update() {
-            if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped()) {
+            if (this.duration == 0.1F && this.target != null && !this.target.isDeadOrEscaped() && !this.target.halfDead) {
                 int targetAmount = this.power.amount / 2;
                 int reduceAmount = this.power.amount - targetAmount;
 

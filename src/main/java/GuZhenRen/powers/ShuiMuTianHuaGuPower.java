@@ -44,6 +44,10 @@ public class ShuiMuTianHuaGuPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (!this.damagedThisTurn) {
             this.flash();
             this.addToBot(new GainBlockAction(this.owner, this.owner, this.amount));

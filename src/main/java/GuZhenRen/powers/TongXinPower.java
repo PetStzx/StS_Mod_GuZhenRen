@@ -47,6 +47,10 @@ public class TongXinPower extends AbstractPower {
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         if (!card.isInAutoplay && !card.purgeOnUse) {
             this.flash();
             this.addToBot(new TongXinAction());
