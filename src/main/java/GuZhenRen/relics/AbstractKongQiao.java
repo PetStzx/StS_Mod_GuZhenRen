@@ -65,6 +65,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     protected String nextRelicID = "";
 
     public boolean effectUsedThisCombat = false;
+    public int completedTribulationIndex = -1;
 
     public int[] drawCounts = new int[10];
 
@@ -172,6 +173,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     @Override
     public void atPreBattle() {
         this.effectUsedThisCombat = false;
+        this.completedTribulationIndex = -1;
         updatePulseStatus();
         updateDescription();
     }
@@ -281,6 +283,7 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
     }
 
     public void onTribulationSuccess() {
+        this.completedTribulationIndex = TribulationManager.currentCombatTribulationIndex;
         if (this.rank < 6) {
             evolve(0);
         } else {
@@ -299,6 +302,14 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
                 updateDescription();
             }
         }
+    }
+
+    @Override
+    public int changeNumberOfCardsInReward(int numberOfCards) {
+        if (this.completedTribulationIndex != -1) {
+            return numberOfCards + 1;
+        }
+        return numberOfCards;
     }
 
     public void gainXP(int amount) {
@@ -333,6 +344,8 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         if (newRelic instanceof AbstractKongQiao) {
             AbstractKongQiao nextKongQiao = (AbstractKongQiao) newRelic;
             nextKongQiao.xp = overflowXP;
+
+            nextKongQiao.completedTribulationIndex = this.completedTribulationIndex;
 
             System.arraycopy(this.drawCounts, 0, nextKongQiao.drawCounts, 0, this.drawCounts.length);
 
@@ -509,12 +522,13 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
 
     @Override
     public int[] onSave() {
-        int[] data = new int[3 + this.drawCounts.length];
+        int[] data = new int[4 + this.drawCounts.length];
         data[0] = this.xp;
         data[1] = this.currentState.ordinal();
         data[2] = this.battlesToNextTribulation;
+        data[3] = this.completedTribulationIndex;
         for (int i = 0; i < this.drawCounts.length; i++) {
-            data[3 + i] = this.drawCounts[i];
+            data[4 + i] = this.drawCounts[i];
         }
         return data;
     }
@@ -532,14 +546,17 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
             if (savedData.length >= 3) {
                 this.battlesToNextTribulation = savedData[2];
             }
-            if (savedData.length >= 4) {
-                if (savedData.length == 4) {
-                    this.drawCounts[0] = savedData[3];
-                } else {
-                    for (int i = 0; i < this.drawCounts.length && (i + 3) < savedData.length; i++) {
-                        this.drawCounts[i] = savedData[i + 3];
-                    }
-                }
+
+            int offset = 3;
+            if (savedData.length >= 4 + this.drawCounts.length) {
+                this.completedTribulationIndex = savedData[3];
+                offset = 4;
+            } else {
+                this.completedTribulationIndex = -1;
+            }
+
+            for (int i = 0; i < this.drawCounts.length && (i + offset) < savedData.length; i++) {
+                this.drawCounts[i] = savedData[i + offset];
             }
             updateDescription();
         }

@@ -391,9 +391,9 @@ public class GuZhenRen implements
         int tIndex = TribulationManager.currentCombatTribulationIndex;
         BattleStateManager.publishPostBattle();
 
-        // 杀招合成遗物掉落逻辑
+        // 杀招合成遗物与灾劫额外奖励掉落逻辑
         if (AbstractDungeon.player instanceof FangYuan) {
-            // 1. 普通房间掉落率15%
+            // 1. 杀招遗物掉落逻辑：普通房间掉落率15%
             float dropRate = 0.15f;
 
             if (room instanceof MonsterRoomBoss) {
@@ -402,7 +402,6 @@ public class GuZhenRen implements
                 dropRate = 0.50f; // 精英战 50%
             }
 
-            // 2. 灾劫战斗掉率倍率
             if (tIndex != -1) {
                 if (tIndex == 0) {
                     dropRate *= 3.0f; // 地灾：3倍
@@ -413,10 +412,7 @@ public class GuZhenRen implements
                 }
             }
 
-            // 3. 根据最终掉率判定
             if (dropRate >= 1.00f || AbstractDungeon.relicRng.randomBoolean(dropRate)) {
-
-                // 构建“玩家未拥有”的配方可用池
                 ArrayList<String> availableRecipes = new ArrayList<>();
                 for (String id : recipeRelicIDs) {
                     if (!AbstractDungeon.player.hasRelic(id)) {
@@ -424,11 +420,32 @@ public class GuZhenRen implements
                     }
                 }
 
-                // 从可用池中随机抽取掉落
                 if (!availableRecipes.isEmpty()) {
                     String randomID = availableRecipes.get(AbstractDungeon.relicRng.random(availableRecipes.size() - 1));
                     AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
                     room.rewards.add(new RewardItem(relic));
+                }
+            }
+
+            // 2. 灾劫局概率额外掉落一个常规遗物
+            if (tIndex != -1) {
+                float extraRelicDropRate = 0.0f;
+
+                if (tIndex == 0) {
+                    extraRelicDropRate = 0.40f; // 地灾：40% 掉落
+                } else if (tIndex == 1) {
+                    extraRelicDropRate = 0.70f; // 天劫：70% 掉落
+                } else if (tIndex >= 2) {
+                    extraRelicDropRate = 1.00f; // 浩劫及以上：100% 掉落
+                }
+
+                if (extraRelicDropRate >= 1.00f || AbstractDungeon.relicRng.randomBoolean(extraRelicDropRate)) {
+                    AbstractRelic.RelicTier randomTier = AbstractDungeon.returnRandomRelicTier();
+                    AbstractRelic randomRelic = AbstractDungeon.returnRandomRelic(randomTier);
+
+                    if (randomRelic != null) {
+                        room.rewards.add(new RewardItem(randomRelic));
+                    }
                 }
             }
         }

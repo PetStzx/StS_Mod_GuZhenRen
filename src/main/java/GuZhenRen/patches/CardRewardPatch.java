@@ -2,6 +2,7 @@ package GuZhenRen.patches;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.AbstractGuZhenRenCard;
+import GuZhenRen.relics.AbstractKongQiao;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
@@ -37,32 +38,84 @@ public class CardRewardPatch {
             }
         }
 
-        // 3. 遍历掉落的卡牌，判定是否需要替换（现在只判定仙蛊唯一性）
+        // 3. 仙蛊唯一性防重
         for (int i = 0; i < __result.size(); i++) {
             AbstractCard c = __result.get(i);
 
             if (c instanceof AbstractGuZhenRenCard) {
                 AbstractGuZhenRenCard guCard = (AbstractGuZhenRenCard) c;
 
-                // 判断是否是玩家已经拥有的仙蛊
                 if (guCard.isXianGu() && playerXianGuIDs.contains(guCard.cardID)) {
                     GuZhenRen.logger.info("过滤掉落 [" + guCard.name + "] 原因: 已有同名仙蛊");
 
-                    // 传入索引 i 作为固定种子的参数
-                    AbstractCard replacement = getReplacementCard(
-                            c.rarity,
-                            c.upgraded,
-                            currentRewardIDs,
-                            playerXianGuIDs,
-                            i
-                    );
+                    AbstractCard replacement = getReplacementCard(c.rarity, c.upgraded, currentRewardIDs, playerXianGuIDs, i);
 
                     if (replacement != null) {
                         __result.set(i, replacement);
                         currentRewardIDs.add(replacement.cardID);
                         GuZhenRen.logger.info("   -> 替换为：" + replacement.name);
-                    } else {
-                        GuZhenRen.logger.info("   -> 替换失败：无可用卡牌");
+                    }
+                }
+            }
+        }
+
+        // 4. 灾劫战斗后：获取玩家身上的空窍遗物，读取存活下来的灾劫索引
+        AbstractKongQiao kq = AbstractKongQiao.getInstance();
+
+        if (kq != null && kq.completedTribulationIndex != -1) {
+            AbstractCard.CardTags targetDaoTag = null;
+
+            // 4.1 寻找牌组中第一张本命蛊，决定流派倾向（变化道与杀道目前无倾向）
+            if (AbstractDungeon.player.masterDeck != null) {
+                for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+                    if (c.hasTag(GuZhenRenTags.BEN_MING_GU)) {
+                        String id = c.cardID;
+                        if (id.equals(GuZhenRen.makeID("LiLiangGu"))) targetDaoTag = GuZhenRenTags.LI_DAO;
+                        else if (id.equals(GuZhenRen.makeID("RenGu"))) targetDaoTag = GuZhenRenTags.JIAN_DAO;
+                        else if (id.equals(GuZhenRen.makeID("HuoGu"))) targetDaoTag = GuZhenRenTags.YAN_DAO;
+                        else if (id.equals(GuZhenRen.makeID("XinXue"))) targetDaoTag = GuZhenRenTags.XUE_DAO;
+                        else if (id.equals(GuZhenRen.makeID("ZhiHuiGu"))) targetDaoTag = GuZhenRenTags.ZHI_DAO;
+                        break;
+                    }
+                }
+            }
+
+            // 4.2 如果有指定流派，在当前的奖励列表里挑一张变成该流派
+            if (targetDaoTag != null) {
+                ArrayList<Integer> replaceableIndices = new ArrayList<>();
+                for (int i = 0; i < __result.size(); i++) {
+                    if (!__result.get(i).tags.contains(targetDaoTag)) {
+                        replaceableIndices.add(i);
+                    }
+                }
+
+                if (!replaceableIndices.isEmpty()) {
+                    long seed = Settings.seed ^ (AbstractDungeon.floorNum * 777L);
+                    com.megacrit.cardcrawl.random.Random rng = new com.megacrit.cardcrawl.random.Random(seed);
+
+                    int replaceIndex = replaceableIndices.get(rng.random(replaceableIndices.size() - 1));
+                    AbstractCard cardToReplace = __result.get(replaceIndex);
+
+                    // 在同稀有度中寻找目标流派的候选牌
+                    ArrayList<AbstractCard> candidates = getValidCandidates(cardToReplace.rarity, cardToReplace.upgraded, currentRewardIDs, playerXianGuIDs);
+                    ArrayList<AbstractCard> schoolCandidates = new ArrayList<>();
+
+                    for (AbstractCard c : candidates) {
+                        if (c.tags.contains(targetDaoTag)) {
+                            schoolCandidates.add(c);
+                        }
+                    }
+
+                    if (!schoolCandidates.isEmpty()) {
+                        schoolCandidates.sort(Comparator.comparing(card -> card.cardID));
+                        AbstractCard chosen = schoolCandidates.get(rng.random(schoolCandidates.size() - 1));
+
+                        AbstractCard replacement = chosen.makeCopy();
+                        if (cardToReplace.upgraded) replacement.upgrade();
+
+                        __result.set(replaceIndex, replacement);
+                        currentRewardIDs.add(replacement.cardID);
+                        GuZhenRen.logger.info("灾劫奖励卡牌定向：将位置 " + replaceIndex + " 替换为卡牌 " + replacement.name);
                     }
                 }
             }
@@ -104,7 +157,7 @@ public class CardRewardPatch {
 
                 AbstractCard chosen = candidates.get(deterministicRng.random(candidates.size() - 1));
 
-                AbstractGuZhenRenCard finalCard = (AbstractGuZhenRenCard) chosen.makeCopy();
+                AbstractCard finalCard = chosen.makeCopy();
                 if (needUpgrade) finalCard.upgrade();
                 return finalCard;
             }
