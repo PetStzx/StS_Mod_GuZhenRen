@@ -444,5 +444,238 @@
     "DESCRIPTIONS": [
       "本场战斗中所有流派的牌均视为 #y剑道 。"
     ]
+  },
+  "GuZhenRen:PlayerTribulationPower": {
+    "NAME": "灾劫",
+    "DESCRIPTIONS": [
+      " #r%s 正在你的仙窍中肆虐： NL %s",
+      "受 #r%s 影响，本场战斗出现了更多敌人。",
+      "受 #r%s 影响，本场战斗出现了拥有蛊虫的强大敌人。",
+      "每回合开始时，将1张 #y灼伤 加入你的手牌。",
+      "战斗开始时，获得 #y缓慢 。",
+      "每回合开始时，将1张 #y虚空 加入你的弃牌堆。",
+      " #r%s 正在肆虐： NL %s",
+      "战斗开始时，你每有 4 张牌，将 1 张 #y黑火 加入你的抽牌堆（至少 1 张）。",
+      "战斗开始时，你每有 %d 张牌，将 1 张 #y混沌 加入你的抽牌堆（至少 1 张）。"
+    ]
+  },
+  "GuZhenRen:HuanManPower": {
+    "NAME": "缓慢",
+    "DESCRIPTIONS": [
+      "你在本回合每打出一张牌，从攻击受到的伤害增加 #b10% 。",
+      " NL （受到 #b",
+      "% 额外伤害）"
+    ]
+  },
+  "GuZhenRen:HuoXiNiPower": {
+    "NAME": "和稀泥",
+    "DESCRIPTIONS": [
+      "攻击时，随机消耗你抽牌堆或弃牌堆中的 #b%d 张牌。"
+    ]
+  },
+  "GuZhenRen:ChiTongHuoYiPower": {
+    "NAME": "赤铜火蚁",
+    "DESCRIPTIONS": [
+      "回合开始时，给予你 #b%d 层 #y焚烧 。"
+    ]
+  },
+  "GuZhenRen:ZiAiPower": {
+    "NAME": "自爱",
+    "DESCRIPTIONS": [
+      "回合开始时，净化自身所有的 #y负面状态 。"
+    ]
+  },
+  "GuZhenRen:ShuiMuTianHuaGuPower": {
+    "NAME": "水幕天华蛊",
+    "DESCRIPTIONS": [
+      "若本回合没有失去过生命，回合开始时获得 #b%d 点 #y格挡 。"
+    ]
+  },
+  "GuZhenRen:LangJingPower": {
+    "NAME": "浪静",
+    "DESCRIPTIONS": [
+      "本回合受到的所有伤害减少 #b",
+      " 。每次受到伤害，层数增加 1 。"
+    ]
+  },
+  "GuZhenRen:ZhengChangPower": {
+    "NAME": "正常",
+    "DESCRIPTIONS": [
+      " #b",
+      " 回合后，清空你的所有状态。",
+      "本回合结束时清空你所有的状态。"
+    ]
+  },
+  "GuZhenRen:TieBiPower": {
+    "NAME": "铁壁",
+    "DESCRIPTIONS": [
+      "回合开始时，获得 #b%d 点 #y格挡 。"
+    ]
+  },
+  "GuZhenRen:SiQiJiangZhiPower": {
+    "NAME": "死期将至",
+    "DESCRIPTIONS": [
+      " #b",
+      " 回合后，你死亡。",
+      "本回合结束时，你死亡。"
+    ]
+  },
+  "GuZhenRen:MuMeiGuPower": {
+    "NAME": "木魅蛊",
+    "DESCRIPTIONS": [
+      "最大生命值减半。 ",
+      " 的回合结束时，回复已损失生命值的 95%。（恢复 #b",
+      " 点生命）。"
+    ]
+  },
+  "GuZhenRen:HongLeiGuPower": {
+    "NAME": "轰雷蛊",
+    "DESCRIPTIONS": [
+      " #b",
+      " 回合后，对你造成 #b25 点伤害。",
+      "本回合结束时，对你造成 #b25 点伤害。"
+    ]
+  },
+  "GuZhenRen:DingKongPower": {
+    "NAME": "定空",
+    "DESCRIPTIONS": [
+      "你的手牌上限减少 #b5 。"
+    ]
+  },
+  "GuZhenRen:ZhenPower": {
+    "NAME": "镇",
+    "DESCRIPTIONS": [
+      "你每打出 #b7 张牌，失去 #b1 点 #y力量 。(当前已打出 #b",
+      " 张)"
+    ]
+  },
+  "GuZhenRen:SuoPower": {
+    "NAME": "锁",
+    "DESCRIPTIONS": [
+      "你每打出 #b7 张牌，失去 #b1 点 #y敏捷 。(当前已打出 #b",
+      " 张)"
+    ]
+  },
+  "GuZhenRen:GuoDeQuPower": {
+    "NAME": "过得去",
+    "DESCRIPTIONS": [
+      "无效化你每回合打出的第一张牌。"
+    ]
+  },
+  "GuZhenRen:GuanPower": {
+    "NAME": "关",
+    "DESCRIPTIONS": [
+      "在你的回合内每失去 #b",
+      " 点生命，强制结束你的回合。"
+    ]
+  },
+  "GuZhenRen:SongZhenPower": {
+    "NAME": "松针",
+    "DESCRIPTIONS": [
+      "回合结束时获得 #b",
+      " 层 #y荆棘 。 #y",
+      " 的攻击伤害受 #y荆棘 加成。"
+    ]
+  },
+  "GuZhenRen:XiaoJiaZiQiPower": {
+    "NAME": "小家子气",
+    "DESCRIPTIONS": [
+      "你在回合内连续打出同一流派的牌时，计数增加 #b5 。回合结束时，对你造成 #b",
+      " 点伤害，然后重置计数。"
+    ]
+  },
+  "GuZhenRen:ZhenYuPower": {
+    "NAME": "镇宇",
+    "DESCRIPTIONS": [
+      "在你的回合内你无法额外抽牌。"
+    ]
+  },
+  "GuZhenRen:TongXinPower": {
+    "NAME": "通心",
+    "DESCRIPTIONS": [
+      "你每打出一张牌， #y",
+      " 接管你打出一张手牌。"
+    ]
+  },
+  "GuZhenRen:YingShengChongPower": {
+    "NAME": "应声虫",
+    "DESCRIPTIONS": [
+      "但凡听到此声的存在，只要回应一声，都会沦为奴仆。",
+      "若你在本回合打出了 #y",
+      "！",
+      "你是我的了！！",
+      " ，即刻死亡。"
+    ]
+  },
+  "GuZhenRen:GuiGuaYiPower": {
+    "NAME": "鬼卦衣",
+    "DESCRIPTIONS": [
+      "意图不为攻击时，获得 #y无实体 。"
+    ]
+  },
+  "GuZhenRen:DaJiaZhiQiPower": {
+    "NAME": "大家之气",
+    "DESCRIPTIONS": [
+      "你在回合内每累计打出一种流派的牌，层数增加 #b5 。回合结束时，对你造成 #b",
+      " 点伤害，然后重置计数。",
+      " NL 本回合已打出："
+    ]
+  },
+  "GuZhenRen:HunBaoGuPower": {
+    "NAME": "魂爆蛊",
+    "DESCRIPTIONS": [
+      "死亡时对所有单位造成 #b",
+      " 点伤害。"
+    ]
+  },
+  "GuZhenRen:CaoMangPower": {
+    "NAME": "草莽",
+    "DESCRIPTIONS": [
+      "获得 #b",
+      " 点力量。受到未被格挡的 #y焚烧 伤害时，层数减少1。"
+    ]
+  },
+  "GuZhenRen:LeiDianGuPower": {
+    "NAME": "雷电蛊",
+    "DESCRIPTIONS": [
+      " #b",
+      " 回合后，对你造成 #b8 点伤害 #b5 次。每次造成未被格挡的伤害，将 1 张 #y眩晕 放入你的抽牌堆顶部。",
+      "本回合结束时，对你造成 #b8 点伤害 #b5 次。每次造成未被格挡的伤害，将 1 张 #y眩晕 放入你的抽牌堆顶部。"
+    ]
+  },
+  "GuZhenRen:TianWangPower": {
+    "NAME": "天网",
+    "DESCRIPTIONS": [
+      "你无法打出攻击牌。打出 #b",
+      " 张牌后，在本回合移除此效果。",
+      "本回合天网已解除。"
+    ]
+  },
+  "GuZhenRen:ChouHenGuPower": {
+    "NAME": "仇恨蛊",
+    "DESCRIPTIONS": [
+      "每回合首次受到未被格挡的攻击伤害， #y",
+      " 的下次攻击额外附带等量伤害。"
+    ]
+  },
+  "GuZhenRen:MingJiaPower": {
+    "NAME": "命甲",
+    "DESCRIPTIONS": [
+      "每回合开始时随机执行一项：获得 #b99 层 #y缓冲 ，或失去所有 #y缓冲 。"
+    ]
+  },
+  "GuZhenRen:DouZhuanPower": {
+    "NAME": "斗转",
+    "DESCRIPTIONS": [
+      "回合开始时，若当前生命值低于已损失生命值，置换二者的值。（当前生命：",
+      " / 已损失生命：",
+      "）"
+    ]
+  },
+  "GuZhenRen:YongShengPower": {
+    "NAME": "永生",
+    "DESCRIPTIONS": [
+      "你不会失去生命。 NL 你打出的牌不消耗能量。 NL 你的手牌始终补满。"
+    ]
   }
 }

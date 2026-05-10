@@ -444,5 +444,238 @@
     "DESCRIPTIONS": [
       "For the rest of this combat, all Path cards are considered #ySword #yPath ."
     ]
+  },
+  "GuZhenRen:PlayerTribulationPower": {
+    "NAME": "Tribulation",
+    "DESCRIPTIONS": [
+      " #r%s is raging in your immortal aperture: NL %s",
+      "Affected by #r%s , more enemies appear in this combat.",
+      "Affected by #r%s , powerful enemies with Gu worms appear in this combat.",
+      "At the start of each turn, add 1 #yBurn into your hand.",
+      "At the start of combat, gain #ySlow .",
+      "At the start of each turn, add 1 #yVoid into your discard pile.",
+      " #r%s is raging: NL %s",
+      "At the start of combat, for every 4 cards in your deck, add 1 #yBlack #yFire into your draw pile (minimum 1).",
+      "At the start of combat, for every %d cards in your deck, add 1 #yChaos into your draw pile (minimum 1)."
+    ]
+  },
+  "GuZhenRen:HuanManPower": {
+    "NAME": "Slow",
+    "DESCRIPTIONS": [
+      "Whenever you play a card this turn, attack damage taken is increased by #b10% .",
+      " NL (Taking #b",
+      "% extra damage)"
+    ]
+  },
+  "GuZhenRen:HuoXiNiPower": {
+    "NAME": "Muddle",
+    "DESCRIPTIONS": [
+      "When attacking, randomly #yExhaust #b%d card(s) from your draw pile or discard pile."
+    ]
+  },
+  "GuZhenRen:ChiTongHuoYiPower": {
+    "NAME": "Crimson Copper Fire Ant",
+    "DESCRIPTIONS": [
+      "At the start of your turn, apply #b%d stacks of #yBurning to you."
+    ]
+  },
+  "GuZhenRen:ZiAiPower": {
+    "NAME": "Self-Love",
+    "DESCRIPTIONS": [
+      "At the start of your turn, cleanse all your #yDebuffs ."
+    ]
+  },
+  "GuZhenRen:ShuiMuTianHuaGuPower": {
+    "NAME": "Water Curtain Sky Flower Gu",
+    "DESCRIPTIONS": [
+      "If you did not lose HP last turn, gain #b%d #yBlock at the start of your turn."
+    ]
+  },
+  "GuZhenRen:LangJingPower": {
+    "NAME": "Calm Wave",
+    "DESCRIPTIONS": [
+      "All damage taken this turn is reduced by #b",
+      " . Each time you take damage, the amount increases by 1."
+    ]
+  },
+  "GuZhenRen:ZhengChangPower": {
+    "NAME": "Normal",
+    "DESCRIPTIONS": [
+      "In #b",
+      " turn(s), clear all your statuses.",
+      "At the end of this turn, clear all your statuses."
+    ]
+  },
+  "GuZhenRen:TieBiPower": {
+    "NAME": "Iron Wall",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b%d #yBlock ."
+    ]
+  },
+  "GuZhenRen:SiQiJiangZhiPower": {
+    "NAME": "Approaching Doom",
+    "DESCRIPTIONS": [
+      "In #b",
+      " turn(s), you die.",
+      "At the end of this turn, you die."
+    ]
+  },
+  "GuZhenRen:MuMeiGuPower": {
+    "NAME": "Wood Charm Gu",
+    "DESCRIPTIONS": [
+      "Max HP is halved. ",
+      "'s end of turn, heals 95% of missing HP. (Heals #b",
+      " HP)."
+    ]
+  },
+  "GuZhenRen:HongLeiGuPower": {
+    "NAME": "Crashing Thunder Gu",
+    "DESCRIPTIONS": [
+      "In #b",
+      " turn(s), take #b25 damage.",
+      "At the end of this turn, take #b25 damage."
+    ]
+  },
+  "GuZhenRen:DingKongPower": {
+    "NAME": "Fixed Space",
+    "DESCRIPTIONS": [
+      "Your hand size limit is reduced by #b5 ."
+    ]
+  },
+  "GuZhenRen:ZhenPower": {
+    "NAME": "Suppress",
+    "DESCRIPTIONS": [
+      "For every #b7 cards you play, lose #b1 #yStrength . (Currently played #b",
+      " card(s))"
+    ]
+  },
+  "GuZhenRen:SuoPower": {
+    "NAME": "Lock",
+    "DESCRIPTIONS": [
+      "For every #b7 cards you play, lose #b1 #yDexterity . (Currently played #b",
+      " card(s))"
+    ]
+  },
+  "GuZhenRen:GuoDeQuPower": {
+    "NAME": "Passable",
+    "DESCRIPTIONS": [
+      "Negate the first card you play each turn."
+    ]
+  },
+  "GuZhenRen:GuanPower": {
+    "NAME": "Close",
+    "DESCRIPTIONS": [
+      "For every #b",
+      " HP you lose during your turn, forcefully end your turn."
+    ]
+  },
+  "GuZhenRen:SongZhenPower": {
+    "NAME": "Pine Needle",
+    "DESCRIPTIONS": [
+      "At the end of your turn, gain #b",
+      " #yThorns . #y",
+      "'s attack damage is increased by #yThorns ."
+    ]
+  },
+  "GuZhenRen:XiaoJiaZiQiPower": {
+    "NAME": "Pettiness",
+    "DESCRIPTIONS": [
+      "Whenever you play consecutive cards of the same Path this turn, this counter increases by #b5 . At the end of your turn, take #b",
+      " damage, then reset the counter."
+    ]
+  },
+  "GuZhenRen:ZhenYuPower": {
+    "NAME": "Suppress Space",
+    "DESCRIPTIONS": [
+      "You cannot draw additional cards during your turn."
+    ]
+  },
+  "GuZhenRen:TongXinPower": {
+    "NAME": "Connect Heart",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, #y",
+      " takes over and plays a card from your hand."
+    ]
+  },
+  "GuZhenRen:YingShengChongPower": {
+    "NAME": "Echo Bug",
+    "DESCRIPTIONS": [
+      "Any existence that hears this sound and responds will become a slave.",
+      "If you played #y",
+      "!",
+      "You are mine!!",
+      " this turn, you die instantly."
+    ]
+  },
+  "GuZhenRen:GuiGuaYiPower": {
+    "NAME": "Ghost Divination Garment",
+    "DESCRIPTIONS": [
+      "When intent is not an attack, gain #yIntangible ."
+    ]
+  },
+  "GuZhenRen:DaJiaZhiQiPower": {
+    "NAME": "Magnanimity",
+    "DESCRIPTIONS": [
+      "For each distinct Path card you play this turn, this counter increases by #b5 . At the end of your turn, take #b",
+      " damage, then reset the counter.",
+      " NL Paths played this turn: "
+    ]
+  },
+  "GuZhenRen:HunBaoGuPower": {
+    "NAME": "Soul Explosion Gu",
+    "DESCRIPTIONS": [
+      "Upon death, deal #b",
+      " damage to all targets."
+    ]
+  },
+  "GuZhenRen:CaoMangPower": {
+    "NAME": "Wilderness",
+    "DESCRIPTIONS": [
+      "Gain #b",
+      " #yStrength . Whenever you take unblocked #yBurning damage, reduce this amount by 1."
+    ]
+  },
+  "GuZhenRen:LeiDianGuPower": {
+    "NAME": "Lightning Gu",
+    "DESCRIPTIONS": [
+      "In #b",
+      " turn(s), take #b8 damage #b5 times. For each time you take unblocked damage, put 1 #yDazed on top of your draw pile.",
+      "At the end of this turn, take #b8 damage #b5 times. For each time you take unblocked damage, put 1 #yDazed on top of your draw pile."
+    ]
+  },
+  "GuZhenRen:TianWangPower": {
+    "NAME": "Heavenly Net",
+    "DESCRIPTIONS": [
+      "You cannot play Attacks. After playing #b",
+      " card(s), remove this effect for this turn.",
+      "Heavenly Net is disabled this turn."
+    ]
+  },
+  "GuZhenRen:ChouHenGuPower": {
+    "NAME": "Hatred Gu",
+    "DESCRIPTIONS": [
+      "The first time taking unblocked attack damage each turn, #y",
+      "'s next attack deals equal additional damage."
+    ]
+  },
+  "GuZhenRen:MingJiaPower": {
+    "NAME": "Life Armor",
+    "DESCRIPTIONS": [
+      "At the start of each turn, randomly: gain #b99 #yBuffer , or lose all #yBuffer ."
+    ]
+  },
+  "GuZhenRen:DouZhuanPower": {
+    "NAME": "Shift",
+    "DESCRIPTIONS": [
+      "At the start of your turn, if current HP is lower than missing HP, swap their values. (Current HP: ",
+      " / Missing HP: ",
+      ")"
+    ]
+  },
+  "GuZhenRen:YongShengPower": {
+    "NAME": "Eternal Life",
+    "DESCRIPTIONS": [
+      "You cannot lose HP. NL Cards you play cost 0 Energy. NL Your hand is always full."
+    ]
   }
 }
