@@ -10,56 +10,63 @@
     "NAME": "Rank 2 Aperture",
     "FLAVOR": "A Rank 2 Gu Master's aperture, produces red steel primeval essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y2 you play each combat costs 0."
+      "Each combat, the first Gu below #yRank #y2 is played for free."
     ]
   },
   "GuZhenRen:KongQiao_3": {
     "NAME": "Rank 3 Aperture",
     "FLAVOR": "A Rank 3 Gu Master's aperture, produces white silver primeval essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y3 you play each combat costs 0."
+      "Each combat, the first Gu below #yRank #y3 is played for free."
     ]
   },
   "GuZhenRen:KongQiao_4": {
     "NAME": "Rank 4 Aperture",
     "FLAVOR": "A Rank 4 Gu Master's aperture, produces yellow gold primeval essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y4 you play each combat costs 0."
+      "Each combat, the first Gu below #yRank #y4 is played for free."
     ]
   },
   "GuZhenRen:KongQiao_5": {
     "NAME": "Rank 5 Aperture",
     "FLAVOR": "A Rank 5 Gu Master's aperture, produces purple crystal primeval essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y5 you play each combat costs 0."
+      "Each combat, the first Gu below #yRank #y5 is played for free."
     ]
   },
   "GuZhenRen:XianQiao_6": {
     "NAME": "Rank 6 Immortal Aperture",
     "FLAVOR": "A Rank 6 Gu Immortal's immortal aperture, produces green grape immortal essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y6 you play each combat costs 0."
+      "Upon pickup, raise your Max HP by #b6 . NL At the start of each combat, put 1 #yGreen #yGrape #yImmortal #yEssence into your hand."
     ]
   },
   "GuZhenRen:XianQiao_7": {
     "NAME": "Rank 7 Immortal Aperture",
     "FLAVOR": "A Rank 7 Gu Immortal's immortal aperture, produces red date immortal essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y7 you play each combat costs 0."
+      "Upon pickup, raise your Max HP by #b7 . NL At the start of each combat, put 1 #yRed #yDate #yImmortal #yEssence into your hand."
     ]
   },
   "GuZhenRen:XianQiao_8": {
     "NAME": "Rank 8 Immortal Aperture",
     "FLAVOR": "A Rank 8 Gu Immortal's immortal aperture, produces white litchi immortal essence.",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y8 you play each combat costs 0."
+      "Upon pickup, raise your Max HP by #b8 . NL At the start of each combat, put 1 #yWhite #yLitchi #yImmortal #yEssence into your hand."
     ]
   },
   "GuZhenRen:XianQiao_9": {
     "NAME": "Rank 9 Immortal Aperture",
     "FLAVOR": "\"Everyone, I want you to remember, I, Gu Yue Fang Yuan, am Great Love Immortal Venerable!\"",
     "DESCRIPTIONS": [
-      "The first Gu worm card below #yRank #y9 you play each combat costs 0."
+      "Upon pickup, raise your Max HP by #b9 . NL At the start of each combat, put 1 #yYellow #yApricot #yImmortal #yEssence into your hand."
+    ]
+  },
+  "GuZhenRen:XianQiao_10": {
+    "NAME": "Rank 10 Immortal Aperture",
+    "FLAVOR": "\"Obstacles and difficulties fill this road, life and death matters little against calamities and tribulations. My body flies like willows with the wind, regardless of wind or mud I still fly free.\"",
+    "DESCRIPTIONS": [
+      "Unscathed by a thousand disasters, unground by ten thousand tribulations. Nothing in the world can threaten your existence anymore."
     ]
   },
   "GuZhenRen:LiDaoDaoHen": {
