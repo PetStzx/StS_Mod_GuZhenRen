@@ -29,11 +29,11 @@ public class FangWeiGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.BIAN_HUA_DAO);
         this.setRank(INITIAL_RANK);
 
-        this.purgeOnUse = true;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+        this.purgeOnUse = true;
         this.addToBot(new FangWeiGuAction(this.upgraded));
     }
 

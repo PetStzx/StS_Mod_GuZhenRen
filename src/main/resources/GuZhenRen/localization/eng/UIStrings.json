@@ -58,6 +58,32 @@
   },
   "GuZhenRen:KongQiaoUI": {
     "TEXT": [
+      "Requires #b%d more #yCultivation to break through.",
+      "Cultivation",
+      " NL Accumulate #b%d more #yCultivation to undergo tribulation in the next combat.",
+      " NL Right-click this relic outside of combat to cancel Immortal Ascension.",
+      " NL You will face #r%s in the next combat.",
+      " NL #b%d combat(s) remaining until the next #r%s .",
+      " NL Right-click this relic outside of combat to cancel Venerable Ascension.",
+      " NL #r%s is currently occurring.",
+      " After passing #r%s , break through to #y%s .",
+      " After passing #r%s , undergo Venerable Ascension in the next combat.",
+      "Rank 10",
+      " NL Right-click this relic outside of combat to prepare for tribulation."
+    ]
+  },
+  "GuZhenRen:TribulationNames": {
+    "TEXT": [
+      "Earthly Calamity",
+      "Heavenly Tribulation",
+      "Grand Tribulation",
+      "Myriad Tribulation",
+      "Minor Chaos Disaster",
+      "Major Chaos Disaster"
+    ]
+  },
+  "GuZhenRen:KongQiaoUI": {
+    "TEXT": [
       " Requires #b%d more #yCultivation to break through.",
       "Cultivation"
     ]

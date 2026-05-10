@@ -48,9 +48,11 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
         ArrayList<AbstractGameAction> adjustActions = new ArrayList<>();
 
         for (AbstractPower p : owner.powers) {
-            // 1. 放行：万物大同变自己 和 所有道痕
+            // 1. 放行：万物大同变自己、所有道痕、灾劫、永生
             if (p.ID.equals(this.ID)) continue;
             if (p instanceof AbstractDaoHenPower) continue;
+            if (p.ID.equals(PlayerTribulationPower.POWER_ID)) continue;
+            if (p.ID.equals(YongShengPower.POWER_ID)) continue;
 
             // 2. 统计所有道痕对该状态的保护层数
             int protectedAmt = 0;
@@ -114,6 +116,8 @@ public class WanWuDaTongBianPower extends AbstractPower implements OnReceivePowe
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
         if (AbstractDaoHenPower.isDerivedPower) return true;
         if (power instanceof AbstractDaoHenPower) return true;
+        if (power.ID.equals(PlayerTribulationPower.POWER_ID)) return true;
+        if (power.ID.equals(YongShengPower.POWER_ID)) return true;
 
         int convertAmt = (power.amount <= 0) ? 1 : power.amount;
 

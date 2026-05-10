@@ -2,8 +2,10 @@ package GuZhenRen;
 
 import GuZhenRen.effects.BenMingGuOpeningEffect;
 import GuZhenRen.util.BattleStateManager;
+import GuZhenRen.util.TribulationManager;
 import basemod.BaseMod;
 import basemod.interfaces.*;
+import basemod.interfaces.AddAudioSubscriber;
 import GuZhenRen.character.FangYuan;
 import GuZhenRen.potions.*;
 import com.badlogic.gdx.graphics.Color;
@@ -19,7 +21,6 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import GuZhenRen.cards.*;
 import GuZhenRen.relics.*;
 import GuZhenRen.patches.*;
-import GuZhenRen.powers.*;
 import GuZhenRen.variables.SecondMagicNumber;
 import GuZhenRen.variables.FenShaoVariable;
 import GuZhenRen.variables.NianVariable;
@@ -44,7 +45,8 @@ public class GuZhenRen implements
         PostDungeonInitializeSubscriber,
         OnStartBattleSubscriber,
         PostEnergyRechargeSubscriber,
-        PostBattleSubscriber
+        PostBattleSubscriber,
+        AddAudioSubscriber
 {
     public static final Logger logger = LogManager.getLogger(GuZhenRen.class.getName());
     public static final String MOD_ID = "GuZhenRen";
@@ -247,6 +249,12 @@ public class GuZhenRen implements
         BaseMod.addCard(new BianXing());
         BaseMod.addCard(new JuGuangGu());
         BaseMod.addCard(new JiangHeRiXiaGu());
+        BaseMod.addCard(new QingTiXianYuan());
+        BaseMod.addCard(new HongZaoXianYuan());
+        BaseMod.addCard(new BaiLiXianYuan());
+        BaseMod.addCard(new HuangXingXianYuan());
+        BaseMod.addCard(new HeiHuo());
+        BaseMod.addCard(new HunDun());
     }
 
     @Override
@@ -262,6 +270,7 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new XianQiao_7(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianQiao_8(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianQiao_9(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new XianQiao_10(), CardColorEnum.GUZHENREN_GREY);
 
         BaseMod.addRelicToCustomPool(new LiDaoDaoHen(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new XianGuCanHai(), CardColorEnum.GUZHENREN_GREY);
@@ -315,6 +324,13 @@ public class GuZhenRen implements
     }
 
     @Override
+    public void receiveAddAudio() {
+        BaseMod.addAudio(GuZhenRen.makeID("LiuGuanYi"), assetPath("audio/sound/LiuGuanYi.ogg"));
+        BaseMod.addAudio(GuZhenRen.makeID("LianTianMoZun"), assetPath("audio/sound/LianTianMoZun.ogg"));
+        BaseMod.addAudio(GuZhenRen.makeID("YouHunMoZun"), assetPath("audio/sound/YouHunMoZun.ogg"));
+    }
+
+    @Override
     public void receivePostInitialize() {
         BaseMod.addPotion(
                 ShengJiYe.class,
@@ -324,6 +340,8 @@ public class GuZhenRen implements
                 ShengJiYe.POTION_ID,
                 AbstractPlayerEnum.FANG_YUAN
         );
+
+        TribulationManager.initialize();
     }
 
     @Override
@@ -371,24 +389,31 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostBattle(AbstractRoom room) {
+        int tIndex = TribulationManager.currentCombatTribulationIndex;
         BattleStateManager.publishPostBattle();
 
-        // 杀招合成遗物掉落逻辑
+        // 杀招合成遗物与灾劫额外奖励掉落逻辑
         if (AbstractDungeon.player instanceof FangYuan) {
-            // 默认普通战斗掉落率为 15%
+            // 1. 杀招遗物掉落逻辑：普通房间掉落率15%
             float dropRate = 0.15f;
 
-            // 判断房间类型，修改掉落率
             if (room instanceof MonsterRoomBoss) {
                 dropRate = 1.00f; // Boss战 100%
             } else if (room instanceof MonsterRoomElite) {
                 dropRate = 0.50f; // 精英战 50%
             }
 
-            // 根据当前的掉落率进行随机判定
-            if (AbstractDungeon.relicRng.randomBoolean(dropRate)) {
+            if (tIndex != -1) {
+                if (tIndex == 0) {
+                    dropRate *= 3.0f; // 地灾：3倍
+                } else if (tIndex == 1) {
+                    dropRate *= 5.0f; // 天劫：5倍
+                } else if (tIndex >= 2) {
+                    dropRate = 1.00f; // 浩劫及以上：100%
+                }
+            }
 
-                // 构建“玩家未拥有”的配方可用池
+            if (dropRate >= 1.00f || AbstractDungeon.relicRng.randomBoolean(dropRate)) {
                 ArrayList<String> availableRecipes = new ArrayList<>();
                 for (String id : recipeRelicIDs) {
                     if (!AbstractDungeon.player.hasRelic(id)) {
@@ -396,11 +421,32 @@ public class GuZhenRen implements
                     }
                 }
 
-                // 从可用池中随机抽取掉落
                 if (!availableRecipes.isEmpty()) {
                     String randomID = availableRecipes.get(AbstractDungeon.relicRng.random(availableRecipes.size() - 1));
                     AbstractRelic relic = com.megacrit.cardcrawl.helpers.RelicLibrary.getRelic(randomID).makeCopy();
                     room.rewards.add(new RewardItem(relic));
+                }
+            }
+
+            // 2. 灾劫局概率额外掉落一个常规遗物
+            if (tIndex != -1) {
+                float extraRelicDropRate = 0.0f;
+
+                if (tIndex == 0) {
+                    extraRelicDropRate = 0.40f; // 地灾：40% 掉落
+                } else if (tIndex == 1) {
+                    extraRelicDropRate = 0.70f; // 天劫：70% 掉落
+                } else if (tIndex >= 2) {
+                    extraRelicDropRate = 1.00f; // 浩劫及以上：100% 掉落
+                }
+
+                if (extraRelicDropRate >= 1.00f || AbstractDungeon.relicRng.randomBoolean(extraRelicDropRate)) {
+                    AbstractRelic.RelicTier randomTier = AbstractDungeon.returnRandomRelicTier();
+                    AbstractRelic randomRelic = AbstractDungeon.returnRandomRelic(randomTier);
+
+                    if (randomRelic != null) {
+                        room.rewards.add(new RewardItem(randomRelic));
+                    }
                 }
             }
         }

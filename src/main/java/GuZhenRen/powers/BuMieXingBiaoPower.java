@@ -44,6 +44,9 @@ public class BuMieXingBiaoPower extends AbstractPower {
 
     @Override
     public void atStartOfTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
         this.flash();
         this.addToBot(new BuMieXingBiaoAction(this.owner, this));
     }

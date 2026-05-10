@@ -45,6 +45,10 @@ public class JianQiPower extends AbstractPower {
 
     @Override
     public void atEndOfRound() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
+
         this.flash();
         this.addToBot(new AbstractGameAction() {
             @Override
@@ -54,7 +58,6 @@ public class JianQiPower extends AbstractPower {
             }
         });
     }
-
 
     public static class JianQiConvertAction extends AbstractGameAction {
         private final AbstractPower jianQi;
@@ -68,7 +71,7 @@ public class JianQiPower extends AbstractPower {
 
         @Override
         public void update() {
-            if (this.duration == Settings.ACTION_DUR_FAST && this.target != null && !this.target.isDeadOrEscaped()) {
+            if (this.duration == Settings.ACTION_DUR_FAST && this.target != null && !this.target.isDeadOrEscaped() && !this.target.halfDead) {
                 int convertAmount = this.jianQi.amount;
 
                 this.target.powers.remove(this.jianQi);

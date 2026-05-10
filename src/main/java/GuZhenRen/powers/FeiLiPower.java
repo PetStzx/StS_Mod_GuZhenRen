@@ -45,6 +45,9 @@ public class FeiLiPower extends AbstractPower {
 
     @Override
     public void duringTurn() {
+        if (this.owner == null || this.owner.isDeadOrEscaped() || this.owner.halfDead) {
+            return;
+        }
         this.flash();
         this.addToBot(new FeiLiAction(this.owner, this));
     }

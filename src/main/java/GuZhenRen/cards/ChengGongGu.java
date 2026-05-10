@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.vfx.BorderFlashEffect;
 import com.megacrit.cardcrawl.vfx.RainingGoldEffect;
 import com.megacrit.cardcrawl.vfx.SpotlightPlayerEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
-import com.megacrit.cardcrawl.vfx.combat.GrandFinalEffect; // 【新增】导入华丽收场特效
+import com.megacrit.cardcrawl.vfx.combat.GrandFinalEffect;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,6 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
         this.setDao(Dao.LU_DAO);
         this.setRank(INITIAL_RANK);
 
-        this.purgeOnUse = true;
     }
 
     // 渲染成金卡的视觉特效
@@ -67,6 +66,8 @@ public class ChengGongGu extends AbstractGuZhenRenCard {
     // 打出结算
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
+
+        this.purgeOnUse = true;
 
         if (Settings.FAST_MODE) {
             this.addToBot(new VFXAction(new GrandFinalEffect(), 0.7F));

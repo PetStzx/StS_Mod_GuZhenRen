@@ -100,7 +100,7 @@ public class FangYuan extends CustomPlayer {
         return new CharSelectInfo(
                 getLocalizedCharacterName(),
                 characterStrings.TEXT[0],
-                80, 80, 0, 99, 5,
+                72, 72, 0, 99, 5,
                 this, getStartingRelics(), getStartingDeck(), false
         );
     }

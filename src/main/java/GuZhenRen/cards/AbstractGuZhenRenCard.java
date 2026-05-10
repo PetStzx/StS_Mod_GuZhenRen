@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public abstract class AbstractGuZhenRenCard extends CustomCard implements CustomSavable<int[]>, SpawnModificationCard {
 
-    //  本地化资源加载
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("CardGlobalText"));
     public static final String[] TEXT = uiStrings.TEXT;
 
@@ -61,14 +60,14 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     // 标记该牌当前是否受到了空窍遗物的免费增益
     public boolean isKongQiaoFree = false;
 
-    // 第二魔法值 (用于显示特殊数值)
+    // 第二魔法值
     public int secondMagicNumber = -1;
     public int baseSecondMagicNumber = -1;
     public boolean upgradedSecondMagicNumber = false;
     public boolean isSecondMagicNumberModified = false;
 
     // =========================================================================
-    // 模组底层属性：焚烧 (FenShao)
+    // 底层属性：焚烧 (FenShao)
     // =========================================================================
     public int baseFenShao = -1;
     public int fenShao = -1;
@@ -76,7 +75,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     public boolean upgradedFenShao = false;
 
     // =========================================================================
-    // 模组底层属性：念 (Nian)
+    // 底层属性：念 (Nian)
     // =========================================================================
     public int baseNian = -1;
     public int nian = -1;
@@ -171,29 +170,24 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
     }
 
     // =========================================================================
-    // 动态计算是否享受空窍免耗能
+    // 计算是否享受空窍免耗能
     // =========================================================================
     private void applyKongQiaoCost() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return;
 
         AbstractKongQiao kq = AbstractKongQiao.getInstance();
 
-        // 判定：空窍存在、未使用过效果、满足转数压制
-        if (kq != null && !kq.effectUsedThisCombat && kq.rank > 1 && this.rank >= 1 && this.rank < kq.rank) {
+        if (kq != null && !kq.effectUsedThisCombat && kq.rank > 1 && kq.rank <= 5 && this.rank >= 1 && this.rank < kq.rank) {
             if (!this.isKongQiaoFree) {
                 this.isKongQiaoFree = true;
-                this.freeToPlayOnce = true; // 开启底层免费开关
+                this.freeToPlayOnce = true;
             }
         } else if (this.isKongQiaoFree) {
-            // 如果已经被使用过了，撤销免费
             this.isKongQiaoFree = false;
             this.freeToPlayOnce = false;
         }
     }
 
-    // =========================================================================
-    // 在扣费的最后一刻拦截
-    // =========================================================================
     @Override
     public boolean freeToPlay() {
         if (this.isKongQiaoFree) {
@@ -323,7 +317,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         this.upgradedNian = true;
     }
 
-    // 2. 重写原版的升级预览渲染方法
+    // 重写原版的升级预览渲染方法
     @Override
     public void displayUpgrades() {
         super.displayUpgrades();
