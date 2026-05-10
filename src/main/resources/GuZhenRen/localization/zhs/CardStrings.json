@@ -741,5 +741,32 @@
     "EXTENDED_DESCRIPTION": [
       " NL （命中 !GuZhenRen:SecondMagic! 次）"
     ]
+  },
+  "GuZhenRen:QingTiXianYuan": {
+    "NAME": "青提仙元",
+    "DESCRIPTION": " 保留 。 NL 获得 [E] [E] 。 NL 消耗 。"
+  },
+  "GuZhenRen:HongZaoXianYuan": {
+    "NAME": "红枣仙元",
+    "DESCRIPTION": " 保留 。 NL 获得 [E] [E] [E] 。 NL 消耗 。"
+  },
+  "GuZhenRen:BaiLiXianYuan": {
+    "NAME": "白荔仙元",
+    "DESCRIPTION": " 保留 。 NL 获得 4 [E] 。 NL 消耗 。"
+  },
+  "GuZhenRen:HuangXingXianYuan": {
+    "NAME": "黄杏仙元",
+    "DESCRIPTION": " 保留 。 NL 获得 5 [E] 。 NL 抽牌直到手牌上限。 NL 消耗 。"
+  },
+  "GuZhenRen:HeiHuo": {
+    "NAME": "黑火",
+    "DESCRIPTION": " 不能被打出 。 NL 在你的回合结束时，失去 3 点最大生命。 NL 被 消耗 时，失去 8 点最大生命。",
+    "EXTENDED_DESCRIPTION": [
+      "最大生命 -"
+    ]
+  },
+  "GuZhenRen:HunDun": {
+    "NAME": "混沌",
+    "DESCRIPTION": " 不能被打出 。 NL 在你的回合结束时，即刻死亡。 NL 被 消耗 时，将 3 张 *黑火 加入手牌。"
   }
 }

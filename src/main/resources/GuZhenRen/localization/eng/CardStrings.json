@@ -741,5 +741,32 @@
     "EXTENDED_DESCRIPTION": [
       " NL (Hits !GuZhenRen:SecondMagic! times)"
     ]
+  },
+  "GuZhenRen:QingTiXianYuan": {
+    "NAME": "Green Grape Immortal Essence",
+    "DESCRIPTION": " Retain . NL Gain [E] [E] . NL Exhaust ."
+  },
+  "GuZhenRen:HongZaoXianYuan": {
+    "NAME": "Red Date Immortal Essence",
+    "DESCRIPTION": " Retain . NL Gain [E] [E] [E] . NL Exhaust ."
+  },
+  "GuZhenRen:BaiLiXianYuan": {
+    "NAME": "White Litchi Immortal Essence",
+    "DESCRIPTION": " Retain . NL Gain 4 [E] . NL Exhaust ."
+  },
+  "GuZhenRen:HuangXingXianYuan": {
+    "NAME": "Yellow Apricot Immortal Essence",
+    "DESCRIPTION": " Retain . NL Gain 5 [E] . NL Draw cards until your hand is full. NL Exhaust ."
+  },
+  "GuZhenRen:HeiHuo": {
+    "NAME": "Black Fire",
+    "DESCRIPTION": " Unplayable . NL At the end of your turn, lose 3 Max HP. NL When Exhausted , lose 8 Max HP.",
+    "EXTENDED_DESCRIPTION": [
+      "Max HP -"
+    ]
+  },
+  "GuZhenRen:HunDun": {
+    "NAME": "Chaos",
+    "DESCRIPTION": " Unplayable . NL At the end of your turn, die instantly. NL When Exhausted , add 3 *Black *Fire into your hand."
   }
 }

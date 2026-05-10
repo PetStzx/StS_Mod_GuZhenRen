@@ -741,5 +741,32 @@
     "EXTENDED_DESCRIPTION": [
       " NL (Бьет !GuZhenRen:SecondMagic! раз(а))"
     ]
+  },
+  "GuZhenRen:QingTiXianYuan": {
+    "NAME": "Зеленая Виноградная Бессмертная Сущность",
+    "DESCRIPTION": " Сохраняется . NL Дает [E] [E] . NL Сжигается ."
+  },
+  "GuZhenRen:HongZaoXianYuan": {
+    "NAME": "Красная Финиковая Бессмертная Сущность",
+    "DESCRIPTION": " Сохраняется . NL Дает [E] [E] [E] . NL Сжигается ."
+  },
+  "GuZhenRen:BaiLiXianYuan": {
+    "NAME": "Белая Личи Бессмертная Сущность",
+    "DESCRIPTION": " Сохраняется . NL Дает 4 [E] . NL Сжигается ."
+  },
+  "GuZhenRen:HuangXingXianYuan": {
+    "NAME": "Желтая Абрикосовая Бессмертная Сущность",
+    "DESCRIPTION": " Сохраняется . NL Дает 5 [E] . NL Берите карты, пока рука не заполнится. NL Сжигается ."
+  },
+  "GuZhenRen:HeiHuo": {
+    "NAME": "Черный Огонь",
+    "DESCRIPTION": " Нельзя разыграть . NL В конце вашего хода вы теряете 3 макс. ОЗ. NL При Сжигании вы теряете 8 макс. ОЗ.",
+    "EXTENDED_DESCRIPTION": [
+      "Макс. ОЗ -"
+    ]
+  },
+  "GuZhenRen:HunDun": {
+    "NAME": "Хаос",
+    "DESCRIPTION": " Нельзя разыграть . NL В конце вашего хода вы мгновенно умираете. NL При Сжигании кладет 3 карты *Черный *Огонь в вашу руку."
   }
 }
