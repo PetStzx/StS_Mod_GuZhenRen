@@ -327,6 +327,7 @@ public class GuZhenRen implements
     public void receiveAddAudio() {
         BaseMod.addAudio(GuZhenRen.makeID("LiuGuanYi"), assetPath("audio/sound/LiuGuanYi.ogg"));
         BaseMod.addAudio(GuZhenRen.makeID("LianTianMoZun"), assetPath("audio/sound/LianTianMoZun.ogg"));
+        BaseMod.addAudio(GuZhenRen.makeID("YouHunMoZun"), assetPath("audio/sound/YouHunMoZun.ogg"));
     }
 
     @Override
