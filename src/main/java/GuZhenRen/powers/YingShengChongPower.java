@@ -56,7 +56,33 @@ public class YingShengChongPower extends AbstractPower {
         }
     }
 
+    private void clearRedGlow() {
+        if (!this.targetCardName.isEmpty() && AbstractDungeon.player != null) {
+
+            java.util.ArrayList<AbstractCard> allCombatCards = new java.util.ArrayList<>();
+            if (AbstractDungeon.player.hand != null) allCombatCards.addAll(AbstractDungeon.player.hand.group);
+            if (AbstractDungeon.player.drawPile != null) allCombatCards.addAll(AbstractDungeon.player.drawPile.group);
+            if (AbstractDungeon.player.discardPile != null) allCombatCards.addAll(AbstractDungeon.player.discardPile.group);
+            if (AbstractDungeon.player.exhaustPile != null) allCombatCards.addAll(AbstractDungeon.player.exhaustPile.group);
+            if (AbstractDungeon.player.limbo != null) allCombatCards.addAll(AbstractDungeon.player.limbo.group);
+
+            for (AbstractCard c : allCombatCards) {
+                String cleanName = c.name.replace("+", "").trim();
+                if (cleanName.equals(this.targetCardName)) {
+                    c.stopGlowing();
+                    c.glowColor = new com.badlogic.gdx.graphics.Color(0.2F, 0.9F, 1.0F, 0.25F);
+                }
+            }
+
+            if (AbstractDungeon.player.hand != null) {
+                AbstractDungeon.player.hand.glowCheck();
+            }
+        }
+    }
+
     public void triggerLockCard() {
+        clearRedGlow();
+
         if (!AbstractDungeon.player.hand.isEmpty()) {
             AbstractCard targetCard = AbstractDungeon.player.hand.getRandomCard(AbstractDungeon.cardRandomRng);
             this.targetCardName = targetCard.name.replace("+", "").trim();
@@ -140,5 +166,17 @@ public class YingShengChongPower extends AbstractPower {
                 });
             }
         }
+    }
+
+    @Override
+    public void onRemove() {
+        clearRedGlow();
+        this.targetCardName = "";
+    }
+
+    @Override
+    public void onDeath() {
+        clearRedGlow();
+        this.targetCardName = "";
     }
 }
