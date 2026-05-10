@@ -9,7 +9,7 @@
   },
   {
     "NAMES": ["cultivation"],
-    "DESCRIPTION": "At the end of combat, accumulate 1/2/4 (Normal/Elite/Boss) points of #yCultivation ."
+    "DESCRIPTION": "At the end of combat, accumulate 1/3/5 (Normal/Elite/Boss) points of #yCultivation ."
   },
   {
     "NAMES": ["rank 1", "rank_1"],
@@ -263,5 +263,35 @@
   {
     "NAMES": ["stun", "stunned", "Stun", "Stunned"],
     "DESCRIPTION": "A #yStunned enemy skips its turn #b1 time and retains its intent from the stunned turn."
+  },
+  {
+    "PROPER_NAME": "Earthly Calamity",
+    "NAMES": ["earthly calamity", "earthly_calamity"],
+    "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
+  },
+  {
+    "PROPER_NAME": "Heavenly Tribulation",
+    "NAMES": ["heavenly tribulation", "heavenly_tribulation"],
+    "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
+  },
+  {
+    "PROPER_NAME": "Grand Tribulation",
+    "NAMES": ["grand tribulation", "grand_tribulation"],
+    "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
+  },
+  {
+    "PROPER_NAME": "Myriad Tribulation",
+    "NAMES": ["myriad tribulation", "myriad_tribulation"],
+    "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
+  },
+  {
+    "PROPER_NAME": "Minor Chaos Disaster",
+    "NAMES": ["minor chaos disaster", "minor_chaos_disaster"],
+    "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
+  },
+  {
+    "PROPER_NAME": "Major Chaos Disaster",
+    "NAMES": ["major chaos disaster", "major_chaos_disaster"],
+    "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
   }
 ]
