@@ -82,12 +82,6 @@
       "Major Chaos Disaster"
     ]
   },
-  "GuZhenRen:KongQiaoUI": {
-    "TEXT": [
-      " Requires #b%d more #yCultivation to break through.",
-      "Cultivation"
-    ]
-  },
   "GuZhenRen:RecipeUI": {
     "TEXT": [
       "Unknown Material"
