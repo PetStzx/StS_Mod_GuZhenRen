@@ -57,6 +57,14 @@ public class DingKongPower extends AbstractPower {
             return;
         }
 
+        boolean playerSmoked = AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().smoked;
+        boolean monsterEscaping = this.owner instanceof AbstractMonster && ((AbstractMonster) this.owner).isEscaping;
+
+        if (playerSmoked || monsterEscaping) {
+            resetHandSizeLimit();
+            return;
+        }
+
         boolean amIFirst = false;
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
             if (!m.isDeadOrEscaped() && m.hasPower(POWER_ID)) {
