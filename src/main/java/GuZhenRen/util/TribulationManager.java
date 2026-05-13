@@ -59,8 +59,6 @@ public class TribulationManager {
 
         // 3. 浩劫
         register(new HaoJie_DingKong());
-        register(new HaoJie_Zhen());
-        register(new HaoJie_Suo());
         register(new HaoJie_GuoDeQu());
         register(new HaoJie_XuKong());
         register(new HaoJie_Guan());
@@ -68,6 +66,7 @@ public class TribulationManager {
         register(new HaoJie_YingShengChong());
         register(new HaoJie_GuiGuaYi());
         register(new HaoJie_DaJiaZhiQi());
+        register(new HaoJie_ZhenSuo());
 
         // 4. 万劫
         register(new WanJie_ZhenYu());
