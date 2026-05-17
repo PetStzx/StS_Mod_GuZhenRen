@@ -4,6 +4,7 @@ import GuZhenRen.effects.BenMingGuOpeningEffect;
 import GuZhenRen.util.BattleStateManager;
 import GuZhenRen.util.TribulationManager;
 import basemod.BaseMod;
+import basemod.ReflectionHacks;
 import basemod.interfaces.*;
 import basemod.interfaces.AddAudioSubscriber;
 import GuZhenRen.character.FangYuan;
@@ -332,6 +333,12 @@ public class GuZhenRen implements
 
     @Override
     public void receivePostInitialize() {
+        if (Settings.language == Settings.GameLanguage.ZHT) {
+            if (LocalizedStrings.PERIOD != null && LocalizedStrings.PERIOD.isEmpty()) {
+                ReflectionHacks.setPrivateStaticFinal(LocalizedStrings.class, "PERIOD", "。");
+            }
+        }
+
         BaseMod.addPotion(
                 ShengJiYe.class,
                 Color.GREEN.cpy(),
