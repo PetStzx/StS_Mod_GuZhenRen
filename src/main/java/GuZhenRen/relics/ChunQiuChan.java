@@ -1,0 +1,345 @@
+package GuZhenRen.relics;
+
+import GuZhenRen.GuZhenRen;
+import basemod.abstracts.CustomRelic;
+import basemod.abstracts.CustomSavable;
+import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
+import com.megacrit.cardcrawl.cards.CardSave;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.PowerTip;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
+import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSavable<JsonElement> {
+    public static final String ID = GuZhenRen.makeID("ChunQiuChan");
+    private static final String IMG = GuZhenRen.assetPath("img/relics/ChunQiuChan.png");
+    private static final String OUTLINE = GuZhenRen.assetPath("img/relics/outline/ChunQiuChan.png");
+
+    public static class CQCSaveData {
+        public ArrayList<String> history = new ArrayList<>();
+        public int useCount = 0;
+    }
+
+    private ArrayList<String> saveHistory = new ArrayList<>();
+    public int useCount = 0;
+
+    public static boolean isTimeTraveling = false;
+    private boolean recordedThisFloor = false;
+
+    public static int backupUseCount = -1;
+    public static ArrayList<String> backupSaveHistory = null;
+
+    public ChunQiuChan() {
+        super(ID, ImageMaster.loadImage(IMG), new Texture(OUTLINE), RelicTier.STARTER, LandingSound.MAGICAL);
+        this.counter = 6;
+        this.grayscale = true;
+        updateDescription();
+    }
+
+    @Override
+    public String getUpdatedDescription() {
+        if (this.counter > 0) {
+            return String.format(DESCRIPTIONS[1], this.counter);
+        }
+
+        float failChance = 0.05f + (0.20f * this.useCount);
+        float synergyBonus = 0.0f;
+        boolean hasHongYun = false;
+
+        if (CardCrawlGame.isInARun() && AbstractDungeon.player != null) {
+            if (AbstractDungeon.player.hasRelic(GuZhenRen.makeID("HongYunQiTianGu"))) {
+                synergyBonus += 0.40f;
+                hasHongYun = true;
+            }
+        }
+
+        float finalFailChance = Math.max(0.0f, failChance - synergyBonus);
+        int failInt = (int) (finalFailChance * 100);
+
+        StringBuilder desc = new StringBuilder(String.format(DESCRIPTIONS[0], failInt));
+
+        if (hasHongYun) {
+            desc.append(DESCRIPTIONS[2]);
+        }
+
+        return desc.toString();
+    }
+
+    public void updateDescription() {
+        this.description = getUpdatedDescription();
+        this.tips.clear();
+        this.tips.add(new PowerTip(this.name, this.description));
+        initializeTips();
+    }
+
+    @Override
+    public void onEquip() {
+        super.onEquip();
+        if (saveHistory == null) saveHistory = new ArrayList<>();
+        isTimeTraveling = false;
+
+        backupUseCount = -1;
+        backupSaveHistory = null;
+
+        recordNode();
+        updateDescription();
+    }
+
+    @Override
+    public void justEnteredRoom(AbstractRoom room) {
+        super.justEnteredRoom(room);
+        this.recordedThisFloor = false;
+
+        backupUseCount = -1;
+        backupSaveHistory = null;
+
+        if (this.counter > 0) {
+            this.counter--;
+            if (this.counter == 0) {
+                this.counter = -1;
+                this.grayscale = false;
+            }
+            updateDescription();
+        }
+        recordNode();
+    }
+
+    @Override
+    public void atBattleStart() {
+        recordNode();
+    }
+
+    private void recordNode() {
+        if (this.recordedThisFloor) return;
+        if (AbstractDungeon.player == null || AbstractDungeon.currMapNode == null) return;
+
+        ArrayList<String> tempHistory = new ArrayList<>(this.saveHistory);
+        this.saveHistory.clear();
+
+        try {
+            SaveFile save = new SaveFile(SaveFile.SaveType.ENTER_ROOM);
+            Gson gson = new Gson();
+            String json = gson.toJson(save);
+
+            this.saveHistory.addAll(tempHistory);
+            this.saveHistory.add(json);
+
+            if (this.saveHistory.size() > 7) {
+                this.saveHistory.remove(0);
+            }
+
+            this.recordedThisFloor = true;
+        } catch (Exception e) {
+            GuZhenRen.logger.warn("春秋蝉：当前环境记录节点失败。");
+            this.saveHistory.clear();
+            this.saveHistory.addAll(tempHistory);
+        }
+    }
+
+    @Override
+    public void onRightClick() {
+        if (this.counter > 0 || isTimeTraveling) return;
+        if (saveHistory == null || saveHistory.isEmpty()) {
+            GuZhenRen.logger.info("春秋蝉：当前没有时间节点可供回溯。");
+            return;
+        }
+        if (AbstractDungeon.player == null) return;
+
+        if (AbstractDungeon.isScreenUp) {
+            if (AbstractDungeon.screen == AbstractDungeon.CurrentScreen.SETTINGS ||
+                    AbstractDungeon.screen == AbstractDungeon.CurrentScreen.INPUT_SETTINGS) {
+                CardCrawlGame.sound.play("UI_CLICK_2");
+                return;
+            }
+        }
+
+
+        // ================= 死亡判定与结算阶段 =================
+        float failChance = 0.05f + (0.20f * this.useCount); // 初始死亡率5%，每次回溯增加20%死亡率
+        if (AbstractDungeon.player.hasRelic(GuZhenRen.makeID("HongYunQiTianGu"))) {
+            failChance -= 0.40f;                            //鸿运齐天蛊减少40%死亡率
+        }
+        failChance = Math.max(0.0f, failChance);
+
+        this.useCount++;
+        this.counter = 19;
+        this.grayscale = true;
+        updateDescription();
+
+        boolean isDead = AbstractDungeon.miscRng.randomBoolean(failChance);
+
+        if (isDead) {
+            CardCrawlGame.sound.play("ORB_LIGHTNING_EVOKE");
+
+            AbstractDungeon.player.damage(new DamageInfo(null, 999999, DamageInfo.DamageType.HP_LOSS));
+
+            return;
+        }
+
+        // ================= 回溯成功阶段 =================
+        backupUseCount = this.useCount;
+        backupSaveHistory = new ArrayList<>(this.saveHistory);
+
+        CardCrawlGame.sound.play("STANCE_ENTER_DIVINITY");
+        isTimeTraveling = true;
+
+        int backFloors = AbstractDungeon.miscRng.random(3, 5);
+        int targetIndex = Math.max(0, saveHistory.size() - 1 - backFloors);
+        final String targetJson = saveHistory.get(targetIndex);
+
+        com.badlogic.gdx.Gdx.app.postRunnable(() -> {
+            try {
+                AbstractDungeon.closeCurrentScreen();
+                if (AbstractDungeon.dungeonMapScreen != null) {
+                    AbstractDungeon.dungeonMapScreen.closeInstantly();
+                }
+
+                if (AbstractDungeon.actionManager != null) AbstractDungeon.actionManager.clear();
+
+                if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+                    if (AbstractDungeon.player != null && AbstractDungeon.player.powers != null) {
+                        for (com.megacrit.cardcrawl.powers.AbstractPower p : AbstractDungeon.player.powers) {
+                            p.onVictory();
+                        }
+                    }
+                    if (AbstractDungeon.getMonsters() != null) {
+                        for (com.megacrit.cardcrawl.monsters.AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                            if (m != null && m.powers != null) {
+                                for (com.megacrit.cardcrawl.powers.AbstractPower p : m.powers) {
+                                    p.onVictory();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (com.megacrit.cardcrawl.vfx.AbstractGameEffect e : AbstractDungeon.effectList) { e.dispose(); }
+                AbstractDungeon.effectList.clear();
+
+                for (com.megacrit.cardcrawl.vfx.AbstractGameEffect e : AbstractDungeon.topLevelEffects) { e.dispose(); }
+                AbstractDungeon.topLevelEffects.clear();
+
+                for (com.megacrit.cardcrawl.vfx.AbstractGameEffect e : AbstractDungeon.topLevelEffectsQueue) { e.dispose(); }
+                AbstractDungeon.topLevelEffectsQueue.clear();
+
+                for (com.megacrit.cardcrawl.vfx.AbstractGameEffect e : AbstractDungeon.effectsQueue) { e.dispose(); }
+                AbstractDungeon.effectsQueue.clear();
+
+                Gson gson = new Gson();
+                SaveFile targetSave = gson.fromJson(targetJson, SaveFile.class);
+
+                for (String relicID : GuZhenRen.recipeRelicIDs) {
+                    if (AbstractDungeon.player.hasRelic(relicID) && !targetSave.relics.contains(relicID)) {
+                        targetSave.relics.add(relicID);
+                        targetSave.relic_counters.add(-1);
+                    }
+                }
+
+                targetSave.cards.add(new CardSave(GuZhenRen.makeID("EYun"), 0, 3));
+
+                int cqcIndex = targetSave.relics.indexOf(ID);
+                if (cqcIndex != -1) {
+                    while (targetSave.relic_counters.size() <= cqcIndex) {
+                        targetSave.relic_counters.add(-1);
+                    }
+                    targetSave.relic_counters.set(cqcIndex, 19);
+                }
+
+                SaveAndContinue.save(targetSave);
+
+                CardCrawlGame.music.fadeAll();
+                if (AbstractDungeon.getCurrRoom() != null) AbstractDungeon.getCurrRoom().clearEvent();
+
+                AbstractDungeon.reset();
+                CardCrawlGame.loadingSave = true;
+                CardCrawlGame.mode = CardCrawlGame.GameMode.CHAR_SELECT;
+
+            } catch (Exception e) {
+                GuZhenRen.logger.error("春秋蝉回溯失败：" + e.getMessage());
+                isTimeTraveling = false;
+            }
+        });
+    }
+
+    @Override
+    public JsonElement onSave() {
+        CQCSaveData data = new CQCSaveData();
+        data.history = this.saveHistory;
+        data.useCount = this.useCount;
+        return new Gson().toJsonTree(data);
+    }
+
+    @Override
+    public void onLoad(JsonElement element) {
+        if (element != null) {
+            Gson gson = new Gson();
+
+            if (element.isJsonArray()) {
+                Type listType = new TypeToken<ArrayList<String>>(){}.getType();
+                this.saveHistory = gson.fromJson(element, listType);
+                this.useCount = 0;
+            }
+            else if (element.isJsonObject()) {
+                CQCSaveData data = gson.fromJson(element, CQCSaveData.class);
+                this.saveHistory = data.history != null ? data.history : new ArrayList<>();
+                this.useCount = data.useCount;
+            }
+        } else {
+            this.saveHistory = new ArrayList<>();
+            this.useCount = 0;
+        }
+
+        if (backupUseCount != -1) {
+            this.useCount = backupUseCount;
+            backupUseCount = -1;
+        }
+        if (backupSaveHistory != null) {
+            this.saveHistory = new ArrayList<>(backupSaveHistory);
+            backupSaveHistory = null;
+        }
+
+        isTimeTraveling = false;
+        updateDescription();
+
+        if (this.counter > 0) {
+            this.grayscale = true;
+        } else {
+            this.grayscale = false;
+        }
+    }
+
+    @Override
+    public void setCounter(int setCounter) {
+        super.setCounter(setCounter);
+
+        if (this.counter > 0) {
+            this.grayscale = true;
+        } else {
+            this.grayscale = false;
+        }
+
+        updateDescription();
+    }
+
+    @Override
+    public Type savedType() {
+        return JsonElement.class;
+    }
+
+    @Override
+    public AbstractRelic makeCopy() {
+        return new ChunQiuChan();
+    }
+}

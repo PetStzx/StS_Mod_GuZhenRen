@@ -5,6 +5,7 @@ import GuZhenRen.util.IProbabilityModifier;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
@@ -31,6 +32,28 @@ public class HongYunQiTianGu extends CustomRelic implements IProbabilityModifier
     public void atBattleStart() {
         this.flash();
     }
+
+
+    @Override
+    public void onEquip() {
+        super.onEquip();
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
+            ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
+            cqc.updateDescription();
+        }
+    }
+
+    @Override
+    public void onUnequip() {
+        super.onUnequip();
+        com.badlogic.gdx.Gdx.app.postRunnable(() -> {
+            if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
+                ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
+                cqc.updateDescription();
+            }
+        });
+    }
+
 
     @Override
     public AbstractRelic makeCopy() {

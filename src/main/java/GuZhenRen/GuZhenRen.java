@@ -256,6 +256,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new HuangXingXianYuan());
         BaseMod.addCard(new HeiHuo());
         BaseMod.addCard(new HunDun());
+        BaseMod.addCard(new EYun());
     }
 
     @Override
@@ -279,6 +280,8 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new DingXianYou(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new JianMei(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new HongYunQiTianGu(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new ChunQiuChan(), CardColorEnum.GUZHENREN_GREY);
+
 
         BaseMod.addRelicToCustomPool(new Recipe_AngryBird(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_AngryBird.ID);
