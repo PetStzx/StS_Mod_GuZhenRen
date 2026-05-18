@@ -50,6 +50,8 @@ public abstract class AbstractXuYingCard extends AbstractGuZhenRenCard implement
     public void increaseBaseChance(float amount) {
         this.baseChanceFloat += amount;
         if (this.baseChanceFloat > 1.0f) this.baseChanceFloat = 1.0f;
+        if (this.baseChanceFloat < 0.0f) this.baseChanceFloat = 0.0f;
+
         this.initializeDescription();
     }
 

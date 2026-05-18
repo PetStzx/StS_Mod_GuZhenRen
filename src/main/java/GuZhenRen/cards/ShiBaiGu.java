@@ -42,11 +42,12 @@ public class ShiBaiGu extends AbstractGuZhenRenCard implements IProbabilityCard 
     }
 
 
-    // IProbabilityCard 接口实现
     @Override
     public void increaseBaseChance(float amount) {
         this.baseChance += amount;
         if (this.baseChance > 1.0f) this.baseChance = 1.0f;
+        if (this.baseChance < 0.0f) this.baseChance = 0.0f;
+
         this.initializeDescription();
     }
 
