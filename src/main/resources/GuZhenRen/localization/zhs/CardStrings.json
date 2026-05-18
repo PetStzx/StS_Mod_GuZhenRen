@@ -768,5 +768,9 @@
   "GuZhenRen:HunDun": {
     "NAME": "混沌",
     "DESCRIPTION": " 不能被打出 。 NL 在你的回合结束时，即刻死亡。 NL 被 消耗 时，将 3 张 *黑火 加入手牌。"
+  },
+  "GuZhenRen:EYun": {
+    "NAME": "厄运",
+    "DESCRIPTION": " 不能被打出 。 NL 抽到此牌时，所有牌的 guzhenren:概率 值在本场战斗降低 10% 。 NL 在 !M! 场战斗后从你的牌组中移除。"
   }
 }

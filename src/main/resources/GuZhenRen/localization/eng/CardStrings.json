@@ -768,5 +768,9 @@
   "GuZhenRen:HunDun": {
     "NAME": "Chaos",
     "DESCRIPTION": " Unplayable . NL At the end of your turn, die instantly. NL When Exhausted , add 3 *Black *Fire into your hand."
+  },
+  "GuZhenRen:EYun": {
+    "NAME": "Misfortune",
+    "DESCRIPTION": " Unplayable . NL When drawn, decrease the guzhenren:Probability of all cards by 10% for this combat. NL Removed from your deck after !M! combats."
   }
 }

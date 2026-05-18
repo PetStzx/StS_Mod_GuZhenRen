@@ -280,5 +280,14 @@
       "Requires: #yEight-faced #yPrestige #yWind #yGu , any #yWind #yPath or #yRule #yPath Gu.",
       "Any Wind Path or Rule Path Gu worm"
     ]
+  },
+  "GuZhenRen:ChunQiuChan": {
+    "NAME": "Spring Autumn Cicada",
+    "FLAVOR": "Spring Autumn Cicada sustains its vitality with the water from the River of Time, and possesses the ability to let one be reborn into the past.",
+    "DESCRIPTIONS": [
+      "Right-click to randomly rewind time to a point 3 - 5 floors ago. NL When rewinding, there is a #b%d%% chance to #rDie . Rewinding retains your learned killer moves and adds 1 #yMisfortune into your deck.",
+      "Spring Autumn Cicada is resting. NL Recovers after advancing #b%d floors.",
+      " NL #yFortune #yRivaling #yHeaven #yGu - Increases rewind success rate by 40%."
+    ]
   }
 }
