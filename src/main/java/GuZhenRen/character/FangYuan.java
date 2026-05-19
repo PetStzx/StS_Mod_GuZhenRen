@@ -93,7 +93,6 @@ public class FangYuan extends CustomPlayer {
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
         retVal.add(KongQiao_1.ID);
-        retVal.add(ChunQiuChan.ID);
         return retVal;
     }
 

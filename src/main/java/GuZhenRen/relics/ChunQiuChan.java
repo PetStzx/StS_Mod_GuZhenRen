@@ -42,9 +42,9 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
     public static ArrayList<String> backupSaveHistory = null;
 
     public ChunQiuChan() {
-        super(ID, ImageMaster.loadImage(IMG), new Texture(OUTLINE), RelicTier.STARTER, LandingSound.MAGICAL);
-        this.counter = 6;
-        this.grayscale = true;
+        super(ID, ImageMaster.loadImage(IMG), new Texture(OUTLINE), RelicTier.RARE, LandingSound.MAGICAL);
+        this.counter = -1;
+        this.grayscale = false;
         updateDescription();
     }
 
@@ -54,7 +54,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             return String.format(DESCRIPTIONS[1], this.counter);
         }
 
-        float failChance = 0.05f + (0.20f * this.useCount);
+        float failChance = 0.05f + (0.10f * this.useCount);
         float synergyBonus = 0.0f;
         boolean hasHongYun = false;
 
@@ -151,8 +151,10 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
     @Override
     public void onRightClick() {
         if (this.counter > 0 || isTimeTraveling) return;
+
         if (saveHistory == null || saveHistory.isEmpty()) {
             GuZhenRen.logger.info("春秋蝉：当前没有时间节点可供回溯。");
+            CardCrawlGame.sound.play("UI_CLICK_2");
             return;
         }
         if (AbstractDungeon.player == null) return;
@@ -167,14 +169,17 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
 
 
         // ================= 死亡判定与结算阶段 =================
-        float failChance = 0.05f + (0.20f * this.useCount); // 初始死亡率5%，每次回溯增加20%死亡率
+        // 每次回溯死亡率递增 10%
+        float failChance = 0.05f + (0.10f * this.useCount);
         if (AbstractDungeon.player.hasRelic(GuZhenRen.makeID("HongYunQiTianGu"))) {
-            failChance -= 0.40f;                            //鸿运齐天蛊减少40%死亡率
+            failChance -= 0.40f;
         }
         failChance = Math.max(0.0f, failChance);
 
         this.useCount++;
-        this.counter = 19;
+
+        // 使用后冷却12层
+        this.counter = 13;
         this.grayscale = true;
         updateDescription();
 
@@ -182,9 +187,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
 
         if (isDead) {
             CardCrawlGame.sound.play("ORB_LIGHTNING_EVOKE");
-
             AbstractDungeon.player.damage(new DamageInfo(null, 999999, DamageInfo.DamageType.HP_LOSS));
-
             return;
         }
 
@@ -254,7 +257,10 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                     while (targetSave.relic_counters.size() <= cqcIndex) {
                         targetSave.relic_counters.add(-1);
                     }
-                    targetSave.relic_counters.set(cqcIndex, 19);
+                    targetSave.relic_counters.set(cqcIndex, 13);
+                } else {
+                    targetSave.relics.add(ID);
+                    targetSave.relic_counters.add(13);
                 }
 
                 SaveAndContinue.save(targetSave);
