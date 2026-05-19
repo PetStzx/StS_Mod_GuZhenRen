@@ -63,7 +63,7 @@
       " NL Accumulate #b%d more #yCultivation to undergo tribulation in the next combat.",
       " NL Right-click this relic outside of combat to cancel Immortal Ascension.",
       " NL You will face #r%s in the next combat.",
-      " NL #b%d combat(s) remaining until the next #r%s .",
+      " NL #b%2$d combat(s) remaining until the next #r%1$s .",
       " NL Right-click this relic outside of combat to cancel Venerable Ascension.",
       " NL #r%s is currently occurring.",
       " After passing #r%s , break through to #y%s .",
