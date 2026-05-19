@@ -246,7 +246,7 @@
     "NAME": "Fortune Rivaling Heaven Gu",
     "FLAVOR": "The absolute pinnacle essence of all living beings' luck.",
     "DESCRIPTIONS": [
-      "The final #yProbability value of all your cards is doubled."
+      "The #yProbability of all cards is increased by 40%. NL The chance of rare cards and rare relics appearing in combat rewards is doubled."
     ]
   },
   "GuZhenRen:Recipe_WanWuDaTongBian": {

@@ -246,7 +246,7 @@
     "NAME": "鸿运齐天蛊",
     "FLAVOR": "众生运的巅峰精髓。",
     "DESCRIPTIONS": [
-      "所有卡牌的最终 #y概率 值翻倍。"
+      "所有卡牌的 #y概率 值增加 40% 。 NL 战斗奖励中出现稀有牌与稀有遗物的几率翻倍。"
     ]
   },
   "GuZhenRen:Recipe_WanWuDaTongBian": {
