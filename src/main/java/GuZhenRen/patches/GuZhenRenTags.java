@@ -67,4 +67,6 @@ public class GuZhenRenTags {
     public static AbstractCard.CardTags FENG_DAO;  //风道
     @SpireEnum
     public static AbstractCard.CardTags ZHOU_DAO;  //宙道
+    @SpireEnum
+    public static AbstractCard.CardTags TU_DAO;  //土道
 }

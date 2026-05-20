@@ -46,6 +46,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         YUN_DAO,      // 25 运道
         FENG_DAO,      // 26 风道
         ZHOU_DAO,      // 27 宙道
+        TU_DAO,        // 28 土道
     }
 
     // =========================================================================
@@ -110,6 +111,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
             case YUN_DAO:    this.tags.add(GuZhenRenTags.YUN_DAO); break;
             case FENG_DAO:    this.tags.add(GuZhenRenTags.FENG_DAO); break;
             case ZHOU_DAO:    this.tags.add(GuZhenRenTags.ZHOU_DAO); break;
+            case TU_DAO:      this.tags.add(GuZhenRenTags.TU_DAO); break;
         }
 
         int index = DAO_TEXT_START_INDEX + dao.ordinal();
@@ -136,7 +138,8 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
                 tag == GuZhenRenTags.ZHI_DAO || tag == GuZhenRenTags.BIAN_HUA_DAO ||
                 tag == GuZhenRenTags.YIN_YANG_DAO || tag == GuZhenRenTags.JIAN_DAO ||
                 tag == GuZhenRenTags.XUE_DAO || tag == GuZhenRenTags.YUN_DAO ||
-                tag == GuZhenRenTags.FENG_DAO || tag == GuZhenRenTags.ZHOU_DAO;
+                tag == GuZhenRenTags.FENG_DAO || tag == GuZhenRenTags.ZHOU_DAO ||
+                tag == GuZhenRenTags.TU_DAO;
     }
 
 

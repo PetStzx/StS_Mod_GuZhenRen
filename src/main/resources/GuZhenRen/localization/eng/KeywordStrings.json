@@ -293,5 +293,10 @@
     "PROPER_NAME": "Major Chaos Disaster",
     "NAMES": ["major chaos disaster", "major_chaos_disaster"],
     "DESCRIPTION": "A type of tribulation. Combat will be more difficult, and combat rewards will be richer."
+  },
+  {
+    "PROPER_NAME": "Earth Path",
+    "NAMES": ["earth path", "earth_path"],
+    "DESCRIPTION": "Earth Path."
   }
 ]
