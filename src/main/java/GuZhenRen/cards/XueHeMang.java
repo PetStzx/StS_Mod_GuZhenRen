@@ -24,7 +24,7 @@ public class XueHeMang extends AbstractGuZhenRenCard {
 
     private static final int COST = 2;
     private static final int DAMAGE = 14;
-    private static final int UPGRADE_PLUS_DAMAGE = 4; // 14 -> 18
+    private static final int UPGRADE_PLUS_DAMAGE = 2; // 14 -> 16
     private static final int MAGIC = 4; // 初始每次加 4 伤
     private static final int UPGRADE_PLUS_MAGIC = 2; // 升级后每次加 6 伤
     private static final int INITIAL_RANK = 4;
