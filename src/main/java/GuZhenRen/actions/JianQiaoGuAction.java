@@ -43,8 +43,8 @@ public class JianQiaoGuAction extends AbstractGameAction {
             if (this.p.hand.group.size() == 1) {
                 AbstractCard c = this.p.hand.getTopCard();
                 CardModifierManager.addModifier(c, new JianQiaoGu.JianQiaoModifier());
-                // 塞入抽牌堆顶
-                this.p.hand.moveToDeck(c, false);
+
+                this.p.hand.moveToBottomOfDeck(c);
 
                 this.returnCards();
                 this.isDone = true;
@@ -61,12 +61,11 @@ public class JianQiaoGuAction extends AbstractGameAction {
         // 选完牌后的处理
         if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
             for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
-                // 赋予附魔
                 CardModifierManager.addModifier(c, new JianQiaoGu.JianQiaoModifier());
                 c.superFlash();
-                // 必须先加回手牌，才能通过 moveToDeck 塞入抽牌堆
+
                 this.p.hand.addToTop(c);
-                this.p.hand.moveToDeck(c, false);
+                this.p.hand.moveToBottomOfDeck(c);
             }
             this.returnCards();
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
