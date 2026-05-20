@@ -307,7 +307,10 @@
   },
   "GuZhenRen:DieYingGu": {
     "NAME": "Overlapping Phantom Gu",
-    "DESCRIPTION": "Deal !D! damage, NL Apply !M! guzhenren:Sword_Mark . NL For each *Sword *Phantom in your Exhaust pile, this card's values increase by !GuZhenRen:SecondMagic!."
+    "DESCRIPTION": "Deal !D! damage. NL For each card in your Exhaust pile, apply !M! guzhenren:Sword_Mark .",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Applies !GuZhenRen:SecondMagic! Sword Mark)"
+    ]
   },
   "GuZhenRen:FeiJian": {
     "NAME": "Flying Sword",

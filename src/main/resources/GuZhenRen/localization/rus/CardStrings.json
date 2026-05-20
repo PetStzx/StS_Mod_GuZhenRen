@@ -307,7 +307,10 @@
   },
   "GuZhenRen:DieYingGu": {
     "NAME": "Гу Перекрывающихся Фантомов",
-    "DESCRIPTION": "Наносит !D! урона, NL Накладывает !M! guzhenren:Метки_Меча . NL За каждый *Фантом *Меча в вашей стопке сжигания, значения этой карты увеличиваются на !GuZhenRen:SecondMagic!."
+    "DESCRIPTION": "Наносит !D! урона. NL За каждую карту в вашей стопке сжигания накладывает !M! guzhenren:Метки_Меча .",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Накладывает !GuZhenRen:SecondMagic! Метки_Меча)"
+    ]
   },
   "GuZhenRen:FeiJian": {
     "NAME": "Летающий Меч",

@@ -6,7 +6,6 @@ import GuZhenRen.powers.JianHenPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,8 +22,12 @@ public class DieYingGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 1;
     private static final int DAMAGE = 8;
-    private static final int JIAN_HEN = 1; // 基础剑痕层数
+    private static final int UPGRADE_PLUS_DMG = 1;
+    private static final int MAGIC = 2;
+    private static final int UPGRADE_PLUS_MAGIC = 1;
     private static final int INITIAL_RANK = 4;
+
+    private boolean showDynamicText = false;
 
     public DieYingGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -37,78 +40,73 @@ public class DieYingGu extends AbstractGuZhenRenCard {
         this.setRank(INITIAL_RANK);
 
         this.baseDamage = DAMAGE;
-
-        this.baseMagicNumber = this.magicNumber = JIAN_HEN;
-
-        this.baseSecondMagicNumber = this.secondMagicNumber = 2;
-
-        this.cardsToPreview = new JianYing();
+        this.baseMagicNumber = this.magicNumber = MAGIC;
+        this.baseSecondMagicNumber = this.secondMagicNumber = 0;
     }
 
-    private int countJianYingInExhaust() {
-        int count = 0;
-        if (AbstractDungeon.player != null && AbstractDungeon.player.exhaustPile != null) {
-            for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
-                if (c.cardID.equals(JianYing.ID)) {
-                    count++;
-                }
-            }
+    private int calculateSwordMarks() {
+        if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null || AbstractDungeon.player.exhaustPile == null) {
+            return 0;
         }
-        return count;
+        return AbstractDungeon.player.exhaustPile.size() * this.magicNumber;
     }
 
-    // ==========================================================
-    // 动态更新逻辑：修改伤害和剑痕层数
-    // ==========================================================
+    @Override
+    protected String constructRawDescription() {
+        String s = super.constructRawDescription();
+        if (this.showDynamicText) {
+            s += cardStrings.EXTENDED_DESCRIPTION[0];
+        }
+        return s;
+    }
+
     @Override
     public void applyPowers() {
-        int count = countJianYingInExhaust();
+        int amount = calculateSwordMarks();
+        if (this.secondMagicNumber != amount) {
+            this.secondMagicNumber = amount;
+            this.isSecondMagicNumberModified = true;
+        }
 
-        // 1. 动态更新剑痕层数
-        this.magicNumber = this.baseMagicNumber + (count * this.secondMagicNumber);
-        this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
-
-        // 2. 动态更新伤害
-        int realBaseDamage = this.baseDamage;
-        this.baseDamage += count * this.secondMagicNumber;
+        this.showDynamicText = true;
         super.applyPowers();
-        this.baseDamage = realBaseDamage;
-        this.isDamageModified = (this.damage != this.baseDamage);
     }
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        int count = countJianYingInExhaust();
+        int amount = calculateSwordMarks();
+        if (this.secondMagicNumber != amount) {
+            this.secondMagicNumber = amount;
+            this.isSecondMagicNumberModified = true;
+        }
 
-        // 1. 动态更新剑痕层数
-        this.magicNumber = this.baseMagicNumber + (count * this.secondMagicNumber);
-        this.isMagicNumberModified = (this.magicNumber != this.baseMagicNumber);
-
-        // 2. 动态更新伤害
-        int realBaseDamage = this.baseDamage;
-        this.baseDamage += count * this.secondMagicNumber;
+        this.showDynamicText = true;
         super.calculateCardDamage(mo);
-        this.baseDamage = realBaseDamage;
-        this.isDamageModified = (this.damage != this.baseDamage);
     }
 
     @Override
-    public void resetAttributes() {
-        super.resetAttributes();
-        this.magicNumber = this.baseMagicNumber;
-        this.isMagicNumberModified = false;
+    public void onMoveToDiscard() {
+        this.showDynamicText = false;
+        this.initializeDescription();
+    }
+
+    @Override
+    public void triggerOnExhaust() {
+        this.showDynamicText = false;
+        this.initializeDescription();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 打出总伤害
+        // 1. 造成伤害
         this.addToBot(new DamageAction(m,
                 new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_HEAVY));
 
-        // 赋予总剑痕
-        if (this.magicNumber > 0) {
-            this.addToBot(new ApplyPowerAction(m, p, new JianHenPower(m, this.magicNumber), this.magicNumber));
+        // 2. 给予剑痕
+        int marksToApply = calculateSwordMarks();
+        if (marksToApply > 0) {
+            this.addToBot(new ApplyPowerAction(m, p, new JianHenPower(m, marksToApply), marksToApply));
         }
     }
 
@@ -116,14 +114,9 @@ public class DieYingGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
+            this.upgradeDamage(UPGRADE_PLUS_DMG);
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
             this.upgradeRank(1);
-
-            this.upgradeSecondMagicNumber(1);
-
-            AbstractCard upgradedPreview = new JianYing();
-            upgradedPreview.upgrade();
-            this.cardsToPreview = upgradedPreview;
-
             this.initializeDescription();
         }
     }

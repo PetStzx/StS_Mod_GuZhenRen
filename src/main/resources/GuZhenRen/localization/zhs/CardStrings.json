@@ -307,7 +307,10 @@
   },
   "GuZhenRen:DieYingGu": {
     "NAME": "叠影蛊",
-    "DESCRIPTION": "造成 !D! 点伤害， NL 给予 !M! 层 guzhenren:剑痕 。 NL 消耗堆中每有 1 张 *剑影 ，此牌数值增加 !GuZhenRen:SecondMagic! 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 你的消耗堆中每有 1 张牌，给予 !M! 层 guzhenren:剑痕 。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （给予 !GuZhenRen:SecondMagic! 层剑痕）"
+    ]
   },
   "GuZhenRen:FeiJian": {
     "NAME": "飞剑",
