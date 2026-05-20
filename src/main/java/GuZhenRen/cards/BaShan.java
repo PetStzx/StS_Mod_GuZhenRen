@@ -21,7 +21,6 @@ public class BaShan extends AbstractGuZhenRenCard {
 
     private static final int COST = 2;
     private static final int BASE_DAMAGE = 15;
-    private static final int UPGRADE_PLUS_DAMAGE = 3; // 升级加 3，变成 18
 
     private static final int MAGIC = 3; // 力量发挥的倍数
     private static final int UPGRADE_PLUS_MAGIC = 2; // 升级加 2，变成 5 倍
@@ -43,9 +42,7 @@ public class BaShan extends AbstractGuZhenRenCard {
         this.setRank(INITIAL_RANK);
     }
 
-    // =========================================================================
-    // 动态力量倍数加成处理
-    // =========================================================================
+    //力量倍数加成
     @Override
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
@@ -78,9 +75,6 @@ public class BaShan extends AbstractGuZhenRenCard {
         this.isDamageModified = (this.damage != this.baseDamage);
     }
 
-    // =========================================================================
-    // 打出结算
-    // =========================================================================
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         this.addToBot(new DamageAllEnemiesAction(
@@ -95,9 +89,8 @@ public class BaShan extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(UPGRADE_PLUS_DAMAGE); // 16 -> 20
-            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC); // 3倍 -> 5倍
-            this.upgradeRank(1); // 6转 -> 7转
+            this.upgradeMagicNumber(UPGRADE_PLUS_MAGIC);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }
