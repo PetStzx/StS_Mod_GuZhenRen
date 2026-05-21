@@ -68,7 +68,7 @@
   },
   "GuZhenRen:WuZuNiao": {
     "NAME": "Footless Bird",
-    "DESCRIPTION": "Gain !B! Block. NL Your Block is not removed at the start of your next turn. NL Ethereal."
+    "DESCRIPTION": "Gain 1 stack of guzhenren:Flight . NL At the start of your turn, if you have guzhenren:Flight , gain !M! Block ."
   },
   "GuZhenRen:RongYanZhaLieGu": {
     "NAME": "Magma Burst Gu",

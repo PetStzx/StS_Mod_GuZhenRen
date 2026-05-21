@@ -2,13 +2,13 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.powers.FeiXingPower;
+import GuZhenRen.powers.ZhenChiGaoFeiPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.BlurPower;
 
 public class WuZuNiao extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("WuZuNiao");
@@ -17,43 +17,35 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WuZuNiao.png");
 
-    private static final int COST = 1;
-    private static final int BLOCK = 7;
-    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 7 -> 10
-    private static final int MAGIC = 1; //  1 层残影
+    private static final int COST = 2;
+    private static final int UPGRADE_COST = 1;
+    private static final int BLOCK_GAIN = 3;
     private static final int INITIAL_RANK = 3;
 
     public WuZuNiao() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                CardType.SKILL,
+                CardType.POWER,
                 CardColorEnum.GUZHENREN_GREY,
                 CardRarity.UNCOMMON,
                 CardTarget.SELF);
 
         this.setDao(Dao.GU_DAO);
         this.setRank(INITIAL_RANK);
-
-        this.baseBlock = this.block = BLOCK;
-        this.baseMagicNumber = this.magicNumber = MAGIC;
-
-        this.isEthereal = true;
+        this.baseMagicNumber = this.magicNumber = BLOCK_GAIN;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 获得格挡
-        this.addToBot(new GainBlockAction(p, p, this.block));
-
-        // 2. 获得 1 层残影
-        this.addToBot(new ApplyPowerAction(p, p, new BlurPower(p, this.magicNumber), this.magicNumber));
+        this.addToBot(new ApplyPowerAction(p, p, new FeiXingPower(p, 1), 1));
+        this.addToBot(new ApplyPowerAction(p, p, new ZhenChiGaoFeiPower(p, this.magicNumber), this.magicNumber));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(UPGRADE_PLUS_BLOCK);
-            this.upgradeRank(1); // 3转 -> 4转
+            this.upgradeBaseCost(UPGRADE_COST);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

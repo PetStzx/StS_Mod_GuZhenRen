@@ -691,5 +691,12 @@
       "获得 #y格挡 时，额外获得 #b",
       " 点 #y格挡 。"
     ]
+  },
+  "GuZhenRen:ZhenChiGaoFeiPower": {
+    "NAME": "振翅高飞",
+    "DESCRIPTIONS": [
+      "回合开始时，若你拥有 飞行 ，获得 #b",
+      " 点 #y格挡 。"
+    ]
   }
 }

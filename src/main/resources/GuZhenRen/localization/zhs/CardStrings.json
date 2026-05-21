@@ -68,7 +68,7 @@
   },
   "GuZhenRen:WuZuNiao": {
     "NAME": "无足鸟",
-    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 你的下一回合开始时 格挡 不会消失。 NL 虚无 。"
+    "DESCRIPTION": "获得 1 层 guzhenren:飞行 。 NL 回合开始时若你拥有 guzhenren:飞行 ，获得 !M! 点 格挡 。"
   },
   "GuZhenRen:RongYanZhaLieGu": {
     "NAME": "熔岩炸裂蛊",

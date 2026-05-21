@@ -68,7 +68,7 @@
   },
   "GuZhenRen:WuZuNiao": {
     "NAME": "Птица без ног",
-    "DESCRIPTION": "Дает !B! Блока. NL Ваш Блок не сбрасывается в начале вашего следующего хода. NL Эфирная."
+    "DESCRIPTION": "Дает 1 заряд guzhenren:Полета . NL В начале вашего хода, если у вас есть guzhenren:Полет , дает !M! Блока ."
   },
   "GuZhenRen:RongYanZhaLieGu": {
     "NAME": "Взрыв Магмы Гу",

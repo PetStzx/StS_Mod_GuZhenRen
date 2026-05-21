@@ -298,5 +298,10 @@
     "PROPER_NAME": "Earth Path",
     "NAMES": ["earth path", "earth_path"],
     "DESCRIPTION": "Earth Path."
+  },
+  {
+    "PROPER_NAME": "Flight",
+    "NAMES": ["flight"],
+    "DESCRIPTION": "Reduces #yAttack damage taken by #b50% . Removed if you take #yAttack damage #b1 time in a single turn."
   }
 ]

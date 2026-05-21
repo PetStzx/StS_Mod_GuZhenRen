@@ -691,5 +691,12 @@
       "Whenever you gain #yBlock , gain #b",
       " additional #yBlock ."
     ]
+  },
+  "GuZhenRen:ZhenChiGaoFeiPower": {
+    "NAME": "Soaring High",
+    "DESCRIPTIONS": [
+      "At the start of your turn, if you have Flight , gain #b",
+      " #yBlock ."
+    ]
   }
 }
