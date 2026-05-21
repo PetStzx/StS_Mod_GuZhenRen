@@ -779,5 +779,12 @@
   "GuZhenRen:TuQiangGu": {
     "NAME": "Earth Wall Gu",
     "DESCRIPTION": "Gain !B! Block . NL For the rest of combat, you can retain up to !M! Block between turns."
+  },
+  "GuZhenRen:LongLinGu": {
+    "NAME": "Dragon Scale Gu",
+    "DESCRIPTION": "Gain 3 Block !M! times. NL For each stack of guzhenren:Sword_Edge , gain Block 1 additional time.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Gain !B! Block !GuZhenRen:SecondMagic! times)"
+    ]
   }
 }

@@ -779,5 +779,12 @@
   "GuZhenRen:TuQiangGu": {
     "NAME": "Земляная Стена Гу",
     "DESCRIPTION": "Дает !B! Блока . NL До конца боя вы можете сохранять до !M! Блока между ходами."
+  },
+  "GuZhenRen:LongLinGu": {
+    "NAME": "Чешуя Дракона Гу",
+    "DESCRIPTION": "Получите 3 Блока !M! раз(а). NL За каждый заряд guzhenren:Лезвия_Меча получите Блок еще 1 раз.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Получите !B! Блока !GuZhenRen:SecondMagic! раз(а))"
+    ]
   }
 }
