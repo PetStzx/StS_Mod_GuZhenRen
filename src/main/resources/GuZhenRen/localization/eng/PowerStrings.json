@@ -684,5 +684,12 @@
       "You can retain up to #b",
       " #yBlock between turns."
     ]
+  },
+  "GuZhenRen:TuDaoDaoHenPower": {
+    "NAME": "Earth Path Dao Mark",
+    "DESCRIPTIONS": [
+      "Whenever you gain #yBlock , gain #b",
+      " additional #yBlock ."
+    ]
   }
 }

@@ -684,5 +684,12 @@
       "你可跨回合保留至多 #b",
       " 点 #y格挡 。"
     ]
+  },
+  "GuZhenRen:TuDaoDaoHenPower": {
+    "NAME": "土道道痕",
+    "DESCRIPTIONS": [
+      "获得 #y格挡 时，额外获得 #b",
+      " 点 #y格挡 。"
+    ]
   }
 }

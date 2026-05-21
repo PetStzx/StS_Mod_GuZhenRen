@@ -38,6 +38,7 @@ public class BianHuaDaoDaoHenPower extends AbstractDaoHenPower {
         DAO_MAP.put(GuZhenRenTags.SHI_DAO, ShiDaoDaoHenPower::new);
         DAO_MAP.put(GuZhenRenTags.YUN_DAO, YunDaoDaoHenPower::new);
         DAO_MAP.put(GuZhenRenTags.ZHOU_DAO, ZhouDaoDaoHenPower::new);
+        DAO_MAP.put(GuZhenRenTags.TU_DAO, TuDaoDaoHenPower::new);
     }
 
     public BianHuaDaoDaoHenPower(AbstractCreature owner, int amount) {
