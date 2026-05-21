@@ -118,7 +118,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
 
         if (index < TEXT.length) {
             if (Settings.language == Settings.GameLanguage.RUS) {
-                this.guPathString = "#y" + TEXT[index].replace(" ", " #y");
+                this.guPathString = "*" + TEXT[index].replace(" ", " *");
             } else {
                 this.guPathString = "guzhenren:" + TEXT[index].replace(" ", "_");
             }
@@ -264,7 +264,7 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         String rawRankText = getRankKeywordText(this.rank);
 
         if (Settings.language == Settings.GameLanguage.RUS) {
-            sb.append("#y").append(rawRankText.replace(" ", " #y"));
+            sb.append("*").append(rawRankText.replace(" ", " *"));
         } else {
             String rankKeyword = rawRankText.replace(" ", "_");
             sb.append("guzhenren:").append(rankKeyword);
