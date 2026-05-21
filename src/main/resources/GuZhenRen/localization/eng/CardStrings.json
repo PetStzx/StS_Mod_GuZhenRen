@@ -775,5 +775,9 @@
   "GuZhenRen:EYun": {
     "NAME": "Misfortune",
     "DESCRIPTION": " Unplayable . NL When drawn, decrease the guzhenren:Probability of all cards by 10% for this combat. NL Removed from your deck after !M! combats."
+  },
+  "GuZhenRen:TuQiangGu": {
+    "NAME": "Earth Wall Gu",
+    "DESCRIPTION": "Gain !B! Block . NL For the rest of combat, you can retain up to !M! Block between turns."
   }
 }

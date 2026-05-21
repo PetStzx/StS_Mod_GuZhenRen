@@ -677,5 +677,12 @@
     "DESCRIPTIONS": [
       "You cannot lose HP. NL Cards you play cost 0 Energy. NL Your hand is always full."
     ]
+  },
+  "GuZhenRen:JiTuPower": {
+    "NAME": "Accumulated Earth",
+    "DESCRIPTIONS": [
+      "You can retain up to #b",
+      " #yBlock between turns."
+    ]
   }
 }

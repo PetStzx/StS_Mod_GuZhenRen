@@ -775,5 +775,9 @@
   "GuZhenRen:EYun": {
     "NAME": "厄运",
     "DESCRIPTION": " 不能被打出 。 NL 抽到此牌时，所有牌的 guzhenren:概率 值在本场战斗降低 10% 。 NL 在 !M! 场战斗后从你的牌组中移除。"
+  },
+  "GuZhenRen:TuQiangGu": {
+    "NAME": "土墙蛊",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 本场战斗你可跨回合保留至多 !M! 点 格挡 。"
   }
 }

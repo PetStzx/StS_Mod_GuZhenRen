@@ -677,5 +677,12 @@
     "DESCRIPTIONS": [
       "你不会失去生命。 NL 你打出的牌不消耗能量。 NL 你的手牌始终补满。"
     ]
+  },
+  "GuZhenRen:JiTuPower": {
+    "NAME": "积土",
+    "DESCRIPTIONS": [
+      "你可跨回合保留至多 #b",
+      " 点 #y格挡 。"
+    ]
   }
 }
