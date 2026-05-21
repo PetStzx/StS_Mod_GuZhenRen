@@ -153,6 +153,12 @@ public abstract class AbstractGuZhenRenCard extends CustomCard implements Custom
         return super.hasTag(tag);
     }
 
+    //  修改流派
+    public void changeDao(Dao newDao) {
+        this.tags.removeIf(AbstractGuZhenRenCard::isDaoTag);
+        this.setDao(newDao);
+    }
+
 
     // =========================================================================
     //  底层运算逻辑

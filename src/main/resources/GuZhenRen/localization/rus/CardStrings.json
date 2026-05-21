@@ -786,5 +786,14 @@
     "EXTENDED_DESCRIPTION": [
       " NL (Получите !B! Блока !GuZhenRen:SecondMagic! раз(а))"
     ]
+  },
+  "GuZhenRen:HuaShiGu": {
+    "NAME": "Окаменение Гу",
+    "DESCRIPTION": "Выберите 1 карту в руке и добавьте ей guzhenren:Окаменение !M! .",
+    "EXTENDED_DESCRIPTION": [
+      "добавить Окаменение",
+      " NL guzhenren:Окаменение ",
+      " ."
+    ]
   }
 }

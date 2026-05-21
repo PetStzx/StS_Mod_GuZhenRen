@@ -786,5 +786,14 @@
     "EXTENDED_DESCRIPTION": [
       " NL (Gain !B! Block !GuZhenRen:SecondMagic! times)"
     ]
+  },
+  "GuZhenRen:HuaShiGu": {
+    "NAME": "Fossil Gu",
+    "DESCRIPTION": "Choose a card in your hand and add guzhenren:Fossil !M! .",
+    "EXTENDED_DESCRIPTION": [
+      "Add Fossil",
+      " NL guzhenren:Fossil ",
+      " ."
+    ]
   }
 }

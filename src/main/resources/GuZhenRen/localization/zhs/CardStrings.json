@@ -786,5 +786,14 @@
     "EXTENDED_DESCRIPTION": [
       " NL （获得 !B! 点格挡 !GuZhenRen:SecondMagic! 次）"
     ]
+  },
+  "GuZhenRen:HuaShiGu": {
+    "NAME": "化石蛊",
+    "DESCRIPTION": "选择 1 张手牌，为其附加 guzhenren:化石 !M! 。",
+    "EXTENDED_DESCRIPTION": [
+      "附加 化石",
+      " NL guzhenren:化石 ",
+      " 。"
+    ]
   }
 }

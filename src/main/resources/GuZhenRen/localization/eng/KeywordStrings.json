@@ -303,5 +303,10 @@
     "PROPER_NAME": "Flight",
     "NAMES": ["flight"],
     "DESCRIPTION": "Reduces #yAttack damage taken by #b50% . Removed if you take #yAttack damage #b1 time in a single turn."
+  },
+  {
+    "PROPER_NAME": "Fossil",
+    "NAMES": ["fossil", "fossilized"],
+    "DESCRIPTION": "When played, gain #yBlock equal to its stacks. This card's Path becomes #yEarth_Path ."
   }
 ]
