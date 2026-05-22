@@ -91,5 +91,12 @@
     "TEXT": [
       "You activate all your Gu worms..."
     ]
+  },
+  "GuZhenRen:ConfigUI": {
+    "TEXT": [
+      "Maggot Mode (Requires game restart)",
+      "Play voice lines upon reaching Rank 9",
+      "Play voice lines upon reaching Rank 10"
+    ]
   }
 }
