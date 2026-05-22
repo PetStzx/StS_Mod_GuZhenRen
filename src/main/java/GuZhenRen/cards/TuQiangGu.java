@@ -17,12 +17,12 @@ public class TuQiangGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/TuQiangGu.png");
 
-    private static final int COST = 2; // 改为 2 费
+    private static final int COST = 2;
     private static final int BLOCK = 12;
-    private static final int UPGRADE_PLUS_BLOCK = 3; // 升级后 15
+    private static final int UPGRADE_PLUS_BLOCK = 3;
 
-    private static final int MAGIC = 4; // 基础保留上限 4
-    private static final int UPGRADE_PLUS_MAGIC = 1; // 升级后保留上限 5
+    private static final int MAGIC = 4;
+    private static final int UPGRADE_PLUS_MAGIC = 1;
 
     private static final int INITIAL_RANK = 3;
 

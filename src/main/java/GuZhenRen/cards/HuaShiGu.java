@@ -53,9 +53,7 @@ public class HuaShiGu extends AbstractGuZhenRenCard {
         }
     }
 
-    // =========================================================================
-    //  内嵌的 化石 Modifier
-    // =========================================================================
+
     @AbstractCardModifier.SaveIgnore
     public static class HuaShiModifier extends AbstractCardModifier {
         public static final String MODIFIER_ID = GuZhenRen.makeID("HuaShiModifier");

@@ -18,10 +18,10 @@ public class LongLinGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/LongLinGu.png");
 
     private static final int COST = 1;
-    private static final int BASE_BLOCK = 3;         // 每段固定的基础格挡
-    private static final int BASE_TIMES = 3;         // 初始3次
-    private static final int UPGRADE_PLUS_TIMES = 1; // 升级后+1次（变成4次）
-    private static final int INITIAL_RANK = 7;       // 7转
+    private static final int BASE_BLOCK = 3;
+    private static final int BASE_TIMES = 3;
+    private static final int UPGRADE_PLUS_TIMES = 1;
+    private static final int INITIAL_RANK = 7;
 
     private boolean showDynamicText = false;
 
@@ -48,7 +48,7 @@ public class LongLinGu extends AbstractGuZhenRenCard {
         }
     }
 
-    // 计算总格挡次数：基础次数 + 剑锋层数
+    // 总格挡次数：基础次数 + 剑锋层数
     private int calculateTotalTimes() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) {
             return this.magicNumber;
@@ -75,7 +75,7 @@ public class LongLinGu extends AbstractGuZhenRenCard {
             this.isSecondMagicNumberModified = true;
         }
         this.showDynamicText = true;
-        super.applyPowers(); // 这里会自动触发这回合内敏捷对 block 的动态加成计算
+        super.applyPowers();
     }
 
     @Override
@@ -105,8 +105,8 @@ public class LongLinGu extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADE_PLUS_TIMES); // 3次 -> 4次
-            this.upgradeRank(1);                         // 7转 -> 8转
+            this.upgradeMagicNumber(UPGRADE_PLUS_TIMES);
+            this.upgradeRank(1);
             this.initializeDescription();
         }
     }

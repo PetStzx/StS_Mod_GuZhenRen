@@ -28,7 +28,6 @@ public class HuaShiAction extends AbstractGameAction {
                 this.isDone = true;
                 return;
             }
-            // 直接调用化石蛊卡牌的扩展描述文本
             AbstractDungeon.handCardSelectScreen.open(HuaShiGu.cardStrings.EXTENDED_DESCRIPTION[0], 1, false, false);
             this.tickDuration();
             return;
