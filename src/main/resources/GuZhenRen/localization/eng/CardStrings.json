@@ -618,10 +618,6 @@
     "DESCRIPTION": "Remove all negative statuses. NL For each type removed, gain !M! guzhenren:Transformation_Path_Dao_Marks .",
     "UPGRADE_DESCRIPTION": "Remove all negative statuses. NL For each type removed, gain !M! guzhenren:Transformation_Path_Dao_Marks . NL Retain ."
   },
-  "GuZhenRen:TouSheng": {
-    "NAME": "Steal Life",
-    "DESCRIPTION": "Steal !M! Max HP from all enemies. NL Exhaust ."
-  },
   "GuZhenRen:FangWeiGu": {
     "NAME": "Forgery Gu",
     "DESCRIPTION": "Choose 1 Gu worm card in your deck other than your guzhenren:Vital_Gu , *transform it into its unupgraded copy and add it to your hand. Ignores the Immortal Gu uniqueness rule.",

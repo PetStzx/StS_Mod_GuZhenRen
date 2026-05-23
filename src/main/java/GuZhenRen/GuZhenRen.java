@@ -227,7 +227,6 @@ public class GuZhenRen implements
         BaseMod.addCard(new TianPuGuangHe());
         BaseMod.addCard(new SanShiSanTianGuang());
         BaseMod.addCard(new BianTong());
-        BaseMod.addCard(new TouSheng());
         BaseMod.addCard(new FangWeiGu());
         BaseMod.addCard(new ZhuanYun());
         BaseMod.addCard(new SongYouFeng());

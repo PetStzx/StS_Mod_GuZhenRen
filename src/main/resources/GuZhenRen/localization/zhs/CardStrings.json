@@ -618,10 +618,6 @@
     "DESCRIPTION": "移除所有负面状态。 NL 每移除 1 种，获得 !M! 层 guzhenren:变化道道痕 。",
     "UPGRADE_DESCRIPTION": "移除所有负面状态。 NL 每移除 1 种，获得 !M! 层 guzhenren:变化道道痕 。 NL 保留 。"
   },
-  "GuZhenRen:TouSheng": {
-    "NAME": "偷生",
-    "DESCRIPTION": "盗取所有敌人 !M! 点最大生命。 NL 消耗 。"
-  },
   "GuZhenRen:FangWeiGu": {
     "NAME": "仿伪蛊",
     "DESCRIPTION": "从你的牌组中选择 1 张除 guzhenren:本命蛊 外的蛊虫牌， *变化 为其未升级的复制品并加入手牌。不受仙蛊唯一限制。",
