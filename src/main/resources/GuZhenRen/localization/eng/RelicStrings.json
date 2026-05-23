@@ -289,5 +289,14 @@
       "Spring Autumn Cicada is resting. NL Recovers after advancing #b%d floors.",
       " NL #yFortune #yRivaling #yHeaven #yGu - Increases rewind success rate by 40%."
     ]
+  },
+  "GuZhenRen:TouSheng": {
+    "NAME": "Steal Life",
+    "FLAVOR": "Rank 8 Theft Path Immortal Gu, capable of stealing the lifespan within all living beings.",
+    "DESCRIPTIONS": [
+      "Right-click during combat to steal 2 Max HP from ALL enemies. Usable #b",
+      " more times.",
+      "The effect of this Relic has been exhausted."
+    ]
   }
 }

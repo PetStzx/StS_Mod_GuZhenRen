@@ -288,6 +288,7 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new JianMei(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new HongYunQiTianGu(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new ChunQiuChan(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new TouSheng(), CardColorEnum.GUZHENREN_GREY);
 
 
         BaseMod.addRelicToCustomPool(new Recipe_AngryBird(), CardColorEnum.GUZHENREN_GREY);
