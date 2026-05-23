@@ -2,6 +2,7 @@ package GuZhenRen;
 
 import GuZhenRen.effects.BenMingGuOpeningEffect;
 import GuZhenRen.util.BattleStateManager;
+import GuZhenRen.util.GuZhenRenConfig;
 import GuZhenRen.util.TribulationManager;
 import basemod.BaseMod;
 import basemod.ReflectionHacks;
@@ -69,6 +70,7 @@ public class GuZhenRen implements
         logger.info("========================= 开始注册订阅 =========================");
         BaseMod.subscribe(this);
 
+        GuZhenRenConfig.loadConfig();
         BaseMod.addColor(CardColorEnum.GUZHENREN_GREY,
                 GUZHENREN_COLOR, GUZHENREN_COLOR, GUZHENREN_COLOR,
                 GUZHENREN_COLOR, GUZHENREN_COLOR, GUZHENREN_COLOR, GUZHENREN_COLOR,
@@ -354,19 +356,21 @@ public class GuZhenRen implements
                 AbstractPlayerEnum.FANG_YUAN
         );
 
+        GuZhenRenConfig.setupConfigPanel();
         TribulationManager.initialize();
     }
 
     @Override
     public void receiveEditStrings() {
         String language = getLanguage();
+        String path = "localization/" + language + "/";
 
-        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/" + language + "/CardStrings.json"));
-        BaseMod.loadCustomStringsFile(CharacterStrings.class, assetPath("localization/" + language + "/CharacterStrings.json"));
-        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath("localization/" + language + "/RelicStrings.json"));
-        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/" + language + "/PowerStrings.json"));
-        BaseMod.loadCustomStringsFile(PotionStrings.class, assetPath("localization/" + language + "/PotionStrings.json"));
-        BaseMod.loadCustomStringsFile(UIStrings.class, assetPath("localization/" + language + "/UIStrings.json"));
+        loadCustomStrings(CardStrings.class, assetPath(path + "CardStrings.json"));
+        loadCustomStrings(CharacterStrings.class, assetPath(path + "CharacterStrings.json"));
+        loadCustomStrings(RelicStrings.class, assetPath(path + "RelicStrings.json"));
+        loadCustomStrings(PowerStrings.class, assetPath(path + "PowerStrings.json"));
+        loadCustomStrings(PotionStrings.class, assetPath(path + "PotionStrings.json"));
+        loadCustomStrings(UIStrings.class, assetPath(path + "UIStrings.json"));
     }
 
     @Override
@@ -374,6 +378,10 @@ public class GuZhenRen implements
         Gson gson = new Gson();
         String json = Gdx.files.internal(assetPath("localization/" + getLanguage() + "/KeywordStrings.json"))
                 .readString(String.valueOf(StandardCharsets.UTF_8));
+
+        if (GuZhenRenConfig.quMode && (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT)) {
+            json = json.replace("蛊", "蛆");
+        }
 
         Keyword[] keywords = gson.fromJson(json, Keyword[].class);
         if (keywords != null) {
@@ -479,5 +487,15 @@ public class GuZhenRen implements
         }
 
         return language;
+    }
+
+    private void loadCustomStrings(Class<?> stringType, String filepath) {
+        String json = Gdx.files.internal(filepath).readString(String.valueOf(StandardCharsets.UTF_8));
+
+        if (GuZhenRenConfig.quMode && (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT)) {
+            json = json.replace("蛊", "蛆");
+        }
+
+        BaseMod.loadCustomStrings(stringType, json);
     }
 }

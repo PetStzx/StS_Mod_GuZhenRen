@@ -2,6 +2,7 @@ package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.powers.YongShengPower;
+import GuZhenRen.util.GuZhenRenConfig;
 import com.evacipated.cardcrawl.mod.stslib.relics.OnPlayerDeathRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -47,7 +48,9 @@ public class XianQiao_10 extends AbstractKongQiao implements OnPlayerDeathRelic 
     @Override
     public void onEquip() {
         super.onEquip();
-        CardCrawlGame.sound.play(GuZhenRen.makeID("LiuGuanYi"));
+        if (GuZhenRenConfig.bgm10) {
+            CardCrawlGame.sound.play(GuZhenRen.makeID("LiuGuanYi"));
+        }
 
         if (AbstractDungeon.player != null) {
             this.lastMaxHp = AbstractDungeon.player.maxHealth;
