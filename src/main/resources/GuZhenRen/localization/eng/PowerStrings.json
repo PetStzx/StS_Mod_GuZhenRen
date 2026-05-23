@@ -704,5 +704,13 @@
     "DESCRIPTIONS": [
       "Whenever you lose #yBlock , deal damage to ALL enemies equal to the #yBlock lost."
     ]
+  },
+  "GuZhenRen:GuCiPower": {
+    "NAME": "Bone Spike",
+    "DESCRIPTIONS": [
+      "Reflect blocked attack damage back to the attacker for #b",
+      " turn.",
+      " turns."
+    ]
   }
 }

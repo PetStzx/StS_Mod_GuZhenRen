@@ -704,5 +704,12 @@
     "DESCRIPTIONS": [
       "失去 #y格挡 时，对所有敌人造成等同于你失去 #y格挡 值的伤害。"
     ]
+  },
+  "GuZhenRen:GuCiPower": {
+    "NAME": "骨刺",
+    "DESCRIPTIONS": [
+      "将你 #y格挡 的攻击伤害反弹给攻击者，持续 #b",
+      " 回合。"
+    ]
   }
 }
