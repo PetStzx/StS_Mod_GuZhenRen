@@ -795,5 +795,9 @@
       " NL guzhenren:Fossil ",
       " ."
     ]
+  },
+  "GuZhenRen:HuangSha": {
+    "NAME": "Yellow Sand",
+    "DESCRIPTION": "Whenever you lose Block , deal damage to ALL enemies equal to the Block lost."
   }
 }

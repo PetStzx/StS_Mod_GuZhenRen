@@ -795,5 +795,9 @@
       " NL guzhenren:化石 ",
       " 。"
     ]
+  },
+  "GuZhenRen:HuangSha": {
+    "NAME": "黄沙",
+    "DESCRIPTION": "失去 格挡 时，对所有敌人造成等同于你失去 格挡 值的伤害。"
   }
 }

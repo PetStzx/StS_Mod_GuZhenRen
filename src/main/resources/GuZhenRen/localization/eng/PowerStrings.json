@@ -698,5 +698,11 @@
       "At the start of your turn, if you have Flight , gain #b",
       " #yBlock ."
     ]
+  },
+  "GuZhenRen:HuaShaPower": {
+    "NAME": "Sand Transformation",
+    "DESCRIPTIONS": [
+      "Whenever you lose #yBlock , deal damage to ALL enemies equal to the #yBlock lost."
+    ]
   }
 }
