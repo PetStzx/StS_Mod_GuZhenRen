@@ -18,8 +18,8 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WuZuNiao.png");
 
     private static final int COST = 2;
-    private static final int UPGRADE_COST = 1;
     private static final int BLOCK_GAIN = 3;
+    private static final int UPGRADE_PLUS_BLOCK = 1;
     private static final int INITIAL_RANK = 3;
 
     public WuZuNiao() {
@@ -44,7 +44,7 @@ public class WuZuNiao extends AbstractGuZhenRenCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBaseCost(UPGRADE_COST);
+            this.upgradeMagicNumber(UPGRADE_PLUS_BLOCK);
             this.upgradeRank(1);
             this.initializeDescription();
         }
