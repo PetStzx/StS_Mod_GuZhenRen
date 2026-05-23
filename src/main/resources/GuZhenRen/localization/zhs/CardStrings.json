@@ -803,5 +803,9 @@
   "GuZhenRen:LeiGuDunGu": {
     "NAME": "肋骨盾蛊",
     "DESCRIPTION": "失去 !M! 点生命。 NL 获得 !B! 点 格挡 。 NL 在本回合将你 格挡 的攻击伤害反弹给攻击者。"
+  },
+  "GuZhenRen:DiMai": {
+    "NAME": "地脉",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 本场战斗中每获得过一次 格挡 ，此牌耗能就减少 [E] 。"
   }
 }

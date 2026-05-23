@@ -803,5 +803,9 @@
   "GuZhenRen:LeiGuDunGu": {
     "NAME": "Rib Shield Gu",
     "DESCRIPTION": "Lose !M! HP. NL Gain !B! Block . NL For this turn, reflect blocked attack damage back to the attacker."
+  },
+  "GuZhenRen:DiMai": {
+    "NAME": "Earth Vein",
+    "DESCRIPTION": "Gain !B! Block . NL Costs [E] less for each time you have gained Block this combat."
   }
 }
