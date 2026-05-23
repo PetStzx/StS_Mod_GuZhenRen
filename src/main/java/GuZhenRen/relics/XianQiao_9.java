@@ -1,6 +1,7 @@
 package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.util.GuZhenRenConfig;
 import basemod.abstracts.CustomRelic;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -17,6 +18,8 @@ public class XianQiao_9 extends AbstractKongQiao {
     @Override
     public void onEquip() {
         super.onEquip();
+        if (!GuZhenRenConfig.bgm9) return;
+
         boolean hasShaGu = false;
 
         if (AbstractDungeon.player != null && AbstractDungeon.player.masterDeck != null) {
