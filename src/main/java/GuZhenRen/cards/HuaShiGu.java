@@ -24,7 +24,7 @@ public class HuaShiGu extends AbstractGuZhenRenCard {
     private static final int COST = 0;
     private static final int MAGIC = 3;
     private static final int UPGRADE_PLUS_MAGIC = 2;
-    private static final int INITIAL_RANK = 6;
+    private static final int INITIAL_RANK = 5;
 
     public HuaShiGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
