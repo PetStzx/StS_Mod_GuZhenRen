@@ -182,13 +182,6 @@
       " 点格挡。"
     ]
   },
-  "GuZhenRen:FeiLiPower": {
-    "NAME": "费力",
-    "DESCRIPTIONS": [
-      "回合结束时失去1点 #y力量 ，持续 #b",
-      " 回合。"
-    ]
-  },
   "GuZhenRen:MuDaoDaoHenPower": {
     "NAME": "木道道痕",
     "DESCRIPTIONS": [

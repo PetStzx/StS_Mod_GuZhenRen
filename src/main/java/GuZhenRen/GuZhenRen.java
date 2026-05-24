@@ -190,7 +190,6 @@ public class GuZhenRen implements
         BaseMod.addCard(new FeiXiongXuYing());
         BaseMod.addCard(new WoLi());
         BaseMod.addCard(new WoLiXuYing());
-        BaseMod.addCard(new FeiLiGu());
         BaseMod.addCard(new YunSuan());
         BaseMod.addCard(new BaShan());
         BaseMod.addCard(new LiQiGu());

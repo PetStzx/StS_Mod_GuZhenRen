@@ -421,10 +421,6 @@
     "NAME": "Self Strength Phantom",
     "DESCRIPTION": "{CHANCE} guzhenren:Probability to trigger: NL Randomly play 1 non-Exhaust Attack card from your deck."
   },
-  "GuZhenRen:FeiLiGu": {
-    "NAME": "Strenuous Gu",
-    "DESCRIPTION": "At the end of its turn, the target loses 1 Strength for !M! turn(s). NL Exhaust ."
-  },
   "GuZhenRen:YunSuan": {
     "NAME": "Calculation",
     "DESCRIPTION": " Exhaust 2 cards. Draw !M! cards. NL The guzhenren:Probability of all cards in your hand increases by !GuZhenRen:SecondMagic! % for this combat."

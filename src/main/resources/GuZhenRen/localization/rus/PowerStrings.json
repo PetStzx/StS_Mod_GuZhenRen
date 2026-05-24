@@ -182,13 +182,6 @@
       " Блока."
     ]
   },
-  "GuZhenRen:FeiLiPower": {
-    "NAME": "Напряженный",
-    "DESCRIPTIONS": [
-      "В конце вашего хода теряет 1 #yСилу на #b",
-      " ход(ов)."
-    ]
-  },
   "GuZhenRen:MuDaoDaoHenPower": {
     "NAME": "Марка Дао Пути Дерева",
     "DESCRIPTIONS": [

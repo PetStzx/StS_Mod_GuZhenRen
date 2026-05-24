@@ -182,13 +182,6 @@
       " Block."
     ]
   },
-  "GuZhenRen:FeiLiPower": {
-    "NAME": "Strenuous",
-    "DESCRIPTIONS": [
-      "At the end of your turn, lose 1 #yStrength for #b",
-      " turns."
-    ]
-  },
   "GuZhenRen:MuDaoDaoHenPower": {
     "NAME": "Wood Path Dao Mark",
     "DESCRIPTIONS": [

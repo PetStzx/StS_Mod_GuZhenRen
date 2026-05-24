@@ -421,10 +421,6 @@
     "NAME": "我力虚影",
     "DESCRIPTION": "{CHANCE} guzhenren:概率 触发： NL 随机打出1张你牌组中非 消耗 的攻击牌。"
   },
-  "GuZhenRen:FeiLiGu": {
-    "NAME": "费力蛊",
-    "DESCRIPTION": "目标在回合结束时失去1点 力量 ， NL 持续 !M! 回合。 NL 消耗 。"
-  },
   "GuZhenRen:YunSuan": {
     "NAME": "运算",
     "DESCRIPTION": " 消耗 2 张牌。抽 !M! 张牌。 NL 所有手牌在本场战斗中 guzhenren:概率 属性提高 !GuZhenRen:SecondMagic! %。"
