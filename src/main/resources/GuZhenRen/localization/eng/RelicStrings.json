@@ -326,5 +326,12 @@
     "DESCRIPTIONS": [
       "Whenever you Smith, you can additionally #yUpgrade 1 card."
     ]
+  },
+  "GuZhenRen:ChiXiang": {
+    "NAME": "Eat Fragrance",
+    "FLAVOR": "Rank 6 Food Path Immortal Gu, shaped like a small wooden box.",
+    "DESCRIPTIONS": [
+      "Whenever you kill a non-Minion enemy, heal #b1 HP.  NL #yFood_Path cards' #yFatal rewards are doubled."
+    ]
   }
 }

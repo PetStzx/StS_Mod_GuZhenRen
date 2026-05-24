@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.relics.ChiXiang;
 import GuZhenRen.relics.LiDaoDaoHen;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -28,11 +29,10 @@ public class ChiLi extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ChiLi.png");
 
     private static final int COST = 2;
-    private static final int DAMAGE = 9; // 9 点伤害
-    private static final int UPGRADE_PLUS_DMG = 3; // 升级加 3
+    private static final int DAMAGE = 9;
+    private static final int UPGRADE_PLUS_DMG = 3;
     private static final int INITIAL_RANK = 6;
 
-    // 状态开关：控制是否显示括号
     private boolean showDynamicText = false;
 
     public ChiLi() {
@@ -47,14 +47,10 @@ public class ChiLi extends AbstractGuZhenRenCard {
         this.setDao(Dao.SHI_DAO);
         this.setRank(INITIAL_RANK);
 
-        // 使用 misc 变量来追踪斩杀次数，初始需要斩杀 2 次
         this.misc = 2;
         this.baseMagicNumber = this.magicNumber = this.misc;
     }
 
-    // =========================================================================
-    // 动态文本控制逻辑
-    // =========================================================================
     @Override
     protected String constructRawDescription() {
         String s = super.constructRawDescription();
@@ -90,9 +86,6 @@ public class ChiLi extends AbstractGuZhenRenCard {
         this.initializeDescription();
     }
 
-    // =========================================================================
-    // 打出与斩杀判定
-    // =========================================================================
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         if (m != null) {
@@ -134,12 +127,19 @@ public class ChiLi extends AbstractGuZhenRenCard {
 
                 if ((this.target.isDying || this.target.currentHealth <= 0) && !this.target.halfDead && !this.target.hasPower("Minion")) {
 
-                    card.misc--;
+                    AbstractPlayer p = AbstractDungeon.player;
+
+                    // 判定是否拥有吃香遗物
+                    if (p.hasRelic(ChiXiang.ID)) {
+                        p.getRelic(ChiXiang.ID).flash();
+                        card.misc -= 2; // 收益翻倍
+                    } else {
+                        card.misc -= 1; // 正常收益
+                    }
 
                     if (card.misc <= 0) {
-                        card.misc = 2; // 重置为需要 2 次
+                        card.misc += 2;
 
-                        AbstractPlayer p = AbstractDungeon.player;
                         AbstractRelic relic = p.getRelic(LiDaoDaoHen.ID);
 
                         if (relic != null) {
