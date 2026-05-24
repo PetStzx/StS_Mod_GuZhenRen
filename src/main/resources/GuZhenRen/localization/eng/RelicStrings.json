@@ -298,5 +298,12 @@
       " more times.",
       "The effect of this Relic has been exhausted."
     ]
+  },
+  "GuZhenRen:FeiLiGu": {
+    "NAME": "Waste Effort Gu",
+    "FLAVOR": "Causes the enemy's every move to waste more effort, doubling their loss of strength.",
+    "DESCRIPTIONS": [
+      "At the end of their turn, enemies with #yStrength lose #b1 #yStrength ."
+    ]
   }
 }
