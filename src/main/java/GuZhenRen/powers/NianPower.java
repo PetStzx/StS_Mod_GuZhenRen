@@ -1,6 +1,7 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.util.BattleStateManager;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -22,6 +23,17 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
     private static int nianGainedThisTurn = 0;
     private static int lastTurn = -1;
+
+    static {
+        BattleStateManager.onBattleStart(() -> {
+            nianGainedThisTurn = 0;
+            lastTurn = -1;
+        });
+        BattleStateManager.onPostBattle(() -> {
+            nianGainedThisTurn = 0;
+            lastTurn = -1;
+        });
+    }
 
     public static void recordNianGain(int amount) {
         if (amount <= 0) return;
