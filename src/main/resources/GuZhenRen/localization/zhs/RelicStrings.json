@@ -319,5 +319,12 @@
     "DESCRIPTIONS": [
       "你可以跨回合保留最多 #b3 点 #y格挡 。"
     ]
+  },
+  "GuZhenRen:CunGuangYin": {
+    "NAME": "寸光阴",
+    "FLAVOR": "宙道蛊虫，广泛用于炼蛊，可加速蛊虫的酝酿和变化。",
+    "DESCRIPTIONS": [
+      "你锻造的时候能额外 #y升级 1张牌。"
+    ]
   }
 }
