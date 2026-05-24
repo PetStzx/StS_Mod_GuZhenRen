@@ -305,5 +305,12 @@
     "DESCRIPTIONS": [
       "拥有 #y力量 的敌人在其回合结束时，失去 #b1 点 #y力量 。"
     ]
+  },
+  "GuZhenRen:NongXuGu": {
+    "NAME": "弄虚蛊",
+    "FLAVOR": "虚道蛊虫，能凭空捏造出虚影。",
+    "DESCRIPTIONS": [
+      "在每场战斗开始时，将 #b1 张随机的 #y虚影 牌加入手牌。"
+    ]
   }
 }

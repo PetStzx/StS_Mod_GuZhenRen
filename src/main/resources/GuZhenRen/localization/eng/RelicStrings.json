@@ -305,5 +305,12 @@
     "DESCRIPTIONS": [
       "At the end of their turn, enemies with #yStrength lose #b1 #yStrength ."
     ]
+  },
+  "GuZhenRen:NongXuGu": {
+    "NAME": "Fabrication Gu",
+    "FLAVOR": "A Phantom Path Gu capable of conjuring illusions out of thin air.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, add #b1 random #yPhantom card to your hand."
+    ]
   }
 }
