@@ -19,7 +19,7 @@ public class LeiGuDunGu extends AbstractGuZhenRenCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/LeiGuDunGu.png");
 
     private static final int COST = 1;
-    private static final int BLOCK = 7;
+    private static final int BLOCK = 6;
     private static final int UPGRADE_PLUS_BLOCK = 3;
 
     private static final int MAGIC = 1;
