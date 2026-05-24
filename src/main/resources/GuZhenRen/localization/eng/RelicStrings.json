@@ -312,5 +312,12 @@
     "DESCRIPTIONS": [
       "At the start of each combat, add #b1 random #yPhantom card to your hand."
     ]
+  },
+  "GuZhenRen:TuDuiGu": {
+    "NAME": "Soil Mound Gu",
+    "FLAVOR": "A Rank 2 Earth Path Gu that creates small mounds of earth to steady defenses.",
+    "DESCRIPTIONS": [
+      "You can retain up to #b3 #yBlock across turns."
+    ]
   }
 }

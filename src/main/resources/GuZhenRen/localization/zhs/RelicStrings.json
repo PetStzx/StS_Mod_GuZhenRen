@@ -312,5 +312,12 @@
     "DESCRIPTIONS": [
       "在每场战斗开始时，将 #b1 张随机的 #y虚影 牌加入手牌。"
     ]
+  },
+  "GuZhenRen:TuDuiGu": {
+    "NAME": "土堆蛊",
+    "FLAVOR": "二转土道蛊虫，可产生土堆，稳固防守。",
+    "DESCRIPTIONS": [
+      "你可以跨回合保留最多 #b3 点 #y格挡 。"
+    ]
   }
 }
