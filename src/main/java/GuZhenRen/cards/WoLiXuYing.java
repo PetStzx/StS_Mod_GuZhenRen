@@ -1,10 +1,9 @@
 package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
-import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.actions.common.TriggerCardAction;import GuZhenRen.actions.common.CenterCardDisplayAction;import GuZhenRen.patches.CardColorEnum;
 import GuZhenRen.patches.GuZhenRenTags;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,7 +12,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class WoLiXuYing extends AbstractXuYingCard {
     public static final String ID = GuZhenRen.makeID("WoLiXuYing");
@@ -91,110 +89,42 @@ public class WoLiXuYing extends AbstractXuYingCard {
         }
     }
 
-    // =========================================================================
-    // 动画与触发逻辑
-    // =========================================================================
     @Override
     public void triggerPhantomEffect(AbstractMonster m) {
         if (this.randomAttackCard == null) {
-            rollRandomAttack(); // 兜底保护
+            rollRandomAttack();
         }
 
         if (this.randomAttackCard != null && this.animatedPhantomCard != null) {
-            final AbstractCard tmp = this.randomAttackCard.makeStatEquivalentCopy();
-            final AbstractCard phantom = this.animatedPhantomCard;
-            final AbstractMonster finalTarget = m;
-
-            // 让替身计算伤害
-            if (finalTarget != null && !finalTarget.isDeadOrEscaped()) {
-                tmp.calculateCardDamage(finalTarget);
-            } else {
-                tmp.applyPowers();
-            }
-
-            // 在计算完伤害、放入动作队列前，抵消替身的钢笔尖翻倍
-            if (AbstractDungeon.player.hasPower("Pen Nib")) {
-                tmp.damage /= 2;
-                tmp.isDamageModified = (tmp.damage != tmp.baseDamage);
-            }
-
-            tmp.tags.add(GuZhenRenTags.XU_YING_COPY);
-            tmp.purgeOnUse = true;
-
-            // 让 X 费牌不消耗真实能量
-            tmp.energyOnUse = EnergyPanel.totalCount;
-            tmp.freeToPlayOnce = true;
-
-            AbstractDungeon.player.limbo.addToTop(tmp);
-            tmp.current_x = Settings.WIDTH / 2.0F;
-            tmp.current_y = Settings.HEIGHT / 2.0F;
-            tmp.target_x = Settings.WIDTH / 2.0F;
-            tmp.target_y = Settings.HEIGHT / 2.0F;
-            tmp.drawScale = 0.1F;
-            tmp.targetDrawScale = 0.9F;
-            tmp.transparency = 0.01F;
-            tmp.targetTransparency = 1.0F;
-
-            // 5.攻击特效演示完，从屏幕上抹除这张克隆牌
-            this.addToTop(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    if (AbstractDungeon.player.limbo.contains(tmp)) {
-                        AbstractDungeon.player.limbo.removeCard(tmp);
-                    }
-                    this.isDone = true;
-                }
-            });
-
-            // 4.攻击动作执行后，等待一会
-            this.addToTop(new com.megacrit.cardcrawl.actions.utility.WaitAction(Settings.FAST_MODE ? 0.2F : 0.3F));
-
-            // 3.引发攻击动作
-            this.addToTop(new AbstractGameAction() {
-                @Override
-                public void update() {
-                    int startIndex = AbstractDungeon.actionManager.actions.size();
-                    tmp.use(AbstractDungeon.player, finalTarget);
-                    int endIndex = AbstractDungeon.actionManager.actions.size();
-
-                    if (endIndex > startIndex) {
-                        List<AbstractGameAction> stolenActions = new ArrayList<>();
-                        for (int i = startIndex; i < endIndex; i++) {
-                            stolenActions.add(AbstractDungeon.actionManager.actions.get(i));
-                        }
-                        for (int i = 0; i < stolenActions.size(); i++) {
-                            AbstractDungeon.actionManager.actions.remove(AbstractDungeon.actionManager.actions.size() - 1);
-                        }
-                        for (int i = stolenActions.size() - 1; i >= 0; i--) {
-                            AbstractDungeon.actionManager.addToTop(stolenActions.get(i));
-                        }
-                    }
-                    this.isDone = true;
-                }
-            });
-
-            // 2.变身完成后，定格一会
-            this.addToTop(new com.megacrit.cardcrawl.actions.utility.WaitAction(Settings.FAST_MODE ? 0.15F : 0.25F));
-
-            // 1.最先执行的变身动画
-            this.addToTop(new AbstractGameAction() {
-                private boolean first = true;
-                {
-                    this.actionType = ActionType.WAIT;
-                    this.duration = Settings.FAST_MODE ? 0.3F : 0.45F;
-                }
-                @Override
-                public void update() {
-                    if (first) {
-                        phantom.targetTransparency = 0.0F;
-                        phantom.targetDrawScale = 0.1F;
-                        first = false;
-                    }
-                    this.tickDuration();
-                }
-            });
-
+            AbstractCard tmp = prepareCloneCard(m);
+            this.addToTop(new CenterCardDisplayAction(tmp, null, CenterCardDisplayAction.Phase.CLEAR));
+            this.addToTop(new WaitAction(Settings.FAST_MODE ? 0.2F : 0.3F));
+            this.addToTop(new TriggerCardAction(tmp, m));
+            this.addToTop(new WaitAction(Settings.FAST_MODE ? 0.15F : 0.25F));
+            this.addToTop(new CenterCardDisplayAction(tmp, this.animatedPhantomCard, CenterCardDisplayAction.Phase.SETUP));
             rollRandomAttack();
         }
+    }
+
+    private AbstractCard prepareCloneCard(AbstractMonster m) {
+        AbstractCard tmp = this.randomAttackCard.makeStatEquivalentCopy();
+        if (m != null && !m.isDeadOrEscaped()) {
+            tmp.calculateCardDamage(m);
+        } else {
+            tmp.applyPowers();
+        }
+
+        // 抵消钢笔尖
+        if (AbstractDungeon.player.hasPower("Pen Nib")) {
+            tmp.damage /= 2;
+            tmp.isDamageModified = (tmp.damage != tmp.baseDamage);
+        }
+
+        tmp.tags.add(GuZhenRenTags.XU_YING_COPY);
+        tmp.purgeOnUse = true;
+        tmp.energyOnUse = EnergyPanel.totalCount; // 保证X费牌读取真实能量
+        tmp.freeToPlayOnce = true;
+
+        return tmp;
     }
 }
