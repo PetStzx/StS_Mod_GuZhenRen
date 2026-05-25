@@ -321,10 +321,11 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         if (this.xp >= this.neededXP) {
             if (this.rank == 5) {
                 this.xp = this.neededXP;
-                if (this.currentState == KongQiaoState.XP_GATHERING) {
+                if (isTribulationDisabled()) {
+                } else if (this.currentState == KongQiaoState.XP_GATHERING) {
                     this.currentState = KongQiaoState.TRIBULATION_PENDING;
                     CardCrawlGame.sound.playA("BELL", com.badlogic.gdx.math.MathUtils.random(-0.4F, -0.2F));
-                    AbstractDungeon.topLevelEffectsQueue.add(new BorderFlashEffect(Color.WHITE.cpy()));
+                    AbstractDungeon.topLevelEffectsQueue.add(new com.megacrit.cardcrawl.vfx.BorderFlashEffect(com.badlogic.gdx.graphics.Color.WHITE.cpy()));
                 }
             } else {
                 int overflowXP = this.xp - this.neededXP;
@@ -367,6 +368,17 @@ public abstract class AbstractKongQiao extends CustomRelic implements CustomSava
         if (this.DESCRIPTIONS == null || this.DESCRIPTIONS.length == 0) return "";
         String baseDesc = this.DESCRIPTIONS[0];
         StringBuilder extra = new StringBuilder();
+
+        if (isTribulationDisabled()) {
+            if (this.rank < 5) {
+                int remaining = neededXP - xp;
+                if (remaining < 0) remaining = 0;
+                if (nextRelicID != null && !nextRelicID.isEmpty()) {
+                    extra.append(String.format(TEXT[0], remaining));
+                }
+            }
+            return baseDesc + extra.toString();
+        }
 
         boolean inCombat = false;
         if (AbstractDungeon.currMapNode != null && AbstractDungeon.getCurrRoom() != null) {

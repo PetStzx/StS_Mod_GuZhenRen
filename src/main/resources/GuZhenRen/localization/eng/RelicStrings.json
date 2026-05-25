@@ -333,5 +333,12 @@
     "DESCRIPTIONS": [
       "Whenever you kill a non-Minion enemy, heal #b1 HP.  NL #yFood_Path cards' #yFatal rewards are doubled."
     ]
+  },
+  "GuZhenRen:ShenBuZhi": {
+    "NAME": "Unbeknownst to Gods",
+    "FLAVOR": "Rank 9 Theft Path killer move, capable of shielding against Heaven's Will's detection.",
+    "DESCRIPTIONS": [
+      "You will no longer encounter any #yTribulations ."
+    ]
   }
 }

@@ -333,5 +333,12 @@
     "DESCRIPTIONS": [
       "杀死非爪牙的敌人时，回复 #b1 点生命。 NL #y食道 牌的 #y斩杀 收益翻倍。"
     ]
+  },
+  "GuZhenRen:ShenBuZhi": {
+    "NAME": "神不知",
+    "FLAVOR": "九转偷道杀招，可屏蔽天意的探测。",
+    "DESCRIPTIONS": [
+      "你不会再遭遇任何 #y灾劫 。"
+    ]
   }
 }
