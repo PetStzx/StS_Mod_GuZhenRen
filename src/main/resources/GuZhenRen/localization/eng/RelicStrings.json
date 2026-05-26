@@ -340,5 +340,12 @@
     "DESCRIPTIONS": [
       "You will no longer encounter any #yTribulations ."
     ]
+  },
+  "GuZhenRen:GuiBuJue": {
+    "NAME": "Ghostly Concealment",
+    "FLAVOR": "Rank 9 Theft Path killer move, capable of guarding against ghostly perception.",
+    "DESCRIPTIONS": [
+      " #yGhost enemies cannot target you with their actions. NL (Includes: Hexaghost, The Collector, Torch Head, Transient, Nemesis)"
+    ]
   }
 }
