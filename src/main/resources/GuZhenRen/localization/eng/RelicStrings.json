@@ -312,5 +312,26 @@
     "DESCRIPTIONS": [
       "At the start of each combat, add #b1 random #yPhantom card to your hand."
     ]
+  },
+  "GuZhenRen:TuDuiGu": {
+    "NAME": "Soil Mound Gu",
+    "FLAVOR": "A Rank 2 Earth Path Gu that creates small mounds of earth to steady defenses.",
+    "DESCRIPTIONS": [
+      "You can retain up to #b3 #yBlock across turns."
+    ]
+  },
+  "GuZhenRen:CunGuangYin": {
+    "NAME": "Inch of Time",
+    "FLAVOR": "A Time Path Gu widely used in refinement, capable of accelerating the brewing and transformation of Gu.",
+    "DESCRIPTIONS": [
+      "Whenever you Smith, you can additionally #yUpgrade 1 card."
+    ]
+  },
+  "GuZhenRen:ChiXiang": {
+    "NAME": "Eat Fragrance",
+    "FLAVOR": "Rank 6 Food Path Immortal Gu, shaped like a small wooden box.",
+    "DESCRIPTIONS": [
+      "Whenever you kill a non-Minion enemy, heal #b1 HP.  NL #yFood_Path cards' #yFatal rewards are doubled."
+    ]
   }
 }
