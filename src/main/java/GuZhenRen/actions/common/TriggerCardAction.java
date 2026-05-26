@@ -8,6 +8,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import java.util.ArrayList;
 import java.util.List;
 
+import static GuZhenRen.GuZhenRen.makeID;
+
 public class TriggerCardAction extends AbstractGameAction {
     private final AbstractCard card;
     private final AbstractMonster target;
@@ -25,6 +27,12 @@ public class TriggerCardAction extends AbstractGameAction {
 
         int startIndex = AbstractDungeon.actionManager.actions.size();
         this.card.use(AbstractDungeon.player, this.target);
+
+        AbstractDungeon.player.powers.stream()
+                .filter(p -> makeID("ShanYaoPower").equals(p.ID))
+                .findAny()
+                .ifPresent(p -> p.onUseCard(card, null));
+
         int endIndex = AbstractDungeon.actionManager.actions.size();
 
         if (endIndex > startIndex) {
