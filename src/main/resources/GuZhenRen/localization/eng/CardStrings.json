@@ -815,5 +815,9 @@
   "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
     "NAME": "Move",
     "DESCRIPTION": "Gain 18 Block . NL ALL enemies deal 1 damage to you 1 time for each Vulnerable they have."
+  },
+  "GuZhenRen:ZhanGuCheLun": {
+    "NAME": "War Bone Wheel",
+    "DESCRIPTION": "Deal !D! damage to ALL enemies !M! times."
   }
 }

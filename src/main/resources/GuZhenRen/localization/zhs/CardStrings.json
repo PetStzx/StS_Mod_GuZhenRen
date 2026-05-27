@@ -815,5 +815,9 @@
   "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
     "NAME": "移动",
     "DESCRIPTION": "获得 18 点 格挡 。 NL 所有敌人每有 1 层 易伤 ，就对你造成 1 点伤害 1 次。"
+  },
+  "GuZhenRen:ZhanGuCheLun": {
+    "NAME": "战骨车轮",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
   }
 }

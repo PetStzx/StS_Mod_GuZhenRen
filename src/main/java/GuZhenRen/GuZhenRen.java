@@ -265,6 +265,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new LeiGuDunGu());
         BaseMod.addCard(new DiMai());
         BaseMod.addCard(new BaiGuZhanChe());
+        BaseMod.addCard(new ZhanGuCheLun());
     }
 
     @Override

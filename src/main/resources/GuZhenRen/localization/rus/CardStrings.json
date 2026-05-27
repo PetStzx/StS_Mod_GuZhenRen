@@ -815,5 +815,9 @@
   "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
     "NAME": "Перемещение",
     "DESCRIPTION": "Дает 18 Блока . NL ВСЕ враги наносят вам 1 урон 1 раз за каждую Уязвимость, которую они имеют."
+  },
+  "GuZhenRen:ZhanGuCheLun": {
+    "NAME": "Колесо Боевых Костей",
+    "DESCRIPTION": "Наносит !D! урона ВСЕМ врагам !M! раза."
   }
 }
