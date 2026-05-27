@@ -308,5 +308,9 @@
     "PROPER_NAME": "Fossil",
     "NAMES": ["fossil", "fossilized"],
     "DESCRIPTION": "When played, gain #yBlock equal to its stacks. This card's Path becomes #yEarth_Path ."
+  },
+  {
+    "NAMES": ["mortal_gu_house", "mortal gu house"],
+    "DESCRIPTION": "A Gu House entirely built with mortal Gu, essentially a solidified killer move. NL #yReturns #yto #yyour #yhand #yat #ythe #ystart #yof #yeach #yturn. "
   }
 ]

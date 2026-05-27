@@ -799,5 +799,21 @@
   "GuZhenRen:DiMai": {
     "NAME": "地脉",
     "DESCRIPTION": "获得 !B! 点 格挡 。 NL 本场战斗中每获得过一次 格挡 ，此牌耗能就减少 [E] 。"
+  },
+  "GuZhenRen:BaiGuZhanChe": {
+    "NAME": "白骨战车",
+    "DESCRIPTION": "选择一项： NL 攻伐、防御、移动。"
+  },
+  "GuZhenRen:OptionGongFa_BaiGuZhanChe": {
+    "NAME": "攻伐",
+    "DESCRIPTION": "所有敌人受到等同于你当前格挡值的伤害。 NL 给予所有敌人 2 层 易伤 。"
+  },
+  "GuZhenRen:OptionFangHu_BaiGuZhanChe": {
+    "NAME": "防御",
+    "DESCRIPTION": "获得 3 层 荆棘 。 NL 3 回合内将你格挡的攻击伤害反弹给攻击者。"
+  },
+  "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
+    "NAME": "移动",
+    "DESCRIPTION": "获得 18 点 格挡 。 NL 所有敌人每有 1 层 易伤 ，就对你造成 1 点伤害 1 次。"
   }
 }

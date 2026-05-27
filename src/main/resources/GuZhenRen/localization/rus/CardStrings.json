@@ -799,5 +799,21 @@
   "GuZhenRen:DiMai": {
     "NAME": "Земная Жила",
     "DESCRIPTION": "Дает !B! Блока . NL Стоит на [E] меньше за каждый раз, когда вы получали Блок в этом бою."
+  },
+  "GuZhenRen:BaiGuZhanChe": {
+    "NAME": "Костяная Колесница",
+    "DESCRIPTION": "Выберите одно: NL Атака, Защита, Перемещение."
+  },
+  "GuZhenRen:OptionGongFa_BaiGuZhanChe": {
+    "NAME": "Атака",
+    "DESCRIPTION": "ВСЕ враги получают урон, равный вашему текущему Блоку. NL Накладывает 2 Уязвимости на ВСЕХ врагов."
+  },
+  "GuZhenRen:OptionFangHu_BaiGuZhanChe": {
+    "NAME": "Защита",
+    "DESCRIPTION": "Дает 3 Шипа . NL В течение 3 ходов отражает заблокированный урон от атак обратно в атакующего."
+  },
+  "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
+    "NAME": "Перемещение",
+    "DESCRIPTION": "Дает 18 Блока . NL ВСЕ враги наносят вам 1 урон 1 раз за каждую Уязвимость, которую они имеют."
   }
 }

@@ -799,5 +799,21 @@
   "GuZhenRen:DiMai": {
     "NAME": "Earth Vein",
     "DESCRIPTION": "Gain !B! Block . NL Costs [E] less for each time you have gained Block this combat."
+  },
+  "GuZhenRen:BaiGuZhanChe": {
+    "NAME": "Bone Chariot",
+    "DESCRIPTION": "Choose one: NL Offense, Defense, Move."
+  },
+  "GuZhenRen:OptionGongFa_BaiGuZhanChe": {
+    "NAME": "Offense",
+    "DESCRIPTION": "ALL enemies take damage equal to your current Block. NL Apply 2 Vulnerable to ALL enemies."
+  },
+  "GuZhenRen:OptionFangHu_BaiGuZhanChe": {
+    "NAME": "Defense",
+    "DESCRIPTION": "Gain 3 Thorns . NL For 3 turns, reflect blocked attack damage back to the attacker."
+  },
+  "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
+    "NAME": "Move",
+    "DESCRIPTION": "Gain 18 Block . NL ALL enemies deal 1 damage to you 1 time for each Vulnerable they have."
   }
 }

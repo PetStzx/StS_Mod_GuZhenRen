@@ -15,6 +15,8 @@ public class GuZhenRenTags {
     @SpireEnum
     public static AbstractCard.CardTags XIAN_GU_WU; // 仙蛊屋
     @SpireEnum
+    public static AbstractCard.CardTags FAN_GU_WU; // 凡蛊屋
+    @SpireEnum
     public static AbstractCard.CardTags XU_YING_COPY; // 虚影复制品
     @SpireEnum
     public static AbstractCard.CardTags GUANG_DAO; // 光道
