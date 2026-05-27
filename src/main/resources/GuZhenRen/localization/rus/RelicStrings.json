@@ -347,5 +347,12 @@
     "DESCRIPTIONS": [
       " Действия #yПризрачных врагов не могут быть направлены на вас. NL (Включая: Hexaghost, The Collector, Torch Head, Transient, Nemesis)"
     ]
+  },
+  "GuZhenRen:LuoPoGu": {
+    "NAME": "Долина Ло По",
+    "FLAVOR": "Уединенное царство Пути Души, лучший выбор для закалки души.",
+    "DESCRIPTIONS": [
+      "В начале каждого боя получайте #b1 слой #yНеосязаемости ."
+    ]
   }
 }

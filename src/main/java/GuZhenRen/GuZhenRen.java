@@ -4,6 +4,7 @@ import GuZhenRen.effects.BenMingGuOpeningEffect;
 import GuZhenRen.util.BattleStateManager;
 import GuZhenRen.util.GuZhenRenConfig;
 import GuZhenRen.util.TribulationManager;
+import GuZhenRen.events.*;
 import basemod.BaseMod;
 import basemod.ReflectionHacks;
 import basemod.interfaces.*;
@@ -295,6 +296,7 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new ChiXiang(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new ShenBuZhi(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new GuiBuJue(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new LuoPoGu(), CardColorEnum.GUZHENREN_GREY);
 
 
         BaseMod.addRelicToCustomPool(new Recipe_AngryBird(), CardColorEnum.GUZHENREN_GREY);
@@ -367,6 +369,14 @@ public class GuZhenRen implements
 
         GuZhenRenConfig.setupConfigPanel();
         TribulationManager.initialize();
+
+        basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
+                DaoTianZhenChuan.ID,
+                DaoTianZhenChuan.class)
+                .dungeonID(com.megacrit.cardcrawl.dungeons.TheCity.ID)
+                .playerClass(AbstractPlayerEnum.FANG_YUAN)
+                .spawnCondition(() -> AbstractKongQiao.getCurrentRank() >= 6)
+                .create());
     }
 
     @Override
@@ -380,6 +390,7 @@ public class GuZhenRen implements
         loadCustomStrings(PowerStrings.class, assetPath(path + "PowerStrings.json"));
         loadCustomStrings(PotionStrings.class, assetPath(path + "PotionStrings.json"));
         loadCustomStrings(UIStrings.class, assetPath(path + "UIStrings.json"));
+        loadCustomStrings(EventStrings.class, assetPath(path + "EventStrings.json"));
     }
 
     @Override
