@@ -1,6 +1,6 @@
 package GuZhenRen.patches;
 
-import GuZhenRen.cards.GuQianGu;
+import GuZhenRen.cards.GuQiangGu;
 import GuZhenRen.cards.LuoXuanGuQiangGu;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -26,7 +26,7 @@ public class ShopAutoRemovePatch {
         // 寻找玩家牌库中所有需要被商店回收的特定事件牌
         ArrayList<AbstractCard> cardsToRemove = new ArrayList<>();
         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
-            if (c.cardID.equals(GuQianGu.ID) || c.cardID.equals(LuoXuanGuQiangGu.ID)) {
+            if (c.cardID.equals(GuQiangGu.ID) || c.cardID.equals(LuoXuanGuQiangGu.ID)) {
                 cardsToRemove.add(c);
             }
         }

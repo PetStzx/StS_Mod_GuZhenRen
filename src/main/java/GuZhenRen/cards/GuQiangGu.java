@@ -10,12 +10,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class GuQianGu extends AbstractGuZhenRenCard {
-    public static final String ID = GuZhenRen.makeID("GuQianGu");
+public class GuQiangGu extends AbstractGuZhenRenCard {
+    public static final String ID = GuZhenRen.makeID("GuQiangGu");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/GuQianGu.png");
+    public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/GuQiangGu.png");
 
     private static final int COST = 1;
     private static final int DAMAGE = 6;
@@ -26,7 +26,7 @@ public class GuQianGu extends AbstractGuZhenRenCard {
 
     private static final int INITIAL_RANK = 1;
 
-    public GuQianGu() {
+    public GuQiangGu() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.ATTACK,
                 CardColorEnum.GUZHENREN_GREY,
