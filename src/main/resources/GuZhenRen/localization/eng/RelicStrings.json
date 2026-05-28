@@ -377,5 +377,12 @@
     "DESCRIPTIONS": [
       "Upon pickup, lose #b3 Max HP. NL At the start of each combat, gain #b3 #yMetallicize ."
     ]
+  },
+  "GuZhenRen:BiGuYiGu": {
+    "NAME": "Arm Bone Wing Gu",
+    "FLAVOR": "Rank 3 Bone Path Gu. Can grow a pair of bone wings on the forearm. Flapping the bone wings increases attack speed.",
+    "DESCRIPTIONS": [
+      "During the first turn of each combat, the first Attack card you play is played #b1 additional time."
+    ]
   }
 }
