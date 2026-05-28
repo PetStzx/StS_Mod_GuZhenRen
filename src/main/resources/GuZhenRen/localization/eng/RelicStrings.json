@@ -392,5 +392,13 @@
       "At the end of combat, if you lost HP during combat, heal #b",
       " HP."
     ]
+  },
+  "GuZhenRen:Recipe_BaiGuZhanChe": {
+    "NAME": "Killer Move - White Bone Chariot",
+    "FLAVOR": "The number one mortal killer move, possessing formidable power that can rival a rank six Immortal Gu.",
+    "DESCRIPTIONS": [
+      "Requires: #yBattle #yBone #yWheel+ , any #yBone #yPath #yGu .",
+      "Any Bone Path Gu"
+    ]
   }
 }

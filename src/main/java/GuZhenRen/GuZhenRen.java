@@ -349,6 +349,9 @@ public class GuZhenRen implements
         recipeRelicIDs.add(Recipe_GuangYinFeiRen.ID);
         BaseMod.addRelicToCustomPool(new Recipe_SongYouFeng(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_SongYouFeng.ID);
+
+
+        BaseMod.addRelicToCustomPool(new Recipe_BaiGuZhanChe(), CardColorEnum.GUZHENREN_GREY);
     }
 
     @Override
