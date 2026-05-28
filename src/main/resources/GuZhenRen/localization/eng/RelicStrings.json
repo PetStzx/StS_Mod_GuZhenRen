@@ -384,5 +384,13 @@
     "DESCRIPTIONS": [
       "During the first turn of each combat, the first Attack card you play is played #b1 additional time."
     ]
+  },
+  "GuZhenRen:RouBaiGu": {
+    "NAME": "Flesh and Bone Gu",
+    "FLAVOR": "Healing Gu. Can heal wounds of flesh and blood.",
+    "DESCRIPTIONS": [
+      "At the end of combat, if you lost HP during combat, heal #b",
+      " HP."
+    ]
   }
 }
