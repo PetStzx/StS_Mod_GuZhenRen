@@ -819,5 +819,13 @@
   "GuZhenRen:ZhanGuCheLun": {
     "NAME": "War Bone Wheel",
     "DESCRIPTION": "Deal !D! damage to ALL enemies !M! times."
+  },
+  "GuZhenRen:GuQianGu": {
+    "NAME": "Bone Spear Gu",
+    "DESCRIPTION": "Deal !D! damage. NL When entering a Shop, remove this card from your deck and gain !M! Gold."
+  },
+  "GuZhenRen:LuoXuanGuQiangGu": {
+    "NAME": "Spiral Bone Spear Gu",
+    "DESCRIPTION": "Deal !D! damage ignoring Block. NL When entering a Shop, remove this card from your deck and gain !M! Gold."
   }
 }

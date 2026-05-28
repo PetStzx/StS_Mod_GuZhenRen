@@ -819,5 +819,13 @@
   "GuZhenRen:ZhanGuCheLun": {
     "NAME": "战骨车轮",
     "DESCRIPTION": "对所有敌人造成 !D! 点伤害 !M! 次。"
+  },
+  "GuZhenRen:GuQianGu": {
+    "NAME": "骨枪蛊",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 进入商店时，从牌组中移除此牌并获得 !M! 金币。"
+  },
+  "GuZhenRen:LuoXuanGuQiangGu": {
+    "NAME": "螺旋骨枪蛊",
+    "DESCRIPTION": "造成 !D! 点无视格挡的伤害。 NL 进入商店时，从牌组中移除此牌并获得 !M! 金币。"
   }
 }
