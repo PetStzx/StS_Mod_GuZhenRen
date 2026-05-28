@@ -363,5 +363,12 @@
       " unblocked damage you take.",
       "This relic is used up."
     ]
+  },
+  "GuZhenRen:GuCiGu": {
+    "NAME": "Bone Spike Gu",
+    "FLAVOR": "Rank 3 Bone Path Gu. Can cause the entire skeleton to mutate, producing sharp and rigid bone spikes.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, lose #b1 HP and gain #b4 Thorns ."
+    ]
   }
 }
