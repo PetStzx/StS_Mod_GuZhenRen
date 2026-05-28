@@ -370,5 +370,12 @@
     "DESCRIPTIONS": [
       "At the start of each combat, lose #b1 HP and gain #b4 Thorns ."
     ]
+  },
+  "GuZhenRen:TieGuGu": {
+    "NAME": "Iron Bone Gu",
+    "FLAVOR": "Rank 3 Bone Path Gu. Can make the Gu Master's entire skeleton as hard as iron.",
+    "DESCRIPTIONS": [
+      "Upon pickup, lose #b3 Max HP. NL At the start of each combat, gain #b3 #yMetallicize ."
+    ]
   }
 }
