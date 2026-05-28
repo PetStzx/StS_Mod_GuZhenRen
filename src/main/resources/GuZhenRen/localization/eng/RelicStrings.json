@@ -354,5 +354,14 @@
     "DESCRIPTIONS": [
       "At the start of each combat, gain #b1 layer of #yIntangible ."
     ]
+  },
+  "GuZhenRen:FeiGuDunGu": {
+    "NAME": "Flying Bone Shield Gu",
+    "FLAVOR": "Rank 3 Bone Path Gu. Can form three small spinning bone shields that hover around the Gu Master.",
+    "DESCRIPTIONS": [
+      "Prevent the next #b",
+      " unblocked damage you take.",
+      "This relic is used up."
+    ]
   }
 }
