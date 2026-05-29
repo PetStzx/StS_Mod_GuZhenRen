@@ -22,5 +22,49 @@
       "[Locked] #gRequires: [Pulling Mountain] or [Myriad Self Giant Hand].",
       "[Leave]"
     ]
-  }
+  },
+  "GuZhenRen:BaiGuChuanCheng": {
+    "NAME": "White Bone True Inheritance",
+    "DESCRIPTIONS": [
+      "You step into a mountain range completely white, with no soil or stone around, only pale bones. NL You can faintly hear the shouts of pursuing Gu Masters behind you: NL #r\" #r@Demon!@ #rYou are surrounded, you can't escape even with wings. Just come out!\" NL Ignoring their clamor, relying on your past life's memory, you arrive at a hidden cave. NL Among densely packed spiral bone spikes, you accurately find the shortest one and pull it outwards. NL ~\"Crack...\"~ NL The cave entrance behind you instantly closes, and a long secret passage extends before you. NL \"So this is the #yWhite #yBone #yTrue #yInheritance ...\"",
+      "You follow the secret passage into the first hall. NL In the center of the pure white hall sits a large vat, filled with milk-like white liquid emitting bursts of enticing milky fragrance. NL Beneath this white spring water, dense numbers of #yGu #yworms are slumbering.",
+      "You fish a Gu worm out of the vat and refine it instantly. NL At the same time, strange noises echo from deep within the passage behind you...",
+      "You kick the vat to pieces, completely destroying the remaining Gu worms. NL Hearing the approaching noises from behind, you don't pause, rushing down the secret passage into the second bone hall. NL In the center of the hall stand three white bone pillars, topped with carved bone hands, each grasping a #yGu #yworm . NL A line of text is carved on the pillars: NL #b\"Choose one of three, be content. White Bone Mountain inheritance, left for future generations.\"",
+      "You crush a bone hand to take the Gu worm. NL The remaining stone pillars still stand quietly. Do you still plan to continue taking them?",
+      "You ignore the carved warning on the pillars and forcefully snatch the last Gu worm. NL After losing the Gu worms, the three empty bone hand stone pillars finally stop standing still. Accompanied by the roar of mechanisms, they slowly sink into the ground, leaving no trace.",
+      "You arrive at the third hall. NL A human skeleton sits cross-legged by the cave wall, with an arm-length grey bone giant book placed in front of it. NL You flip open the book, which records many Gu refinement recipes, as well as the life story of the inheritance's owner— #yGrey #yBone #yScholar . NL The book concludes: NL \"This skeleton is Grey Bone Scholar himself. If future fated ones have the heart, they might as well pay their respects and kowtow three times. After paying respects, split the skeleton's skull to see a Gu. This Gu is his #yVital #yGu ; whoever obtains it must ~benefit the world and uphold justice~ .\"",
+      "You step forward and raise your foot, crushing the skeleton's skull! NL You extract Grey Bone Scholar's vital Gu, the #yBone #ySpike #yGu , from the cracked skull. NL The shouts of the pursuing enemies behind you are already clearly audible.",
+      "You walk down the descending grey bone stairs for thousands of meters. In the darkness, a tightly shut door appears before you. NL Four large words are carved on the door— #yFlesh #ySac #ySecret #yPavilion . NL You push the door and enter. The walls around you are all made of flesh. The flesh walls are covered with countless mouths, revealing rows of white teeth. NL #r~\"Hee hee hee... Hahaha... Hehehe...\"~ NL Various laughs mix together, echoing in the narrow pavilion. NL According to records, these mouths, transformed by the #yFlesh #ySmile #yGu , are containers used to store Gu worms.",
+      "You bend your finger and knock on the teeth of a large mouth. NL This mouth's laughter abruptly stops, and its teeth all fall out. A bright red, long tongue stretches forward, spitting out a #yGu #yworm towards you.",
+      "You follow the secret passage to the end of the inheritance, only to find a sheer cliff outside the exit! NL The tight sound of footsteps comes from behind as the Gu Masters aggressively pursue and completely block you at the edge of the cliff.",
+      "You ran all the way, not stopping at any checkpoints. To force you to stop, the pursuers frantically unleashed ranged killer moves in the narrow secret passage. NL With a loud \"@Boom!@\", the bone ground beneath your feet was forcibly blown apart, and you plunged fiercely into the abyss.",
+      "You climb up and find yourself fallen into a deep, secluded #ysecret #yroom . NL \"What's going on?\" NL You are deeply shaken. Relying on five hundred years of memories from your past life, you know the ins and outs of the White Bone True Inheritance perfectly, but this secret room is completely outside your memories.",
+      "In the center of the secret room quietly stands a giant Gu worm flowing with ~chilling bone light~ — the #yBattle #yBone #yWheel #yGu . NL When you place your palm on the wheel, a stream of information instantly flows into your mind. This is actually the peak mortal killer move, #y@White Bone Chariot@ ! NL \"This killer move was uniquely created by the rank eight demonic path Gu Immortal #yShen #yJie #yAo , and its might can rival a rank six Immortal Gu. To think that Grey Bone Scholar, a mere rank four Gu Master, could hide it here. What a great method!\" you secretly praise in your heart.",
+      "Pursuers have already poked their heads out of the gap above. You decisively activate the newly acquired Battle Bone Wheel Gu. NL The giant pale bone wheel, carrying frantic bone spikes and fierce winds, @spins@ at high speed, forcibly @crushing@ a passage through the mountain body. It breaks through the wall and takes you away, completely leaving the dumbfounded pursuers behind.",
+      "You delayed too long during your looting, and the pursuers finally surged out like a tide, completely surrounding you! NL You have nowhere to hide and must fight!",
+      "Although you repelled this wave of enemies, your primeval essence is severely depleted, and your condition is extremely poor. NL Worse still, more pursuers are arriving from behind, their battle cries shaking the heavens and earth. NL You ignore looting the spoils of war and, under the cover of the dust kicked up by the battle, quickly flee the area.",
+      "Outnumbered, fighting head-on offers no chance of survival. NL You grit your teeth and frantically activate your Gu worms at all costs, forcefully tearing open a gap in the encirclement to escape amidst a barrage of attacks. NL Although you successfully broke out, you suffered extremely heavy injuries as a result.",
+      "Jumping from this height is absolutely certain death, but you have no other choice and jump off the cliff fiercely. NL During the rapid descent, you desperately activate defensive methods, successively smashing through countless thick bone branches protruding from the cliff face to continuously slow your fall. NL Finally, you crash heavily to the bottom of the valley, narrowly saving your life, and escape into the deep forest to avoid the search.",
+      "You leap off the cliff and summon the #yFootless #yBird in mid-air. NL In the split second before crashing, the Footless Bird frantically flaps its wings, charging upwards against the extreme wind pressure! NL You ride the giant bird across the sky, flying far away, leaving behind a group of Gu masters at the cliff edge watching you leave with ashen faces."
+    ],
+    "OPTIONS": [
+      "[Advance]",
+      "[Loot] #gObtain #gBone Spear Gu . #r%d%%: Encounter pursuers .",
+      "[Loot] #gObtain #gSpiral Bone Spear Gu . #r%d%%: Encounter pursuers .",
+      "[Advance]",
+      "[Loot] #gObtain #gRib Shield Gu . #r%d%%: Encounter pursuers .",
+      "[Loot] #gObtain #gFlying Bone Shield Gu . #r%d%%: Encounter pursuers .",
+      "[Loot] #gObtain #gArm Bone Wings Gu . #r%d%%: Encounter pursuers .",
+      "[Loot] #gObtain #gBone Spike Gu . #r%d%%: Encounter pursuers .",
+      "[Loot] #gObtain #gRandom Bone Path Gu . #r%d%%: Encounter pursuers .",
+      "[Breakout] #rCursed #r- #rInjury. ",
+      "[Jump off Cliff] #rTake #r%d #rdamage. ",
+      "[Fly]",
+      "[Locked] Requires: [Footless Bird] in deck.",
+      "[Get Up]",
+      "[Explore] #gObtain #gBattle Bone Wheel and #gKiller Move - White Bone Chariot .",
+      "[Escape]",
+      "[Fight]",
+      "[Leave]"
+    ]
 }

@@ -388,6 +388,13 @@ public class GuZhenRen implements
                 .playerClass(AbstractPlayerEnum.FANG_YUAN)
                 .spawnCondition(() -> AbstractKongQiao.getCurrentRank() >= 6)
                 .create());
+        basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
+                BaiGuChuanCheng.ID,
+                BaiGuChuanCheng.class)
+                .dungeonID(com.megacrit.cardcrawl.dungeons.Exordium.ID)
+                .playerClass(AbstractPlayerEnum.FANG_YUAN)
+                .spawnCondition(() -> AbstractKongQiao.getCurrentRank() < 6)
+                .create());
     }
 
     @Override
