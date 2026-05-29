@@ -826,6 +826,6 @@
   },
   "GuZhenRen:LuoXuanGuQiangGu": {
     "NAME": "螺旋骨枪蛊",
-    "DESCRIPTION": "造成 !D! 点无视格挡的伤害。 NL 进入商店时，从牌组中移除此牌并获得 !M! 金币。"
+    "DESCRIPTION": "造成 !D! 点无视 格挡 的伤害。 NL 进入商店时，从牌组中移除此牌并获得 !M! 金币。"
   }
 }
