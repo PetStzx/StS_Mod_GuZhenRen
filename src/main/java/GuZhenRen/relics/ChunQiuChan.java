@@ -43,7 +43,6 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
     public static int backupUseCount = -1;
     public static ArrayList<String> backupSaveHistory = null;
 
-    // 【新增】用于跨时空传递发牌指令的静态标记
     public static boolean pendingCurse = false;
 
     public ChunQiuChan() {
@@ -62,11 +61,16 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
         float failChance = 0.05f + (0.10f * this.useCount);
         float synergyBonus = 0.0f;
         boolean hasHongYun = false;
+        boolean hasGouShiYun = false;
 
-        if (CardCrawlGame.isInARun() && AbstractDungeon.player != null) {
-            if (AbstractDungeon.player.hasRelic(GuZhenRen.makeID("HongYunQiTianGu"))) {
+        if (AbstractDungeon.player != null) {
+            if (AbstractDungeon.player.hasRelic(HongYunQiTianGu.ID)) {
                 synergyBonus += 0.40f;
                 hasHongYun = true;
+            }
+            if (AbstractDungeon.player.hasRelic(GouShiYun.ID)) {
+                synergyBonus += 0.25f;
+                hasGouShiYun = true;
             }
         }
 
@@ -77,6 +81,9 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
 
         if (hasHongYun) {
             desc.append(DESCRIPTIONS[2]);
+        }
+        if (hasGouShiYun) {
+            desc.append(DESCRIPTIONS[3]);
         }
 
         return desc.toString();
@@ -172,18 +179,18 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             }
         }
 
-        // ================= 死亡判定与结算阶段 =================
-        // 每次回溯死亡率递增 10%
         float failChance = 0.05f + (0.10f * this.useCount);
-        if (AbstractDungeon.player.hasRelic(GuZhenRen.makeID("HongYunQiTianGu"))) {
+        if (AbstractDungeon.player.hasRelic(HongYunQiTianGu.ID)) {
             failChance -= 0.40f;
+        }
+        if (AbstractDungeon.player.hasRelic(GouShiYun.ID)) {
+            failChance -= 0.25f;
         }
         failChance = Math.max(0.0f, failChance);
 
         this.useCount++;
 
-        // 使用后冷却12层
-        this.counter = 13;
+        this.counter = 10;
         this.grayscale = true;
         updateDescription();
 
@@ -195,7 +202,6 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             return;
         }
 
-        // ================= 回溯成功阶段 =================
         backupUseCount = this.useCount;
         backupSaveHistory = new ArrayList<>(this.saveHistory);
 
@@ -261,10 +267,10 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                     while (targetSave.relic_counters.size() <= cqcIndex) {
                         targetSave.relic_counters.add(-1);
                     }
-                    targetSave.relic_counters.set(cqcIndex, 13);
+                    targetSave.relic_counters.set(cqcIndex, 10);
                 } else {
                     targetSave.relics.add(ID);
-                    targetSave.relic_counters.add(13);
+                    targetSave.relic_counters.add(10);
                 }
 
                 SaveAndContinue.save(targetSave);
@@ -300,7 +306,6 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                 if (omamori.counter == 0) {
                     omamori.usedUp();
                 }
-
             } else {
                 AbstractDungeon.player.masterDeck.addToTop(curse);
 

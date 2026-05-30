@@ -42,9 +42,15 @@ public class HongYunQiTianGu extends CustomRelic implements IProbabilityModifier
     @Override
     public void onEquip() {
         super.onEquip();
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
-            ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
-            cqc.updateDescription();
+        if (AbstractDungeon.player != null) {
+            if (AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
+                ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
+                cqc.updateDescription();
+            }
+            if (AbstractDungeon.player.hasRelic(GouShiYun.ID)) {
+                GouShiYun gsy = (GouShiYun) AbstractDungeon.player.getRelic(GouShiYun.ID);
+                gsy.updateDescription();
+            }
         }
     }
 
@@ -52,13 +58,18 @@ public class HongYunQiTianGu extends CustomRelic implements IProbabilityModifier
     public void onUnequip() {
         super.onUnequip();
         com.badlogic.gdx.Gdx.app.postRunnable(() -> {
-            if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
-                ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
-                cqc.updateDescription();
+            if (AbstractDungeon.player != null) {
+                if (AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
+                    ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
+                    cqc.updateDescription();
+                }
+                if (AbstractDungeon.player.hasRelic(GouShiYun.ID)) {
+                    GouShiYun gsy = (GouShiYun) AbstractDungeon.player.getRelic(GouShiYun.ID);
+                    gsy.updateDescription();
+                }
             }
         });
     }
-
 
     @Override
     public Integer onSave() {
@@ -67,9 +78,15 @@ public class HongYunQiTianGu extends CustomRelic implements IProbabilityModifier
 
     @Override
     public void onLoad(Integer savedData) {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
-            ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
-            cqc.updateDescription();
+        if (AbstractDungeon.player != null) {
+            if (AbstractDungeon.player.hasRelic(ChunQiuChan.ID)) {
+                ChunQiuChan cqc = (ChunQiuChan) AbstractDungeon.player.getRelic(ChunQiuChan.ID);
+                cqc.updateDescription();
+            }
+            if (AbstractDungeon.player.hasRelic(GouShiYun.ID)) {
+                GouShiYun gsy = (GouShiYun) AbstractDungeon.player.getRelic(GouShiYun.ID);
+                gsy.updateDescription();
+            }
         }
     }
 
