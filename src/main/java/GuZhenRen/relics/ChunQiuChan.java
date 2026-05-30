@@ -8,9 +8,11 @@ import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardSave;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
@@ -40,6 +42,9 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
 
     public static int backupUseCount = -1;
     public static ArrayList<String> backupSaveHistory = null;
+
+    // 【新增】用于跨时空传递发牌指令的静态标记
+    public static boolean pendingCurse = false;
 
     public ChunQiuChan() {
         super(ID, ImageMaster.loadImage(IMG), new Texture(OUTLINE), RelicTier.RARE, LandingSound.MAGICAL);
@@ -167,7 +172,6 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             }
         }
 
-
         // ================= 死亡判定与结算阶段 =================
         // 每次回溯死亡率递增 10%
         float failChance = 0.05f + (0.10f * this.useCount);
@@ -250,7 +254,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                     }
                 }
 
-                targetSave.cards.add(new CardSave(GuZhenRen.makeID("EYun"), 0, 3));
+                pendingCurse = true;
 
                 int cqcIndex = targetSave.relics.indexOf(ID);
                 if (cqcIndex != -1) {
@@ -277,6 +281,45 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                 isTimeTraveling = false;
             }
         });
+    }
+
+    @Override
+    public void update() {
+        super.update();
+
+        if (pendingCurse && !CardCrawlGame.loadingSave && AbstractDungeon.player != null) {
+            pendingCurse = false;
+
+            AbstractCard curse = com.megacrit.cardcrawl.helpers.CardLibrary.getCard(GuZhenRen.makeID("EYun")).makeCopy();
+
+            AbstractRelic omamori = AbstractDungeon.player.getRelic("Omamori");
+            if (omamori != null && omamori.counter > 0) {
+                omamori.flash();
+                omamori.counter--;
+
+                if (omamori.counter == 0) {
+                    omamori.usedUp();
+                }
+
+            } else {
+                AbstractDungeon.player.masterDeck.addToTop(curse);
+
+                for (com.megacrit.cardcrawl.relics.AbstractRelic r : AbstractDungeon.player.relics) {
+                    r.onObtainCard(curse);
+                    r.onMasterDeckChange();
+                }
+
+                boolean combatDeckInitialized = !AbstractDungeon.player.drawPile.isEmpty()
+                        || !AbstractDungeon.player.hand.isEmpty()
+                        || !AbstractDungeon.player.discardPile.isEmpty();
+
+                if (combatDeckInitialized) {
+                    AbstractDungeon.player.drawPile.addToRandomSpot(curse.makeStatEquivalentCopy());
+                }
+
+                AbstractDungeon.topLevelEffects.add(new com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect(curse.makeStatEquivalentCopy()));
+            }
+        }
     }
 
     @Override
