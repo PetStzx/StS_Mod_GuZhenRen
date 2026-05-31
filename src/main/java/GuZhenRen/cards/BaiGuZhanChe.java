@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ThornsPower;
-import com.megacrit.cardcrawl.powers.VulnerablePower;
+import com.megacrit.cardcrawl.powers.WeakPower;
 
 import java.util.ArrayList;
 
@@ -90,7 +90,7 @@ public class BaiGuZhanChe extends AbstractXianGuWuCard {
 
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 if (!mo.isDeadOrEscaped()) {
-                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new VulnerablePower(mo, 2, false), 2));
+                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(mo, p, new WeakPower(mo, 2, false), 2));
                 }
             }
         }
@@ -142,8 +142,8 @@ public class BaiGuZhanChe extends AbstractXianGuWuCard {
             AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, 18));
 
             for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                if (!mo.isDeadOrEscaped() && mo.hasPower(VulnerablePower.POWER_ID)) {
-                    int hits = mo.getPower(VulnerablePower.POWER_ID).amount;
+                if (!mo.isDeadOrEscaped() && mo.hasPower(WeakPower.POWER_ID)) {
+                    int hits = mo.getPower(WeakPower.POWER_ID).amount;
                     for (int i = 0; i < hits; i++) {
                         AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                             @Override

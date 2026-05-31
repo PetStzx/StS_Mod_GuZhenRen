@@ -806,7 +806,7 @@
   },
   "GuZhenRen:OptionGongFa_BaiGuZhanChe": {
     "NAME": "Offense",
-    "DESCRIPTION": "ALL enemies take damage equal to your current Block. NL Apply 2 Vulnerable to ALL enemies."
+    "DESCRIPTION": "ALL enemies take damage equal to your current Block. NL Apply 2 Weak to ALL enemies."
   },
   "GuZhenRen:OptionFangHu_BaiGuZhanChe": {
     "NAME": "Defense",
@@ -814,7 +814,7 @@
   },
   "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
     "NAME": "Move",
-    "DESCRIPTION": "Gain 18 Block . NL ALL enemies deal 1 damage to you 1 time for each Vulnerable they have."
+    "DESCRIPTION": "Gain 18 Block . NL ALL enemies deal 1 damage to you 1 time for each Weak they have."
   },
   "GuZhenRen:ZhanGuCheLun": {
     "NAME": "War Bone Wheel",

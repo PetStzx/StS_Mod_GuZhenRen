@@ -806,7 +806,7 @@
   },
   "GuZhenRen:OptionGongFa_BaiGuZhanChe": {
     "NAME": "攻伐",
-    "DESCRIPTION": "所有敌人受到等同于你当前格挡值的伤害。 NL 给予所有敌人 2 层 易伤 。"
+    "DESCRIPTION": "所有敌人受到等同于你当前格挡值的伤害。 NL 给予所有敌人 2 层 虚弱 。"
   },
   "GuZhenRen:OptionFangHu_BaiGuZhanChe": {
     "NAME": "防御",
@@ -814,7 +814,7 @@
   },
   "GuZhenRen:OptionYiDong_BaiGuZhanChe": {
     "NAME": "移动",
-    "DESCRIPTION": "获得 18 点 格挡 。 NL 所有敌人每有 1 层 易伤 ，就对你造成 1 点伤害 1 次。"
+    "DESCRIPTION": "获得 18 点 格挡 。 NL 所有敌人每有 1 层 虚弱 ，就对你造成 1 点伤害 1 次。"
   },
   "GuZhenRen:ZhanGuCheLun": {
     "NAME": "战骨车轮",
