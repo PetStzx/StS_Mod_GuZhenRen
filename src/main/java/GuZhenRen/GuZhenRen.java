@@ -395,6 +395,16 @@ public class GuZhenRen implements
                     return rank > 1 && rank <= 5;
                 })
                 .create());
+        basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
+                DuShiChang.ID,
+                DuShiChang.class)
+                .spawnCondition(() -> {
+                    int rank = AbstractKongQiao.getCurrentRank();
+                    return rank >= 2 && rank <= 5 &&
+                            AbstractDungeon.player != null &&
+                            AbstractDungeon.player.gold >= 30;
+                })
+                .create());
     }
 
     @Override

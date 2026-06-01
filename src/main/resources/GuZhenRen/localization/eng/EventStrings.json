@@ -67,4 +67,29 @@
       "[Fight]",
       "[Leave]"
     ]
+  },
+  "GuZhenRen:DuShiChang": {
+    "NAME": "Rock Gambling Den",
+    "DESCRIPTIONS": [
+      "You pass by a large grey tent. A couplet is carved on the pillars at the entrance: NL First line: \"A little courage brings the fortune of four seasons.\" NL Second line: \"Show your skills to harvest the wealth of all directions.\" NL Horizontal scroll: \"A turn of luck.\" NL Lifting the door curtain, the inside of the tent is very deserted. Many stones are scattered on the long tables in the venue, divided into three counters according to their appearance. The only clerk is fast asleep on the table, completely unresponsive to your arrival.",
+      "You toss out a few gold coins, pick a stone, and crush it. A perfectly intact Gu worm is revealed in the stone powder.",
+      "You toss out a few gold coins, pick a stone, and crush it. Apart from a pile of grey-white stone powder, there is nothing else.",
+      "You pick a piece of purple gold stone and grind it down. As the stone core peels off, a Gu worm is revealed.",
+      "You pick a piece of purple gold stone and grind it down. As the last bit of stone flesh turns to dust, you confirm this is just a solid waste rock.",
+      "You pick a nice-looking stone and grind it down. The stone skin fades away, and a Gu worm is presented before you.",
+      "You pick a nice-looking stone and grind it down. Although the exterior is extraordinary, there is nothing inside.",
+      "You turn around and walk out of this deserted rock gambling den."
+    ],
+    "OPTIONS": [
+      "[Low-grade Counter] #rLose #r5 #rGold . #g%d%%: Obtain a random Common Gu relic.%s",
+      "[Regular Counter] #rLose #r10 #rGold . #g%d%%: Obtain a random Uncommon Gu relic.%s",
+      "[High-grade Counter] #rLose #r15 #rGold . #g%d%%: Obtain a random Rare Gu relic.%s",
+      "[Leave]",
+      "[Locked] Requires: %d Gold.",
+      "[Locked] Sold out.",
+      " #y[Dog #yShit #yLuck #y+5%]",
+      " #y[Fortune #yRivaling #yHeaven #y+10%]",
+      " #y[Dog #yShit #yLuck #yFortune #yRivaling #yHeaven #y+15%]"
+    ]
+  }
 }
