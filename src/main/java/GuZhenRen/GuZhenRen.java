@@ -396,6 +396,7 @@ public class GuZhenRen implements
         basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
                 DaoTianZhenChuan.ID,
                 DaoTianZhenChuan.class)
+                .dungeonID(com.megacrit.cardcrawl.dungeons.TheCity.ID)
                 .spawnCondition(() -> AbstractKongQiao.getCurrentRank() >= 6)
                 .create());
         basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
@@ -411,7 +412,7 @@ public class GuZhenRen implements
                 DuShiChang.class)
                 .spawnCondition(() -> {
                     int rank = AbstractKongQiao.getCurrentRank();
-                    return rank >= 2 && rank <= 5 &&
+                    return rank > 1 && rank <= 5 &&
                             AbstractDungeon.player != null &&
                             AbstractDungeon.player.gold >= 30;
                 })
