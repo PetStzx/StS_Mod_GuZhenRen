@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardSave;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -105,7 +104,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
         backupUseCount = -1;
         backupSaveHistory = null;
 
-        recordNode();
+        recordNode(SaveFile.SaveType.ENTER_ROOM);
         updateDescription();
     }
 
@@ -125,15 +124,18 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             }
             updateDescription();
         }
-        recordNode();
+
+        if (room.phase != AbstractRoom.RoomPhase.COMBAT) {
+            recordNode(SaveFile.SaveType.ENTER_ROOM);
+        }
     }
 
     @Override
-    public void atBattleStart() {
-        recordNode();
+    public void onVictory() {
+        recordNode(SaveFile.SaveType.POST_COMBAT);
     }
 
-    private void recordNode() {
+    private void recordNode(SaveFile.SaveType saveType) {
         if (this.recordedThisFloor) return;
         if (AbstractDungeon.player == null || AbstractDungeon.currMapNode == null) return;
 
@@ -141,7 +143,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
         this.saveHistory.clear();
 
         try {
-            SaveFile save = new SaveFile(SaveFile.SaveType.ENTER_ROOM);
+            SaveFile save = new SaveFile(saveType);
             Gson gson = new Gson();
             String json = gson.toJson(save);
 
@@ -297,32 +299,21 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             pendingCurse = false;
 
             AbstractCard curse = com.megacrit.cardcrawl.helpers.CardLibrary.getCard(GuZhenRen.makeID("EYun")).makeCopy();
-
             AbstractRelic omamori = AbstractDungeon.player.getRelic("Omamori");
+
             if (omamori != null && omamori.counter > 0) {
                 omamori.flash();
                 omamori.counter--;
-
                 if (omamori.counter == 0) {
                     omamori.usedUp();
                 }
             } else {
-                AbstractDungeon.player.masterDeck.addToTop(curse);
 
-                for (com.megacrit.cardcrawl.relics.AbstractRelic r : AbstractDungeon.player.relics) {
-                    r.onObtainCard(curse);
-                    r.onMasterDeckChange();
-                }
-
-                boolean combatDeckInitialized = !AbstractDungeon.player.drawPile.isEmpty()
-                        || !AbstractDungeon.player.hand.isEmpty()
-                        || !AbstractDungeon.player.discardPile.isEmpty();
-
-                if (combatDeckInitialized) {
-                    AbstractDungeon.player.drawPile.addToRandomSpot(curse.makeStatEquivalentCopy());
-                }
-
-                AbstractDungeon.topLevelEffects.add(new com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect(curse.makeStatEquivalentCopy()));
+                AbstractDungeon.topLevelEffectsQueue.add(
+                        new com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect(
+                                curse, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, false
+                        )
+                );
             }
         }
     }
