@@ -5,5 +5,12 @@
       "Heal #b",
       " HP."
     ]
+  },
+  "GuZhenRen:FuRenXin": {
+    "NAME": "Woman's Heart",
+    "DESCRIPTIONS": [
+      "Apply #b",
+      " Poison . NL Whenever you kill a non-minion enemy, apply 3 additional Poison ."
+    ]
   }
 }

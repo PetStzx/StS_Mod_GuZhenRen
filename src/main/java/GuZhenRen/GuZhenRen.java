@@ -379,6 +379,16 @@ public class GuZhenRen implements
                 AbstractPlayerEnum.FANG_YUAN
         );
 
+        BaseMod.addPotion(
+                FuRenXin.class,
+                Color.PURPLE.cpy(),
+                null,
+                null,
+                FuRenXin.POTION_ID,
+                AbstractPlayerEnum.FANG_YUAN
+        );
+        basemod.BaseMod.addSaveField("GuZhenRen_FuRenXinBonus", new FuRenXin.SaveData());
+
         GuZhenRenConfig.setupConfigPanel();
         TribulationManager.initialize();
 
