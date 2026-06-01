@@ -416,5 +416,12 @@
     "DESCRIPTIONS": [
       "Whenever you obtain a #yCurse, transform it into a random card."
     ]
+  },
+  "GuZhenRen:NengLiGu": {
+    "NAME": "Ability Gu",
+    "FLAVOR": "Rank 8 Strength Path Immortal Gu, recorded in \"The Legends of Ren Zu\", capable of growing continuously in tribulations.",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yPower card, gain #b1 #yStrength ."
+    ]
   }
 }
