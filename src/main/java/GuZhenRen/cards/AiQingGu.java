@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.relics.ChunQiuChan;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -113,14 +114,15 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                         AbstractRelic relicToObtain = null;
                         int safetyCounter = 0;
 
-                        // 剔除“瓶装”系列遗物
+                        // 剔除“瓶装”系列遗物以及“春秋蝉”
                         do {
                             relicToObtain = AbstractDungeon.returnRandomRelic(AbstractDungeon.returnRandomRelicTier());
                             safetyCounter++;
                         } while (safetyCounter < 50 && (
                                 relicToObtain.relicId.equals(BottledFlame.ID) ||
                                         relicToObtain.relicId.equals(BottledLightning.ID) ||
-                                        relicToObtain.relicId.equals(BottledTornado.ID)
+                                        relicToObtain.relicId.equals(BottledTornado.ID) ||
+                                        relicToObtain.relicId.equals(ChunQiuChan.ID)
                         ));
 
                         if (relicToObtain != null) {
