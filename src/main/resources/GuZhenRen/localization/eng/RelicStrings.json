@@ -409,5 +409,12 @@
       "There is a #b%d%% chance to drop #b1 additional relic in combat rewards.",
       " NL #yFortune #yRivaling #yHeaven #yGu - Drop rate increases by #b15% ."
     ]
+  },
+  "GuZhenRen:FengXiongHuaJi": {
+    "NAME": "Turn Ill Luck Into Good",
+    "FLAVOR": "Rank 7 Luck Path Immortal Gu, can transform one's ill luck into good luck.",
+    "DESCRIPTIONS": [
+      "Whenever you obtain a #yCurse, transform it into a random card."
+    ]
   }
 }
