@@ -431,5 +431,12 @@
       "Whenever you Exhaust #b",
       " cards, add a random #yWood #yPath card to your hand. It costs 0 this combat."
     ]
+  },
+  "GuZhenRen:JianChiGu": {
+    "NAME": "Perseverance Gu",
+    "FLAVOR": "Rank 7 Human Path Immortal Gu. There is no Mortal Perseverance Gu, for perseverance itself is extraordinary.",
+    "DESCRIPTIONS": [
+      "The first time each of your #ypositive powers disappears due to its duration ending, retain it."
+    ]
   }
 }
