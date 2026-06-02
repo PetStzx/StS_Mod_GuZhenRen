@@ -423,5 +423,13 @@
     "DESCRIPTIONS": [
       "Whenever you play a #yPower card, gain #b1 #yStrength ."
     ]
+  },
+  "GuZhenRen:MuYa": {
+    "NAME": "Wood Sprout",
+    "FLAVOR": "Rank 7 Wood Path Immortal Gu.",
+    "DESCRIPTIONS": [
+      "Whenever you Exhaust #b",
+      " cards, add a random #yWood #yPath card to your hand. It costs 0 this combat."
+    ]
   }
 }
