@@ -438,5 +438,12 @@
     "DESCRIPTIONS": [
       "The first time each of your #ypositive powers disappears due to its duration ending, retain it."
     ]
+  },
+  "GuZhenRen:NiLiuHe": {
+    "NAME": "Reverse Flow River",
+    "FLAVOR": "Rule Path secluded domain of heaven and earth, capable of reversing all offensives.",
+    "DESCRIPTIONS": [
+      "Reflect the next #b%d attacks you receive back to the attacker. NL Gain #b1 layer of #yReverse Flow River water for each floor you advance. #yReverse Flow River water can hold up to 9 layers."
+    ]
   }
 }
