@@ -827,5 +827,9 @@
   "GuZhenRen:LuoXuanGuQiangGu": {
     "NAME": "螺旋骨枪蛊",
     "DESCRIPTION": "造成 !D! 点无视 格挡 的伤害。 NL 进入商店时，从牌组中移除此牌并获得 !M! 金币。"
+  },
+  "GuZhenRen:NiLiuHuShenYin": {
+    "NAME": "逆流护身印",
+    "DESCRIPTION": "在你的回合开始时，获得 !M! 层 guzhenren:逆流河水 。"
   }
 }

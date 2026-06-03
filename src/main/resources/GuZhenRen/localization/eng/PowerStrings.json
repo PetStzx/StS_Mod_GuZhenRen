@@ -705,5 +705,12 @@
       " turn.",
       " turns."
     ]
+  },
+  "GuZhenRen:NiLiuHuShenYinPower": {
+    "NAME": "Reverse Flow Protector Seal",
+    "DESCRIPTIONS": [
+      "At the start of your turn, gain #b",
+      " layers of #yReverse #yFlow #yRiver #ywater ."
+    ]
   }
 }

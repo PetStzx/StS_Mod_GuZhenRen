@@ -827,5 +827,9 @@
   "GuZhenRen:LuoXuanGuQiangGu": {
     "NAME": "Spiral Bone Spear Gu",
     "DESCRIPTION": "Deal !D! damage ignoring Block. NL When entering a Shop, remove this card from your deck and gain !M! Gold."
+  },
+  "GuZhenRen:NiLiuHuShenYin": {
+    "NAME": "Reverse Flow Protector Seal",
+    "DESCRIPTION": "At the start of your turn, gain !M! layers of guzhenren:Reverse_Flow_River_Water ."
   }
 }

@@ -704,5 +704,12 @@
       "将你 #y格挡 的攻击伤害反弹给攻击者，持续 #b",
       " 回合。"
     ]
+  },
+  "GuZhenRen:NiLiuHuShenYinPower": {
+    "NAME": "逆流护身印",
+    "DESCRIPTIONS": [
+      "在你的回合开始时，获得 #b",
+      " 层 #y逆流河水 。"
+    ]
   }
 }
