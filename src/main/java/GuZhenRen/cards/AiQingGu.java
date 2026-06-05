@@ -95,8 +95,10 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                 if (shaZhaoCache == null) {
                     shaZhaoCache = new ArrayList<>();
                     for (AbstractCard c : CardLibrary.getAllCards()) {
-                        // 排除特殊衍生杀招
-                        if (c instanceof AbstractShaZhaoCard && !c.cardID.equals(SongYouFengSongBie.ID)) {
+                        // 排除特殊杀招
+                        if (c instanceof AbstractShaZhaoCard &&
+                                !c.cardID.equals(SongYouFengSongBie.ID) &&
+                                !c.cardID.equals(NiLiuHuShenYin.ID)) {
                             shaZhaoCache.add(c);
                         }
                     }
