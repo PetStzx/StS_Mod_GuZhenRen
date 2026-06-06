@@ -64,7 +64,8 @@
   },
   "GuZhenRen:HuoMaoSanZhangGu": {
     "NAME": "火冒三丈蛊",
-    "DESCRIPTION": "给予 guzhenren:焚烧 时，若层数小于 3 ，将其提高到 3 。"
+    "DESCRIPTION": "给予 guzhenren:焚烧 时，若层数小于 3 ，将其提高到 3 。",
+    "UPGRADE_DESCRIPTION": "给予所有敌人 !GuZhenRen:FenShao! 层 guzhenren:焚烧 。 NL 给予 guzhenren:焚烧 时，若层数小于 3 ，将其提高到 3 。"
   },
   "GuZhenRen:WuZuNiao": {
     "NAME": "无足鸟",

@@ -64,7 +64,8 @@
   },
   "GuZhenRen:HuoMaoSanZhangGu": {
     "NAME": "Furious Fire Gu",
-    "DESCRIPTION": "When applying guzhenren:Burning , if the stacks are less than 3, increase them to 3."
+    "DESCRIPTION": "When applying guzhenren:Burning , if the stacks are less than 3, increase them to 3.",
+    "UPGRADE_DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning to ALL enemies. NL When applying guzhenren:Burning , if the stacks are less than 3, increase them to 3."
   },
   "GuZhenRen:WuZuNiao": {
     "NAME": "Footless Bird",
