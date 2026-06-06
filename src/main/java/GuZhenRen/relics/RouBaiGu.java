@@ -12,7 +12,7 @@ public class RouBaiGu extends CustomRelic {
     private static final String IMG = "RouBaiGu.png";
     private static final String OUTLINE = "RouBaiGu.png";
 
-    private static final int HEAL_AMT = 4;
+    private static final int HEAL_AMT = 6;
 
     private boolean hasLostHpThisCombat = false;
 
