@@ -630,11 +630,11 @@
   },
   "GuZhenRen:SongYouFeng": {
     "NAME": "送友风",
-    "DESCRIPTION": "与一名敌人结为 guzhenren:好友 。 NL 将一张 *送友风·送别 加入弃牌堆。"
+    "DESCRIPTION": "给予 1 层 guzhenren:好友 。 NL 将一张 *送友风·送别 加入弃牌堆。 NL 若目标已经是你的 guzhenren:好友 ，改为加入手牌。"
   },
   "GuZhenRen:SongYouFengSongBie": {
     "NAME": "送友风·送别",
-    "DESCRIPTION": "若目标拥有 guzhenren:好友 状态，给予其 2 层 guzhenren:消逝 。 NL 消耗 。 虚无 。"
+    "DESCRIPTION": "若目标拥有 guzhenren:好友 状态，给予其 2 层 guzhenren:消散 。 NL 消耗 。 虚无 。"
   },
   "GuZhenRen:GuangYinFeiRen": {
     "NAME": "光阴飞刃",

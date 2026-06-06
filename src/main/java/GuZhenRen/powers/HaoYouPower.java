@@ -3,7 +3,7 @@ package GuZhenRen.powers;
 import GuZhenRen.GuZhenRen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -21,7 +21,7 @@ public class HaoYouPower extends AbstractPower {
         this.name = NAME;
         this.ID = POWER_ID;
         this.owner = owner;
-        this.amount = -1;
+        this.amount = amount;
         this.type = PowerType.DEBUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/HaoYouPower_p.png");
@@ -40,25 +40,34 @@ public class HaoYouPower extends AbstractPower {
         this.description = this.owner.name + DESCRIPTIONS[0];
     }
 
-    // 玩家对敌人造成伤害时，移除状态
+    // 减少目标对玩家造成的攻击伤害
+    @Override
+    public float atDamageGive(float damage, DamageInfo.DamageType type) {
+        if (type == DamageInfo.DamageType.NORMAL) {
+            return damage * 0.5F;
+        }
+        return damage;
+    }
+
+    // 玩家对敌人造成攻击伤害时，减少层数
     @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
         if (info.type != DamageInfo.DamageType.THORNS && info.type != DamageInfo.DamageType.HP_LOSS && info.owner != null && info.owner != this.owner) {
             if (info.output > 0) {
                 this.flash();
-                this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+                this.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
             }
         }
         return damageAmount;
     }
 
-    // 敌人对玩家造成伤害时，移除状态
+    // 敌人对玩家造成攻击伤害时，减少层数
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         if (info.type != DamageInfo.DamageType.THORNS && info.type != DamageInfo.DamageType.HP_LOSS && target != this.owner) {
             if (info.output > 0) {
                 this.flash();
-                this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+                this.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
             }
         }
     }

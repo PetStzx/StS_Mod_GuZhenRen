@@ -345,7 +345,7 @@
   "GuZhenRen:HaoYouPower": {
     "NAME": "Friend",
     "DESCRIPTIONS": [
-      " has become your Friend. When you and your Friend deal damage to each other, remove this status."
+      " has become your #yFriend . Attack damage from a #yFriend is halved. When you and your #yFriend deal attack damage to each other, reduce the #yFriend stacks by #b1 ."
     ]
   },
   "GuZhenRen:FenShenPower": {
@@ -711,6 +711,15 @@
     "DESCRIPTIONS": [
       "At the start of your turn, gain #b",
       " layers of #yReverse #yFlow #yRiver #ywater ."
+    ]
+  },
+  "GuZhenRen:SongYouFadingPower": {
+    "NAME": "Dissipating",
+    "DESCRIPTIONS": [
+      "Dies in #b",
+      " turns. During #yDissipating , #y",
+      " 's attack damage is reduced to 0.",
+      "Dies this turn. During #yDissipating , #y"
     ]
   }
 }

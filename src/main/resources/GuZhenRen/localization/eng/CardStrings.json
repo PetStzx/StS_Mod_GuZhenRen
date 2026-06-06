@@ -630,11 +630,11 @@
   },
   "GuZhenRen:SongYouFeng": {
     "NAME": "Farewell Friend Wind",
-    "DESCRIPTION": "Become a guzhenren:Friend with an enemy. NL Add a *Farewell *Friend *Wind *· *Parting into your discard pile."
+    "DESCRIPTION": "Apply 1 stack of guzhenren:Friend . NL Add a *Farewell *Friend *Wind *· *Parting into your discard pile. NL If the target is already your guzhenren:Friend , add it to your hand instead."
   },
   "GuZhenRen:SongYouFengSongBie": {
     "NAME": "Farewell Friend Wind · Parting",
-    "DESCRIPTION": "If the target has the guzhenren:Friend status, apply 2 guzhenren:Fading to it. NL Exhaust . Ethereal ."
+    "DESCRIPTION": "If the target has the guzhenren:Friend status, apply 2 guzhenren:Dissipating to it. NL Exhaust . Ethereal ."
   },
   "GuZhenRen:GuangYinFeiRen": {
     "NAME": "Flying Time Edge",

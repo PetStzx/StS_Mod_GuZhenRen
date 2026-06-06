@@ -222,8 +222,9 @@
     "DESCRIPTION": "Increases the damage of the next #yLight #yPath Attack played by #b50% ."
   },
   {
+    "PROPER_NAME": "Friend",
     "NAMES": ["friend"],
-    "DESCRIPTION": "When you and your Friend deal damage to each other, remove this status."
+    "DESCRIPTION": "Attack damage from a #yFriend is halved. When you and your #yFriend deal damage to each other, reduce stacks by #b1 ."
   },
   {
     "PROPER_NAME": "Positive Effect",
@@ -245,8 +246,9 @@
     "DESCRIPTION": "Potion, heal #b6 HP."
   },
   {
-    "NAMES": ["fading"],
-    "DESCRIPTION": "Dies in #bX turns."
+    "PROPER_NAME": "Dissipating",
+    "NAMES": ["dissipating"],
+    "DESCRIPTION": "Dies in #bX turns. Attack damage is reduced to #b0 during this time."
   },
   {
     "NAMES": ["immortal gu house", "immortal_gu_house"],

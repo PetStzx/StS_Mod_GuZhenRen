@@ -345,7 +345,7 @@
   "GuZhenRen:HaoYouPower": {
     "NAME": "好友",
     "DESCRIPTIONS": [
-      " 成为了你的好友。你与其互相造成伤害时，移除此状态。"
+      " 成为了你的 #y好友 。 #y好友 对你造成的攻击伤害减半。你与 #y好友 互相造成攻击伤害时，好友层数减少 #b1 。"
     ]
   },
   "GuZhenRen:FenShenPower": {
@@ -710,6 +710,15 @@
     "DESCRIPTIONS": [
       "在你的回合开始时，获得 #b",
       " 层 #y逆流河水 。"
+    ]
+  },
+  "GuZhenRen:SongYouFadingPower": {
+    "NAME": "消散",
+    "DESCRIPTIONS": [
+      "在 #b",
+      " 回合后死亡。 #y消散 期间， #y",
+      " 的攻击伤害降低至0。",
+      "在本回合死亡。 #y消散 期间， #y"
     ]
   }
 }
