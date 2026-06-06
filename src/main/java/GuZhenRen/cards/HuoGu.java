@@ -47,7 +47,7 @@ public class HuoGu extends AbstractBenMingGuCard {
 
         this.isEthereal = (rankIndex == 1);
 
-        this.selfRetain = (rankIndex >= 8);
+        this.selfRetain = (rankIndex >= 6);
 
         if (this.isEthereal) {
             this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[1];
