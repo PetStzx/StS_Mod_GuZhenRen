@@ -15,7 +15,7 @@ public class WanWuDaTongBian extends AbstractShaZhaoCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/WanWuDaTongBian.png");
 
-    private static final int COST = 2;
+    private static final int COST = 1;
 
     public WanWuDaTongBian() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
