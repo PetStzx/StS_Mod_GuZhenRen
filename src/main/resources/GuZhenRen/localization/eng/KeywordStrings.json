@@ -206,7 +206,7 @@
   {
     "PROPER_NAME": "Defensive Powers",
     "NAMES": ["defensive power", "defensive powers", "defensive_power", "defensive_powers"],
-    "DESCRIPTION": "Includes #yIntangible , #yInvincible , #yPlated #yArmor , #yMetallicize , #yBarricade , #yCurl #yUp , and #yMalleable ."
+    "DESCRIPTION": "Includes #yIntangible , #yInvincible , #yPlated #yArmor , #yMetallicize , #yBarricade , #yCurl #yUp , #yMalleable , #yBuffer , #yWater #yCanopy #yGu , #yIron #yWall , and #yGhost #yDivination #yGarment ."
   },
   {
     "PROPER_NAME": "Blood Frenzy",

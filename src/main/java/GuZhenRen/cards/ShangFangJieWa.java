@@ -25,7 +25,7 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
     private static final int BASE_DAMAGE = 10;
     private static final int MULTIPLIER = 3; // 3倍力量加成
 
-    // 原版游戏中需要被驱散的防御类状态 ID 列表
+    // 需要被驱散的防御类状态 ID 列表
     private static final String[] DEFENSIVE_POWERS = {
             "Intangible", // 无实体
             "IntangiblePlayer", // 无实体
@@ -34,7 +34,11 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
             "Metallicize", // 金属化
             "Barricade", // 壁垒
             "Curl Up", // 蜷身
-            "Plated Armor" // 柔韧
+            "Plated Armor", // 柔韧
+            "Buffer", // 缓冲
+            GuZhenRen.makeID("ShuiMuTianHuaGuPower"), // 水幕天华蛊
+            GuZhenRen.makeID("TieBiPower"), // 铁壁
+            GuZhenRen.makeID("GuiGuaYiPower") // 鬼卦衣
     };
 
     public ShangFangJieWa() {
@@ -47,7 +51,6 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
 
         this.setDao(Dao.LI_DAO);
     }
-
 
     @Override
     public void applyPowers() {
@@ -90,7 +93,6 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
             super.calculateCardDamage(mo);
         }
     }
-
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
