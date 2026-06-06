@@ -422,6 +422,15 @@ public class GuZhenRen implements
                             AbstractDungeon.player.gold >= 30;
                 })
                 .create());
+        basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
+                NiLiuHeEvent.ID,
+                NiLiuHeEvent.class)
+                .spawnCondition(() ->
+                        AbstractKongQiao.getCurrentRank() >= 7 &&
+                                AbstractDungeon.player != null &&
+                                AbstractDungeon.player.currentHealth >= 24
+                )
+                .create());
     }
 
     @Override
