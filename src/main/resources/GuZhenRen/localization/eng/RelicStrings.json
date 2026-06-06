@@ -445,5 +445,12 @@
     "DESCRIPTIONS": [
       "Reflect the damage of the next #b%d attacks you receive back to the attacker. NL Gain #b1 layer of #yReverse Flow River water for each floor you advance. #yReverse Flow River water can hold up to 9 layers."
     ]
+  },
+  "GuZhenRen:SiXuRuDianGu": {
+    "NAME": "Thoughts Like Lightning Gu",
+    "FLAVOR": "A common Wisdom Path Gu worm that assists in thinking.",
+    "DESCRIPTIONS": [
+      "Whenever you gain #yThought , deal #b3 damage to ALL enemies."
+    ]
   }
 }

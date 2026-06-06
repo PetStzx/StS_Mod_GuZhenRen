@@ -1,6 +1,7 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.relics.SiXuRuDianGu;
 import GuZhenRen.util.BattleStateManager;
 import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -86,8 +87,16 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         // 记录获取的层数
         recordNianGain(stackAmount);
 
-        if (stackAmount > 0 && this.owner.hasPower(XingLuoQiBuPower.POWER_ID)) {
-            ((XingLuoQiBuPower) this.owner.getPower(XingLuoQiBuPower.POWER_ID)).onGainNian(stackAmount);
+        if (stackAmount > 0) {
+            // 触发星罗棋布Power
+            if (this.owner.hasPower(XingLuoQiBuPower.POWER_ID)) {
+                ((XingLuoQiBuPower) this.owner.getPower(XingLuoQiBuPower.POWER_ID)).onGainNian(stackAmount);
+            }
+
+            // 触发思绪如电蛊遗物
+            if (this.owner.isPlayer && AbstractDungeon.player.hasRelic(SiXuRuDianGu.ID)) {
+                ((SiXuRuDianGu) AbstractDungeon.player.getRelic(SiXuRuDianGu.ID)).onGainNian(stackAmount);
+            }
         }
 
         checkThreshold();
@@ -99,8 +108,16 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         // 记录初始获取的层数
         recordNianGain(this.amount);
 
-        if (this.amount > 0 && this.owner.hasPower(XingLuoQiBuPower.POWER_ID)) {
-            ((XingLuoQiBuPower) this.owner.getPower(XingLuoQiBuPower.POWER_ID)).onGainNian(this.amount);
+        if (this.amount > 0) {
+            // 触发星罗棋布Power
+            if (this.owner.hasPower(XingLuoQiBuPower.POWER_ID)) {
+                ((XingLuoQiBuPower) this.owner.getPower(XingLuoQiBuPower.POWER_ID)).onGainNian(this.amount);
+            }
+
+            // 触发思绪如电蛊遗物
+            if (this.owner.isPlayer && AbstractDungeon.player.hasRelic(SiXuRuDianGu.ID)) {
+                ((SiXuRuDianGu) AbstractDungeon.player.getRelic(SiXuRuDianGu.ID)).onGainNian(this.amount);
+            }
         }
 
         checkThreshold();
