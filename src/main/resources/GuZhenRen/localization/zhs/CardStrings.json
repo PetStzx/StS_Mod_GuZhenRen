@@ -836,5 +836,31 @@
   "GuZhenRen:JianMianCengXiangShi": {
     "NAME": "见面曾相识",
     "DESCRIPTION": "接下来 5 场战斗开始时，给予所有敌人 5 层 guzhenren:好友 。 NL 效果持续期间此牌以遗物形式存在。"
+  },
+  "GuZhenRen:AnTuZhongShanBao": {
+    "NAME": "安土重山堡",
+    "DESCRIPTION": "选择一项： NL 积土成山、入土为安 NL 卷土重来、不动如山。",
+    "EXTENDED_DESCRIPTION": [
+      "guzhenren:化石"
+    ]
+  },
+  "GuZhenRen:OptionJiTuChengShan_AnTuZhongShanBao": {
+    "NAME": "积土成山",
+    "DESCRIPTION": "你的手牌中每有1张 guzhenren:土道 牌，获得 8 点 格挡 1次。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （获得 !M! 次）"
+    ]
+  },
+  "GuZhenRen:OptionRuTuWeiAn_AnTuZhongShanBao": {
+    "NAME": "入土为安",
+    "DESCRIPTION": "为所有手牌附加 guzhenren:化石 3。"
+  },
+  "GuZhenRen:OptionJuanTuChongLai_AnTuZhongShanBao": {
+    "NAME": "卷土重来",
+    "DESCRIPTION": "将弃牌堆中所有的 guzhenren:土道 牌洗入抽牌堆。 NL 每洗入 1 张，本场战斗可跨回合保留至多 3 点 格挡 。"
+  },
+  "GuZhenRen:OptionBuDongRuShan_AnTuZhongShanBao": {
+    "NAME": "不动如山",
+    "DESCRIPTION": "每场战斗限一次： NL 获得 30 点 格挡 。 NL 本场战斗你可跨回合保留至多 30 点 格挡 。"
   }
 }

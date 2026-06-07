@@ -269,6 +269,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new LuoXuanGuQiangGu());
         BaseMod.addCard(new NiLiuHuShenYin());
         BaseMod.addCard(new JianMianCengXiangShi());
+        BaseMod.addCard(new AnTuZhongShanBao());
     }
 
     @Override
@@ -361,7 +362,9 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new Recipe_SongYouFeng(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_SongYouFeng.ID);
         BaseMod.addRelicToCustomPool(new Recipe_JianMianCengXiangShi(), CardColorEnum.GUZHENREN_GREY);
-        recipeRelicIDs.add(Recipe_SongYouFeng.ID);
+        recipeRelicIDs.add(Recipe_JianMianCengXiangShi.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_AnTuZhongShanBao(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_AnTuZhongShanBao.ID);
 
 
         BaseMod.addRelicToCustomPool(new Recipe_BaiGuZhanChe(), CardColorEnum.GUZHENREN_GREY);

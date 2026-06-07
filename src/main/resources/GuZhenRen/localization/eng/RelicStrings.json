@@ -469,5 +469,13 @@
       "Requires: #yAttitude #yGu+ , any #yTransformation #yPath or #yTheft #yPath Gu.",
       "Any Transformation Path or Theft Path Gu worm"
     ]
+  },
+  "GuZhenRen:Recipe_AnTuZhongShanBao": {
+    "NAME": "Killer Move - Peaceful Earth Heavy Mountain Fortress",
+    "FLAVOR": "A rank eight Earth Path Immortal Gu House. Its defensive capabilities are unmatched among rank eights.",
+    "DESCRIPTIONS": [
+      "Requires: 3 of any #yEarth #yPath Gu.",
+      "Any Earth Path Gu worm"
+    ]
   }
 }

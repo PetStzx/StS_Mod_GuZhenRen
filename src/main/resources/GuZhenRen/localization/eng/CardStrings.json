@@ -836,5 +836,31 @@
   "GuZhenRen:JianMianCengXiangShi": {
     "NAME": "Familiar Face",
     "DESCRIPTION": "At the start of the next 5 combats, apply 5 stacks of guzhenren:Friend to ALL enemies. NL While this effect lasts, this card exists as a Relic."
+  },
+  "GuZhenRen:AnTuZhongShanBao": {
+    "NAME": "Peaceful Earth Heavy Mountain Fortress",
+    "DESCRIPTION": "Choose one: NL Accumulate Earth, Settle into Earth NL Resurgence, Immovable as a Mountain.",
+    "EXTENDED_DESCRIPTION": [
+      "guzhenren:fossil"
+    ]
+  },
+  "GuZhenRen:OptionJiTuChengShan_AnTuZhongShanBao": {
+    "NAME": "Accumulate Earth",
+    "DESCRIPTION": "Gain 8 Block 1 time for each guzhenren:Earth_Path card in your hand.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Gain !M! times)"
+    ]
+  },
+  "GuZhenRen:OptionRuTuWeiAn_AnTuZhongShanBao": {
+    "NAME": "Settle into Earth",
+    "DESCRIPTION": "Apply guzhenren:Fossil 3 to ALL cards in your hand."
+  },
+  "GuZhenRen:OptionJuanTuChongLai_AnTuZhongShanBao": {
+    "NAME": "Resurgence",
+    "DESCRIPTION": "Shuffle all guzhenren:Earth_Path cards from your discard pile into your draw pile. NL For each card shuffled, retain up to 3 Block between turns for the rest of this combat."
+  },
+  "GuZhenRen:OptionBuDongRuShan_AnTuZhongShanBao": {
+    "NAME": "Immovable as a Mountain",
+    "DESCRIPTION": "Once per combat: NL Gain 30 Block . NL Retain up to 30 Block between turns for the rest of this combat."
   }
 }

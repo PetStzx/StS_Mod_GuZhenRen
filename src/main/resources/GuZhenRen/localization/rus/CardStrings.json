@@ -836,5 +836,31 @@
   "GuZhenRen:JianMianCengXiangShi": {
     "NAME": "Знакомое Лицо",
     "DESCRIPTION": "В начале следующих 5 боев накладывает 5 слоев guzhenren:Друга на ВСЕХ врагов. NL Пока длится этот эффект, эта карта существует в виде Реликвии."
+  },
+  "GuZhenRen:AnTuZhongShanBao": {
+    "NAME": "Крепость Мирной Земли и Тяжелой Горы",
+    "DESCRIPTION": "Выберите одно: NL Накопление Земли, Упокоение в Земле NL Возрождение, Неподвижный как Гора.",
+    "EXTENDED_DESCRIPTION": [
+      "guzhenren:окаменение"
+    ]
+  },
+  "GuZhenRen:OptionJiTuChengShan_AnTuZhongShanBao": {
+    "NAME": "Накопление Земли",
+    "DESCRIPTION": "Вы получаете 8 Блока 1 раз за каждую карту guzhenren:Пути_Земли в вашей руке.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Получено !M! раз(а))"
+    ]
+  },
+  "GuZhenRen:OptionRuTuWeiAn_AnTuZhongShanBao": {
+    "NAME": "Упокоение в Земле",
+    "DESCRIPTION": "Накладывает guzhenren:Окаменение 3 на ВСЕ карты в вашей руке."
+  },
+  "GuZhenRen:OptionJuanTuChongLai_AnTuZhongShanBao": {
+    "NAME": "Возрождение",
+    "DESCRIPTION": "Замешайте все карты guzhenren:Пути_Земли из стопки сброса в стопку добора. NL За каждую замешанную карту вы можете сохранять до 3 Блока между ходами до конца этого боя."
+  },
+  "GuZhenRen:OptionBuDongRuShan_AnTuZhongShanBao": {
+    "NAME": "Неподвижный как Гора",
+    "DESCRIPTION": "Один раз за бой: NL Дает 30 Блока . NL До конца этого боя вы можете сохранять до 30 Блока между ходами."
   }
 }
