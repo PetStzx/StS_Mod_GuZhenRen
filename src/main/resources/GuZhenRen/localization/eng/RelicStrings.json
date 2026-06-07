@@ -452,5 +452,22 @@
     "DESCRIPTIONS": [
       "Whenever you gain #yThought , deal #b3 damage to ALL enemies."
     ]
+  },
+  "GuZhenRen:JianMianCengXiangShiRelic": {
+    "NAME": "Familiar Face",
+    "FLAVOR": "Transformation Path Immortal killer move, originating from Thieving Heaven Demon Venerable.",
+    "DESCRIPTIONS": [
+      "At the start of the next #b",
+      " combats, apply #b",
+      " stacks of #yFriend to ALL enemies. NL When this effect is exhausted or you #yRight-click this relic, it reverts to a card and returns to your deck."
+    ]
+  },
+  "GuZhenRen:Recipe_JianMianCengXiangShi": {
+    "NAME": "Killer Move - Familiar Face",
+    "FLAVOR": "Attitude is the mask of the heart.",
+    "DESCRIPTIONS": [
+      "Requires: #yAttitude #yGu+ , any #yTransformation #yPath or #yTheft #yPath Gu.",
+      "Any Transformation Path or Theft Path Gu worm"
+    ]
   }
 }

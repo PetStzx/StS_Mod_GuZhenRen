@@ -832,5 +832,9 @@
   "GuZhenRen:NiLiuHuShenYin": {
     "NAME": "逆流护身印",
     "DESCRIPTION": "在你的回合开始时，获得 !M! 层 guzhenren:逆流河水 。"
+  },
+  "GuZhenRen:JianMianCengXiangShi": {
+    "NAME": "见面曾相识",
+    "DESCRIPTION": "接下来 5 场战斗开始时，给予所有敌人 5 层 guzhenren:好友 。 NL 效果持续期间此牌以遗物形式存在。"
   }
 }

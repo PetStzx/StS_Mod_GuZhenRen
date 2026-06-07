@@ -22,7 +22,6 @@ public class HaoYouPower extends AbstractPower {
         this.ID = POWER_ID;
         this.owner = owner;
         this.amount = amount;
-        this.type = PowerType.DEBUFF;
 
         String pathLarge = GuZhenRen.assetPath("img/powers/HaoYouPower_p.png");
         String pathSmall = GuZhenRen.assetPath("img/powers/HaoYouPower.png");

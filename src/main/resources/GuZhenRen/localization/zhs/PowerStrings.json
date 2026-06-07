@@ -345,7 +345,7 @@
   "GuZhenRen:HaoYouPower": {
     "NAME": "好友",
     "DESCRIPTIONS": [
-      " 成为了你的 #y好友 。 #y好友 对你造成的攻击伤害减半。你与 #y好友 互相造成攻击伤害时，好友层数减少 #b1 。"
+      " 成为了你的 #y好友 。 #y好友 对你造成的攻击伤害减半。你与 #y好友 互相造成攻击伤害时，层数减少 #b1 。"
     ]
   },
   "GuZhenRen:FenShenPower": {

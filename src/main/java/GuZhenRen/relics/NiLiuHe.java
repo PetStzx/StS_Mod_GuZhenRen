@@ -28,15 +28,12 @@ public class NiLiuHe extends CustomRelic {
 
     private static final int MAX_WATER = 9;
 
-    // 核心联动标记：记录当前正在被逆流河反噬的怪物
+    // 记录当前正在被逆流河反噬的怪物
     public static AbstractCreature reflectingTarget = null;
 
-    // 动作处理器记录：确保动作只被拦截判定一次
+    // 确保动作只被拦截判定一次
     public static WeakHashMap<AbstractGameAction, Boolean> processedActions = new WeakHashMap<>();
 
-    // ==========================================================
-    // 生命周期管理：解决 SL 与快速重置导致的静态变量残留与内存泄漏
-    // ==========================================================
     static {
         BattleStateManager.onBattleStart(() -> {
             NiLiuHe.reflectingTarget = null;
@@ -79,7 +76,7 @@ public class NiLiuHe extends CustomRelic {
 
     @Override
     public void atTurnStart() {
-        // 玩家回合开始时，自然清理上一轮的逆反标记，防止跨回合污染
+        // 玩家回合开始时，清理上一轮的逆反标记
         reflectingTarget = null;
     }
 
@@ -89,7 +86,7 @@ public class NiLiuHe extends CustomRelic {
     }
 
     // ==========================================================
-    // 拦截器 1：伤害逆反
+    // 伤害逆反
     // ==========================================================
     @SpirePatch(clz = DamageAction.class, method = "update")
     public static class DamagePatch {
@@ -112,13 +109,13 @@ public class NiLiuHe extends CustomRelic {
                             relic.updateDescriptionDynamically();
                             relic.flash();
 
-                            // 将伤害目标强制改为怪物自己
+                            // 将伤害目标改为怪物自己
                             __instance.target = __instance.source;
 
-                            // 锁定该怪物！它接下来的附带 Debuff 也会被反弹
+                            // 标记该怪物
                             NiLiuHe.reflectingTarget = __instance.source;
                         } else {
-                            // 防跨次污染：没水了，清除逆反标记
+                            // 防跨次污染
                             NiLiuHe.reflectingTarget = null;
                         }
                     } else {
@@ -130,7 +127,7 @@ public class NiLiuHe extends CustomRelic {
     }
 
     // ==========================================================
-    // 拦截器 2：附带 Debuff 逆反
+    // 附带 Debuff 逆反
     // ==========================================================
     @SpirePatch(clz = ApplyPowerAction.class, method = "update")
     public static class ApplyPowerPatch {
@@ -141,14 +138,13 @@ public class NiLiuHe extends CustomRelic {
             }
             processedActions.put(__instance, true);
 
-            // 如果目标是玩家，且施加状态的怪物恰好是我们刚刚标记的被反噬者
+            // 如果目标是玩家，且施加状态的怪物拥有标记
             if (__instance.target == AbstractDungeon.player) {
                 if (__instance.source != null && __instance.source == NiLiuHe.reflectingTarget) {
                     AbstractPower powerToApply = ReflectionHacks.getPrivate(__instance, ApplyPowerAction.class, "powerToApply");
 
                     if (powerToApply != null && powerToApply.type == AbstractPower.PowerType.DEBUFF) {
 
-                        // 将目标和所有权全都转交还给怪物自身
                         __instance.target = __instance.source;
                         powerToApply.owner = __instance.source;
 

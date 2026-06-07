@@ -452,5 +452,22 @@
     "DESCRIPTIONS": [
       "每当你获得 #y念 时，对所有敌人造成 #b3 点伤害。"
     ]
+  },
+  "GuZhenRen:JianMianCengXiangShiRelic": {
+    "NAME": "见面曾相识",
+    "FLAVOR": "变化道仙级杀招，源自盗天魔尊。",
+    "DESCRIPTIONS": [
+      "接下来 #b",
+      " 场战斗开始时，给予所有敌人 #b",
+      " 层 #y好友 。 NL 效果耗尽或 #y右键 此遗物时，转为卡牌并返回你的牌组。"
+    ]
+  },
+  "GuZhenRen:Recipe_JianMianCengXiangShi": {
+    "NAME": "杀招-见面曾相识",
+    "FLAVOR": "态度是心的面具。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y态度蛊+ 、任意 #y变化道 或 #y偷道 蛊虫。",
+      "任意变化道或偷道蛊虫"
+    ]
   }
 }

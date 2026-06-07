@@ -832,5 +832,9 @@
   "GuZhenRen:NiLiuHuShenYin": {
     "NAME": "Reverse Flow Protector Seal",
     "DESCRIPTION": "At the start of your turn, gain !M! layers of guzhenren:Reverse_Flow_River_Water ."
+  },
+  "GuZhenRen:JianMianCengXiangShi": {
+    "NAME": "Familiar Face",
+    "DESCRIPTION": "At the start of the next 5 combats, apply 5 stacks of guzhenren:Friend to ALL enemies. NL While this effect lasts, this card exists as a Relic."
   }
 }
