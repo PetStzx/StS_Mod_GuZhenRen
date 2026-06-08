@@ -799,7 +799,8 @@
   },
   "GuZhenRen:DiMai": {
     "NAME": "Earth Vein",
-    "DESCRIPTION": "Gain !B! Block . NL Costs [E] less for each time you have gained Block this combat."
+    "DESCRIPTION": " Unplayable . NL Always at the bottom of your *draw *pile . NL When drawn, gain Block equal to the number of cards in your *discard *pile .",
+    "UPGRADE_DESCRIPTION": " Unplayable . NL Always at the bottom of your *draw *pile . NL When drawn, gain Block equal to the total number of cards in your hand and *discard *pile ."
   },
   "GuZhenRen:BaiGuZhanChe": {
     "NAME": "Bone Chariot",

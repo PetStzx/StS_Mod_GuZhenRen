@@ -799,7 +799,8 @@
   },
   "GuZhenRen:DiMai": {
     "NAME": "地脉",
-    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 本场战斗中每获得过一次 格挡 ，此牌耗能就减少 [E] 。"
+    "DESCRIPTION": " 不能被打出 。 NL 在 *抽牌堆 中始终位于底部。 NL 抽到这张牌时，获得等同于 *弃牌堆 牌数的 格挡 。",
+    "UPGRADE_DESCRIPTION": " 不能被打出 。 NL 在 *抽牌堆 中始终位于底部。 NL 抽到这张牌时，获得等同于 *手牌 与 *弃牌堆 总牌数的 格挡 。"
   },
   "GuZhenRen:BaiGuZhanChe": {
     "NAME": "白骨战车",
