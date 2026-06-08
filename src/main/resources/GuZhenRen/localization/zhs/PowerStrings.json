@@ -720,5 +720,12 @@
       " 的攻击伤害降低至0。",
       "在本回合死亡。 #y消散 期间， #y"
     ]
+  },
+  "GuZhenRen:WuJinXuanGuangQiPower": {
+    "NAME": "五禁玄光气",
+    "DESCRIPTIONS": [
+      "获得 缓慢 时，在本回合失去 #b",
+      " 点 #y力量 。"
+    ]
   }
 }

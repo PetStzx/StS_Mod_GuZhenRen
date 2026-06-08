@@ -319,5 +319,9 @@
     "PROPER_NAME": "Reverse Flow River Water",
     "NAMES": ["reverse_flow_river_water", "reverse flow river water"],
     "DESCRIPTION": " #yReverse #yFlow #yRiver consumes 1 layer of #yReverse #yFlow #yRiver #ywater each time it reflects an attack. "
+  },
+  {
+    "NAMES": ["slow"],
+    "DESCRIPTION": "Whenever you play a card this turn, the target takes #b10% more damage from Attacks. #ySlow resets every turn."
   }
 ]

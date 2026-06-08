@@ -269,7 +269,7 @@
   },
   "GuZhenRen:WuJinXuanGuangQi": {
     "NAME": "Five Restrictions Profound Light Qi",
-    "DESCRIPTION": "Apply 99 Weak , 99 Vulnerable , and 1 Slow to all enemies. NL Exhaust ."
+    "DESCRIPTION": "Apply 1 guzhenren:Slow to all enemies. NL Whenever an enemy receives guzhenren:Slow , it loses 1 Strength this turn. NL Exhaust ."
   },
   "GuZhenRen:WuZhiQuanXinJian": {
     "NAME": "Five Finger Fist Heart Sword",

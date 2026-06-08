@@ -721,5 +721,12 @@
       " 's attack damage is reduced to 0.",
       "Dies this turn. During #yDissipating , #y"
     ]
+  },
+  "GuZhenRen:WuJinXuanGuangQiPower": {
+    "NAME": "Five Restrictions Profound Light Qi",
+    "DESCRIPTIONS": [
+      "Whenever receiving Slow, loses #b",
+      " #yStrength this turn."
+    ]
   }
 }

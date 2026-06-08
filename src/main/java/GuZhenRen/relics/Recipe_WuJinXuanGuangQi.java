@@ -85,7 +85,11 @@ public class Recipe_WuJinXuanGuangQi extends AbstractRecipeRelic {
 
     @Override
     public AbstractCard getRewardCard() {
-        // 返回合成好的杀招牌：五禁玄光气
         return new WuJinXuanGuangQi();
+    }
+
+    @Override
+    protected String[] getTipKeywords(){
+        return new String[]{"缓慢"};
     }
 }
