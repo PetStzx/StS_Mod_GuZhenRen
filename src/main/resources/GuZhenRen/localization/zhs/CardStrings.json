@@ -775,7 +775,7 @@
   },
   "GuZhenRen:LongLinGu": {
     "NAME": "龙鳞蛊",
-    "DESCRIPTION": "获得 3 点 格挡 !M! 次。 NL 你每有 1 层 guzhenren:剑锋 ，额外获得一次 格挡 。",
+    "DESCRIPTION": "获得 3 点 格挡 !M! 次。 NL 你每有 1 层 guzhenren:剑锋 ，额外获得 1 次 格挡 。",
     "EXTENDED_DESCRIPTION": [
       " NL （获得 !B! 点格挡 !GuZhenRen:SecondMagic! 次）"
     ]
