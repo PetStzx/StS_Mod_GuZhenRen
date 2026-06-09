@@ -309,7 +309,7 @@
   {
     "PROPER_NAME": "Fossil",
     "NAMES": ["fossil", "fossilized"],
-    "DESCRIPTION": "When played, gain #yBlock equal to its stacks. This card's Path becomes #yEarth_Path ."
+    "DESCRIPTION": "When played, gain #yBlock equal to its stacks. This card's Path becomes #yEarth #yPath ."
   },
   {
     "NAMES": ["mortal_gu_house", "mortal gu house"],
@@ -317,7 +317,9 @@
   },
   {
     "PROPER_NAME": "Reverse Flow River Water",
-    "NAMES": ["reverse_flow_river_water", "reverse flow river water"],
+    "NAMES": [
+      "reverse flow river water", "reverse_flow_river_water"
+    ],
     "DESCRIPTION": " #yReverse #yFlow #yRiver consumes 1 layer of #yReverse #yFlow #yRiver #ywater each time it reflects an attack. "
   },
   {
