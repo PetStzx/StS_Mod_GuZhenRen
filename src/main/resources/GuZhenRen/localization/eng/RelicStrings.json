@@ -477,5 +477,13 @@
       "Requires: 3 of any #yEarth #yPath Gu.",
       "Any Earth Path Gu worm"
     ]
+  },
+  "GuZhenRen:ShuiWenGu": {
+    "NAME": "Filler Gu",
+    "FLAVOR": "\"This is Filler Gu, retreat quickly, we readers are most afraid of fillers.\"",
+    "DESCRIPTIONS": [
+      "When the word count of played cards reaches #b300 , gain #b200 #yGold .",
+      "This relic's effect has been exhausted."
+    ]
   }
 }
