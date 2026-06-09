@@ -25,10 +25,11 @@ public class ShaGu extends AbstractBenMingGuCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/ShaGu.png");
 
-    private static final int COST = 0;
+    private static final int COST = 1;
     private static final int INITIAL_RANK = 1;
 
-    private static final int[] BASE_DMG =      {0, 6, 7, 8, 9, 10, 10, 11, 12, 13};
+    private static final int[] BASE_DMG =      {0, 7, 8, 9, 10, 11, 11, 12, 13, 14};
+
     private static final int[] DEATH_DMG_INC = {0, 1, 1, 1, 1,  1,  2,  2,  2,  3};
 
     public ShaGu() {
