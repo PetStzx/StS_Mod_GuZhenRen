@@ -23,6 +23,12 @@ public class DuShiChang extends AbstractImageEvent {
 
     private CurrentScreen screen = CurrentScreen.INTRO;
 
+    // 每个柜台的中奖次数
+    private int commonWins = 0;
+    private int uncommonWins = 0;
+    private int rareWins = 0;
+    private static final int MAX_WINS = 3; // 每个柜台最大中奖次数
+
     public DuShiChang() {
         super(NAME, DESCRIPTIONS[0], GuZhenRen.assetPath("img/events/DuShiChang.png"));
         updateDialogs();
@@ -50,7 +56,7 @@ public class DuShiChang extends AbstractImageEvent {
             }
 
             // 选项1: [低等柜台] - 5金币，普通遗物
-            if (isModRelicPoolEmpty(AbstractRelic.RelicTier.COMMON)) {
+            if (this.commonWins >= MAX_WINS || isModRelicPoolEmpty(AbstractRelic.RelicTier.COMMON)) {
                 this.imageEventText.setDialogOption(OPTIONS[5], true);
             } else if (AbstractDungeon.player.gold < 5) {
                 this.imageEventText.setDialogOption(String.format(OPTIONS[4], 5), true);
@@ -59,7 +65,7 @@ public class DuShiChang extends AbstractImageEvent {
             }
 
             // 选项2: [常规柜台] - 10金币，罕见遗物
-            if (isModRelicPoolEmpty(AbstractRelic.RelicTier.UNCOMMON)) {
+            if (this.uncommonWins >= MAX_WINS || isModRelicPoolEmpty(AbstractRelic.RelicTier.UNCOMMON)) {
                 this.imageEventText.setDialogOption(OPTIONS[5], true);
             } else if (AbstractDungeon.player.gold < 10) {
                 this.imageEventText.setDialogOption(String.format(OPTIONS[4], 10), true);
@@ -68,7 +74,7 @@ public class DuShiChang extends AbstractImageEvent {
             }
 
             // 选项3: [高等柜台] - 15金币，稀有遗物
-            if (isModRelicPoolEmpty(AbstractRelic.RelicTier.RARE)) {
+            if (this.rareWins >= MAX_WINS || isModRelicPoolEmpty(AbstractRelic.RelicTier.RARE)) {
                 this.imageEventText.setDialogOption(OPTIONS[5], true);
             } else if (AbstractDungeon.player.gold < 15) {
                 this.imageEventText.setDialogOption(String.format(OPTIONS[4], 15), true);
@@ -119,6 +125,18 @@ public class DuShiChang extends AbstractImageEvent {
             AbstractRelic relic = getRandomModRelic(tier);
             if (relic != null) {
                 AbstractDungeon.getCurrRoom().spawnRelicAndObtain((float)(Settings.WIDTH / 2), (float)(Settings.HEIGHT / 2), relic);
+
+                switch (tier) {
+                    case COMMON:
+                        this.commonWins++;
+                        break;
+                    case UNCOMMON:
+                        this.uncommonWins++;
+                        break;
+                    case RARE:
+                        this.rareWins++;
+                        break;
+                }
             }
         } else {
             this.imageEventText.updateBodyText(failText);
@@ -126,7 +144,6 @@ public class DuShiChang extends AbstractImageEvent {
 
         updateDialogs();
     }
-
 
     private ArrayList<String> getGlobalPool(AbstractRelic.RelicTier tier) {
         switch (tier) {
