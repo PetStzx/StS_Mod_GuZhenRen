@@ -150,7 +150,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
             this.saveHistory.addAll(tempHistory);
             this.saveHistory.add(json);
 
-            if (this.saveHistory.size() > 7) {
+            if (this.saveHistory.size() > 8) {
                 this.saveHistory.remove(0);
             }
 
@@ -210,7 +210,7 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
         CardCrawlGame.sound.play("STANCE_ENTER_DIVINITY");
         isTimeTraveling = true;
 
-        int backFloors = AbstractDungeon.miscRng.random(3, 5);
+        int backFloors = AbstractDungeon.miscRng.random(4, 6);
         int targetIndex = Math.max(0, saveHistory.size() - 1 - backFloors);
         final String targetJson = saveHistory.get(targetIndex);
 
