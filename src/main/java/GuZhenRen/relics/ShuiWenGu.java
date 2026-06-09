@@ -18,7 +18,7 @@ public class ShuiWenGu extends CustomRelic {
     private static final String OUTLINE = "ShuiWenGu.png";
 
     private static final int TARGET_WORDS = 300;
-    private static final int GOLD_AMOUNT = 200;
+    private static final int GOLD_AMOUNT = 250;
 
     public ShuiWenGu() {
         super(ID,
