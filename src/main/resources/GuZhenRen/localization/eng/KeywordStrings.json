@@ -323,5 +323,10 @@
   {
     "NAMES": ["slow"],
     "DESCRIPTION": "Whenever you play a card this turn, the target takes #b10% more damage from Attacks. #ySlow resets every turn."
+  },
+  {
+    "PROPER_NAME": "Dao Mark",
+    "NAMES": ["dao mark", "dao marks", "dao_mark", "dao_marks"],
+    "DESCRIPTION": "Various Dao Mark powers, including #yTransformation #yPath #yDao #yMarks ."
   }
 ]

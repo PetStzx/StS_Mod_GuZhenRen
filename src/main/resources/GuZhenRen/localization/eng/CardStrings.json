@@ -775,7 +775,7 @@
   },
   "GuZhenRen:LongLinGu": {
     "NAME": "Dragon Scale Gu",
-    "DESCRIPTION": "Gain 3 Block !M! times. NL For each stack of guzhenren:Sword_Edge , gain Block 1 additional time.",
+    "DESCRIPTION": "Gain 2 Block !M! times. NL For each stack of guzhenren:Dao_Mark or guzhenren:Sword_Edge , gain Block 1 additional time.",
     "EXTENDED_DESCRIPTION": [
       " NL (Gain !B! Block !GuZhenRen:SecondMagic! times)"
     ]

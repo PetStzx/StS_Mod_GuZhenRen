@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.powers.AbstractDaoHenPower;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -17,8 +18,10 @@ public class LongLinGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/LongLinGu.png");
 
+    private static final String JIAN_FENG_ID = GuZhenRen.makeID("JianFengPower");
+
     private static final int COST = 1;
-    private static final int BASE_BLOCK = 3;
+    private static final int BASE_BLOCK = 2;
     private static final int BASE_TIMES = 3;
     private static final int UPGRADE_PLUS_TIMES = 1;
     private static final int INITIAL_RANK = 7;
@@ -43,19 +46,28 @@ public class LongLinGu extends AbstractGuZhenRenCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         int totalTimes = calculateTotalTimes();
+
+        totalTimes = Math.max(0, totalTimes);
+
         for (int i = 0; i < totalTimes; i++) {
             this.addToBot(new GainBlockAction(p, p, this.block));
         }
     }
 
-    // 总格挡次数：基础次数 + 剑锋层数
     private int calculateTotalTimes() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) {
             return this.magicNumber;
         }
-        AbstractPower jianFeng = AbstractDungeon.player.getPower(GuZhenRen.makeID("JianFengPower"));
-        int jianFengCount = (jianFeng != null) ? jianFeng.amount : 0;
-        return this.magicNumber + jianFengCount;
+
+        int extraCount = 0;
+
+        for (AbstractPower p : AbstractDungeon.player.powers) {
+            if (p instanceof AbstractDaoHenPower || p.ID.equals(JIAN_FENG_ID)) {
+                extraCount += p.amount;
+            }
+        }
+
+        return this.magicNumber + extraCount;
     }
 
     @Override
