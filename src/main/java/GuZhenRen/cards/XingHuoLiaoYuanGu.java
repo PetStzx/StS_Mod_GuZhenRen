@@ -19,7 +19,6 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
 
     private static final int COST = 2;
     private static final int FEN_SHAO_AMT = 1;
-    private static final int UPGRADED_TIMES = 3; // 升级后给 3 次
     private static final int INITIAL_RANK = 5;
 
     public XingHuoLiaoYuanGu() {
@@ -33,26 +32,21 @@ public class XingHuoLiaoYuanGu extends AbstractGuZhenRenCard {
 
         this.baseFenShao = this.fenShao = FEN_SHAO_AMT;
 
-        this.baseMagicNumber = this.magicNumber = 1;
-
         this.exhaust = true;
         this.setRank(INITIAL_RANK);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-
-        for (int i = 0; i < this.magicNumber; i++) {
-            this.addToBot(new ApplyPowerAction(m, p, new FenShaoPower(m, this.fenShao), this.fenShao));
-        }
-        this.addToBot(new ApplyPowerAction(m, p, new XingHuoLiaoYuanPower(m,-1)));
+        this.addToBot(new ApplyPowerAction(m, p, new FenShaoPower(m, this.fenShao), this.fenShao));
+        this.addToBot(new ApplyPowerAction(m, p, new XingHuoLiaoYuanPower(m, -1)));
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeMagicNumber(UPGRADED_TIMES - 1);
+            this.isInnate = true;
             this.myBaseDescription = cardStrings.UPGRADE_DESCRIPTION;
             this.upgradeRank(1);
             this.initializeDescription();

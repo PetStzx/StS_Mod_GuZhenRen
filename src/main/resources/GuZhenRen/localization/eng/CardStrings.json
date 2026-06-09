@@ -103,7 +103,7 @@
   "GuZhenRen:XingHuoLiaoYuanGu": {
     "NAME": "Prairie Fire Gu",
     "DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning . NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning !M! times. NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust."
+    "UPGRADE_DESCRIPTION": " Innate . NL Apply !GuZhenRen:FenShao! guzhenren:Burning . NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust."
   },
   "GuZhenRen:LiaoYuanHuo": {
     "NAME": "Prairie Fire",

@@ -37,7 +37,7 @@
   "GuZhenRen:XingHuoLiaoYuanPower": {
     "NAME": "星火燎原",
     "DESCRIPTIONS": [
-      "当该敌人从此状态外的途径获得 #y焚烧 时，其他所有敌人也获得等量 #y焚烧 。"
+      "当该敌人从此状态外获得 #y焚烧 时，其他所有敌人也获得等量 #y焚烧 。"
     ]
   },
   "GuZhenRen:BianHuaDaoDaoHenPower": {

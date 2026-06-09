@@ -103,7 +103,7 @@
   "GuZhenRen:XingHuoLiaoYuanGu": {
     "NAME": "星火燎原蛊",
     "DESCRIPTION": "给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 。 NL 这名敌人获得 guzhenren:焚烧 时，其他敌人也获得等量 guzhenren:焚烧 。 NL 消耗 。",
-    "UPGRADE_DESCRIPTION": "给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 !M! 次。 NL 这名敌人获得 guzhenren:焚烧 时，其他敌人也获得等量 guzhenren:焚烧 。 NL 消耗 。"
+    "UPGRADE_DESCRIPTION": " 固有 。 NL 给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 。 NL 这名敌人获得 guzhenren:焚烧 时，其他敌人也获得等量 guzhenren:焚烧 。 NL 消耗 。"
   },
   "GuZhenRen:LiaoYuanHuo": {
     "NAME": "燎原火",

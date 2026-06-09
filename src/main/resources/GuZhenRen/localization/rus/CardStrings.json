@@ -103,7 +103,7 @@
   "GuZhenRen:XingHuoLiaoYuanGu": {
     "NAME": "Степной Огонь Гу",
     "DESCRIPTION": "Накладывает !GuZhenRen:FenShao! guzhenren:Воспламенения . NL Когда этот враг получает guzhenren:Воспламенение , все остальные враги также получают равное количество guzhenren:Воспламенения . NL Сжигается.",
-    "UPGRADE_DESCRIPTION": "Накладывает !GuZhenRen:FenShao! guzhenren:Воспламенения !M! раз(а). NL Когда этот враг получает guzhenren:Воспламенение , все остальные враги также получают равное количество guzhenren:Воспламенения . NL Сжигается."
+    "UPGRADE_DESCRIPTION": " Врожденный . NL Накладывает !GuZhenRen:FenShao! guzhenren:Воспламенения . NL Когда этот враг получает guzhenren:Воспламенение , все остальные враги также получают равное количество guzhenren:Воспламенения . NL Сжигается."
   },
   "GuZhenRen:LiaoYuanHuo": {
     "NAME": "Степной Огонь",
