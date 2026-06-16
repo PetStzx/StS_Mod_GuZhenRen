@@ -98,13 +98,13 @@ public class AnTuZhongShanBao extends AbstractXianGuWuCard {
         private static final CardStrings strings = CardCrawlGame.languagePack.getCardStrings(ID);
 
         private boolean showDynamicText = false;
-        private AbstractCard parentCard;
+        private java.util.UUID parentUuid;
 
         public OptionJiTuChengShan_AnTuZhongShanBao(AbstractCard parentCard) {
             super(ID, strings.NAME, IMG_PATH, -2, strings.DESCRIPTION, CardType.SKILL, CardColorEnum.GUZHENREN_GREY, CardRarity.SPECIAL, CardTarget.NONE);
             this.baseBlock = this.block = 8;
             this.baseMagicNumber = this.magicNumber = 0;
-            this.parentCard = parentCard;
+            this.parentUuid = parentCard != null ? parentCard.uuid : null;
         }
 
         public OptionJiTuChengShan_AnTuZhongShanBao() {
@@ -116,7 +116,7 @@ public class AnTuZhongShanBao extends AbstractXianGuWuCard {
             int count = 0;
 
             for (AbstractCard c : AbstractDungeon.player.hand.group) {
-                boolean isSelf = parentCard != null && c.uuid.equals(parentCard.uuid);
+                boolean isSelf = parentUuid != null && c.uuid.equals(parentUuid);
                 if (c.hasTag(GuZhenRenTags.TU_DAO) && !isSelf) {
                     count++;
                 }
@@ -222,11 +222,11 @@ public class AnTuZhongShanBao extends AbstractXianGuWuCard {
         public static final String ID = GuZhenRen.makeID("OptionJuanTuChongLai_AnTuZhongShanBao");
         public static final CardStrings strings = CardCrawlGame.languagePack.getCardStrings(ID);
 
-        private AbstractCard parentCard;
+        private java.util.UUID parentUuid;
 
         public OptionJuanTuChongLai_AnTuZhongShanBao(AbstractCard parentCard) {
             super(ID, strings.NAME, IMG_PATH, -2, strings.DESCRIPTION, CardType.SKILL, CardColorEnum.GUZHENREN_GREY, CardRarity.SPECIAL, CardTarget.NONE);
-            this.parentCard = parentCard;
+            this.parentUuid = parentCard != null ? parentCard.uuid : null;
         }
 
         public OptionJuanTuChongLai_AnTuZhongShanBao() {
@@ -247,22 +247,19 @@ public class AnTuZhongShanBao extends AbstractXianGuWuCard {
                     ArrayList<AbstractCard> cardsToMove = new ArrayList<>();
 
                     for (AbstractCard c : p.discardPile.group) {
-                        boolean isSelf = parentCard != null && c.uuid.equals(parentCard.uuid);
+                        boolean isSelf = parentUuid != null && c.uuid.equals(parentUuid);
                         if (c.hasTag(GuZhenRenTags.TU_DAO) && !isSelf) {
                             cardsToMove.add(c);
                         }
                     }
 
                     int count = cardsToMove.size();
-
                     for (AbstractCard c : cardsToMove) {
                         p.discardPile.moveToDeck(c, true);
                     }
-
                     if (count > 0) {
                         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new JiTuPower(p, count * 3), count * 3));
                     }
-
                     this.isDone = true;
                 }
             });
