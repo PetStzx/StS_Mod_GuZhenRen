@@ -275,7 +275,20 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                     targetSave.relic_counters.add(10);
                 }
 
-                SaveAndContinue.save(targetSave);
+                try {
+                    String savePath = SaveAndContinue.getPlayerSavePath(AbstractDungeon.player.chosenClass);
+                    String targetJsonData = gson.toJson(targetSave);
+
+                    if (!Settings.isBeta) {
+                        targetJsonData = com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator.encode(targetJsonData, "key");
+                    }
+
+                    com.badlogic.gdx.files.FileHandle fileHandle = com.badlogic.gdx.Gdx.files.local(savePath);
+                    fileHandle.writeString(targetJsonData, false);
+                } catch (Exception ex) {
+                    GuZhenRen.logger.error("春秋蝉：同步写入存档失败！" + ex.getMessage());
+                }
+                // ==========================================================
 
                 CardCrawlGame.music.fadeAll();
                 if (AbstractDungeon.getCurrRoom() != null) AbstractDungeon.getCurrRoom().clearEvent();
