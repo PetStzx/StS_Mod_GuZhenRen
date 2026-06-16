@@ -50,12 +50,11 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 计算总命中次数：全面雷达 + UUID 去重法
+    // 计算总命中次数
     // =========================================================================
     private int calculateHits() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return 1;
 
-        // 使用 HashSet 来存储 UUID，天然免疫“双发”等机制产生的相同 UUID 的临时假牌
         HashSet<UUID> uniqueBats = new HashSet<>();
 
         CardGroup[] groupsToCheck = {
@@ -66,7 +65,6 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
                 AbstractDungeon.player.limbo
         };
 
-        // 1. 收集五大常规牌堆里的刀翅血蝠
         for (CardGroup group : groupsToCheck) {
             for (AbstractCard c : group.group) {
                 if (c.cardID.equals(DaoChiXueFu.ID)) {
@@ -75,12 +73,10 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
             }
         }
 
-        // 2. 收集正在半空中打出的刀翅血蝠 (cardInUse)
         if (AbstractDungeon.player.cardInUse != null && AbstractDungeon.player.cardInUse.cardID.equals(DaoChiXueFu.ID)) {
             uniqueBats.add(AbstractDungeon.player.cardInUse.uuid);
         }
 
-        // 3. 【终极修复】收集被“精炼混沌”、“破坏”等机制抽走，正在动作队列(cardQueue)中排队等待打出的异次元血蝠！
         if (AbstractDungeon.actionManager != null && AbstractDungeon.actionManager.cardQueue != null) {
             for (com.megacrit.cardcrawl.cards.CardQueueItem item : AbstractDungeon.actionManager.cardQueue) {
                 if (item.card != null && item.card.cardID.equals(DaoChiXueFu.ID)) {
@@ -89,7 +85,6 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
             }
         }
 
-        // 保底命中 1 次
         return Math.max(1, uniqueBats.size());
     }
 
