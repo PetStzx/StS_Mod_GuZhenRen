@@ -17,6 +17,9 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.BiteEffect;
 import com.megacrit.cardcrawl.cards.CardGroup;
 
+import java.util.HashSet;
+import java.util.UUID;
+
 public class DaoChiXueFu extends AbstractGuZhenRenCard {
     public static final String ID = GuZhenRen.makeID("DaoChiXueFu");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
@@ -47,12 +50,13 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
     }
 
     // =========================================================================
-    // 计算总命中次数
+    // 计算总命中次数：全面雷达 + UUID 去重法
     // =========================================================================
     private int calculateHits() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null) return 1;
 
-        int batCount = 0;
+        // 使用 HashSet 来存储 UUID，天然免疫“双发”等机制产生的相同 UUID 的临时假牌
+        HashSet<UUID> uniqueBats = new HashSet<>();
 
         CardGroup[] groupsToCheck = {
                 AbstractDungeon.player.hand,
@@ -62,16 +66,31 @@ public class DaoChiXueFu extends AbstractGuZhenRenCard {
                 AbstractDungeon.player.limbo
         };
 
+        // 1. 收集五大常规牌堆里的刀翅血蝠
         for (CardGroup group : groupsToCheck) {
             for (AbstractCard c : group.group) {
-                if (c.cardID.equals(DaoChiXueFu.ID) && !c.purgeOnUse) {
-                    batCount++;
+                if (c.cardID.equals(DaoChiXueFu.ID)) {
+                    uniqueBats.add(c.uuid);
+                }
+            }
+        }
+
+        // 2. 收集正在半空中打出的刀翅血蝠 (cardInUse)
+        if (AbstractDungeon.player.cardInUse != null && AbstractDungeon.player.cardInUse.cardID.equals(DaoChiXueFu.ID)) {
+            uniqueBats.add(AbstractDungeon.player.cardInUse.uuid);
+        }
+
+        // 3. 【终极修复】收集被“精炼混沌”、“破坏”等机制抽走，正在动作队列(cardQueue)中排队等待打出的异次元血蝠！
+        if (AbstractDungeon.actionManager != null && AbstractDungeon.actionManager.cardQueue != null) {
+            for (com.megacrit.cardcrawl.cards.CardQueueItem item : AbstractDungeon.actionManager.cardQueue) {
+                if (item.card != null && item.card.cardID.equals(DaoChiXueFu.ID)) {
+                    uniqueBats.add(item.card.uuid);
                 }
             }
         }
 
         // 保底命中 1 次
-        return Math.max(1, batCount);
+        return Math.max(1, uniqueBats.size());
     }
 
     // 动态文本显示逻辑
