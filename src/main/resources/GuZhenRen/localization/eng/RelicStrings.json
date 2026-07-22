@@ -118,7 +118,7 @@
     "NAME": "Killer Move - Chasing Life Fire",
     "FLAVOR": "It senses attacks, traces the origin, and burns the immortal aperture directly. As long as life persists, this fire burns endlessly.",
     "DESCRIPTIONS": [
-      "Requires: #yPrairie #yFire #yGu+ , any #yFire #yPath #yImmortal #yGu .",
+      "Requires: #yPrairie #yFire+ , any #yFire #yPath #yImmortal #yGu .",
       "Any Fire Path Immortal Gu"
     ]
   },

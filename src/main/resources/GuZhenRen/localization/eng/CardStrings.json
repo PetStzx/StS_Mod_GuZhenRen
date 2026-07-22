@@ -101,7 +101,7 @@
     "DESCRIPTION": "Whenever you play a card targeting an enemy this turn, apply !M! guzhenren:Burning to it. NL After triggering 4 times, each trigger adds a *Burn into your hand."
   },
   "GuZhenRen:XingHuoLiaoYuanGu": {
-    "NAME": "Prairie Fire Gu",
+    "NAME": "Stellar Fire Prairie Gu",
     "DESCRIPTION": "Apply !GuZhenRen:FenShao! guzhenren:Burning . NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust.",
     "UPGRADE_DESCRIPTION": " Innate . NL Apply !GuZhenRen:FenShao! guzhenren:Burning . NL When this enemy receives guzhenren:Burning , all other enemies also receive an equal amount of guzhenren:Burning . NL Exhaust."
   },
