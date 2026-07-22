@@ -220,7 +220,7 @@
     "DESCRIPTION": "获得 !B! 点格挡。 NL 将 !M! 张 *灼伤 加入手牌。"
   },
   "GuZhenRen:YangMangBeiHuoYi": {
-    "NAME": "阳莽被火衣",
+    "NAME": "阳莽背火衣",
     "DESCRIPTION": "获得 !B! 点格挡。 NL 你在这个回合每次受到攻击，都对攻击者造成 !GuZhenRen:SecondMagic! 层 guzhenren:焚烧 !M! 次。"
   },
   "GuZhenRen:ZhuiMingHuo": {

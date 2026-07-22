@@ -220,7 +220,7 @@
     "DESCRIPTION": "Gain !B! Block . NL Add !M! *Burn into your hand."
   },
   "GuZhenRen:YangMangBeiHuoYi": {
-    "NAME": "Yang Mang Wears Fire Cloak",
+    "NAME": "Verdant Sun Flame Cloak",
     "DESCRIPTION": "Gain !B! Block . NL Whenever you are attacked this turn, apply !GuZhenRen:SecondMagic! guzhenren:Burning !M! times to the attacker."
   },
   "GuZhenRen:ZhuiMingHuo": {
