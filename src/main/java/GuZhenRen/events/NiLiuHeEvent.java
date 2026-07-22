@@ -139,19 +139,17 @@ public class NiLiuHeEvent extends AbstractImageEvent {
                 imageEventText.clearAllDialogs();
 
                 boolean hasWanLan = false;
-                AbstractCard wanLanCard = null;
                 for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                     if (c.cardID.equals(WanLan.ID)) {
                         hasWanLan = true;
-                        wanLanCard = c;
                         break;
                     }
                 }
 
                 if (hasWanLan) {
-                    imageEventText.setDialogOption(OPTIONS[18], new NiLiuHuShenYin());
+                    imageEventText.setDialogOption(String.format(OPTIONS[18], WanLan.NAME), new NiLiuHuShenYin());
                 } else {
-                    imageEventText.setDialogOption(OPTIONS[19], true);
+                    imageEventText.setDialogOption(String.format(OPTIONS[19], WanLan.NAME), true);
                 }
                 imageEventText.setDialogOption(OPTIONS[20]);
                 screen = Screen.ENDING_3;

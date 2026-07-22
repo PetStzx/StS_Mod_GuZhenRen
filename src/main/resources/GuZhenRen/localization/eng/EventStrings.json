@@ -154,8 +154,8 @@
       "[Advance] #gRefine Gu.",
       "[Advance] #gObtain relic #gPerseverance Gu.",
       "[Take Domain] #gObtain relic #gReverse Flow River.",
-      "[Deduce Killer Move] #rLose #r[Wan Lan]. #gObtain #g[Reverse Flow Protection Seal].",
-      "[Locked] Requires: [Wan Lan] in your deck.",
+      "[Deduce Killer Move] #rLose #r[%s]. #gObtain #g[Reverse Flow Protection Seal].",
+      "[Locked] Requires: [%s] in your deck.",
       "[Leave]"
     ]
   }
