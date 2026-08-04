@@ -90,7 +90,16 @@ public class YingShengChongPower extends AbstractPower {
             this.updateDescription();
             this.flash();
 
-            AbstractDungeon.actionManager.addToBottom(new TalkAction(this.owner, this.targetCardName + DESCRIPTIONS[2], 1.0F, 2.5F));
+
+            AbstractDungeon.actionManager.addToBottom(new com.megacrit.cardcrawl.actions.AbstractGameAction() {
+                @Override
+                public void update() {
+                    if (owner != null && !owner.isDeadOrEscaped() && !owner.halfDead && !owner.isDying) {
+                        AbstractDungeon.actionManager.addToTop(new TalkAction(owner, targetCardName + DESCRIPTIONS[2], 1.0F, 2.5F));
+                    }
+                    this.isDone = true;
+                }
+            });
         } else {
             this.targetCardName = "";
             this.updateDescription();
