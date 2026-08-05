@@ -1,0 +1,13 @@
+QiQiang.png
+size: 447, 1028
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+QiQiang
+  rotate: false
+  xy: 2, 2
+  size: 443, 1024
+  orig: 443, 1024
+  offset: 0, 0
+  index: -1
+
