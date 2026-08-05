@@ -40,9 +40,17 @@ public class TianWangPower extends AbstractPower {
 
     @Override
     public void onInitialApplication() {
-        AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(AbstractDungeon.player, this.owner, new EntanglePower(AbstractDungeon.player))
-        );
+        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+            @Override
+            public void update() {
+                if (owner != null && !owner.isDeadOrEscaped() && !owner.halfDead && !owner.isDying) {
+                    AbstractDungeon.actionManager.addToTop(
+                            new ApplyPowerAction(AbstractDungeon.player, owner, new EntanglePower(AbstractDungeon.player))
+                    );
+                }
+                this.isDone = true;
+            }
+        });
     }
 
     @Override
@@ -91,12 +99,13 @@ public class TianWangPower extends AbstractPower {
         @Override
         public void update() {
             if (this.duration == Settings.ACTION_DUR_FAST) {
-                AbstractDungeon.actionManager.addToTop(
-                        new ApplyPowerAction(AbstractDungeon.player, this.target, new EntanglePower(AbstractDungeon.player))
-                );
-
-                this.power.amount = 3;
-                this.power.updateDescription();
+                if (this.target != null && !this.target.isDeadOrEscaped() && !this.target.halfDead && !this.target.isDying) {
+                    AbstractDungeon.actionManager.addToTop(
+                            new ApplyPowerAction(AbstractDungeon.player, this.target, new EntanglePower(AbstractDungeon.player))
+                    );
+                    this.power.amount = 3;
+                    this.power.updateDescription();
+                }
             }
             this.tickDuration();
         }
