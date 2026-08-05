@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.patches.CardColorEnum;
+import GuZhenRen.powers.QiHuPower;
 import GuZhenRen.powers.YiPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -46,22 +47,35 @@ public class ShaYiGu extends AbstractGuZhenRenCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        // 1. 统计当前活着的敌人数量
-        int enemyCount = 0;
+        // 1. 统计当前活着的且未被气护power保护的敌人数量（命中数）
+        int hitCount = 0;
         for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
             if (!mo.isDeadOrEscaped()) {
-                enemyCount++;
+                boolean isProtectedByOthers = false;
+
+                for (AbstractMonster other : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                    if (other != mo && !other.isDeadOrEscaped() && other.hasPower(QiHuPower.POWER_ID)) {
+                        QiHuPower qh = (QiHuPower) other.getPower(QiHuPower.POWER_ID);
+                        if (qh.protectedTarget == mo) {
+                            isProtectedByOthers = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!isProtectedByOthers) {
+                    hitCount++;
+                }
             }
         }
 
-        // 2. 造成AOE伤害
+
         this.addToBot(new SFXAction("ATTACK_HEAVY"));
         this.addToBot(new VFXAction(p, new CleaveEffect(), 0.1F));
         this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn, AbstractGameAction.AttackEffect.NONE));
 
-        // 3. 给予意
-        if (enemyCount > 0) {
-            int totalYi = enemyCount * this.magicNumber;
+        if (hitCount > 0) {
+            int totalYi = hitCount * this.magicNumber;
             this.addToBot(new ApplyPowerAction(p, p, new YiPower(p, totalYi), totalYi));
         }
     }
