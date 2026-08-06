@@ -735,5 +735,13 @@
       "Redirects all #yDamage and #yDebuffs targeted at ",
       " to itself."
     ]
+  },
+  "GuZhenRen:LongYuShangBinPower": {
+    "NAME": "Heavenly Dragon's Last Stand",
+    "DESCRIPTIONS": [
+      "At the end of its turn, loses #b",
+      " Max HP and gains #b",
+      " #yStrength."
+    ]
   }
 }

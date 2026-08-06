@@ -734,5 +734,13 @@
       "将 ",
       " 受到的 #y伤害 与 #y负面状态 转移至自身。"
     ]
+  },
+  "GuZhenRen:LongYuShangBinPower": {
+    "NAME": "龙驭上宾",
+    "DESCRIPTIONS": [
+      "回合结束时，失去 #b",
+      " 点最大生命，获得 #b",
+      " 点 #y力量 。"
+    ]
   }
 }
