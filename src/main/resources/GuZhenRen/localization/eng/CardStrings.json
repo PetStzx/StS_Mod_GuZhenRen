@@ -863,5 +863,9 @@
   "GuZhenRen:OptionBuDongRuShan_AnTuZhongShanBao": {
     "NAME": "Immovable as a Mountain",
     "DESCRIPTION": "Once per combat: NL Gain 30 Block . NL Retain up to 30 Block between turns for the rest of this combat."
+  },
+  "GuZhenRen:YiLuan": {
+    "NAME": "Distraction",
+    "DESCRIPTION": "Unplayable . NL While in hand, playing a guzhenren:Killer_Move has a {CHANCE} chance to fail and lose !M! HP. NL Ethereal ."
   }
 }

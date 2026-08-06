@@ -863,5 +863,9 @@
   "GuZhenRen:OptionBuDongRuShan_AnTuZhongShanBao": {
     "NAME": "不动如山",
     "DESCRIPTION": "每场战斗限一次： NL 获得 30 点 格挡 。 NL 本场战斗你可跨回合保留至多 30 点 格挡 。"
+  },
+  "GuZhenRen:YiLuan": {
+    "NAME": "意乱",
+    "DESCRIPTION": "不能被打出 。 NL 在手牌中时，你打出 guzhenren:杀招 有 {CHANCE} guzhenren:概率 失败并失去 !M! 点生命。 NL 虚无 。"
   }
 }
