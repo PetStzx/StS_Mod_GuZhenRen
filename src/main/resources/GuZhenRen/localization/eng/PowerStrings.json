@@ -743,5 +743,12 @@
       " Max HP and gains #b",
       " #yStrength."
     ]
+  },
+  "GuZhenRen:JiuLongWenHuShenPower": {
+    "NAME": "Nine Dragons Protection",
+    "DESCRIPTIONS": [
+      "Attack damage received is reduced by #b",
+      "%. Whenever attacked, loses #b1 stack."
+    ]
   }
 }
