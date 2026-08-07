@@ -70,6 +70,7 @@ public class ZhengChangPower extends AbstractPower {
                         for (AbstractPower p : AbstractDungeon.player.powers) {
                             if (p.ID.equals(PlayerTribulationPower.POWER_ID)) continue;
                             if (p.ID.equals(YongShengPower.POWER_ID)) continue;
+                            if (p.ID.equals(XianQiaoBengKuiPower.POWER_ID)) continue;
 
                             AbstractDungeon.actionManager.addToTop(
                                     new RemoveSpecificPowerAction(AbstractDungeon.player, ZhengChangPower.this.owner, p)
