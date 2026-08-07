@@ -750,5 +750,20 @@
       "Attack damage received is reduced by #b",
       "%. Whenever attacked, loses #b1 stack."
     ]
+  },
+  "GuZhenRen:YouLongPower": {
+    "NAME": "Swimming Dragon",
+    "DESCRIPTIONS": [
+      "Whenever you play a card, heal #b",
+      " HP."
+    ]
+  },
+  "GuZhenRen:GangQiPower": {
+    "NAME": "Gang Qi",
+    "DESCRIPTIONS": [
+      "Can only lose #b",
+      " more HP this turn.",
+      "Cannot lose any more HP this turn."
+    ]
   }
 }

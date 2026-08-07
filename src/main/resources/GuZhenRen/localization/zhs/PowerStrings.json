@@ -749,5 +749,20 @@
       "受到的攻击伤害降低 #b",
       "% 。受到攻击伤害时，层数减少 #b1 。"
     ]
+  },
+  "GuZhenRen:YouLongPower": {
+    "NAME": "游龙",
+    "DESCRIPTIONS": [
+      "你每打出一张牌，回复 #b",
+      " 点生命。"
+    ]
+  },
+  "GuZhenRen:GangQiPower": {
+    "NAME": "罡气",
+    "DESCRIPTIONS": [
+      "本回合至多再失去 #b",
+      " 点生命。",
+      "本回合无法再失去生命。"
+    ]
   }
 }
