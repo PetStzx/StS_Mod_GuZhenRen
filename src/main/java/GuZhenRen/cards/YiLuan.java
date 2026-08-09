@@ -21,7 +21,7 @@ public class YiLuan extends CustomCard implements IProbabilityCard {
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/YiLuan.png");
 
     private static final int COST = -2;
-    private static final int HP_LOSS = 10;
+    private static final int HP_LOSS = 6;
 
     // “抵抗干扰”的概率
     public float baseChance = 0.50f;
