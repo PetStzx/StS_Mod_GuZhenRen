@@ -16,9 +16,6 @@ public class NetworkFangYuan extends NetworkCharPreset {
 
     public NetworkFangYuan() {
         super(new FangYuan("FangYuan"));
-        if (this.source.img == null) {
-            this.source.img = ImageMaster.loadImage(GuZhenRen.assetPath("img/character/FangYuan/Idle.png"));
-        }
     }
 
     @Override
@@ -34,17 +31,16 @@ public class NetworkFangYuan extends NetworkCharPreset {
     @Override
     public void render(SpriteBatch sb) {
         sb.setColor(this.tint.color);
-        if (this.source.img != null) {
-            float unifiedScale = Settings.scale * this.getScale();
-            sb.draw(this.source.img,
-                    this.drawX - (float) this.source.img.getWidth() * unifiedScale / 2.0F + this.animX,
-                    this.drawY + this.animY,
-                    (float) this.source.img.getWidth() * unifiedScale,
-                    (float) this.source.img.getHeight() * unifiedScale,
-                    0, 0,
-                    this.source.img.getWidth(), this.source.img.getHeight(),
-                    this.flipHorizontal, this.flipVertical);
-        }
+
+        this.source.drawX = this.drawX;
+        this.source.drawY = this.drawY;
+        this.source.animX = this.animX;
+        this.source.animY = this.animY;
+        this.source.flipHorizontal = this.flipHorizontal;
+        this.source.flipVertical = this.flipVertical;
+        this.source.tint.color.set(this.tint.color);
+
+        this.source.renderPlayerImage(sb);
 
         StanceSwitchRenderPatches.renderOn = this.source;
         this.stance.render(sb);
@@ -83,5 +79,4 @@ public class NetworkFangYuan extends NetworkCharPreset {
     public Nameplate GetNameplateUnlock() {
         return null;
     }
-
 }

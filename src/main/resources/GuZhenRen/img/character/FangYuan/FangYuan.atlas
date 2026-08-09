@@ -1,0 +1,27 @@
+FangYuan.png
+size: 1544, 516
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+FangYuan_body
+  rotate: false
+  xy: 2, 2
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+FangYuan_foot
+  rotate: false
+  xy: 516, 2
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+FangYuan_shadow
+  rotate: false
+  xy: 1030, 2
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+

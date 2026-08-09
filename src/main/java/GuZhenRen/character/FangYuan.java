@@ -28,13 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FangYuan extends CustomPlayer {
-    // 1. 注册角色字符串ID
     public static final String ID = GuZhenRen.makeID("FangYuan");
     private static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
 
     private static final UIStrings eventStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("CharacterEvents"));
 
-    // 2. 能量球纹理
+    // 能量球纹理
     private static final String[] ORB_TEXTURES = {
             GuZhenRen.assetPath("img/ui/orb/1.png"),
             GuZhenRen.assetPath("img/ui/orb/2.png"),
@@ -49,22 +48,20 @@ public class FangYuan extends CustomPlayer {
             GuZhenRen.assetPath("img/ui/orb/5d.png")
     };
 
-    // 3. 能量球特效路径
+    // 能量球特效路径
     private static final String ORB_VFX = GuZhenRen.assetPath("img/ui/orb/vfx.png");
 
-    // 4. 能量球每层的转速
+    // 能量球每层转速
     private static final float[] LAYER_SPEED = new float[]{-40.0F, -32.0F, 20.0F, -20.0F, 0.0F, -10.0F, -8.0F, 5.0F, -5.0F, 0.0F};
 
     public FangYuan(String name) {
-        // 5. super 构造函数
         super(name, AbstractPlayerEnum.FANG_YUAN, ORB_TEXTURES, ORB_VFX, LAYER_SPEED, null, null);
 
         this.dialogX = (this.drawX + 0.0F * Settings.scale);
         this.dialogY = (this.drawY + 220.0F * Settings.scale);
 
-        // 6. 初始化角色设置
         initializeClass(
-                GuZhenRen.assetPath("img/character/FangYuan/Idle.png"),
+                null,
                 GuZhenRen.assetPath("img/character/FangYuan/shoulder2.png"),
                 GuZhenRen.assetPath("img/character/FangYuan/shoulder.png"),
                 GuZhenRen.assetPath("img/character/FangYuan/corpse.png"),
@@ -72,6 +69,15 @@ public class FangYuan extends CustomPlayer {
                 20.0F, -10.0F, 220.0F, 290.0F,
                 new EnergyManager(3)
         );
+
+        this.loadAnimation(
+                GuZhenRen.assetPath("img/character/FangYuan/FangYuan.atlas"),
+                GuZhenRen.assetPath("img/character/FangYuan/FangYuan.json"),
+                1.0F
+        );
+
+        com.esotericsoftware.spine.AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
+        e.setTime(e.getEndTime() * com.badlogic.gdx.math.MathUtils.random());
     }
 
     @Override
