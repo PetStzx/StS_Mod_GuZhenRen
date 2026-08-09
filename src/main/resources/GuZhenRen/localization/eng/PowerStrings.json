@@ -797,5 +797,11 @@
     "DESCRIPTIONS": [
       "At the end of the round, heals ALL HP and restores #yNine #yDragons #yProtection to #b9 stacks."
     ]
+  },
+  "GuZhenRen:ZhuanZhuPower": {
+    "NAME": "Focus",
+    "DESCRIPTIONS": [
+      "This enemy is preparing a #yKiller #yMove. Taking damage interrupts the current intent."
+    ]
   }
 }

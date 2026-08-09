@@ -796,5 +796,11 @@
     "DESCRIPTIONS": [
       "回合结束时，回复所有生命，恢复 #y九龙纹护身 至 #b9 层。"
     ]
+  },
+  "GuZhenRen:ZhuanZhuPower": {
+    "NAME": "专注",
+    "DESCRIPTIONS": [
+      "这名敌人正在酝酿 #y杀招 ，受到伤害时打断当前意图。"
+    ]
   }
 }
