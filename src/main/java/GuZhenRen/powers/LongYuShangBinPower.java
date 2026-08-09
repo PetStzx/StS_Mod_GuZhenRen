@@ -1,6 +1,7 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.monsters.LongGong;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -35,7 +36,6 @@ public class LongYuShangBinPower extends AbstractPower {
         this.region128 = new TextureAtlas.AtlasRegion(largeTexture, 0, 0, 88, 88);
         this.region48 = new TextureAtlas.AtlasRegion(smallTexture, 0, 0, 32, 32);
 
-
         this.updateDescription();
     }
 
@@ -48,35 +48,47 @@ public class LongYuShangBinPower extends AbstractPower {
     @Override
     public void atEndOfTurn(boolean isPlayer) {
         if (!isPlayer) {
-            this.flash();
+            // 龙公复生回合不触发
+            if (this.owner instanceof LongGong) {
+                LongGong lg = (LongGong) this.owner;
+                if (lg.nextMove == LongGong.INTENT_SAN_QI_GUI_LAI) {
+                    return;
+                }
+            }
 
+            this.flash();
             final int powerAmount = this.amount;
 
             AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                 @Override
                 public void update() {
-                    int actualLoss = Math.min(powerAmount, owner.maxHealth);
-
-                    if (actualLoss > 0) {
-                        owner.maxHealth -= actualLoss;
+                    if (owner.maxHealth <= powerAmount) {
+                        AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
+                            @Override
+                            public void update() {
+                                if (!owner.isDying && !owner.isDead) {
+                                    owner.maxHealth = 1;
+                                    if (owner.currentHealth > 1) {
+                                        owner.currentHealth = 1;
+                                    }
+                                    owner.healthBarUpdatedEvent();
+                                }
+                                this.isDone = true;
+                            }
+                        });
+                        AbstractDungeon.actionManager.addToTop(new com.megacrit.cardcrawl.actions.common.InstantKillAction(owner));
+                    } else {
+                        owner.maxHealth -= powerAmount;
 
                         if (owner.currentHealth > owner.maxHealth) {
                             int hpLoss = owner.currentHealth - owner.maxHealth;
-                            owner.currentHealth = owner.maxHealth;
+                            owner.currentHealth = Math.max(owner.maxHealth, 1);
 
                             DamageInfo fakeInfo = new DamageInfo(owner, hpLoss, DamageInfo.DamageType.HP_LOSS);
                             for (AbstractPower p : owner.powers) {
                                 p.wasHPLost(fakeInfo, hpLoss);
                             }
                         }
-
-                        if (owner.maxHealth <= 0) {
-                            owner.currentHealth = 0;
-                            if (owner instanceof com.megacrit.cardcrawl.monsters.AbstractMonster) {
-                                ((com.megacrit.cardcrawl.monsters.AbstractMonster) owner).die();
-                            }
-                        }
-
                         owner.healthBarUpdatedEvent();
                     }
                     this.isDone = true;
