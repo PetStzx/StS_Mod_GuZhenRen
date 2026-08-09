@@ -791,5 +791,11 @@
       " turns, your #yVital #yGu will be destroyed.",
       "At the start of your turn, draw #b2 less cards, lose #b2 Energy, and lose #b10 HP."
     ]
+  },
+  "GuZhenRen:SanQiGuiLaiPower": {
+    "NAME": "Three Qi Return",
+    "DESCRIPTIONS": [
+      "At the end of the round, heals ALL HP and restores #yNine #yDragons #yProtection to #b9 stacks."
+    ]
   }
 }
