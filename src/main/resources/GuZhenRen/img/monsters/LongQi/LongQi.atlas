@@ -1,0 +1,90 @@
+LongQi.png
+size: 305, 1007
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+body
+  rotate: true
+  xy: 2, 558
+  size: 447, 210
+  orig: 447, 210
+  offset: 0, 0
+  index: -1
+claw_LB
+  rotate: true
+  xy: 111, 311
+  size: 83, 94
+  orig: 83, 94
+  offset: 0, 0
+  index: -1
+claw_LF
+  rotate: true
+  xy: 214, 488
+  size: 121, 85
+  orig: 121, 85
+  offset: 0, 0
+  index: -1
+claw_RB
+  rotate: false
+  xy: 214, 611
+  size: 78, 143
+  orig: 78, 143
+  offset: 0, 0
+  index: -1
+claw_RF
+  rotate: false
+  xy: 108, 2
+  size: 133, 137
+  orig: 133, 137
+  offset: 0, 0
+  index: -1
+cloud_LB
+  rotate: false
+  xy: 2, 6
+  size: 104, 111
+  orig: 104, 111
+  offset: 0, 0
+  index: -1
+cloud_LF
+  rotate: true
+  xy: 2, 119
+  size: 150, 104
+  orig: 150, 104
+  offset: 0, 0
+  index: -1
+cloud_RB
+  rotate: true
+  xy: 214, 368
+  size: 118, 85
+  orig: 118, 85
+  offset: 0, 0
+  index: -1
+cloud_RF
+  rotate: true
+  xy: 111, 396
+  size: 160, 101
+  orig: 160, 101
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 111, 141
+  size: 172, 168
+  orig: 172, 168
+  offset: 0, 0
+  index: -1
+whisker_L
+  rotate: true
+  xy: 214, 756
+  size: 249, 89
+  orig: 257, 89
+  offset: 0, 0
+  index: -1
+whisker_R
+  rotate: true
+  xy: 2, 271
+  size: 285, 107
+  orig: 285, 107
+  offset: 0, 0
+  index: -1
+
