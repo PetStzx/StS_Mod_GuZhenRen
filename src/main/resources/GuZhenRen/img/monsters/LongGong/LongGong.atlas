@@ -1,0 +1,125 @@
+LongGong.png
+size: 1652, 395
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Qi_body
+  rotate: false
+  xy: 262, 172
+  size: 401, 221
+  orig: 401, 221
+  offset: 0, 0
+  index: -1
+Qi_head
+  rotate: false
+  xy: 965, 196
+  size: 272, 197
+  orig: 272, 197
+  offset: 0, 0
+  index: -1
+Qi_tail
+  rotate: false
+  xy: 262, 15
+  size: 410, 155
+  orig: 410, 155
+  offset: 0, 0
+  index: -1
+arm_L
+  rotate: false
+  xy: 1493, 182
+  size: 94, 211
+  orig: 94, 211
+  offset: 0, 0
+  index: -1
+arm_R
+  rotate: true
+  xy: 986, 99
+  size: 95, 245
+  orig: 95, 245
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 674, 2
+  size: 162, 170
+  orig: 162, 170
+  offset: 0, 0
+  index: -1
+eye_white
+  rotate: true
+  xy: 2, 4
+  size: 27, 8
+  orig: 27, 8
+  offset: 0, 0
+  index: -1
+hair
+  rotate: true
+  xy: 1239, 135
+  size: 258, 252
+  orig: 258, 252
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 1233, 29
+  size: 104, 220
+  orig: 104, 220
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: true
+  xy: 986, 10
+  size: 87, 234
+  orig: 87, 234
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 1455, 80
+  size: 53, 136
+  orig: 53, 136
+  offset: 0, 0
+  index: -1
+pupil_L
+  rotate: false
+  xy: 12, 20
+  size: 4, 4
+  orig: 4, 4
+  offset: 0, 0
+  index: -1
+pupil_R
+  rotate: false
+  xy: 12, 26
+  size: 4, 5
+  orig: 4, 5
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: true
+  xy: 1593, 75
+  size: 318, 57
+  orig: 318, 57
+  offset: 0, 0
+  index: -1
+skirt_back
+  rotate: false
+  xy: 838, 4
+  size: 146, 168
+  orig: 146, 168
+  offset: 0, 0
+  index: -1
+skirt_front
+  rotate: true
+  xy: 665, 174
+  size: 219, 298
+  orig: 219, 298
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 2, 33
+  size: 360, 258
+  orig: 360, 258
+  offset: 0, 0
+  index: -1
+
