@@ -1,7 +1,7 @@
 package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
-import basemod.abstracts.CustomRelic;
+import GuZhenRen.effects.ChunQiuChanFadeEffect;import GuZhenRen.effects.ChunQiuChanStartEffect;import GuZhenRen.util.ChunQiuChanOverlayManager;import basemod.abstracts.CustomRelic;
 import basemod.abstracts.CustomSavable;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
@@ -27,6 +27,8 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
     public static final String ID = GuZhenRen.makeID("ChunQiuChan");
     private static final String IMG = GuZhenRen.assetPath("img/relics/ChunQiuChan.png");
     private static final String OUTLINE = GuZhenRen.assetPath("img/relics/outline/ChunQiuChan.png");
+
+    public static boolean shouldFadeFromWhite = false;
 
     public static class CQCSaveData {
         public ArrayList<String> history = new ArrayList<>();
@@ -207,6 +209,8 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
         backupUseCount = this.useCount;
         backupSaveHistory = new ArrayList<>(this.saveHistory);
 
+        shouldFadeFromWhite = true;
+
         CardCrawlGame.sound.play("STANCE_ENTER_DIVINITY");
         isTimeTraveling = true;
 
@@ -214,7 +218,15 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
         int targetIndex = Math.max(0, saveHistory.size() - 1 - backFloors);
         final String targetJson = saveHistory.get(targetIndex);
 
-        com.badlogic.gdx.Gdx.app.postRunnable(() -> {
+        AbstractDungeon.closeCurrentScreen();
+        if (AbstractDungeon.dungeonMapScreen != null) {
+            AbstractDungeon.dungeonMapScreen.closeInstantly();
+        }
+        AbstractDungeon.isScreenUp = true;
+
+        AbstractDungeon.topLevelEffects.add(new ChunQiuChanStartEffect(() -> {
+            ChunQiuChanOverlayManager.startOverlay();
+            com.badlogic.gdx.Gdx.app.postRunnable(() -> {
             try {
                 AbstractDungeon.closeCurrentScreen();
                 if (AbstractDungeon.dungeonMapScreen != null) {
@@ -288,7 +300,6 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                 } catch (Exception ex) {
                     GuZhenRen.logger.error("春秋蝉：同步写入存档失败！" + ex.getMessage());
                 }
-                // ==========================================================
 
                 CardCrawlGame.music.fadeAll();
                 if (AbstractDungeon.getCurrRoom() != null) AbstractDungeon.getCurrRoom().clearEvent();
@@ -302,11 +313,17 @@ public class ChunQiuChan extends CustomRelic implements ClickableRelic, CustomSa
                 isTimeTraveling = false;
             }
         });
+        }));
     }
 
     @Override
     public void update() {
         super.update();
+
+        if (shouldFadeFromWhite && !CardCrawlGame.loadingSave && AbstractDungeon.player != null) {
+            shouldFadeFromWhite = false;
+            AbstractDungeon.topLevelEffects.add(new ChunQiuChanFadeEffect());
+        }
 
         if (pendingCurse && !CardCrawlGame.loadingSave && AbstractDungeon.player != null) {
             pendingCurse = false;
