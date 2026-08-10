@@ -100,5 +100,13 @@
       "Play voice lines upon reaching Rank 9",
       "Play voice lines upon reaching Rank 10"
     ]
+  },
+  "GuZhenRen:FinalBossChoiceUI": {
+    "TEXT": [
+      "Act 4 Final Boss",
+      "Corrupt Heart",
+      "Duke Long",
+      "Random"
+    ]
   }
 }
