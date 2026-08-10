@@ -4,7 +4,6 @@ import GuZhenRen.GuZhenRen;
 import GuZhenRen.cards.*;
 import GuZhenRen.patches.AbstractPlayerEnum;
 import GuZhenRen.patches.CardColorEnum;
-import GuZhenRen.relics.ChunQiuChan;
 import GuZhenRen.relics.KongQiao_1;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
@@ -17,6 +16,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.cutscenes.CutscenePanel;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
@@ -208,9 +208,15 @@ public class FangYuan extends CustomPlayer {
     public List<CutscenePanel> getCutscenePanels() {
         List<CutscenePanel> panels = new ArrayList<>();
 
-        panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene1.png"), "WATCHER_HEART_PUNCH"));
-        panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene2.png")));
-        panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene3.png")));
+        if (GuZhenRen.ENCOUNTER_LONG_GONG.equals(AbstractDungeon.bossKey)) {
+            panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene4.png")));
+            panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene5.png"),"WATCHER_HEART_PUNCH"));
+            panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene6.png")));
+        } else {
+            panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene1.png"), "WATCHER_HEART_PUNCH"));
+            panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene2.png")));
+            panels.add(new CutscenePanel(GuZhenRen.assetPath("img/scenes/FangYuan_Scene3.png")));
+        }
 
         return panels;
     }
