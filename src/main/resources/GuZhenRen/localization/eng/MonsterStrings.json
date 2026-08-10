@@ -1,0 +1,50 @@
+{
+  "GuZhenRen:LongGong": {
+    "NAME": "Duke Long",
+    "MOVES": [
+      "Chaotic Dragon Fist",
+      "Qi Breath Mountain",
+      "Dragon Claw Strike",
+      "Human Qi Return",
+      "Earth Qi Return",
+      "Heavenly Qi Return",
+      "Three Qi Return",
+      "Qi Covers Mountains and Rivers",
+      "Whirling Dragon Fangs",
+      "Grand Qi Palm Blast",
+      "World-Shaking Dragon Hammer"
+    ],
+    "DIALOG": [
+      "Fang Yuan",
+      "Your journey ends here",
+      "...",
+      "It cannot be...",
+      "@I cannot die yet@",
+      "I will...",
+      "@Fight once more!!!@"
+    ]
+  },
+  "GuZhenRen:QiQiang": {
+    "NAME": "Qi Wall",
+    "MOVES": [
+      "Recover"
+    ],
+    "DIALOG": []
+  },
+  "GuZhenRen:YouLongQiQiang": {
+    "NAME": "Self-Rotating Dragon Qi Wall",
+    "MOVES": [
+      "Recover",
+      "Strengthen"
+    ],
+    "DIALOG": []
+  },
+  "GuZhenRen:LongQi": {
+    "NAME": "Purple-Gold Dragon Qi",
+    "MOVES": [
+      "Hidden Dragon Qi Burst",
+      "Dragon Qi"
+    ],
+    "DIALOG": []
+  }
+}

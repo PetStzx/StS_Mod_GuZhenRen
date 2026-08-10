@@ -4,6 +4,7 @@ import GuZhenRen.effects.BenMingGuOpeningEffect;
 import GuZhenRen.util.BattleStateManager;
 import GuZhenRen.util.GuZhenRenConfig;
 import GuZhenRen.util.TribulationManager;
+import GuZhenRen.util.FinalBossChoiceManager;
 import GuZhenRen.events.*;
 import basemod.BaseMod;
 import basemod.ReflectionHacks;
@@ -21,6 +22,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import GuZhenRen.monsters.*;
 import GuZhenRen.cards.*;
 import GuZhenRen.relics.*;
 import GuZhenRen.patches.*;
@@ -54,8 +57,9 @@ public class GuZhenRen implements
     public static final Logger logger = LogManager.getLogger(GuZhenRen.class.getName());
     public static final String MOD_ID = "GuZhenRen";
 
-    // 用于存储所有配方遗物ID的列表
     public static ArrayList<String> recipeRelicIDs = new ArrayList<>();
+
+    public static final String ENCOUNTER_LONG_GONG = makeID("EncounterLongGong");
 
     public static String makeID(String id) {
         return MOD_ID + ":" + id;
@@ -93,6 +97,16 @@ public class GuZhenRen implements
 
     public static void initialize() {
         new GuZhenRen();
+    }
+
+    private void registerMonsters() {
+        BaseMod.addMonster(ENCOUNTER_LONG_GONG, LongGong.NAME, () ->
+                new MonsterGroup(new com.megacrit.cardcrawl.monsters.ending.CorruptHeart())
+        );
+
+        BaseMod.addMonster(QiQiang.ID, () -> new MonsterGroup(new QiQiang(0.0F, 0.0F)));
+        BaseMod.addMonster(YouLongQiQiang.ID, () -> new MonsterGroup(new YouLongQiQiang(0.0F, 0.0F)));
+        BaseMod.addMonster(LongQi.ID, () -> new MonsterGroup(new LongQi(0.0F, 0.0F)));
     }
 
     @Override
@@ -270,6 +284,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new NiLiuHuShenYin());
         BaseMod.addCard(new JianMianCengXiangShi());
         BaseMod.addCard(new AnTuZhongShanBao());
+        BaseMod.addCard(new YiLuan());
     }
 
     @Override
@@ -376,10 +391,15 @@ public class GuZhenRen implements
         BaseMod.addAudio(GuZhenRen.makeID("LiuGuanYi"), assetPath("audio/sound/LiuGuanYi.ogg"));
         BaseMod.addAudio(GuZhenRen.makeID("LianTianMoZun"), assetPath("audio/sound/LianTianMoZun.ogg"));
         BaseMod.addAudio(GuZhenRen.makeID("YouHunMoZun"), assetPath("audio/sound/YouHunMoZun.ogg"));
+        BaseMod.addAudio(GuZhenRen.makeID("LongYin1"), assetPath("audio/sound/LongYin1.ogg"));
+        BaseMod.addAudio(GuZhenRen.makeID("LongYin2"), assetPath("audio/sound/LongYin2.ogg"));
     }
 
     @Override
     public void receivePostInitialize() {
+        FinalBossChoiceManager.loadGlobalConfig();
+        this.registerMonsters();
+
         if (Settings.language == Settings.GameLanguage.ZHT) {
             if (LocalizedStrings.PERIOD != null && LocalizedStrings.PERIOD.isEmpty()) {
                 ReflectionHacks.setPrivateStaticFinal(LocalizedStrings.class, "PERIOD", "。");
@@ -405,8 +425,11 @@ public class GuZhenRen implements
         );
         basemod.BaseMod.addSaveField("GuZhenRen_FuRenXinBonus", new FuRenXin.SaveData());
 
+        basemod.BaseMod.addSaveField(FinalBossChoiceManager.SAVE_KEY, FinalBossChoiceManager.getInstance());
+
         GuZhenRenConfig.setupConfigPanel();
         TribulationManager.initialize();
+
 
         basemod.BaseMod.addEvent(new basemod.eventUtil.AddEventParams.Builder(
                 DaoTianZhenChuan.ID,
@@ -455,6 +478,7 @@ public class GuZhenRen implements
         loadCustomStrings(PotionStrings.class, assetPath(path + "PotionStrings.json"));
         loadCustomStrings(UIStrings.class, assetPath(path + "UIStrings.json"));
         loadCustomStrings(EventStrings.class, assetPath(path + "EventStrings.json"));
+        loadCustomStrings(MonsterStrings.class, assetPath(path + "MonsterStrings.json"));
     }
 
     @Override
