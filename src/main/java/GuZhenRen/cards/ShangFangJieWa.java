@@ -38,7 +38,9 @@ public class ShangFangJieWa extends AbstractShaZhaoCard {
             "Buffer", // 缓冲
             GuZhenRen.makeID("ShuiMuTianHuaGuPower"), // 水幕天华蛊
             GuZhenRen.makeID("TieBiPower"), // 铁壁
-            GuZhenRen.makeID("GuiGuaYiPower") // 鬼卦衣
+            GuZhenRen.makeID("GuiGuaYiPower"), // 鬼卦衣
+            GuZhenRen.makeID("JiuLongWenHuShenPower"), // 九龙纹护身
+            GuZhenRen.makeID("GangQiPower") // 罡气
     };
 
     public ShangFangJieWa() {
