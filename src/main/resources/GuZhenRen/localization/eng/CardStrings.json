@@ -874,5 +874,9 @@
     "EXTENDED_DESCRIPTION": [
       " NL (Gain !B! Block)"
     ]
+  },
+  "GuZhenRen:LuanFangHunXiangWu": {
+    "NAME": "Fog of Confusion",
+    "DESCRIPTION": "guzhenren:Stun ALL enemies for 1 turn. NL At the end of enemy turn, they have a {CHANCE} guzhenren:Probability to be unable to act next turn. This probability decreases by 20% each round. NL Exhaust ."
   }
 }

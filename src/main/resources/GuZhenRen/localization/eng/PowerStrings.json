@@ -803,5 +803,13 @@
     "DESCRIPTIONS": [
       "This enemy is preparing a #yKiller #yMove. Taking damage interrupts the current intent."
     ]
+  },
+  "GuZhenRen:YunTouZhuanXiangPower": {
+    "NAME": "Dizzy",
+    "DESCRIPTIONS": [
+      "At the end of the round, has a #b",
+      "% chance to be Stunned next turn. This chance decreases by 20% each round.",
+      "Dizzy"
+    ]
   }
 }

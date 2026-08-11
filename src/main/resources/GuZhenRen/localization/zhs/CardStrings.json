@@ -874,5 +874,9 @@
     "EXTENDED_DESCRIPTION": [
       " NL （获得 !B! 点格挡）"
     ]
+  },
+  "GuZhenRen:LuanFangHunXiangWu": {
+    "NAME": "乱方混向雾",
+    "DESCRIPTION": "guzhenren:击晕 所有敌人 1 回合。 NL 敌方回合结束时， {CHANCE} guzhenren:概率 下回合无法行动，此概率每回合降低 20% 。 NL 消耗 。"
   }
 }

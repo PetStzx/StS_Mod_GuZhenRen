@@ -802,5 +802,13 @@
     "DESCRIPTIONS": [
       "这名敌人正在酝酿 #y杀招 ，受到伤害时打断当前意图。"
     ]
+  },
+  "GuZhenRen:YunTouZhuanXiangPower": {
+    "NAME": "晕头转向",
+    "DESCRIPTIONS": [
+      "回合结束时， #b",
+      "% 概率下回合无法行动。此概率每回合降低20% 。",
+      "晕头转向"
+    ]
   }
 }
