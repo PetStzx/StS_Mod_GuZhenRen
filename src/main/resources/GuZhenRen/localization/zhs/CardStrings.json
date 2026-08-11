@@ -867,5 +867,12 @@
   "GuZhenRen:YiLuan": {
     "NAME": "意乱",
     "DESCRIPTION": "不能被打出 。 NL 在手牌中时，你打出 guzhenren:杀招 有 {CHANCE} guzhenren:概率 失败并失去 !M! 点生命。 NL 虚无 。"
+  },
+  "GuZhenRen:XueRanZhengPao": {
+    "NAME": "血染征袍",
+    "DESCRIPTION": "失去 1 点生命。 NL 获得等同于你已损失生命值的格挡。",
+    "EXTENDED_DESCRIPTION": [
+      " NL （获得 !B! 点格挡）"
+    ]
   }
 }

@@ -867,5 +867,12 @@
   "GuZhenRen:YiLuan": {
     "NAME": "Distraction",
     "DESCRIPTION": "Unplayable . NL While in hand, playing a guzhenren:Killer_Move has a {CHANCE} chance to fail and lose !M! HP. NL Ethereal ."
+  },
+  "GuZhenRen:XueRanZhengPao": {
+    "NAME": "Blood-Stained Battle Robe",
+    "DESCRIPTION": "Lose 1 HP. NL Gain Block equal to your lost HP.",
+    "EXTENDED_DESCRIPTION": [
+      " NL (Gain !B! Block)"
+    ]
   }
 }
