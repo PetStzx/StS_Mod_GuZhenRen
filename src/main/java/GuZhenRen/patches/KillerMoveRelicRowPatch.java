@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.blights.AbstractBlight;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
@@ -101,13 +102,47 @@ public class KillerMoveRelicRowPatch {
                 : (relicCount - 1) / AbstractRelic.MAX_RELICS_PER_PAGE;
     }
 
+    // In Endless Mode the player accumulates Blight items, which the base game
+    // renders in the same row (and starting X) as our killer-move recipe row.
+    // Instead of pinning the Blights on the left, we treat the second row as a
+    // single shared, paginated sequence: [ Blights..., recipe relics... ]. The
+    // Blights occupy the first slots of the sequence, recipe relics follow, and
+    // paging scrolls through the whole sequence (Blights included), exactly like
+    // the normal relic row. The left arrow always sits at the far left.
+    private static int getBlightCount() {
+        if (AbstractDungeon.player == null || AbstractDungeon.player.blights == null) {
+            return 0;
+        }
+        return AbstractDungeon.player.blights.size();
+    }
+
+    private static int getSecondRowCount() {
+        return getBlightCount() + getRecipeRelicCount();
+    }
+
+    private static int getSecondRowMaxPage() {
+        int count = getSecondRowCount();
+        return count == 0 ? 0 : (count - 1) / AbstractRelic.MAX_RELICS_PER_PAGE;
+    }
+
+    // Left edge of the second row. Kept fixed (left-aligned) regardless of how
+    // many pages the sequence spans, so it always lines up with the first relic
+    // row and the Blights' default start position.
+    private static float getSecondRowStartX() {
+        return START_X * Settings.scale;
+    }
+
+    private static float getSecondRowY() {
+        return getTopRowY() - ROW_GAP * Settings.scale;
+    }
+
     private static void updateRecipeArrowPositions() {
         if (recipeLeftScrollHb == null) {
             recipeLeftScrollHb = new Hitbox(64.0F * Settings.scale, 64.0F * Settings.scale);
             recipeRightScrollHb = new Hitbox(64.0F * Settings.scale, 64.0F * Settings.scale);
         }
 
-        float recipeRowY = getTopRowY() - ROW_GAP * Settings.scale;
+        float recipeRowY = getSecondRowY();
         recipeLeftScrollHb.move(32.0F * Settings.scale, recipeRowY);
         recipeRightScrollHb.move(Settings.WIDTH - 32.0F * Settings.scale, recipeRowY);
     }
@@ -124,19 +159,29 @@ public class KillerMoveRelicRowPatch {
         if (logicalIndex < 0) {
             return;
         }
-        int column = logicalIndex % AbstractRelic.MAX_RELICS_PER_PAGE;
 
         Float offsetX = ReflectionHacks.getPrivateStatic(AbstractRelic.class, "offsetX");
-        float visibleX = (START_X * Settings.scale) + column * AbstractRelic.PAD_X;
-        int rowRelicCount = recipeRelic ? getRecipeRelicCount() : getNormalRelicCount();
-        if (rowRelicCount > AbstractRelic.MAX_RELICS_PER_PAGE) {
-            visibleX += 36.0F * Settings.scale;
-        }
         float visibleY = getTopRowY();
+        float visibleX;
         if (recipeRelic) {
-            visibleY -= ROW_GAP * Settings.scale;
+            int perPage = AbstractRelic.MAX_RELICS_PER_PAGE;
+            int combinedIndex = getBlightCount() + logicalIndex;
             if (!relic.isDone) {
-                recipeRelicPage = logicalIndex / AbstractRelic.MAX_RELICS_PER_PAGE;
+                recipeRelicPage = combinedIndex / perPage;
+            }
+            // Only lay out recipes that belong to the current second-row page;
+            // off-page recipes are neither rendered nor hoverable.
+            if (combinedIndex / perPage != recipeRelicPage) {
+                return;
+            }
+            int column = combinedIndex % perPage;
+            visibleX = getSecondRowStartX() + column * AbstractRelic.PAD_X;
+            visibleY = getSecondRowY();
+        } else {
+            int column = logicalIndex % AbstractRelic.MAX_RELICS_PER_PAGE;
+            visibleX = (START_X * Settings.scale) + column * AbstractRelic.PAD_X;
+            if (getNormalRelicCount() > AbstractRelic.MAX_RELICS_PER_PAGE) {
+                visibleX += 36.0F * Settings.scale;
             }
         }
 
@@ -226,9 +271,9 @@ public class KillerMoveRelicRowPatch {
 
             int actualIndex = AbstractDungeon.player.relics.indexOf(__instance);
             if (__instance instanceof AbstractRecipeRelic) {
-                int recipeIndex = getRecipeRelicIndex(__instance);
+                int combinedIndex = getBlightCount() + getRecipeRelicIndex(__instance);
                 AbstractRelic.relicPage =
-                        recipeIndex / AbstractRelic.MAX_RELICS_PER_PAGE == recipeRelicPage
+                        combinedIndex / AbstractRelic.MAX_RELICS_PER_PAGE == recipeRelicPage
                                 ? actualIndex / AbstractRelic.MAX_RELICS_PER_PAGE
                                 : -1;
                 return;
@@ -256,9 +301,11 @@ public class KillerMoveRelicRowPatch {
             ArrayList<AbstractRelic> visibleRelics = new ArrayList<>();
             int normalIndex = 0;
             int recipeIndex = 0;
+            int blightCount = getBlightCount();
             for (AbstractRelic relic : __instance.relics) {
                 if (relic instanceof AbstractRecipeRelic) {
-                    if (recipeIndex / AbstractRelic.MAX_RELICS_PER_PAGE == recipeRelicPage) {
+                    int combinedIndex = blightCount + recipeIndex;
+                    if (combinedIndex / AbstractRelic.MAX_RELICS_PER_PAGE == recipeRelicPage) {
                         relic.renderInTopPanel(sb);
                         visibleRelics.add(relic);
                     }
@@ -299,7 +346,7 @@ public class KillerMoveRelicRowPatch {
                 AbstractRelic.relicPage = maxNormalPage;
             }
 
-            int maxRecipePage = getMaxPage(getRecipeRelicCount());
+            int maxRecipePage = getSecondRowMaxPage();
             if (recipeRelicPage > maxRecipePage) {
                 recipeRelicPage = maxRecipePage;
             }
@@ -352,7 +399,7 @@ public class KillerMoveRelicRowPatch {
                 renderArrow(sb, ___rightScrollHb, false);
             }
 
-            int maxRecipePage = getMaxPage(getRecipeRelicCount());
+            int maxRecipePage = getSecondRowMaxPage();
             if (recipeRelicPage > 0) {
                 renderArrow(sb, recipeLeftScrollHb, true);
             }
@@ -360,6 +407,53 @@ public class KillerMoveRelicRowPatch {
                 renderArrow(sb, recipeRightScrollHb, false);
             }
             return SpireReturn.Return(null);
+        }
+    }
+
+    // Fold Endless-Mode Blights into the shared second-row sequence. Blights come
+    // first in the sequence, so on the current page they render alongside the
+    // recipe relics; Blights that fall on another page are moved off-screen so
+    // they are neither drawn (base game renders them at currentX/currentY) nor
+    // hoverable. When no recipe relic is owned, Blights keep their vanilla layout.
+    @SpirePatch(clz = AbstractBlight.class, method = "update")
+    public static class BlightUpdatePatch {
+        private static final float OFFSCREEN_X = -9999.0F;
+
+        @SpirePrefixPatch
+        public static void Prefix(AbstractBlight __instance) {
+            if (!hasRecipeRelics() || AbstractDungeon.player == null) {
+                return;
+            }
+
+            int combinedIndex = AbstractDungeon.player.blights.indexOf(__instance);
+            if (combinedIndex < 0) {
+                return;
+            }
+
+            int perPage = AbstractRelic.MAX_RELICS_PER_PAGE;
+            if (!__instance.isDone) {
+                recipeRelicPage = combinedIndex / perPage;
+            }
+
+            float y = getSecondRowY();
+            if (combinedIndex / perPage == recipeRelicPage) {
+                int column = combinedIndex % perPage;
+                float x = getSecondRowStartX() + column * AbstractRelic.PAD_X;
+                __instance.targetX = x;
+                __instance.targetY = y;
+                if (__instance.isDone) {
+                    __instance.currentX = x;
+                    __instance.currentY = y;
+                    __instance.hb.move(x, y);
+                }
+            } else {
+                // Off-page: park the Blight (and its hitbox) off-screen.
+                __instance.targetX = OFFSCREEN_X;
+                __instance.currentX = OFFSCREEN_X;
+                __instance.targetY = y;
+                __instance.currentY = y;
+                __instance.hb.move(OFFSCREEN_X, y);
+            }
         }
     }
 }
