@@ -1,6 +1,7 @@
 package GuZhenRen.powers;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.cards.RanNianFeiShi;
 import GuZhenRen.relics.SiXuRuDianGu;
 import GuZhenRen.util.BattleStateManager;
 import basemod.interfaces.CloneablePowerInterface;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -42,7 +44,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             currentTurn = AbstractDungeon.actionManager.turn;
         }
-        // 如果回合数变了，说明是新回合，重置计数器
         if (currentTurn != lastTurn) {
             nianGainedThisTurn = 0;
             lastTurn = currentTurn;
@@ -56,11 +57,10 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
             currentTurn = AbstractDungeon.actionManager.turn;
         }
         if (currentTurn != lastTurn) {
-            return 0; // 回合已变，当前回合还没获得过念
+            return 0;
         }
         return nianGainedThisTurn;
     }
-    // ==========================================
 
     public NianPower(AbstractCreature owner, int amount) {
         this.name = NAME;
@@ -75,7 +75,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         this.region48 = new TextureAtlas.AtlasRegion(ImageMaster.loadImage(pathSmall), 0, 0, 32, 32);
 
         this.amount = amount;
-
         updateDescription();
     }
 
@@ -84,7 +83,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
         this.fontScale = 8.0F;
         this.amount += stackAmount;
 
-        // 记录获取的层数
         recordNianGain(stackAmount);
 
         if (stackAmount > 0) {
@@ -97,6 +95,9 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
             if (this.owner.isPlayer && AbstractDungeon.player.hasRelic(SiXuRuDianGu.ID)) {
                 ((SiXuRuDianGu) AbstractDungeon.player.getRelic(SiXuRuDianGu.ID)).onGainNian(stackAmount);
             }
+
+            //触发燃念飞石
+            triggerRanNianFeiShi();
         }
 
         checkThreshold();
@@ -105,7 +106,6 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
 
     @Override
     public void onInitialApplication() {
-        // 记录初始获取的层数
         recordNianGain(this.amount);
 
         if (this.amount > 0) {
@@ -118,10 +118,23 @@ public class NianPower extends AbstractPower implements CloneablePowerInterface 
             if (this.owner.isPlayer && AbstractDungeon.player.hasRelic(SiXuRuDianGu.ID)) {
                 ((SiXuRuDianGu) AbstractDungeon.player.getRelic(SiXuRuDianGu.ID)).onGainNian(this.amount);
             }
+
+            //触发燃念飞石
+            triggerRanNianFeiShi();
         }
 
         checkThreshold();
         updateDescription();
+    }
+
+    private void triggerRanNianFeiShi() {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.exhaustPile != null) {
+            for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
+                if (c instanceof RanNianFeiShi) {
+                    ((RanNianFeiShi) c).triggerFromExhaustPile();
+                }
+            }
+        }
     }
 
     private void checkThreshold() {

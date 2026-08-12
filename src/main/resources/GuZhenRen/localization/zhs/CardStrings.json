@@ -878,5 +878,9 @@
   "GuZhenRen:LuanFangHunXiangWu": {
     "NAME": "乱方混向雾",
     "DESCRIPTION": "guzhenren:击晕 所有敌人 1 回合。 NL 敌方回合结束时， {CHANCE} guzhenren:概率 下回合无法行动，此概率每回合降低 20% 。 NL 消耗 。"
+  },
+  "GuZhenRen:RanNianFeiShi": {
+    "NAME": "燃念飞石",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 给予 !GuZhenRen:FenShao! 层 guzhenren:焚烧 。 NL 获得 guzhenren:念 时，若这张牌在你的消耗堆中，对随机敌人触发此牌效果。"
   }
 }
