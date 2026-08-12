@@ -811,5 +811,24 @@
       "% chance to be Stunned next turn. This chance decreases by 20% each round.",
       "Dizzy"
     ]
+  },
+  "GuZhenRen:YinPower": {
+    "NAME": "Cause",
+    "DESCRIPTIONS": [
+      "When you take damage or receive a debuff, negate it and store it in a #yFruit ."
+    ]
+  },
+  "GuZhenRen:GuoPower": {
+    "NAME": "Fruit",
+    "DESCRIPTIONS": [
+      "Drops in #b",
+      " turns, containing: ",
+      "Drops at the end of this turn, containing: ",
+      " #r",
+      " damage.",
+      " #r",
+      " stacks of ",
+      " ."
+    ]
   }
 }
