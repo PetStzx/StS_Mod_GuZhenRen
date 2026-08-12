@@ -882,5 +882,13 @@
   "GuZhenRen:RanNianFeiShi": {
     "NAME": "Burning Thought Stone",
     "DESCRIPTION": "Deal !D! damage. NL Apply !GuZhenRen:FenShao! guzhenren:Burning . NL Whenever you gain guzhenren:Thought , if this card is in your Exhaust pile, trigger its effect on a random enemy."
+  },
+  "GuZhenRen:YinGuoShenShu": {
+    "NAME": "Karma Divine Tree",
+    "DESCRIPTION": "When you take damage or receive a debuff, negate it and store it in a guzhenren:Fruit . NL Add an *Incoming_Cause,_Outgoing_Effect into your discard pile."
+  },
+  "GuZhenRen:LaiYinQuGuo": {
+    "NAME": "Incoming Cause, Outgoing Effect",
+    "DESCRIPTION": "Transfer ALL your guzhenren:Fruits to random enemies."
   }
 }

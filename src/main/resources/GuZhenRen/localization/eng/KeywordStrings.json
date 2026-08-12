@@ -330,5 +330,9 @@
     "PROPER_NAME": "Dao Mark",
     "NAMES": ["dao mark", "dao marks", "dao_mark", "dao_marks"],
     "DESCRIPTION": "Various Dao Mark powers, including #yTransformation #yPath #yDao #yMarks ."
+  },
+  {
+    "NAMES": ["fruit", "fruits"],
+    "DESCRIPTION": "Temporarily stores damage or debuffs, taking effect on the bearer after #b2 turns."
   }
 ]
