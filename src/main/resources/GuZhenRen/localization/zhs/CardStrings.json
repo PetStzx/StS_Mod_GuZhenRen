@@ -890,5 +890,9 @@
   "GuZhenRen:LaiYinQuGuo": {
     "NAME": "来因去果",
     "DESCRIPTION": "将你所有的 guzhenren:果 随机转移给敌人。"
+  },
+  "GuZhenRen:ChiXin": {
+    "NAME": "吃心",
+    "DESCRIPTION": "杀死所有当前生命低于你最大生命的敌人。 NL 斩杀 时，提升 !M! 点最大生命。 NL 消耗 。"
   }
 }

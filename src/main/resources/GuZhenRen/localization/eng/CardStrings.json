@@ -890,5 +890,9 @@
   "GuZhenRen:LaiYinQuGuo": {
     "NAME": "Incoming Cause, Outgoing Effect",
     "DESCRIPTION": "Transfer ALL your guzhenren:Fruits to random enemies."
+  },
+  "GuZhenRen:ChiXin": {
+    "NAME": "Eat Heart",
+    "DESCRIPTION": "Kill ALL enemies with HP strictly less than your Max HP. NL Fatal : Raise your Max HP by !M!. NL Exhaust ."
   }
 }
