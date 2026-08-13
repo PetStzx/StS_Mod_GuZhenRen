@@ -894,5 +894,9 @@
   "GuZhenRen:ChiXin": {
     "NAME": "Eat Heart",
     "DESCRIPTION": "Kill ALL enemies with HP strictly less than your Max HP. NL Fatal : Raise your Max HP by !M!. NL Exhaust ."
+  },
+  "GuZhenRen:NiePanHuo": {
+    "NAME": "Nirvana Fire",
+    "DESCRIPTION": "Lose all HP and heal to !M!% of your Max HP. NL Apply guzhenren:Burning to ALL enemies equal to the HP lost. NL Exhaust ."
   }
 }

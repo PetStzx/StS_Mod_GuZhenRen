@@ -894,5 +894,9 @@
   "GuZhenRen:ChiXin": {
     "NAME": "吃心",
     "DESCRIPTION": "杀死所有当前生命低于你最大生命的敌人。 NL 斩杀 时，提升 !M! 点最大生命。 NL 消耗 。"
+  },
+  "GuZhenRen:NiePanHuo": {
+    "NAME": "涅槃火",
+    "DESCRIPTION": "失去所有生命并回复至最大生命值的 !M!% 。 NL 给予所有敌人等同于你失去生命值的 guzhenren:焚烧 。 NL 消耗 。"
   }
 }
