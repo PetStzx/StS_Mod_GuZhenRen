@@ -99,7 +99,8 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                         if (c instanceof AbstractShaZhaoCard &&
                                 !c.cardID.equals(SongYouFengSongBie.ID) &&
                                 !c.cardID.equals(NiLiuHuShenYin.ID) &&
-                                !c.cardID.equals(JianMianCengXiangShi.ID)) {
+                                !c.cardID.equals(JianMianCengXiangShi.ID) &&
+                                !c.cardID.equals(LaiYinQuGuo.ID)) {
                             shaZhaoCache.add(c);
                         }
                     }
