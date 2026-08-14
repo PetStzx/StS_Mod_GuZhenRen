@@ -34,7 +34,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = GuZhenRen.assetPath("img/cards/AiQingGu.png");
 
-    private static final int COST = -2; // 不能被打出
+    private static final int COST = -2;
     private static final int INITIAL_RANK = 9;
 
     public AiQingGu() {
@@ -71,9 +71,6 @@ public class AiQingGu extends AbstractGuZhenRenCard {
         this.addToBot(new AiQingGuAction(this));
     }
 
-    // =========================================================================
-    // Action
-    // =========================================================================
     public static class AiQingGuAction extends AbstractGameAction {
         private final AbstractCard card;
         private static ArrayList<AbstractCard> shaZhaoCache = null;
@@ -87,7 +84,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
         public void update() {
             AbstractPlayer p = AbstractDungeon.player;
 
-            // 1. 判定随机正面效果
+            // 判定随机正面效果
             int posRoll = AbstractDungeon.cardRandomRng.random(0, 99);
 
             if (posRoll < 60) {
@@ -100,7 +97,8 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                                 !c.cardID.equals(SongYouFengSongBie.ID) &&
                                 !c.cardID.equals(NiLiuHuShenYin.ID) &&
                                 !c.cardID.equals(JianMianCengXiangShi.ID) &&
-                                !c.cardID.equals(LaiYinQuGuo.ID)) {
+                                !c.cardID.equals(LaiYinQuGuo.ID) &&
+                                !c.cardID.equals(WeiLaiShen.ID)) {
                             shaZhaoCache.add(c);
                         }
                     }
@@ -111,7 +109,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                     AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(randomShaZhao, 1));
                 }
             } else if (posRoll < 75) {
-                // 15%：获得随机遗物
+                // 15%：随机遗物
                 AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                     @Override
                     public void update() {
@@ -159,7 +157,7 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                 });
             }
 
-            // 2. 判定随机负面效果
+            // 判定随机负面效果
             int negRoll = AbstractDungeon.cardRandomRng.random(0, 99);
 
             if (negRoll < 25) {
@@ -182,7 +180,6 @@ public class AiQingGu extends AbstractGuZhenRenCard {
                 AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DexterityPower(p, -2), -2));
             }
 
-            // 3. 消耗
             AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(this.card, p.hand));
 
             this.isDone = true;
