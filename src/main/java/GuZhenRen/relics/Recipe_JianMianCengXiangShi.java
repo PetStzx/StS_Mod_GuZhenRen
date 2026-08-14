@@ -11,11 +11,17 @@ import java.util.ArrayList;
 
 public class Recipe_JianMianCengXiangShi extends AbstractRecipeRelic {
     public static final String ID = GuZhenRen.makeID("Recipe_JianMianCengXiangShi");
-    private static final String IMG = "Recipe_BianHuaDao.png"; // 继续使用变化道的合成底图
+    private static final String IMG = "Recipe_BianHuaDao.png";
     private static final String OUTLINE = "Recipe_BianHuaDao.png";
 
     public Recipe_JianMianCengXiangShi() {
         super(ID, IMG, OUTLINE, RelicTier.SPECIAL, LandingSound.FLAT);
+    }
+
+
+    @Override
+    public boolean canBeBorrowedByWeiLaiShen() {
+        return false;
     }
 
     @Override

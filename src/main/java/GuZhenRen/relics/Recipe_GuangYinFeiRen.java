@@ -23,6 +23,11 @@ public class Recipe_GuangYinFeiRen extends AbstractRecipeRelic {
         return DESCRIPTIONS[0];
     }
 
+    @Override
+    public boolean canBeBorrowedByWeiLaiShen() {
+        return false;
+    }
+
     // =========================================================================
     //  步骤 1：固定材料 (刃蛊)
     // =========================================================================
@@ -49,12 +54,10 @@ public class Recipe_GuangYinFeiRen extends AbstractRecipeRelic {
     @Override
     public boolean isGenericIngredient(int index, AbstractCard c) {
         if (index == 1) {
-            // 条件 A: 必须包含【宙道】标签
             if (!c.hasTag(GuZhenRenTags.ZHOU_DAO)) {
                 return false;
             }
 
-            // 条件 B: 必须是仙蛊（6-9转）
             if (c instanceof AbstractGuZhenRenCard) {
                 int rank = ((AbstractGuZhenRenCard) c).rank;
                 return rank >= 6 && rank <= 9;
@@ -73,8 +76,6 @@ public class Recipe_GuangYinFeiRen extends AbstractRecipeRelic {
         return super.getIngredientDescription(index);
     }
 
-
-    //  奖励发放
     @Override
     public ArrayList<String> getRequiredRelicIDs() {
         return new ArrayList<>();

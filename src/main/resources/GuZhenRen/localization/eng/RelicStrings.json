@@ -485,5 +485,13 @@
       "When the word count of played cards reaches #b300 , gain #b250 #yGold .",
       "This relic's effect has been exhausted."
     ]
+  },
+  "GuZhenRen:WeiLaiShenRelic": {
+    "NAME": "Future Body",
+    "FLAVOR": "\"Planting red lotuses in the River of Time, going back in time with my tears run dry.\"",
+    "DESCRIPTIONS": [
+      "For #b",
+      " more combats. NL At the start of combat, Upgrade ALL cards. NL Once per combat: #yRight-click any unused Killer Move relic to add the corresponding #yKiller #yMove to your hand. NL Transforms back into a card and returns to your deck when depleted or #yRight-clicked ."
+    ]
   }
 }

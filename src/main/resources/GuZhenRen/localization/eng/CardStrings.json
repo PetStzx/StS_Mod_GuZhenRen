@@ -836,7 +836,7 @@
   },
   "GuZhenRen:JianMianCengXiangShi": {
     "NAME": "Familiar Face",
-    "DESCRIPTION": "At the start of the next 5 combats, apply 5 stacks of guzhenren:Friend to ALL enemies. NL While this effect lasts, this card exists as a Relic."
+    "DESCRIPTION": "guzhenren:Sustain !M! . NL At the start of combat, apply 5 stacks of guzhenren:Friend to ALL enemies."
   },
   "GuZhenRen:AnTuZhongShanBao": {
     "NAME": "Peaceful Earth Heavy Mountain Fortress",
@@ -898,5 +898,9 @@
   "GuZhenRen:NiePanHuo": {
     "NAME": "Nirvana Fire",
     "DESCRIPTION": "Lose all HP and heal to !M!% of your Max HP. NL Apply guzhenren:Burning to ALL enemies equal to the HP lost. NL Exhaust ."
+  },
+  "GuZhenRen:WeiLaiShen": {
+    "NAME": "Future Body",
+    "DESCRIPTION": "guzhenren:Sustain !M! . NL Upgrade ALL cards. NL Once per combat: Right-click any unused guzhenren:Killer_Move_Relic to add the corresponding guzhenren:Killer_Move to your hand."
   }
 }

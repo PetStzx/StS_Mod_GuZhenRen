@@ -334,5 +334,15 @@
   {
     "NAMES": ["fruit", "fruits"],
     "DESCRIPTION": "Temporarily stores damage or debuffs, taking effect on the bearer after #b2 turns."
+  },
+  {
+    "PROPER_NAME": "Sustain",
+    "NAMES": ["sustain"],
+    "DESCRIPTION": "Lasts for #bX combats. During this time, this card exists as a Relic. Returns to your deck when depleted."
+  },
+  {
+    "PROPER_NAME": "Killer Move Relic",
+    "NAMES": ["killer move relic", "killer_move_relic", "killer move relics", "killer_move_relics"],
+    "DESCRIPTION": "Special materials used to craft Killer Moves. NL ( #yFamiliar #yFace and #yTime #yBlade cannot be acquired via #yFuture #yBody )."
   }
 ]

@@ -1,11 +1,16 @@
 package GuZhenRen.relics;
 
 import GuZhenRen.GuZhenRen;
+import GuZhenRen.util.BattleStateManager;
 import GuZhenRen.util.ShaZhaoHelper;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -13,16 +18,25 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.RestRoom;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 import java.util.ArrayList;
 
-public abstract class AbstractRecipeRelic extends CustomRelic {
+public abstract class AbstractRecipeRelic extends CustomRelic implements ClickableRelic {
 
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(GuZhenRen.makeID("RecipeUI"));
     public static final String[] TEXT = uiStrings.TEXT;
     protected AbstractCard previewCard;
     private float checkTimer = 0.5f;
+
+    public static boolean usedWeiLaiShenThisCombat = false;
+
+    static {
+        BattleStateManager.onBattleStart(() -> usedWeiLaiShenThisCombat = false);
+        BattleStateManager.onPostBattle(() -> usedWeiLaiShenThisCombat = false);
+    }
 
     public AbstractRecipeRelic(String id, String imgName, String outlineName, RelicTier tier, LandingSound sfx) {
         super(id,
@@ -36,6 +50,10 @@ public abstract class AbstractRecipeRelic extends CustomRelic {
     public abstract ArrayList<String> getRequiredRelicIDs();
 
     public abstract AbstractCard getRewardCard();
+
+    public boolean canBeBorrowedByWeiLaiShen() {
+        return true;
+    }
 
     public boolean requiresUpgrade(String cardID) {
         return false;
@@ -156,5 +174,56 @@ public abstract class AbstractRecipeRelic extends CustomRelic {
 
     protected String[] getTipKeywords() {
         return new String[0];
+    }
+
+    // 未来身相关逻辑
+    @Override
+    public void onRightClick() {
+        boolean inCombat = AbstractDungeon.isPlayerInDungeon() &&
+                AbstractDungeon.getCurrRoom() != null &&
+                AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT;
+
+        if (!inCombat || AbstractDungeon.isScreenUp || AbstractDungeon.actionManager.turnHasEnded || AbstractDungeon.player.isDead) {
+            return;
+        }
+
+        if (!AbstractDungeon.player.hasRelic(WeiLaiShenRelic.ID)) {
+            return;
+        }
+
+        if (this.usedUp) {
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[1], true));
+            return;
+        }
+
+        if (usedWeiLaiShenThisCombat) {
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[2], true));
+            return;
+        }
+
+        if (!this.canBeBorrowedByWeiLaiShen()) {
+            AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F, TEXT[3], true));
+            return;
+        }
+
+        usedWeiLaiShenThisCombat = true;
+
+        this.flash();
+        AbstractDungeon.player.getRelic(WeiLaiShenRelic.ID).flash();
+
+        final AbstractCard cardToGive = this.getRewardCard();
+
+        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+            @Override
+            public void update() {
+                if (AbstractDungeon.player.hand.size() >= basemod.BaseMod.MAX_HAND_SIZE) {
+                    AbstractDungeon.player.createHandIsFullDialog();
+                    AbstractDungeon.actionManager.addToTop(new MakeTempCardInDiscardAction(cardToGive, 1));
+                } else {
+                    AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(cardToGive, 1));
+                }
+                this.isDone = true;
+            }
+        });
     }
 }

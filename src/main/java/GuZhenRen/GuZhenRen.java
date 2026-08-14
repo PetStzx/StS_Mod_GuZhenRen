@@ -292,6 +292,7 @@ public class GuZhenRen implements
         BaseMod.addCard(new LaiYinQuGuo());
         BaseMod.addCard(new ChiXin());
         BaseMod.addCard(new NiePanHuo());
+        BaseMod.addCard(new WeiLaiShen());
     }
 
     @Override
@@ -339,6 +340,7 @@ public class GuZhenRen implements
         BaseMod.addRelicToCustomPool(new SiXuRuDianGu(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new JianMianCengXiangShiRelic(), CardColorEnum.GUZHENREN_GREY);
         BaseMod.addRelicToCustomPool(new ShuiWenGu(), CardColorEnum.GUZHENREN_GREY);
+        BaseMod.addRelicToCustomPool(new WeiLaiShenRelic(), CardColorEnum.GUZHENREN_GREY);
 
 
 

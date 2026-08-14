@@ -86,7 +86,10 @@
   },
   "GuZhenRen:RecipeUI": {
     "TEXT": [
-      "未知材料"
+      "未知材料",
+      "我已经拥有这个杀招了。",
+      "我已经借用过未来了。",
+      "未来身无法触及这个杀招。"
     ]
   },
   "GuZhenRen:CharacterEvents": {

@@ -86,7 +86,10 @@
   },
   "GuZhenRen:RecipeUI": {
     "TEXT": [
-      "Unknown Material"
+      "Unknown Material",
+      "I already possess this Killer Move.",
+      "I have already borrowed the future.",
+      "Future Body cannot reach this Killer Move."
     ]
   },
   "GuZhenRen:CharacterEvents": {
