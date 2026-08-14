@@ -36,6 +36,7 @@ public class LuanFangHunXiangWu extends AbstractShaZhaoCard implements IProbabil
         this.exhaust = true;
         this.baseChance = INITIAL_CHANCE;
         this.isMultiDamage = true;
+        this.initializeDescription();
     }
 
     @Override
