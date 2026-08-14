@@ -93,6 +93,6 @@ public class Recipe_JianMianCengXiangShi extends AbstractRecipeRelic {
 
     @Override
     protected String[] getTipKeywords(){
-        return new String[]{"好友"};
+        return new String[]{"持续性", "好友"};
     }
 }
