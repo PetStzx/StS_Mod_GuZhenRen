@@ -493,5 +493,61 @@
       "For #b",
       " more combats. NL At the start of combat, Upgrade ALL cards. NL Once per combat: #yRight-click any unused Killer Move relic to add the corresponding #yKiller #yMove to your hand. NL Transforms back into a card and returns to your deck when depleted or #yRight-clicked ."
     ]
+  },
+  "GuZhenRen:Recipe_WeiLaiShen": {
+    "NAME": "Killer Move - Future Body",
+    "FLAVOR": "Relying on the River of Time, this move can project a Gu Immortal's future state into the present.",
+    "DESCRIPTIONS": [
+      "Requires: #yTime #yNeedle #yGu+ , any #yTime #yPath #yImmortal #yGu .",
+      "Any Time Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_NiePanHuo": {
+    "NAME": "Killer Move - Nirvana Fire",
+    "FLAVOR": "Expounding the mysteries between life and death through the Fire path.",
+    "DESCRIPTIONS": [
+      "Requires: #yBathing #yFire #yGu+ , any #yFire #yPath or #yTime #yPath #yImmortal #yGu .",
+      "Any Fire Path or Time Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_YinGuoShenShu": {
+    "NAME": "Killer Move - Karma Divine Tree",
+    "FLAVOR": "\"In this world, every cause has an effect, and every effect has a cause.\"",
+    "DESCRIPTIONS": [
+      "Requires: #yHeavenly #yEssence #yTreasure #yLotus+ , any #yRule #yPath or #yLuck #yPath #yImmortal #yGu .",
+      "Any Rule Path or Luck Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_ChiXin": {
+    "NAME": "Killer Move - Eat Heart",
+    "FLAVOR": "\"Quickly take out all your hearts and let us eat them!\"",
+    "DESCRIPTIONS": [
+      "Requires: #yEat #yStrength #yGu+ , any #yRule #yPath #yGu #yworm .",
+      "Any Rule Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_XueRanZhengPao": {
+    "NAME": "Killer Move - Blood-stained Conqueror's Robe",
+    "FLAVOR": "The conqueror's robe is stained blood-red, soaking through the armor.",
+    "DESCRIPTIONS": [
+      "Requires: #yBlood #yCurtain #ySky #yFlower #yGu+ , any #yBlood #yPath #yGu #yworm .",
+      "Any Blood Path Gu worm"
+    ]
+  },
+  "GuZhenRen:Recipe_LuanFangHunXiangWu": {
+    "NAME": "Killer Move - Confusing Direction Fog",
+    "FLAVOR": "An immortal level Wisdom Path killer move that disorients the sense of direction and distorts perception.",
+    "DESCRIPTIONS": [
+      "Requires: #yCaptivating #yHeart #yGu+ , any #yWisdom #yPath #yImmortal #yGu .",
+      "Any Wisdom Path Immortal Gu"
+    ]
+  },
+  "GuZhenRen:Recipe_RanNianFeiShi": {
+    "NAME": "Killer Move - Burning Thought Flying Stone",
+    "FLAVOR": "Giant boulders of flame formed from thoughts; the thought-fire lacks any trace of heat, yet it can raise monstrous red infernos.",
+    "DESCRIPTIONS": [
+      "Requires: #yVajra #yThought #yGu+ , any #yWisdom #yPath or #yFire #yPath #yImmortal #yGu .",
+      "Any Wisdom Path or Fire Path Immortal Gu"
+    ]
   }
 }

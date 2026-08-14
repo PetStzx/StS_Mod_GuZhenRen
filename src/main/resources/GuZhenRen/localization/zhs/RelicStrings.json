@@ -493,5 +493,61 @@
       "剩余 #b",
       " 场战斗。 NL 战斗开始时，升级所有牌。 NL 每场战斗限一次： #y右键 任意未使用的杀招遗物，将对应 #y杀招 加入手牌。 NL 效果耗尽或 #y右键 此遗物时，转为卡牌并返回你的牌组。"
     ]
+  },
+  "GuZhenRen:Recipe_WeiLaiShen": {
+    "NAME": "杀招-未来身",
+    "FLAVOR": "此招依凭光阴长河，能将蛊仙未来某刻的状态投射到现在。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y时针+ 、任意 #y宙道仙蛊 。",
+      "任意宙道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_NiePanHuo": {
+    "NAME": "杀招-涅槃火",
+    "FLAVOR": "以炎道阐述生死间的奥秘。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y浴火+ 、任意 #y炎道 或 #y宙道 #y仙蛊 。",
+      "任意炎道或宙道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_YinGuoShenShu": {
+    "NAME": "杀招-因果神树",
+    "FLAVOR": "“世间之事，有因必有果，有果必有因。”",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y天元宝莲+ 、任意 #y律道 或 #y运道 #y仙蛊 。",
+      "任意律道或运道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_ChiXin": {
+    "NAME": "杀招-吃心",
+    "FLAVOR": "“快把你的心都拿出来，让我们吃！”",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y吃力+ 、任意 #y律道 #y蛊虫 。",
+      "任意律道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_XueRanZhengPao": {
+    "NAME": "杀招-血染征袍",
+    "FLAVOR": "血染征袍透甲红。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y血幕天华蛊+ 、任意 #y血道 #y蛊虫 。",
+      "任意血道蛊虫"
+    ]
+  },
+  "GuZhenRen:Recipe_LuanFangHunXiangWu": {
+    "NAME": "杀招-乱方混向雾",
+    "FLAVOR": "智道仙级杀招，能使人方向颠乱，感觉错失。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y摄心蛊+ 、任意 #y智道 #y仙蛊 。",
+      "任意智道仙蛊"
+    ]
+  },
+  "GuZhenRen:Recipe_RanNianFeiShi": {
+    "NAME": "杀招-燃念飞石",
+    "FLAVOR": "由念头所化的火焰巨石，念火无一丝热浪，却能掀起滔天赤焰。",
+    "DESCRIPTIONS": [
+      "需要蛊虫： #y金刚念+ 、任意 #y智道 或 #y炎道 #y仙蛊 。",
+      "任意智道或炎道仙蛊"
+    ]
   }
 }

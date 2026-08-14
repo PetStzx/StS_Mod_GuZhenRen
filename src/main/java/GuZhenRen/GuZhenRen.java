@@ -390,6 +390,20 @@ public class GuZhenRen implements
         recipeRelicIDs.add(Recipe_JianMianCengXiangShi.ID);
         BaseMod.addRelicToCustomPool(new Recipe_AnTuZhongShanBao(), CardColorEnum.GUZHENREN_GREY);
         recipeRelicIDs.add(Recipe_AnTuZhongShanBao.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_WeiLaiShen(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_WeiLaiShen.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_NiePanHuo(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_NiePanHuo.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_YinGuoShenShu(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_YinGuoShenShu.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_ChiXin(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_ChiXin.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_XueRanZhengPao(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_XueRanZhengPao.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_LuanFangHunXiangWu(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_LuanFangHunXiangWu.ID);
+        BaseMod.addRelicToCustomPool(new Recipe_RanNianFeiShi(), CardColorEnum.GUZHENREN_GREY);
+        recipeRelicIDs.add(Recipe_RanNianFeiShi.ID);
 
 
         BaseMod.addRelicToCustomPool(new Recipe_BaiGuZhanChe(), CardColorEnum.GUZHENREN_GREY);
