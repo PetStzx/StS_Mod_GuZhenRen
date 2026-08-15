@@ -40,7 +40,6 @@ public class SanQiGuiLaiPower extends AbstractPower {
     public void atEndOfRound() {
         this.flash();
         this.addToBot(new HealAction(this.owner, this.owner, this.owner.maxHealth));
-        this.addToBot(new ApplyPowerAction(this.owner, this.owner, new JiuLongWenHuShenPower(this.owner, 9), 9));
     }
 
     @Override

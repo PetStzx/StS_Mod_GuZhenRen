@@ -795,7 +795,7 @@
   "GuZhenRen:SanQiGuiLaiPower": {
     "NAME": "三气归来",
     "DESCRIPTIONS": [
-      "回合结束时，回复所有生命，恢复 #y九龙纹护身 至 #b9 层。"
+      "回合结束时，回复所有生命。"
     ]
   },
   "GuZhenRen:ZhuanZhuPower": {
