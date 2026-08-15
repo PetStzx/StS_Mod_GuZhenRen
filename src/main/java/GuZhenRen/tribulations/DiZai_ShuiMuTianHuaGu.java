@@ -18,6 +18,12 @@ public class DiZai_ShuiMuTianHuaGu extends AbstractTribulation {
 
     @Override
     public void atPreBattle(AbstractPower power) {
-        applyPowerToRandomEnemyAction(target -> new ShuiMuTianHuaGuPower(target, 25));
+        applyPowerToRandomEnemyAction(target -> {
+            int amount = 25;
+            if (target != null && target.hasPower("Barricade")) {
+                amount = 20; // 目标有壁垒时降低至 20 层
+            }
+            return new ShuiMuTianHuaGuPower(target, amount);
+        });
     }
 }
