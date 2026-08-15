@@ -22,7 +22,7 @@ public class QiQiang extends AbstractMonster {
 
     private static final int MAX_HP = 250;
     private static final byte INTENT_HEAL = 1;
-    private static final int HEAL_AMT = 50;
+    private static final int HEAL_AMT = 30;
 
     public boolean lockAlpha = false;
     public float lockedAlpha = 1.0F;

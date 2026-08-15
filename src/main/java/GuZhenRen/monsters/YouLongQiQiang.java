@@ -14,7 +14,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.MonsterStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class YouLongQiQiang extends AbstractMonster {
     public static final String ID = GuZhenRen.makeID("YouLongQiQiang");
@@ -26,14 +25,18 @@ public class YouLongQiQiang extends AbstractMonster {
     private static final int MAX_HP = 500;
 
     private static final byte INTENT_HEAL = 1;
+    private static final byte INTENT_BUFF = 2;
 
-    private static final int HEAL_AMT = 50;
+    private static final int HEAL_AMT_1 = 40;
+    private static final int HEAL_AMT_2 = 20;
     private static final int GANG_QI_AMT = 100;
     private static final int YOU_LONG_BASE_AMT = 3;
     private static final int YOU_LONG_ADD_AMT = 1;
 
     public boolean lockAlpha = false;
     public float lockedAlpha = 1.0F;
+
+    private int actionStep = 0;
 
     public YouLongQiQiang(float x, float y) {
         super(NAME, ID, MAX_HP, 0.0F, -10.0F, 200.0F, 500.0F, null, x, y);
@@ -101,20 +104,27 @@ public class YouLongQiQiang extends AbstractMonster {
     public void takeTurn() {
         switch (this.nextMove) {
             case INTENT_HEAL:
-                AbstractDungeon.actionManager.addToBottom(new HealAction(this, this, HEAL_AMT));
-
-                AbstractPower youLong = this.getPower(YouLongPower.POWER_ID);
-                int currentYouLong = (youLong != null) ? youLong.amount : 0;
-                if (currentYouLong < 5) {
-                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new YouLongPower(this, YOU_LONG_ADD_AMT), YOU_LONG_ADD_AMT));
-                }
+                AbstractDungeon.actionManager.addToBottom(new HealAction(this, this, HEAL_AMT_1));
+                this.actionStep++;
+                break;
+            case INTENT_BUFF:
+                AbstractDungeon.actionManager.addToBottom(new HealAction(this, this, HEAL_AMT_2));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new YouLongPower(this, YOU_LONG_ADD_AMT), YOU_LONG_ADD_AMT));
+                this.actionStep++;
                 break;
         }
+
         AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
     }
 
     @Override
     protected void getMove(int num) {
-        this.setMove(INTENT_HEAL, Intent.BUFF);
+        if (this.actionStep == 0 || this.actionStep == 2) {
+            this.setMove(INTENT_HEAL, Intent.BUFF);
+        } else if (this.actionStep == 1 || this.actionStep == 3) {
+            this.setMove(INTENT_BUFF, Intent.BUFF);
+        } else {
+            this.setMove(INTENT_HEAL, Intent.BUFF);
+        }
     }
 }

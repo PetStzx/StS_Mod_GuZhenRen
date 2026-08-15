@@ -92,13 +92,13 @@ public class LongGong extends AbstractMonster {
     public LongGong(float x, float y) {
         super(NAME, ID, MAX_HP, 0.0F, -10.0F, 400.0F, 500.0F, null, x, y);
 
-        this.damage.add(new DamageInfo(this, 8));  // 0: 乱龙拳
-        this.damage.add(new DamageInfo(this, 36)); // 1: 气呼山
-        this.damage.add(new DamageInfo(this, 14)); // 2: 龙爪击
-        this.damage.add(new DamageInfo(this, 15)); // 3: 气盖山河
-        this.damage.add(new DamageInfo(this, 4));  // 4: 回旋龙牙
-        this.damage.add(new DamageInfo(this, 80)); // 5: 一气大手爆
-        this.damage.add(new DamageInfo(this, 40)); // 6: 撼世龙锤
+        this.damage.add(new DamageInfo(this, 4));  // 0: 乱龙拳
+        this.damage.add(new DamageInfo(this, 32)); // 1: 气呼山
+        this.damage.add(new DamageInfo(this, 8)); // 2: 龙爪击
+        this.damage.add(new DamageInfo(this, 10)); // 3: 气盖山河
+        this.damage.add(new DamageInfo(this, 1));  // 4: 回旋龙牙
+        this.damage.add(new DamageInfo(this, 40)); // 5: 一气大手爆
+        this.damage.add(new DamageInfo(this, 5)); // 6: 撼世龙锤
 
         this.loadAnimation(
                 GuZhenRen.assetPath("img/monsters/LongGong/LongGong.atlas"),
@@ -252,6 +252,7 @@ public class LongGong extends AbstractMonster {
                 AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new LongYuShangBinPower(this, 200 - currentLongYu), 200 - currentLongYu));
             }
 
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new JiuLongWenHuShenPower(this, 9), 9));
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new SanQiGuiLaiPower(this)));
         }
     }
@@ -441,11 +442,7 @@ public class LongGong extends AbstractMonster {
                     AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, this.damage.get(4), AbstractGameAction.AttackEffect.SLASH_HEAVY));
                 }
 
-                AbstractPower jiuLong = this.getPower(JiuLongWenHuShenPower.POWER_ID);
-                int currentJiuLong = (jiuLong != null) ? jiuLong.amount : 0;
-                if (currentJiuLong < 9) {
-                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new JiuLongWenHuShenPower(this, 9 - currentJiuLong), 9 - currentJiuLong));
-                }
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new JiuLongWenHuShenPower(this, 4), 4));
                 break;
 
             case INTENT_YI_QI_DA_SHOU:
@@ -453,7 +450,7 @@ public class LongGong extends AbstractMonster {
                 AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                     @Override
                     public void update() {
-                        CardCrawlGame.sound.playAV(GuZhenRen.makeID("LongYin2"), -0.2F, 0.6F);
+                        CardCrawlGame.sound.playAV(GuZhenRen.makeID("LongYin2"), 0.2F, 0.6F);
                         this.isDone = true;
                     }
                 });
@@ -476,7 +473,7 @@ public class LongGong extends AbstractMonster {
                 AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
                     @Override
                     public void update() {
-                        CardCrawlGame.sound.playAV(GuZhenRen.makeID("LongYin1"), -0.1F, 0.6F);
+                        CardCrawlGame.sound.playAV(GuZhenRen.makeID("LongYin1"), 0.1F, 0.6F);
                         this.isDone = true;
                     }
                 });
