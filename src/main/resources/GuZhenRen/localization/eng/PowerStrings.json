@@ -510,7 +510,8 @@
     "DESCRIPTIONS": [
       "In #b",
       " turn(s), you die.",
-      "At the end of this turn, you die."
+      "At the end of this turn, you die.",
+      "At the end of its turn, gains #b10 Strength."
     ]
   },
   "GuZhenRen:MuMeiGuPower": {
