@@ -38,7 +38,7 @@ public class MuMeiGuPower extends AbstractPower {
     private int calculateHealAmount() {
         if (this.owner == null) return 0;
         int missingHp = this.owner.maxHealth - this.owner.currentHealth;
-        return (int) Math.ceil(missingHp * 0.95f);
+        return (int) Math.ceil(missingHp * 0.90f);
     }
 
     @Override

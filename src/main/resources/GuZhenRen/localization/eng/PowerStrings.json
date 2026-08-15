@@ -517,7 +517,7 @@
     "NAME": "Wood Charm Gu",
     "DESCRIPTIONS": [
       "Max HP is halved. ",
-      "'s end of turn, heals 95% of missing HP. (Heals #b",
+      "'s end of turn, heals 90% of missing HP. (Heals #b",
       " HP)."
     ]
   },
