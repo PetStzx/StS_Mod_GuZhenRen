@@ -35,20 +35,15 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
 
     private void calculateStats() {
         int amount = this.rank + 1;
-        if (this.rank >= 9) {
-            amount = 9;
-            this.isInnate = true;
-        } else {
-            this.isInnate = false;
-        }
+
+        this.isInnate = (this.rank >= 8);
 
         this.baseMagicNumber = this.magicNumber = amount;
 
-        String innatePrefix = ZhiHuiGu.cardStrings.EXTENDED_DESCRIPTION[0]; // " 固有 。 "
-        String innateCheck = ZhiHuiGu.cardStrings.EXTENDED_DESCRIPTION[1];  // "固有"
-
-        if (this.isInnate && !this.myBaseDescription.contains(innateCheck)) {
-            this.myBaseDescription = innatePrefix + this.myBaseDescription;
+        this.myBaseDescription = ZhiHuiGu.DESCRIPTION;
+        if (this.isInnate) {
+            String innatePrefix = ZhiHuiGu.cardStrings.EXTENDED_DESCRIPTION[0];
+            this.myBaseDescription = innatePrefix + " NL " + this.myBaseDescription;
         }
     }
 
@@ -72,9 +67,7 @@ public class ZhiHuiGu extends AbstractBenMingGuCard {
         calculateStats();
         this.upgradedMagicNumber = true;
 
-        if (this.rank == 9) {
-            this.initializeDescription();
-        }
+        this.initializeDescription();
     }
 
     @Override

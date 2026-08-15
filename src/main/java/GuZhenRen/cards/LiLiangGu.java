@@ -44,7 +44,7 @@ public class LiLiangGu extends AbstractBenMingGuCard {
         this.baseMagicNumber = this.magicNumber = gains[rankIndex];
         this.baseSecondMagicNumber = this.secondMagicNumber = loses[rankIndex];
 
-        this.isInnate = (rankIndex >= 6);
+        this.isInnate = (rankIndex >= 8);
 
         if (this.secondMagicNumber > 0) {
             this.myBaseDescription = cardStrings.EXTENDED_DESCRIPTION[0];
