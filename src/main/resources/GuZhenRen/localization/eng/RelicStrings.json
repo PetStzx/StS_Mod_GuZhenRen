@@ -498,7 +498,7 @@
     "NAME": "Killer Move - Future Body",
     "FLAVOR": "Relying on the River of Time, this move can project a Gu Immortal's future state into the present.",
     "DESCRIPTIONS": [
-      "Requires: #yTime #yNeedle #yGu+ , any #yTime #yPath #yImmortal #yGu .",
+      "Requires: #yTime #yHand+ , any #yTime #yPath #yImmortal #yGu .",
       "Any Time Path Immortal Gu"
     ]
   },
@@ -506,7 +506,7 @@
     "NAME": "Killer Move - Nirvana Fire",
     "FLAVOR": "Expounding the mysteries between life and death through the Fire path.",
     "DESCRIPTIONS": [
-      "Requires: #yBathing #yFire #yGu+ , any #yFire #yPath or #yTime #yPath #yImmortal #yGu .",
+      "Requires: #yBathe #yin #yFire+ , any #yFire #yPath or #yTime #yPath #yImmortal #yGu .",
       "Any Fire Path or Time Path Immortal Gu"
     ]
   },
@@ -538,7 +538,7 @@
     "NAME": "Killer Move - Confusing Direction Fog",
     "FLAVOR": "An immortal level Wisdom Path killer move that disorients the sense of direction and distorts perception.",
     "DESCRIPTIONS": [
-      "Requires: #yCaptivating #yHeart #yGu+ , any #yWisdom #yPath #yImmortal #yGu .",
+      "Requires: #yCapture #yHeart #yGu+ , any #yWisdom #yPath #yImmortal #yGu .",
       "Any Wisdom Path Immortal Gu"
     ]
   },
@@ -546,7 +546,7 @@
     "NAME": "Killer Move - Burning Thought Flying Stone",
     "FLAVOR": "Giant boulders of flame formed from thoughts; the thought-fire lacks any trace of heat, yet it can raise monstrous red infernos.",
     "DESCRIPTIONS": [
-      "Requires: #yVajra #yThought #yGu+ , any #yWisdom #yPath or #yFire #yPath #yImmortal #yGu .",
+      "Requires: #yVajra #yThought+ , any #yWisdom #yPath or #yFire #yPath #yImmortal #yGu .",
       "Any Wisdom Path or Fire Path Immortal Gu"
     ]
   }

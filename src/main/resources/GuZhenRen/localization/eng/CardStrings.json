@@ -866,7 +866,7 @@
   },
   "GuZhenRen:YiLuan": {
     "NAME": "Distraction",
-    "DESCRIPTION": "Unplayable . NL While in hand, playing a guzhenren:Killer_Move has a {CHANCE} chance to fail and lose !M! HP. NL Ethereal ."
+    "DESCRIPTION": "Unplayable . NL While in hand, playing a guzhenren:Killer_Move has a {CHANCE} guzhenren:Probability to fail and lose !M! HP. NL Ethereal ."
   },
   "GuZhenRen:XueRanZhengPao": {
     "NAME": "Blood-Stained Battle Robe",
@@ -885,7 +885,7 @@
   },
   "GuZhenRen:YinGuoShenShu": {
     "NAME": "Karma Divine Tree",
-    "DESCRIPTION": "When you take damage or receive a debuff, negate it and store it in a guzhenren:Fruit . NL Add an *Incoming_Cause,_Outgoing_Effect into your discard pile."
+    "DESCRIPTION": "When you take damage or receive a debuff, negate it and store it in a guzhenren:Fruit . NL Add an *Incoming *Cause, *Outgoing *Effect into your discard pile."
   },
   "GuZhenRen:LaiYinQuGuo": {
     "NAME": "Incoming Cause, Outgoing Effect",
