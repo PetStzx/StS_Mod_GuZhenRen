@@ -814,7 +814,7 @@
   "GuZhenRen:YinPower": {
     "NAME": "因",
     "DESCRIPTIONS": [
-      "受到伤害或获得负面状态时，将其抵消并存入 #y果 中。"
+      "受到未被格挡的伤害或获得负面状态时，将其抵消并存入 #y果 中。"
     ]
   },
   "GuZhenRen:GuoPower": {

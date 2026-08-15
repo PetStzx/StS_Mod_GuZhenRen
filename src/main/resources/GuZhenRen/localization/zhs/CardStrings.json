@@ -885,7 +885,7 @@
   },
   "GuZhenRen:YinGuoShenShu": {
     "NAME": "因果神树",
-    "DESCRIPTION": "受到伤害或获得负面状态时，将其抵消并存入 guzhenren:果 中。 NL 将一张 *来因去果 加入弃牌堆。"
+    "DESCRIPTION": "受到未被格挡的伤害或获得负面状态时，将其抵消并存入 guzhenren:果 中。 NL 将一张 *来因去果 加入弃牌堆。"
   },
   "GuZhenRen:LaiYinQuGuo": {
     "NAME": "来因去果",

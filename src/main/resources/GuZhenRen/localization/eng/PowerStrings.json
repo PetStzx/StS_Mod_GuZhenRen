@@ -815,7 +815,7 @@
   "GuZhenRen:YinPower": {
     "NAME": "Cause",
     "DESCRIPTIONS": [
-      "When you take damage or receive a debuff, negate it and store it in a #yFruit ."
+      "When you take unblocked damage or receive a debuff, negate it and store it in a #yFruit ."
     ]
   },
   "GuZhenRen:GuoPower": {

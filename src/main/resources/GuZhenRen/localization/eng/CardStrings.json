@@ -885,7 +885,7 @@
   },
   "GuZhenRen:YinGuoShenShu": {
     "NAME": "Karma Divine Tree",
-    "DESCRIPTION": "When you take damage or receive a debuff, negate it and store it in a guzhenren:Fruit . NL Add an *Incoming *Cause, *Outgoing *Effect into your discard pile."
+    "DESCRIPTION": "When you take unblocked damage or receive a debuff, negate it and store it in a guzhenren:Fruit . NL Add an *Incoming *Cause, *Outgoing *Effect into your discard pile."
   },
   "GuZhenRen:LaiYinQuGuo": {
     "NAME": "Incoming Cause, Outgoing Effect",
