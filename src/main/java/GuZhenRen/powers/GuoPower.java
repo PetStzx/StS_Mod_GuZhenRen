@@ -140,8 +140,14 @@ public class GuoPower extends AbstractPower {
         if (this.isDamage) {
             this.description = timeStr + DESCRIPTIONS[3] + this.storedDamage + DESCRIPTIONS[4];
         } else if (this.storedPower != null) {
-            if (this.storedPower.amount != 0) {
-                this.description = timeStr + DESCRIPTIONS[5] + this.storedPower.amount + DESCRIPTIONS[6] + "#y" + this.storedPower.name + DESCRIPTIONS[7];
+
+            int displayAmt = this.storedPower.amount;
+            if (displayAmt == -1) {
+                displayAmt = 1;
+            }
+
+            if (displayAmt != 0) {
+                this.description = timeStr + DESCRIPTIONS[5] + displayAmt + DESCRIPTIONS[6] + "#y" + this.storedPower.name + DESCRIPTIONS[7];
             } else {
                 this.description = timeStr + " #y" + this.storedPower.name + DESCRIPTIONS[7];
             }
