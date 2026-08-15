@@ -33,13 +33,13 @@ public class DiZai_HunBaoGu extends AbstractTribulation {
                 // 根据非爪牙敌人的数量决定发放层数
                 int amount = 10;
                 if (count == 1) {
-                    amount = 24;
+                    amount = 20;
                 } else if (count == 2) {
-                    amount = 16;
+                    amount = 14;
                 } else if (count == 3) {
-                    amount = 12;
-                } else if (count >= 4) {
                     amount = 10;
+                } else if (count >= 4) {
+                    amount = 8;
                 }
 
                 // 群体发放
