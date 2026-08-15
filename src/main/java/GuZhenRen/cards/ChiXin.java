@@ -2,6 +2,7 @@ package GuZhenRen.cards;
 
 import GuZhenRen.GuZhenRen;
 import GuZhenRen.relics.ChiXiang;
+import GuZhenRen.effects.FastHeartMegaDebuffEffect;
 import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -29,12 +30,11 @@ public class ChiXin extends AbstractShaZhaoCard {
     public ChiXin() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 CardType.SKILL,
-                CardTarget.ALL_ENEMY);
+                CardTarget.ENEMY);
 
         this.setDao(Dao.SHI_DAO);
 
         this.baseMagicNumber = this.magicNumber = MAX_HP_GAIN;
-        this.exhaust = true;
     }
 
     @Override
@@ -42,20 +42,13 @@ public class ChiXin extends AbstractShaZhaoCard {
         this.addToBot(new AbstractGameAction() {
             @Override
             public void update() {
-                int killCount = 0;
-                for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                    if (mo != null && !mo.isDeadOrEscaped() && !mo.halfDead && mo.currentHealth < p.maxHealth) {
-                        killCount++;
-                    }
-                }
+                boolean isValidTarget = (m != null && !m.isDeadOrEscaped() && !m.halfDead && m.currentHealth < p.maxHealth);
 
-                if (killCount > 0) {
-                    final int finalKillCount = killCount;
-
+                if (isValidTarget) {
                     AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            int actualGain = ChiXin.this.magicNumber * finalKillCount;
+                            int actualGain = ChiXin.this.magicNumber;
 
                             if (p.hasRelic(ChiXiang.ID)) {
                                 p.getRelic(ChiXiang.ID).flash();
@@ -66,29 +59,19 @@ public class ChiXin extends AbstractShaZhaoCard {
                             this.isDone = true;
                         }
                     });
-
-                    for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                        if (mo != null && !mo.isDeadOrEscaped() && !mo.halfDead && mo.currentHealth < p.maxHealth) {
-                            AbstractDungeon.actionManager.addToTop(new InstantKillAction(mo));
-                        }
-                    }
-
-                    AbstractDungeon.actionManager.addToTop(new WaitAction(0.5F));
-
+                    AbstractDungeon.actionManager.addToTop(new InstantKillAction(m));
+                    AbstractDungeon.actionManager.addToTop(new WaitAction(0.3F));
                     AbstractDungeon.actionManager.addToTop(new AbstractGameAction() {
                         @Override
                         public void update() {
-                            for (AbstractMonster mo : AbstractDungeon.getCurrRoom().monsters.monsters) {
-                                if (mo != null && !mo.isDeadOrEscaped() && !mo.halfDead && mo.currentHealth < p.maxHealth) {
-                                    AbstractDungeon.effectList.add(new BiteEffect(mo.hb.cX, mo.hb.cY - 40.0F * Settings.scale, Color.PURPLE.cpy()));
-                                }
+                            if (m != null && !m.isDeadOrEscaped() && !m.halfDead) {
+                                AbstractDungeon.effectList.add(new BiteEffect(m.hb.cX, m.hb.cY - 40.0F * Settings.scale, Color.PURPLE.cpy()));
                             }
                             this.isDone = true;
                         }
                     });
 
-                    AbstractDungeon.actionManager.addToTop(new VFXAction(new HeartMegaDebuffEffect(), 1.0F));
-                }
+                    AbstractDungeon.actionManager.addToTop(new VFXAction(new FastHeartMegaDebuffEffect(), 1.0F));                }
 
                 this.isDone = true;
             }
