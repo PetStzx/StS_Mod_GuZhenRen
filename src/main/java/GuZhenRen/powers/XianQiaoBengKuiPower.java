@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -67,6 +68,7 @@ public class XianQiaoBengKuiPower extends AbstractPower {
             this.amount--;
             if (this.amount == 0) {
                 triggerDestruction();
+                this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this));
             }
             this.updateDescription();
         }
@@ -130,10 +132,6 @@ public class XianQiaoBengKuiPower extends AbstractPower {
 
     @Override
     public void updateDescription() {
-        if (this.amount > 0) {
-            this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
-        } else {
-            this.description = DESCRIPTIONS[2];
-        }
+        this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
     }
 }
