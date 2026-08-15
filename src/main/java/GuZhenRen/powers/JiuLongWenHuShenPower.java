@@ -52,25 +52,24 @@ public class JiuLongWenHuShenPower extends AbstractPower {
         this.updateDescription();
     }
 
-    // 气墙存在时，不执行减伤
-    @Override
-    public float atDamageReceive(float damage, DamageInfo.DamageType type) {
-        if (type == DamageInfo.DamageType.NORMAL) {
-            boolean protectedByQiHu = false;
-
-            if (AbstractDungeon.getMonsters() != null) {
-                for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
-                    if (!mo.isDeadOrEscaped() && mo.hasPower(QiHuPower.POWER_ID)) {
-                        QiHuPower qh = (QiHuPower) mo.getPower(QiHuPower.POWER_ID);
-                        if (qh.protectedTarget == this.owner) {
-                            protectedByQiHu = true;
-                            break;
-                        }
+    private boolean isProtectedByQiHu() {
+        if (AbstractDungeon.getMonsters() != null) {
+            for (AbstractMonster mo : AbstractDungeon.getMonsters().monsters) {
+                if (!mo.isDeadOrEscaped() && mo.hasPower(QiHuPower.POWER_ID)) {
+                    QiHuPower qh = (QiHuPower) mo.getPower(QiHuPower.POWER_ID);
+                    if (qh.protectedTarget == this.owner) {
+                        return true;
                     }
                 }
             }
+        }
+        return false;
+    }
 
-            if (!protectedByQiHu) {
+    @Override
+    public float atDamageReceive(float damage, DamageInfo.DamageType type) {
+        if (type == DamageInfo.DamageType.NORMAL) {
+            if (!isProtectedByQiHu()) {
                 return damage * (1.0F - (this.amount * 0.1F));
             }
         }
@@ -78,8 +77,18 @@ public class JiuLongWenHuShenPower extends AbstractPower {
     }
 
     @Override
+    public int onAttackedToChangeDamage(DamageInfo info, int damageAmount) {
+        if (info.type != DamageInfo.DamageType.NORMAL && info.type != DamageInfo.DamageType.HP_LOSS) {
+            if (!isProtectedByQiHu()) {
+                return Math.round(damageAmount * (1.0F - (this.amount * 0.1F)));
+            }
+        }
+        return damageAmount;
+    }
+
+    @Override
     public int onAttacked(DamageInfo info, int damageAmount) {
-        if (info.type == DamageInfo.DamageType.NORMAL && info.owner != null && info.owner != this.owner) {
+        if (info.type != DamageInfo.DamageType.HP_LOSS && damageAmount > 0) {
             this.flash();
             this.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
         }

@@ -748,8 +748,8 @@
   "GuZhenRen:JiuLongWenHuShenPower": {
     "NAME": "Nine Dragons Protection",
     "DESCRIPTIONS": [
-      "Attack damage received is reduced by #b",
-      "%. Whenever attacked, loses #b1 stack."
+      "Damage received is reduced by #b",
+      "%. When receiving damage, loses #b1 stack."
     ]
   },
   "GuZhenRen:YouLongPower": {

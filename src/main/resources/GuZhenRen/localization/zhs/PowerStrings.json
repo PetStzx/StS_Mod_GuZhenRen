@@ -747,8 +747,8 @@
   "GuZhenRen:JiuLongWenHuShenPower": {
     "NAME": "九龙纹护身",
     "DESCRIPTIONS": [
-      "受到的攻击伤害降低 #b",
-      "% 。受到攻击伤害时，层数减少 #b1 。"
+      "受到的伤害降低 #b",
+      "% 。受到伤害时，层数减少 #b1 。"
     ]
   },
   "GuZhenRen:YouLongPower": {
